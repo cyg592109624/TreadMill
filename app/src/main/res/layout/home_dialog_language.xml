@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dialog_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/home_dialog_language_img_us"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/btn_home_language_us_3" />
+
+            <ImageView
+                android:id="@+id/home_dialog_language_img_zh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/btn_home_language_cn_3" />
+
+            <ImageView
+                android:id="@+id/home_dialog_language_img_de"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/btn_home_language_de_3" />
+
+            <ImageView
+                android:id="@+id/home_dialog_language_img_tr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/btn_home_language_tr_3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/home_dialog_language_txt_us"
+                android:layout_width="59dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="@string/language_us"
+                android:textColor="@color/language_btn_off" />
+
+            <TextView
+                android:id="@+id/home_dialog_language_txt_zh"
+                android:layout_width="59dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="@string/language_zh"
+                android:textColor="@color/language_btn_off" />
+
+            <TextView
+                android:id="@+id/home_dialog_language_txt_de"
+                android:layout_width="59dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="@string/language_de"
+                android:textColor="@color/language_btn_off" />
+
+            <TextView
+                android:id="@+id/home_dialog_language_txt_tr"
+                android:layout_width="59dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="@string/language_tr"
+                android:textColor="@color/language_btn_off" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/home_dialog_language_img_ir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/btn_home_language_ir_3" />
+
+            <ImageView
+                android:id="@+id/home_dialog_language_img_es"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/btn_home_language_esp_3" />
+
+            <ImageView
+                android:id="@+id/home_dialog_language_img_pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/btn_home_language_pt_3" />
+
+            <ImageView
+                android:id="@+id/home_dialog_language_img_ru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/btn_home_language_rus_3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/home_dialog_language_txt_ir"
+                android:layout_width="59dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="@string/language_ir"
+                android:textColor="@color/language_btn_off" />
+
+            <TextView
+                android:id="@+id/home_dialog_language_txt_es"
+                android:layout_width="59dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="@string/language_es"
+                android:textColor="@color/language_btn_off" />
+
+            <TextView
+                android:id="@+id/home_dialog_language_txt_pt"
+                android:layout_width="59dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="@string/language_pt"
+                android:textColor="@color/language_btn_off" />
+
+            <TextView
+                android:id="@+id/home_dialog_language_txt_ru"
+                android:layout_width="59dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="@string/language_ru"
+                android:textColor="@color/language_btn_off" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
