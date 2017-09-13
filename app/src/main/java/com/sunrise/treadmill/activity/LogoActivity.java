@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.home.HomeActivity;
 import com.sunrise.treadmill.base.BaseActivity;
 import com.sunrise.treadmill.utils.Constant;
 import com.sunrise.treadmill.utils.LanguageUtils;
@@ -21,10 +23,11 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        syncLanguage();
         super.onCreate(savedInstanceState);
         EasyPermissions.requestPermissions(this, "必要的权限", 0, lackOfPerms);
-        syncLanguage();
     }
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_logo;
@@ -55,7 +58,7 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
      */
     private void syncLanguage() {
         //启动app时 获取语言设置
-        String appLanguage = (String) SPUtils.get(getApplicationContext(), Constant.appLanguage, LanguageUtils.ir_IR);
+        String appLanguage = (String) SPUtils.get(getApplicationContext(), Constant.appLanguage, LanguageUtils.en_US);
         //获取当前设置
         String nowAppLanguage = LanguageUtils.getAppLanguage(getResources());
         if (!appLanguage.equals(nowAppLanguage)) {
@@ -65,6 +68,16 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
             Intent intent = new Intent(LogoActivity.this, LogoActivity.class);
             finish();
             startActivity(intent);
+        } else {
+            try {
+                GlobalSetting.AppLanguage= LanguageUtils.getAppLanguage(getResources());
+                Thread.sleep(2000);
+                Intent intent = new Intent(LogoActivity.this, HomeActivity.class);
+                finish();
+                startActivity(intent);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

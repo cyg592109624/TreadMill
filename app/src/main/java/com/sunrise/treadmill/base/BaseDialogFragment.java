@@ -34,6 +34,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         changeSystemUiState();
         inflateView().setMinimumWidth(DIALOG_WIDTH);
+        setTextStyle();
         return inflateView();
     }
 
@@ -48,6 +49,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
     }
 
     public abstract View inflateView();
+
+    protected void setTextStyle(){}
 
     /**
      * 隐藏部分系统ui、部分button事件拦截

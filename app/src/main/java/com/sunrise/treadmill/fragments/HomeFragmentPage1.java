@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 
@@ -17,10 +18,16 @@ import com.sunrise.treadmill.base.BaseFragment;
 public class HomeFragmentPage1 extends BaseFragment {
     private View rootVew;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootVew = inflater.inflate(R.layout.home_fragment_page_1, container, false);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public View getLayoutView() {
         return rootVew;
     }
 

@@ -30,6 +30,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         bind = ButterKnife.bind(this);
         amUtils = AMUtils.getInstance();
         amUtils.addActivity(this);
+        setTextStyle();
     }
 
     public abstract int getLayoutId();
@@ -38,6 +39,9 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
         bind.unbind();
+    }
+    protected void setTextStyle() {
+
     }
 
     public void finishActivity() {

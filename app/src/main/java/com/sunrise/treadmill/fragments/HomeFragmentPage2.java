@@ -27,6 +27,11 @@ public class HomeFragmentPage2 extends BaseFragment {
         }else {
             rootVew = inflater.inflate(R.layout.home_fragment_page_2, container, false);
         }
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public View getLayoutView() {
         return rootVew;
     }
 

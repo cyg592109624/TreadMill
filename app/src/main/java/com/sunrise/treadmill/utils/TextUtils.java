@@ -3,6 +3,7 @@ package com.sunrise.treadmill.utils;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
@@ -83,31 +84,34 @@ public class TextUtils {
         }
     }
 
+    public static void changeTextColor(TextView textView, int color) {
+        textView.setTextColor(color);
+    }
+
     public static void changeTextColor(List<TextView> textViews, int color) {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.de_DE)) {
-            textViews.get(2).setTextColor(color);
-
+            changeTextColor(textViews.get(2), color);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.en_US)) {
-            textViews.get(0).setTextColor(color);
-
+            changeTextColor(textViews.get(0), color);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.es_ES)) {
-            textViews.get(5).setTextColor(color);
-
+            changeTextColor(textViews.get(5), color);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.ir_IR)) {
-            textViews.get(4).setTextColor(color);
-
+            changeTextColor(textViews.get(4), color);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.pt_PT)) {
-            textViews.get(6).setTextColor(color);
-
+            changeTextColor(textViews.get(6), color);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.ru_RU)) {
-            textViews.get(7).setTextColor(color);
-
+            changeTextColor(textViews.get(7), color);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.tr_TR)) {
-            textViews.get(3).setTextColor(color);
-
+            changeTextColor(textViews.get(3), color);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            textViews.get(1).setTextColor(color);
-
+            changeTextColor(textViews.get(1), color);
         }
+    }
+
+    public  static void changeTextSize(TextView textView, float size){
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
+    }
+    public  static void changeTextSize(List<TextView> textViews, float size){
+
     }
 }

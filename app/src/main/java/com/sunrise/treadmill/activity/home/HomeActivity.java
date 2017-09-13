@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.factory.FactoriesActivity;
+import com.sunrise.treadmill.activity.settings.SettingsActivity;
 import com.sunrise.treadmill.adapter.HomeFragmentAdapter;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.dialog.Home_InitialiteDialog;
@@ -41,7 +43,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @BindView(R.id.home_img_vp)
     ImageView selectTg;
 
-    @BindView(R.id.home_btn_logo)
+    @BindView(R.id.bottom_logo)
     LogoImageView logo;
 
     @BindView(R.id.home_viewPage)
@@ -82,6 +84,13 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
         languageDialog.show(fragmentManager, Home_LanguageDialog.Home_Language_Dialog);
     }
 
+    @OnClick(R.id.home_btn_setting)
+    public void toSettings() {
+        Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+
     private void initFragment() {
         Home_InitialiteDialog initialiteDialog = new Home_InitialiteDialog();
         initialiteDialog.show(fragmentManager, Home_InitialiteDialog.Home_Initialite_Dialog);
@@ -98,7 +107,8 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
         logo.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                System.out.println("触发长按事件.....");
+                Intent intent=new Intent(HomeActivity.this, FactoriesActivity.class);
+                startActivity(intent);
                 return true;
             }
         });

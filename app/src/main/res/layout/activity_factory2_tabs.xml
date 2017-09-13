@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="11dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/factory_2_card_setting"
+        style="@style/settings_tabs_on"
+        android:layout_marginLeft="52dp"
+        android:text="@string/setting" />
+
+    <TextView
+        android:id="@+id/factory_2_card_info"
+        style="@style/settings_tabs_off"
+        android:layout_marginLeft="14dp"
+        android:text="@string/information" />
+
+    <TextView
+        android:id="@+id/factory_2_card_update"
+        style="@style/settings_tabs_off"
+        android:layout_marginLeft="14dp"
+        android:text="@string/update" />
+
+    <TextView
+        android:id="@+id/factory_2_card_logo"
+        style="@style/settings_tabs_off"
+        android:layout_marginLeft="14dp"
+        android:text="@string/logo" />
+</LinearLayout>
+
+
+

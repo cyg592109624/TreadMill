@@ -17,4 +17,22 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
+    <style name="settings_tabs">
+        <item name="android:layout_width">125dp</item>
+        <item name="android:layout_height">28dp</item>
+        <item name="android:lineSpacingExtra">28dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="settings_tabs_on" parent="settings_tabs">
+        <item name="android:textColor">@color/settings_tabs_on</item>
+        <item name="android:textSize">30px</item>
+    </style>
+
+    <style name="settings_tabs_off" parent="settings_tabs">
+        <item name="android:textColor">@color/settings_tabs_off</item>
+        <item name="android:textSize">25px</item>
+    </style>
 </resources>

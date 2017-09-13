@@ -67,7 +67,7 @@ public class LogoImageView extends ImageView {
                 mCounter++;
                 isReleased = false;
                 isMoved = false;
-                postDelayed(mRunnable, 6000);
+                postDelayed(mRunnable, 100);
                 break;
             case MotionEvent.ACTION_MOVE:
                 if(isMoved) break;

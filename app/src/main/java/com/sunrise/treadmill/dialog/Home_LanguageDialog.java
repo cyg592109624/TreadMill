@@ -43,7 +43,6 @@ public class Home_LanguageDialog extends BaseDialogFragment {
         inflaterView = inflater.inflate(R.layout.home_dialog_language, container);
         ButterKnife.bind(this, inflaterView);
         dialogFragmentReturn = (HomeLanguageDialogReturn) getActivity();
-        setTextStyle();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -52,7 +51,8 @@ public class Home_LanguageDialog extends BaseDialogFragment {
         return inflaterView;
     }
 
-    private void setTextStyle() {
+    @Override
+    protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(textViews, TextUtils.Microsoft(getContext()));
         } else {
@@ -126,13 +126,14 @@ public class Home_LanguageDialog extends BaseDialogFragment {
                 }
                 break;
         }
-        if(isChange){
+        if (isChange) {
             SPUtils.put(getContext(), Constant.appLanguage, GlobalSetting.AppLanguage);
             dialogFragmentReturn.onLanguageReturn(isChange);
-        }else {
+        } else {
             dialogFragmentReturn.onLanguageReturn(false);
         }
         dismiss();
 
     }
+
 }

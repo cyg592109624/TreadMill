@@ -59,4 +59,26 @@ public class DensityUtils {
     public static float px2sp(Context context, float pxVal) {
         return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
     }
+
+    /**
+     * pt转px （附公式：px = pt * DPI / 72)
+     *
+     * @param context
+     * @param ptVal
+     * @return
+     */
+    public static float pt2px(Context context, float ptVal) {
+        return (ptVal * context.getResources().getDisplayMetrics().densityDpi) / 72;
+    }
+
+    /**
+     * px转pt
+     *
+     * @param context
+     * @param pxVal
+     * @return
+     */
+    public static float px2pt(Context context, float pxVal) {
+        return (72 * pxVal) / context.getResources().getDisplayMetrics().densityDpi;
+    }
 }
