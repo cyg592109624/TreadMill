@@ -24,6 +24,14 @@ public abstract class BaseFragment extends Fragment {
         return getLayoutView();
     }
 
+//    @Override
+//    public void setMenuVisibility(boolean menuVisible) {
+//        super.setMenuVisibility(menuVisible);
+//        if (this.getView() != null){
+//            this.getView().setVisibility(menuVisible ? View.VISIBLE : View.GONE);
+//        }
+//    }
+
     /**
      * 实现Fragment数据的缓加载 * @param isVisibleToUser
      */

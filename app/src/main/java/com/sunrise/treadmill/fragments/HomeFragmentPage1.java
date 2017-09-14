@@ -16,19 +16,19 @@ import com.sunrise.treadmill.base.BaseFragment;
  */
 
 public class HomeFragmentPage1 extends BaseFragment {
-    private View rootVew;
+    private View rootView;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootVew = inflater.inflate(R.layout.home_fragment_page_1, container, false);
+        rootView = inflater.inflate(R.layout.home_fragment_page_1, container, false);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     public View getLayoutView() {
-        return rootVew;
+        return rootView;
     }
 
     @Override

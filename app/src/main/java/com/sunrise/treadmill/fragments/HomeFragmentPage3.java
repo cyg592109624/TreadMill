@@ -17,22 +17,22 @@ import com.sunrise.treadmill.utils.LanguageUtils;
  */
 
 public class HomeFragmentPage3 extends BaseFragment {
-    private View rootVew;
+    private View rootView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            rootVew = inflater.inflate(R.layout.home_fragment_page_3_zh, container, false);
+            rootView = inflater.inflate(R.layout.home_fragment_page_3_zh, container, false);
         } else {
-            rootVew = inflater.inflate(R.layout.home_fragment_page_3, container, false);
+            rootView = inflater.inflate(R.layout.home_fragment_page_3, container, false);
         }
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     public View getLayoutView() {
-        return rootVew;
+        return rootView;
     }
 
     @Override

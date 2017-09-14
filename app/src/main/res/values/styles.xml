@@ -9,7 +9,7 @@
 
     <style name="Dialog_No_Border">
         <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowBackground">@drawable/dialog_bg</item>
+        <item name="android:windowBackground">@drawable/bg_dialog</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowFrame">@null</item>
@@ -28,11 +28,11 @@
 
     <style name="settings_tabs_on" parent="settings_tabs">
         <item name="android:textColor">@color/settings_tabs_on</item>
-        <item name="android:textSize">30px</item>
+        <item name="android:textSize">35px</item>
     </style>
 
     <style name="settings_tabs_off" parent="settings_tabs">
         <item name="android:textColor">@color/settings_tabs_off</item>
-        <item name="android:textSize">25px</item>
+        <item name="android:textSize">30px</item>
     </style>
 </resources>

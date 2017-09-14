@@ -2,31 +2,25 @@ package com.sunrise.treadmill.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
-import com.sunrise.treadmill.utils.LanguageUtils;
 
 /**
- * Created by ChuHui on 2017/9/12.
+ * Created by ChuHui on 2017/9/14.
  */
 
-public class HomeFragmentPage2 extends BaseFragment {
-    private View rootView;
+public class SettingsFragmentCard1 extends BaseFragment {
+    View rootView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if(GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)){
-            rootView = inflater.inflate(R.layout.home_fragment_page_2_zh, container, false);
-        }else {
-            rootView = inflater.inflate(R.layout.home_fragment_page_2, container, false);
-        }
+
+        rootView = inflater.inflate(R.layout.settings_fragment_card_1, container, false);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -37,6 +31,11 @@ public class HomeFragmentPage2 extends BaseFragment {
 
     @Override
     protected void loadData() {
+
+    }
+
+    @Override
+    protected void setTextStyle() {
 
     }
 }
