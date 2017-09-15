@@ -7,61 +7,42 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * Created by ChuHui on 2017/9/9.
  */
 
 public abstract class BaseFragment extends Fragment {
-    //是否可见
-    protected boolean isVisible;
-    // 标志位，标志Fragment已经初始化完a成。
-    public boolean isPrepared = false;
-
+    private Unbinder bind;
+    private View parentView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        setTextStyle();
-        return getLayoutView();
+        parentView = inflater.inflate(getLayoutId(), container, false);
+        return parentView;
     }
 
-//    @Override
-//    public void setMenuVisibility(boolean menuVisible) {
-//        super.setMenuVisibility(menuVisible);
-//        if (this.getView() != null){
-//            this.getView().setVisibility(menuVisible ? View.VISIBLE : View.GONE);
-//        }
-//    }
-
-    /**
-     * 实现Fragment数据的缓加载 * @param isVisibleToUser
-     */
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (getUserVisibleHint()) {
-            isVisible = true;
-            onVisible();
-        } else {
-            isVisible = false;
-            onInVisible();
-        }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        bind = ButterKnife.bind(this, view);
+        setTextStyle();
+        init();
     }
 
-    public abstract View getLayoutView();
-
-    protected void onInVisible() {
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        bind.unbind();
     }
 
-    protected void setTextStyle() {
+    public abstract int getLayoutId();
 
-    }
 
-    protected void onVisible() {
-        //加载数据
-        loadData();
-    }
+    protected abstract void setTextStyle();
 
-    protected abstract void loadData();
+    protected abstract void init();
 
 }

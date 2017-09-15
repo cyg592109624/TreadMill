@@ -9,7 +9,9 @@ import java.util.Locale;
 public class GlobalSetting {
     public static String AppLanguage = "";
 
-    public  static String UnitType="";
+    public static String UnitType = "";
+    public static int AppBrightness;
+    public static int AppSounds;
 
 
 }

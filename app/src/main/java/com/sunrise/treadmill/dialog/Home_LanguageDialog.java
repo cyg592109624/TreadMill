@@ -11,7 +11,7 @@ import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseDialogFragment;
 import com.sunrise.treadmill.interfaces.HomeLanguageDialogReturn;
-import com.sunrise.treadmill.utils.Constant;
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.SPUtils;
 import com.sunrise.treadmill.utils.TextUtils;

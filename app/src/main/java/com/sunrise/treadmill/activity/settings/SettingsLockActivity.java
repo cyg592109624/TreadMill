@@ -1,7 +1,5 @@
 package com.sunrise.treadmill.activity.settings;
 
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,9 +14,8 @@ import android.widget.TextView;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
-import com.sunrise.treadmill.fragments.SettingsFragmentCard1;
-import com.sunrise.treadmill.fragments.SettingsFragmentCard2;
-import com.sunrise.treadmill.fragments.SettingsFragmentCard3;
+import com.sunrise.treadmill.fragments.SettingsLockFragmentCard1;
+import com.sunrise.treadmill.fragments.SettingsLockFragmentCard2;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
@@ -30,28 +27,32 @@ import butterknife.BindViews;
 import butterknife.OnClick;
 
 /**
- * Created by ChuHui on 2017/9/13.
+ * Created by ChuHui on 2017/9/15.
  */
 
-public class SettingsActivity extends BaseFragmentActivity {
-
+public class SettingsLockActivity extends BaseFragmentActivity {
     @BindView(R.id.settings_view_bg)
     LinearLayout bgView;
 
     @BindView(R.id.settings_views)
     FrameLayout showView;
 
-    @BindView(R.id.bottom_logo_tab_home)
-    ImageView backHome;
+    @BindView(R.id.bottom_logo_tab_back)
+    ImageView back;
 
-    @BindViews({R.id.settings_card_system, R.id.settings_card_bluetooth, R.id.settings_card_wifi, R.id.settings_card_lock, R.id.settings_title})
+
+    @BindViews({R.id.settings_card_lock, R.id.settings_card_psw, R.id.settings_title})
     List<TextView> txtList;
 
     private FragmentManager fragmentManager;
     private Fragment nowFragment;
-    private SettingsFragmentCard1 card1;
-    private SettingsFragmentCard2 card2;
-    private SettingsFragmentCard3 card3;
+    private SettingsLockFragmentCard1 card1;
+    private SettingsLockFragmentCard2 card2;
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_settings_lock;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,54 +61,38 @@ public class SettingsActivity extends BaseFragmentActivity {
     }
 
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_settings;
-    }
-
-    @Override
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(this));
-
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(this));
         }
     }
 
-    @OnClick({R.id.settings_card_system, R.id.settings_card_bluetooth, R.id.settings_card_wifi, R.id.settings_card_lock})
+    @OnClick({R.id.settings_card_lock, R.id.settings_card_psw})
     public void onSelectCardClick(View view) {
         int bgResource = -1;
         int tgCard = -1;
         Fragment tgFragment = null;
         switch (view.getId()) {
-            case R.id.settings_card_system:
-                bgResource = R.mipmap.img_factory_3_1;
+            case R.id.settings_card_lock:
+                bgResource = R.mipmap.img_factory_2_1;
                 tgCard = 0;
                 tgFragment = card1;
                 break;
-            case R.id.settings_card_bluetooth:
-                bgResource = R.mipmap.img_factory_3_2;
+            case R.id.settings_card_psw:
+                bgResource = R.mipmap.img_factory_2_2;
                 tgCard = 1;
                 tgFragment = card2;
-                break;
-            case R.id.settings_card_wifi:
-                bgResource = R.mipmap.img_factory_3_3;
-                tgCard = 2;
-                tgFragment = card3;
-                break;
-            case R.id.settings_card_lock:
-                Intent intent = new Intent(SettingsActivity.this, SettingsLockActivity.class);
-                startActivity(intent);
                 break;
             default:
                 bgResource = -1;
                 tgCard = -1;
-                tgFragment = null;
                 break;
         }
-        if (bgResource != -1 && tgCard != -1 && tgFragment != null) {
+        if (bgResource != -1 && tgCard != -1) {
             bgView.setBackgroundResource(bgResource);
-            for (int i = 0; i < txtList.size() - 2; i++) {
+            for (int i = 0; i < txtList.size() - 1; i++) {
                 if (i == tgCard) {
                     TextUtils.changeTextColor(txtList.get(i), getColor(R.color.settings_tabs_on));
                     TextUtils.changeTextSize(txtList.get(i), 35f);
@@ -126,17 +111,16 @@ public class SettingsActivity extends BaseFragmentActivity {
         }
     }
 
-    @OnClick(R.id.bottom_logo_tab_home)
-    public void onBackHome() {
-        ImageUtils.changeImageView(backHome, R.mipmap.btn_home_2);
+    @OnClick(R.id.bottom_logo_tab_back)
+    public void onBack() {
+        ImageUtils.changeImageView(back, R.mipmap.btn_back_3);
         finishActivity();
     }
 
     private void init() {
         fragmentManager = getSupportFragmentManager();
-        card1 = new SettingsFragmentCard1();
-        card2 = new SettingsFragmentCard2();
-        card3 = new SettingsFragmentCard3();
+        card1 = new SettingsLockFragmentCard1();
+        card2 = new SettingsLockFragmentCard2();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.add(R.id.settings_views, card1).commit();
         nowFragment = card1;

@@ -41,6 +41,13 @@
         </activity>
 
         <activity
+            android:name=".activity.settings.SettingsLockActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape" >
+        </activity>
+
+        <activity
             android:name=".activity.factory.FactoriesActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:launchMode="singleTop"

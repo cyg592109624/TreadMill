@@ -7,11 +7,11 @@ import com.sunrise.treadmill.base.BaseFragment;
  * Created by ChuHui on 2017/9/14.
  */
 
-public class SettingsFragmentCard3 extends BaseFragment {
+public class SettingsLockFragmentCard1 extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.settings_fragment_card_3;
+        return R.layout.settings_fragment_card_4_1;
     }
 
     @Override

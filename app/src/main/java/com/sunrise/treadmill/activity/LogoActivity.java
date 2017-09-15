@@ -8,24 +8,23 @@ import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.home.HomeActivity;
 import com.sunrise.treadmill.base.BaseActivity;
-import com.sunrise.treadmill.utils.Constant;
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.SPUtils;
+import com.sunrise.treadmill.utils.ScreenUtils;
 
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class LogoActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
-
-
     private String[] lackOfPerms = {"android.permission.CHANGE_CONFIGURATION", "android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.WRITE_SETTINGS"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        syncLanguage();
         super.onCreate(savedInstanceState);
         EasyPermissions.requestPermissions(this, "必要的权限", 0, lackOfPerms);
+        syncLanguage();
     }
 
     @Override
@@ -49,6 +48,7 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
         String curPerm[] = new String[perms.size()];
         for (int i = 0; i < perms.size(); i++) {
             curPerm[i] = perms.get(i);
+            System.out.println("没有被允许的权限 --> "+perms.get(i));
         }
         lackOfPerms = curPerm;
     }
@@ -70,12 +70,12 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
             startActivity(intent);
         } else {
             try {
-                GlobalSetting.AppLanguage= LanguageUtils.getAppLanguage(getResources());
-                Thread.sleep(2000);
+                GlobalSetting.AppLanguage = LanguageUtils.getAppLanguage(getResources());
+                Thread.sleep(1000);
                 Intent intent = new Intent(LogoActivity.this, HomeActivity.class);
                 finish();
                 startActivity(intent);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
