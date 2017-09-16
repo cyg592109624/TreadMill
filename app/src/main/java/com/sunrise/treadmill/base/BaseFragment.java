@@ -24,6 +24,7 @@ public abstract class BaseFragment extends Fragment {
         return parentView;
     }
 
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -36,6 +37,9 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         bind.unbind();
+    }
+    public View getParentView(){
+        return parentView;
     }
 
     public abstract int getLayoutId();

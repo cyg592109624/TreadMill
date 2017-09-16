@@ -11,6 +11,7 @@
     <color name="language_btn_disable">#646464</color>
 
     <color name="settings_title">#FFFFFF</color>
+    <color name="settings_black">#000000</color>
     <color name="settings_tabs_on">#32B4FF</color>
     <color name="settings_tabs_off">#323232</color>
 

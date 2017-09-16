@@ -19,6 +19,7 @@ import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.fragments.SettingsFragmentCard1;
 import com.sunrise.treadmill.fragments.SettingsFragmentCard2;
 import com.sunrise.treadmill.fragments.SettingsFragmentCard3;
+import com.sunrise.treadmill.fragments.SettingsFragmentCard4;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
@@ -52,6 +53,7 @@ public class SettingsActivity extends BaseFragmentActivity {
     private SettingsFragmentCard1 card1;
     private SettingsFragmentCard2 card2;
     private SettingsFragmentCard3 card3;
+    private SettingsFragmentCard4 card4;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,7 +70,6 @@ public class SettingsActivity extends BaseFragmentActivity {
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(this));
-
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(this));
         }
@@ -96,8 +97,9 @@ public class SettingsActivity extends BaseFragmentActivity {
                 tgFragment = card3;
                 break;
             case R.id.settings_card_lock:
-                Intent intent = new Intent(SettingsActivity.this, SettingsLockActivity.class);
-                startActivity(intent);
+                bgResource = R.mipmap.img_factory_3_4;
+                tgCard = 3;
+                tgFragment = card4;
                 break;
             default:
                 bgResource = -1;
@@ -105,9 +107,9 @@ public class SettingsActivity extends BaseFragmentActivity {
                 tgFragment = null;
                 break;
         }
-        if (bgResource != -1 && tgCard != -1 && tgFragment != null) {
-            bgView.setBackgroundResource(bgResource);
-            for (int i = 0; i < txtList.size() - 2; i++) {
+        bgView.setBackgroundResource(bgResource);
+        if (bgResource != -1 && tgFragment != null) {
+            for (int i = 0; i < txtList.size() - 1; i++) {
                 if (i == tgCard) {
                     TextUtils.changeTextColor(txtList.get(i), getColor(R.color.settings_tabs_on));
                     TextUtils.changeTextSize(txtList.get(i), 35f);
@@ -124,6 +126,10 @@ public class SettingsActivity extends BaseFragmentActivity {
             }
             nowFragment = tgFragment;
         }
+        if (tgCard == 3) {
+            Intent intent = new Intent(SettingsActivity.this, SettingsLockActivity.class);
+            startActivity(intent);
+        }
     }
 
     @OnClick(R.id.bottom_logo_tab_home)
@@ -137,6 +143,7 @@ public class SettingsActivity extends BaseFragmentActivity {
         card1 = new SettingsFragmentCard1();
         card2 = new SettingsFragmentCard2();
         card3 = new SettingsFragmentCard3();
+        card4 = new SettingsFragmentCard4();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.add(R.id.settings_views, card1).commit();
         nowFragment = card1;

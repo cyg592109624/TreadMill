@@ -34,12 +34,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center|right"
+                android:clickable="true"
                 android:textColor="@color/settings_title"
                 android:textSize="42px" />
 
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/settings_card4_2_reset"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -10,7 +10,7 @@ import android.widget.ImageView;
  * Created by ChuHui on 2017/9/12.
  */
 
-public class LogoImageView extends ImageView {
+public class LogoImageView extends android.support.v7.widget.AppCompatImageView {
     private int mLastMotionX, mLastMotionY;
     //是否移动了
     private boolean isMoved;
@@ -44,10 +44,6 @@ public class LogoImageView extends ImageView {
 
     public LogoImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    public LogoImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     @Override
