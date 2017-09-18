@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ public class SettingsActivity extends BaseFragmentActivity {
     FrameLayout showView;
 
     @BindView(R.id.bottom_logo_tab_home)
-    ImageView backHome;
+    ImageButton backHome;
 
     @BindViews({R.id.settings_card_system, R.id.settings_card_bluetooth, R.id.settings_card_wifi, R.id.settings_card_lock, R.id.settings_title})
     List<TextView> txtList;
@@ -82,23 +83,32 @@ public class SettingsActivity extends BaseFragmentActivity {
         Fragment tgFragment = null;
         switch (view.getId()) {
             case R.id.settings_card_system:
-                bgResource = R.mipmap.img_factory_3_1;
                 tgCard = 0;
+                bgResource = R.mipmap.img_factory_3_1;
                 tgFragment = card1;
                 break;
             case R.id.settings_card_bluetooth:
-                bgResource = R.mipmap.img_factory_3_2;
                 tgCard = 1;
+                bgResource = R.mipmap.img_factory_3_2;
+                if(card2==null){
+                    card2 = new SettingsFragmentCard2();
+                }
                 tgFragment = card2;
                 break;
             case R.id.settings_card_wifi:
-                bgResource = R.mipmap.img_factory_3_3;
                 tgCard = 2;
+                bgResource = R.mipmap.img_factory_3_3;
+                if(card3==null){
+                    card3 = new SettingsFragmentCard3();
+                }
                 tgFragment = card3;
                 break;
             case R.id.settings_card_lock:
-                bgResource = R.mipmap.img_factory_3_4;
                 tgCard = 3;
+                bgResource = R.mipmap.img_factory_3_4;
+                if(card4==null){
+                    card4 = new SettingsFragmentCard4();
+                }
                 tgFragment = card4;
                 break;
             default:
@@ -134,16 +144,12 @@ public class SettingsActivity extends BaseFragmentActivity {
 
     @OnClick(R.id.bottom_logo_tab_home)
     public void onBackHome() {
-        ImageUtils.changeImageView(backHome, R.mipmap.btn_home_2);
         finishActivity();
     }
 
     private void init() {
         fragmentManager = getSupportFragmentManager();
         card1 = new SettingsFragmentCard1();
-        card2 = new SettingsFragmentCard2();
-        card3 = new SettingsFragmentCard3();
-        card4 = new SettingsFragmentCard4();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.add(R.id.settings_views, card1).commit();
         nowFragment = card1;

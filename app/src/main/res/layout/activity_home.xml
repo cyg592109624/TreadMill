@@ -13,17 +13,21 @@
         android:gravity="right"
         android:orientation="horizontal">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/home_btn_setting"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@mipmap/btn_home_setting_1" />
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_home_settings"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/home_btn_language"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@mipmap/btn_home_language_us_1" />
+            android:src="@drawable/btn_home_language"
+            android:background="#00000000"
+            android:scaleType="fitXY"/>
 
     </LinearLayout>
 

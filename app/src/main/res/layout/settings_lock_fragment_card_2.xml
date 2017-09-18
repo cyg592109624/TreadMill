@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:padding="0dp">
+
+    <include
+        layout="@layout/settings_lock_fragment_card_2_1"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:src="@mipmap/img_factory_line" />
+
+    <RelativeLayout
+        android:id="@+id/settings_card4_2_right"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:visibility="invisible">
+
+        <include layout="@layout/key_board" />
+    </RelativeLayout>
+</LinearLayout>

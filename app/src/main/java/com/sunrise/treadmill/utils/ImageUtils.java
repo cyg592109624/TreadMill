@@ -2,9 +2,12 @@ package com.sunrise.treadmill.utils;
 
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
+
+import java.util.List;
 
 /**
  * Created by ChuHui on 2017/9/11.
@@ -13,65 +16,27 @@ import com.sunrise.treadmill.R;
 public class ImageUtils {
 
 
-    public  static void changeImageView(ImageView imageView,int imgResource){
+    public static void changeImageView(ImageView imageView, int imgResource) {
         imageView.setImageResource(imgResource);
     }
 
-    /**
-     * 切换语言图标 必须运行在UI线程
-     *
-     * @param isClick 是否切换到点击状态
-     */
-    public static void changeLanguageIconState(ImageView languageIcon, boolean isClick) {
-
+    public static void changeImageView(List<ImageView> imgViews) {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.de_DE)) {
-            if (isClick) {
-                languageIcon.setImageResource(R.mipmap.btn_home_language_de_2);
-                return;
-            }
-            languageIcon.setImageResource(R.mipmap.btn_home_language_de_1);
+            changeImageView(imgViews.get(2), R.mipmap.btn_home_language_de_4);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.en_US)) {
-            if (isClick) {
-                languageIcon.setImageResource(R.mipmap.btn_home_language_us_2);
-                return;
-            }
-            languageIcon.setImageResource(R.mipmap.btn_home_language_us_1);
+            changeImageView(imgViews.get(0), R.mipmap.btn_home_language_us_4);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.es_ES)) {
-            if (isClick) {
-                languageIcon.setImageResource(R.mipmap.btn_home_language_esp_2);
-                return;
-            }
-            languageIcon.setImageResource(R.mipmap.btn_home_language_esp_1);
+            changeImageView(imgViews.get(5), R.mipmap.btn_home_language_esp_4);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.ir_IR)) {
-            if (isClick) {
-                languageIcon.setImageResource(R.mipmap.btn_home_language_ir_2);
-                return;
-            }
-            languageIcon.setImageResource(R.mipmap.btn_home_language_ir_1);
+            changeImageView(imgViews.get(4), R.mipmap.btn_home_language_ir_4);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.pt_PT)) {
-            if (isClick) {
-                languageIcon.setImageResource(R.mipmap.btn_home_language_pt_2);
-                return;
-            }
-            languageIcon.setImageResource(R.mipmap.btn_home_language_pt_1);
+            changeImageView(imgViews.get(6), R.mipmap.btn_home_language_pt_4);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.ru_RU)) {
-            if (isClick) {
-                languageIcon.setImageResource(R.mipmap.btn_home_language_rus_2);
-                return;
-            }
-            languageIcon.setImageResource(R.mipmap.btn_home_language_rus_1);
+            changeImageView(imgViews.get(7), R.mipmap.btn_home_language_rus_4);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.tr_TR)) {
-            if (isClick) {
-                languageIcon.setImageResource(R.mipmap.btn_home_language_tr_2);
-                return;
-            }
-            languageIcon.setImageResource(R.mipmap.btn_home_language_tr_1);
+            changeImageView(imgViews.get(3), R.mipmap.btn_home_language_tr_4);
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            if (isClick) {
-                languageIcon.setImageResource(R.mipmap.btn_home_language_cn_2);
-                return;
-            }
-            languageIcon.setImageResource(R.mipmap.btn_home_language_cn_1);
+            changeImageView(imgViews.get(1), R.mipmap.btn_home_language_cn_4);
         }
     }
 }

@@ -12,6 +12,7 @@ import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseDialogFragment;
 import com.sunrise.treadmill.interfaces.HomeLanguageDialogReturn;
 import com.sunrise.treadmill.Constant;
+import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.SPUtils;
 import com.sunrise.treadmill.utils.TextUtils;
@@ -59,6 +60,7 @@ public class Home_LanguageDialog extends BaseDialogFragment {
             TextUtils.setTextTypeFace(textViews, TextUtils.Arial(getContext()));
         }
         TextUtils.changeTextColor(textViews, getResources().getColor(R.color.language_btn_on));
+        ImageUtils.changeImageView(imageViews);
     }
 
 

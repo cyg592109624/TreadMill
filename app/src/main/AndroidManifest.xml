@@ -43,7 +43,7 @@
         <activity
             android:name=".activity.settings.SettingsLockActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
+            android:launchMode="standard"
             android:screenOrientation="sensorLandscape" >
         </activity>
 

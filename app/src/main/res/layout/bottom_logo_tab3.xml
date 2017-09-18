@@ -6,9 +6,8 @@
     android:gravity="center">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="62dp"
         android:layout_height="42dp"
-        android:src="@mipmap/btn_home"
         android:visibility="invisible" />
 
     <View
@@ -28,11 +27,13 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/bottom_logo_tab_back"
-        android:layout_width="wrap_content"
+        android:layout_width="62dp"
         android:layout_height="42dp"
-        android:src="@mipmap/btn_back_2" />
+        android:background="#00000000"
+        android:scaleType="fitXY"
+        android:src="@drawable/btn_logo_back" />
 
 </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.activity.factory;
 
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,11 +23,8 @@ import butterknife.OnClick;
  */
 
 public class Factory1Activity extends BaseActivity {
-    @BindViews({R.id.factory_1_title, R.id.factory_1_card_setting})
-    List<TextView> txtList;
-
     @BindView(R.id.bottom_logo_tab_home)
-    ImageView backHome;
+    ImageButton backHome;
 
     @Override
     public int getLayoutId() {
@@ -34,15 +33,19 @@ public class Factory1Activity extends BaseActivity {
 
     @Override
     protected void setTextStyle() {
+        List<TextView> txtList = new ArrayList<TextView>();
+        txtList.add((TextView) findViewById(R.id.factory_1_title));
+        txtList.add((TextView) findViewById(R.id.factory_1_card_setting));
+
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(this));
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(this));
         }
     }
+
     @OnClick(R.id.bottom_logo_tab_home)
     public void onBackHome() {
-        ImageUtils.changeImageView(backHome, R.mipmap.btn_home_2);
         finishActivity();
     }
 }

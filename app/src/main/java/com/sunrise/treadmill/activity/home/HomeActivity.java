@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.sunrise.treadmill.R;
@@ -35,10 +36,10 @@ import butterknife.OnClick;
 public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDialogReturn, ViewPager.OnPageChangeListener {
 
     @BindView(R.id.home_btn_language)
-    ImageView btn_language;
+    ImageButton btn_language;
 
     @BindView(R.id.home_btn_setting)
-    ImageView btn_setting;
+    ImageButton btn_setting;
 
     @BindView(R.id.home_img_vp)
     ImageView selectTg;
@@ -56,7 +57,6 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ImageUtils.changeLanguageIconState(btn_language, false);
         initFragment();
     }
 
@@ -71,15 +71,11 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
             Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
             finishActivity();
             startActivity(intent);
-            return;
-        } else {
-            ImageUtils.changeLanguageIconState(btn_language, isChange);
         }
     }
 
     @OnClick(R.id.home_btn_language)
     public void changeLanguage() {
-        ImageUtils.changeLanguageIconState(btn_language, true);
         Home_LanguageDialog languageDialog = new Home_LanguageDialog();
         languageDialog.show(fragmentManager, Home_LanguageDialog.Home_Language_Dialog);
     }

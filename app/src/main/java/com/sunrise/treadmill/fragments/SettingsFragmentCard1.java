@@ -18,6 +18,7 @@ import com.sunrise.treadmill.utils.ScreenUtils;
 import com.sunrise.treadmill.utils.SoundsUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,9 +29,6 @@ import butterknife.BindViews;
  */
 
 public class SettingsFragmentCard1 extends BaseFragment implements SeekBar.OnSeekBarChangeListener {
-    @BindViews({R.id.settings_card1_txt1, R.id.settings_card1_txt2})
-    List<TextView> txtList;
-
     @BindView(R.id.settings_card1_seek_bar_bright)
     SeekBar bright;
     @BindView(R.id.settings_card1_seek_bar_sounds)
@@ -43,6 +41,10 @@ public class SettingsFragmentCard1 extends BaseFragment implements SeekBar.OnSee
 
     @Override
     protected void setTextStyle() {
+        List<TextView> txtList = new ArrayList<>();
+        txtList.add((TextView) getParentView().findViewById(R.id.settings_card1_txt1));
+        txtList.add((TextView) getParentView().findViewById(R.id.settings_card1_txt2));
+
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(getContext()));
         } else {

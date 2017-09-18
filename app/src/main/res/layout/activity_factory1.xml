@@ -29,14 +29,11 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="@string/setting"
-            android:textColor="@color/factory_hint"
+            android:textColor="@color/factory_tabs_on"
             android:textSize="30px" />
 
-        <FrameLayout
-            android:id="@+id/factory_1_layout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"></FrameLayout>
+        <include
+            layout="@layout/factory1_fragment_card"/>
 
     </LinearLayout>
 

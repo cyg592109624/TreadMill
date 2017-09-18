@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/factory2_card1_1"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:gravity="center|left"
+            android:text="@string/display_mode"
+            android:textColor="@color/factory_white"
+            android:textSize="42px" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:gravity="center|left"
+            android:text="@string/display_mode"
+            android:textColor="@color/factory_white"
+            android:textSize="42px" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:gravity="center|left"
+            android:text="@string/display_mode"
+            android:textColor="@color/factory_white"
+            android:textSize="42px" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:gravity="center|left"
+            android:text="@string/display_mode"
+            android:textColor="@color/factory_white"
+            android:textSize="42px" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:gravity="center|left"
+            android:text="@string/display_mode"
+            android:textColor="@color/factory_white"
+            android:textSize="42px" />
+
+        <ToggleButton
+            android:layout_width="113dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center|left"
+            android:background="@drawable/btn_factory_2_togg" />
+
+    </LinearLayout>
+
+</LinearLayout>

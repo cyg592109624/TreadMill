@@ -9,44 +9,41 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/settings_card1_txt1"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
                 android:gravity="center|left"
                 android:text="@string/brightness"
-                android:textColor="@color/settings_title"
+                android:textColor="@color/settings_white"
                 android:textSize="42px" />
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="1dp"
-                    android:paddingRight="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|left"
+                    android:layout_marginRight="10dp"
                     android:src="@mipmap/img_brightness_voice_bar_1_1" />
 
                 <SeekBar
                     android:id="@+id/settings_card1_seek_bar_bright"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
+                    android:layout_gravity="center|left"
+                    android:layout_marginLeft="5dp"
                     android:max="100"
                     android:maxHeight="5dp"
                     android:minHeight="5dp"
@@ -59,36 +56,37 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/settings_card1_txt2"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
                 android:gravity="center|left"
                 android:text="@string/sounds"
-                android:textColor="@color/settings_title"
+                android:textColor="@color/settings_white"
                 android:textSize="42px" />
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left">
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="1dp"
-                    android:paddingRight="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|left"
+                    android:layout_marginRight="10dp"
                     android:src="@mipmap/img_brightness_voice_bar_1_2" />
 
                 <SeekBar
                     android:id="@+id/settings_card1_seek_bar_sounds"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
+                    android:layout_gravity="center|left"
+                    android:layout_marginLeft="5dp"
                     android:max="100"
                     android:maxHeight="5dp"
                     android:minHeight="5dp"
@@ -105,6 +103,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:src="@mipmap/img_factory_line" />
 
     <View

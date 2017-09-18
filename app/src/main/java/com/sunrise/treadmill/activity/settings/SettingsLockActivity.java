@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class SettingsLockActivity extends BaseFragmentActivity {
     FrameLayout showView;
 
     @BindView(R.id.bottom_logo_tab_back)
-    ImageView back;
+    ImageButton back;
 
 
     @BindViews({R.id.settings_card_lock, R.id.settings_card_psw, R.id.settings_title})
@@ -81,8 +82,11 @@ public class SettingsLockActivity extends BaseFragmentActivity {
                 tgFragment = card1;
                 break;
             case R.id.settings_card_psw:
-                bgResource = R.mipmap.img_factory_2_2;
                 tgCard = 1;
+                bgResource = R.mipmap.img_factory_2_2;
+                if(card2==null){
+                    card2 = new SettingsLockFragmentCard2();
+                }
                 tgFragment = card2;
                 break;
             default:
@@ -113,14 +117,12 @@ public class SettingsLockActivity extends BaseFragmentActivity {
 
     @OnClick(R.id.bottom_logo_tab_back)
     public void onBack() {
-        ImageUtils.changeImageView(back, R.mipmap.btn_back_3);
         finishActivity();
     }
 
     private void init() {
         fragmentManager = getSupportFragmentManager();
         card1 = new SettingsLockFragmentCard1();
-        card2 = new SettingsLockFragmentCard2();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.add(R.id.settings_views, card1).commit();
         nowFragment = card1;

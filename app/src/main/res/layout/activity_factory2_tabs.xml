@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/factory_2_card_setting"
-        style="@style/settings_tabs_on"
+        style="@style/factory_tabs_on"
         android:layout_marginLeft="52dp"
         android:text="@string/setting" />
 
@@ -19,13 +19,13 @@
 
     <TextView
         android:id="@+id/factory_2_card_update"
-        style="@style/settings_tabs_off"
+        style="@style/factory_tabs_off"
         android:layout_marginLeft="14dp"
         android:text="@string/update" />
 
     <TextView
         android:id="@+id/factory_2_card_logo"
-        style="@style/settings_tabs_off"
+        style="@style/factory_tabs_off"
         android:layout_marginLeft="14dp"
         android:text="@string/logo" />
 </LinearLayout>

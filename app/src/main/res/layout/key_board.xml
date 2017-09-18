@@ -2,150 +2,174 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:id="@+id/key_board"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="170dp"
+        android:layout_width="174dp"
         android:layout_height="wrap_content"
         android:background="@mipmap/img_keybord_bk"
         android:orientation="vertical"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp">
+        android:paddingLeft="8dp"
+        android:paddingRight="7dp">
 
-        <TextView
+        <ImageView
             android:id="@+id/key_board_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/settings_title"
-            android:textSize="8pt" />
+            android:layout_height="30dp"
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/key_board_edit_value"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/settings_black"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="5dp"
+            android:text="11111111"
+            android:paddingRight="5dp"
+            android:textColor="@color/settings_black"
             android:textSize="10pt" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="29dp"
+            android:layout_height="32dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/key_board_1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_weight="1"
-                android:src="@mipmap/img_keybord_1_1" />
+                android:background="#00000000"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_key_board_1" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/key_board_2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_weight="1"
-                android:src="@mipmap/img_keybord_2_1" />
+                android:background="#00000000"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_key_board_2" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/key_board_3"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_weight="1"
-                android:src="@mipmap/img_keybord_3_1" />
+                android:background="#00000000"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_key_board_3" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="29dp"
+            android:layout_height="32dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/key_board_4"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_weight="1"
-                android:src="@mipmap/img_keybord_4_1" />
+                android:background="#00000000"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_key_board_4" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/key_board_5"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_weight="1"
-                android:src="@mipmap/img_keybord_5_1" />
+                android:background="#00000000"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_key_board_5" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/key_board_6"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_weight="1"
-                android:src="@mipmap/img_keybord_6_1" />
+                android:background="#00000000"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_key_board_6" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="29dp"
+            android:layout_height="32dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/key_board_7"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_weight="1"
-                android:src="@mipmap/img_keybord_7_1" />
+                android:background="#00000000"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_key_board_7" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/key_board_8"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_weight="1"
-                android:src="@mipmap/img_keybord_8_1" />
+                android:background="#00000000"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_key_board_8" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/key_board_9"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_weight="1"
-                android:src="@mipmap/img_keybord_9_1" />
+                android:background="#00000000"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_key_board_9" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="29dp"
+            android:layout_height="32dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/key_board_0"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_weight="2"
-                android:src="@mipmap/img_keybord_0_1" />
+                android:background="#00000000"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_key_board_0" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/key_board_del"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_weight="1"
-                android:src="@mipmap/img_keybord_delete_1" />
+                android:background="#00000000"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_key_board_del" />
         </LinearLayout>
 
-        <ImageView
+        <ImageButton
             android:layout_width="match_parent"
-            android:layout_height="33dp"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
+            android:layout_height="32dp"
             android:layout_gravity="center"
-            android:src="@mipmap/img_keybord_enter_2" />
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_key_board_enter" />
 
     </LinearLayout>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/key_board_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/img_keybord_x" />
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="#00000000"
+        android:scaleType="fitXY"
+        android:src="@drawable/btn_key_board_close" />
 
 </LinearLayout>

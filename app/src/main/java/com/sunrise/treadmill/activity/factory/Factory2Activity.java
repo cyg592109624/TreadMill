@@ -1,6 +1,7 @@
 package com.sunrise.treadmill.activity.factory;
 
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class Factory2Activity extends BaseActivity {
     List<TextView> txtList;
 
     @BindView(R.id.bottom_logo_tab_home)
-    ImageView backHome;
+    ImageButton backHome;
 
 
     @Override
@@ -49,7 +50,6 @@ public class Factory2Activity extends BaseActivity {
 
     @OnClick(R.id.bottom_logo_tab_home)
     public void onBackHome() {
-        ImageUtils.changeImageView(backHome, R.mipmap.btn_home_2);
         finishActivity();
     }
 

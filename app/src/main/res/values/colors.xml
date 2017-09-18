@@ -10,13 +10,22 @@
     <color name="language_btn_off">#FFFFFF</color>
     <color name="language_btn_disable">#646464</color>
 
+
     <color name="settings_title">#FFFFFF</color>
+    <color name="settings_hint">#FFFFFF</color>
+    <color name="settings_white">#FFFFFF</color>
     <color name="settings_black">#000000</color>
+    <color name="settings_gary">#323232</color>
     <color name="settings_tabs_on">#32B4FF</color>
     <color name="settings_tabs_off">#323232</color>
 
 
     <color name="factory_title">#FFFFFF</color>
     <color name="factory_hint">#FFFFFF</color>
+    <color name="factory_white">#FFFFFF</color>
+    <color name="factory_black">#000000</color>
+    <color name="factory_gary">#323232</color>
+    <color name="factory_tabs_on">#32B4FF</color>
+    <color name="factory_tabs_off">#323232</color>
 
 </resources>
