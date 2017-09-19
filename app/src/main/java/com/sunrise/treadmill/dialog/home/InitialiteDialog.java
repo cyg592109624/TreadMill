@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.dialog;
+package com.sunrise.treadmill.dialog.home;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,8 +20,8 @@ import butterknife.ButterKnife;
  * Created by ChuHui on 2017/9/12.
  */
 
-public class Home_InitialiteDialog extends BaseDialogFragment {
-    public static final String Home_Initialite_Dialog="Home_InitialiteDialog";
+public class InitialiteDialog extends BaseDialogFragment {
+    public static final String Home_Initialite_Dialog="InitialiteDialog";
 
     private static final int clearAnim=6000;
     View inflaterView;
@@ -46,7 +46,7 @@ public class Home_InitialiteDialog extends BaseDialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        inflaterView = inflater.inflate(R.layout.home_dialog_initialite, container);
+        inflaterView = inflater.inflate(R.layout.dialog_home_initialite, container);
         ButterKnife.bind(this, inflaterView);
         img.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.home_dialog_initialite));
         mHandler.sendEmptyMessageDelayed(clearAnim,5000);

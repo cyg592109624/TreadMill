@@ -8,20 +8,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
-import com.sunrise.treadmill.fragments.SettingsFragmentCard1;
-import com.sunrise.treadmill.fragments.SettingsFragmentCard2;
-import com.sunrise.treadmill.fragments.SettingsFragmentCard3;
-import com.sunrise.treadmill.fragments.SettingsFragmentCard4;
-import com.sunrise.treadmill.utils.ImageUtils;
+import com.sunrise.treadmill.fragments.settings.SettingsFragmentCard1;
+import com.sunrise.treadmill.fragments.settings.SettingsFragmentCard2;
+import com.sunrise.treadmill.fragments.settings.SettingsFragmentCard3;
+import com.sunrise.treadmill.fragments.settings.SettingsFragmentCard4;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
@@ -39,9 +36,6 @@ public class SettingsActivity extends BaseFragmentActivity {
 
     @BindView(R.id.settings_view_bg)
     LinearLayout bgView;
-
-    @BindView(R.id.settings_views)
-    FrameLayout showView;
 
     @BindView(R.id.bottom_logo_tab_home)
     ImageButton backHome;
@@ -106,10 +100,10 @@ public class SettingsActivity extends BaseFragmentActivity {
             case R.id.settings_card_lock:
                 tgCard = 3;
                 bgResource = R.mipmap.img_factory_3_4;
-                if(card4==null){
-                    card4 = new SettingsFragmentCard4();
-                }
-                tgFragment = card4;
+//                if(card4==null){
+//                    card4 = new SettingsFragmentCard4();
+//                }
+//                tgFragment = card4;
                 break;
             default:
                 bgResource = -1;
@@ -117,8 +111,8 @@ public class SettingsActivity extends BaseFragmentActivity {
                 tgFragment = null;
                 break;
         }
-        bgView.setBackgroundResource(bgResource);
         if (bgResource != -1 && tgFragment != null) {
+            bgView.setBackgroundResource(bgResource);
             for (int i = 0; i < txtList.size() - 1; i++) {
                 if (i == tgCard) {
                     TextUtils.changeTextColor(txtList.get(i), getColor(R.color.settings_tabs_on));

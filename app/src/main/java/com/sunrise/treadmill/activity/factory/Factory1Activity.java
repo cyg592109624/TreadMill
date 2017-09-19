@@ -36,6 +36,8 @@ public class Factory1Activity extends BaseActivity {
         List<TextView> txtList = new ArrayList<TextView>();
         txtList.add((TextView) findViewById(R.id.factory_1_title));
         txtList.add((TextView) findViewById(R.id.factory_1_card_setting));
+        txtList.add((TextView) findViewById(R.id.factory1_unit));
+        txtList.add((TextView) findViewById(R.id.factory1_type));
 
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(this));

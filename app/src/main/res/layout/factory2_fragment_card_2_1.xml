@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/settings_lock_fragment_card_1_2"
+    android:id="@+id/factory2_card2_1"
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"
@@ -12,33 +12,26 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/settings_card4_1_2_distance"
+            android:id="@+id/factory2_card2_1_total_time"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:gravity="center|left"
-            android:text="@string/distance"
-            android:textColor="@color/settings_white"
+            android:text="@string/total_time"
+            android:textColor="@color/factory_white"
             android:textSize="42px" />
 
-        <TextView
-            android:id="@+id/settings_card4_1_2_distance_value"
+        <View
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|right"
-            android:layout_weight="1"
-            android:gravity="center|right"
-            android:textColor="@color/settings_white"
-            android:textSize="42px" />
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/settings_card4_1_2_distance_unit"
+            android:id="@+id/factory2_card2_1_total_time_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|right"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/unit_km"
-            android:textColor="@color/settings_white"
             android:textSize="42px" />
 
     </LinearLayout>
@@ -50,49 +43,36 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/settings_card4_1_2_remaining_distance"
+            android:id="@+id/factory2_card2_1_total_distance"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:gravity="center|left"
-            android:text="@string/remaining_distance"
-            android:textColor="@color/settings_white"
+            android:text="@string/total_distance"
+            android:textColor="@color/factory_white"
             android:textSize="42px" />
 
-        <TextView
-            android:id="@+id/settings_card4_1_2_remaining_distance_value"
+        <View
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|right"
-            android:layout_weight="1"
-            android:gravity="center|right"
-            android:textColor="@color/settings_white"
-            android:textSize="42px" />
+            android:layout_height="1dp"
+            android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/settings_card4_1_2_remaining_distance_unit"
+            android:id="@+id/factory2_card2_1_total_distance_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|right"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/unit_km"
-            android:textColor="@color/settings_white"
             android:textSize="42px" />
 
     </LinearLayout>
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
     <ImageView
-        android:id="@+id/settings_card4_1_2_reset"
         android:layout_width="100dp"
         android:layout_height="41dp"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:background="#00000000"
         android:scaleType="fitXY"
         android:src="@drawable/btn_reset" />
-
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.fragments;
+package com.sunrise.treadmill.fragments.settings;
 
 import android.view.View;
 import android.widget.ImageButton;
@@ -30,8 +30,7 @@ public class SettingsLockFragmentCard2 extends BaseFragment {
     RelativeLayout keyBoard;
 
     @BindView(R.id.settings_card4_2_reset)
-    ImageButton reSet;
-
+    ImageView reSet;
 
 
     @Override
@@ -41,7 +40,7 @@ public class SettingsLockFragmentCard2 extends BaseFragment {
 
     @Override
     protected void setTextStyle() {
-        List<TextView> txtList=new ArrayList<TextView>();
+        List<TextView> txtList = new ArrayList<TextView>();
         txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_2_customer_psw));
         txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_2_srs_psw));
         txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_2_srs_psw_value));
@@ -64,7 +63,7 @@ public class SettingsLockFragmentCard2 extends BaseFragment {
                 TextUtils.changeTextColor(psw, R.color.settings_white);
             }
         });
-        ImageView keyBoardTitle = (ImageView)keyBoard.findViewById(R.id.key_board_title);
+        ImageView keyBoardTitle = (ImageView) keyBoard.findViewById(R.id.key_board_title);
         keyBoardTitle.setImageResource(R.mipmap.tv_keybord_password);
     }
 

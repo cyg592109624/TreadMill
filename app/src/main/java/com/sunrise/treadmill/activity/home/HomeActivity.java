@@ -14,11 +14,11 @@ import com.sunrise.treadmill.activity.factory.FactoriesActivity;
 import com.sunrise.treadmill.activity.settings.SettingsActivity;
 import com.sunrise.treadmill.adapter.HomeFragmentAdapter;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
-import com.sunrise.treadmill.dialog.Home_InitialiteDialog;
-import com.sunrise.treadmill.dialog.Home_LanguageDialog;
-import com.sunrise.treadmill.fragments.HomeFragmentPage1;
-import com.sunrise.treadmill.fragments.HomeFragmentPage2;
-import com.sunrise.treadmill.fragments.HomeFragmentPage3;
+import com.sunrise.treadmill.dialog.home.InitialiteDialog;
+import com.sunrise.treadmill.dialog.home.LanguageDialog;
+import com.sunrise.treadmill.fragments.home.HomeFragmentPage1;
+import com.sunrise.treadmill.fragments.home.HomeFragmentPage2;
+import com.sunrise.treadmill.fragments.home.HomeFragmentPage3;
 import com.sunrise.treadmill.interfaces.HomeLanguageDialogReturn;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.views.LogoImageView;
@@ -76,8 +76,8 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     @OnClick(R.id.home_btn_language)
     public void changeLanguage() {
-        Home_LanguageDialog languageDialog = new Home_LanguageDialog();
-        languageDialog.show(fragmentManager, Home_LanguageDialog.Home_Language_Dialog);
+        LanguageDialog languageDialog = new LanguageDialog();
+        languageDialog.show(fragmentManager, LanguageDialog.Home_Language_Dialog);
     }
 
     @OnClick(R.id.home_btn_setting)
@@ -88,8 +88,8 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
 
     private void initFragment() {
-        Home_InitialiteDialog initialiteDialog = new Home_InitialiteDialog();
-        initialiteDialog.show(fragmentManager, Home_InitialiteDialog.Home_Initialite_Dialog);
+        InitialiteDialog initialiteDialog = new InitialiteDialog();
+        initialiteDialog.show(fragmentManager, InitialiteDialog.Home_Initialite_Dialog);
 
         List<Fragment> list = new ArrayList<Fragment>();
         list.add(new HomeFragmentPage1());

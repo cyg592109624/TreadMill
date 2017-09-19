@@ -1,17 +1,17 @@
-package com.sunrise.treadmill.fragments;
+package com.sunrise.treadmill.fragments.settings;
 
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 
 /**
- * Created by ChuHui on 2017/9/12.
+ * Created by ChuHui on 2017/9/14.
  */
 
-public class HomeFragmentPage1 extends BaseFragment {
+public class SettingsFragmentCard3 extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.home_fragment_page_1;
+        return R.layout.settings_fragment_card_3;
     }
 
     @Override

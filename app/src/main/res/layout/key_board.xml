@@ -26,7 +26,6 @@
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:paddingLeft="5dp"
-            android:text="11111111"
             android:paddingRight="5dp"
             android:textColor="@color/settings_black"
             android:textSize="10pt" />
@@ -155,6 +154,7 @@
         </LinearLayout>
 
         <ImageButton
+            android:id="@+id/key_board_enter"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:layout_gravity="center"

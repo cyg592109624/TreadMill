@@ -27,5 +27,6 @@
     <color name="factory_gary">#323232</color>
     <color name="factory_tabs_on">#32B4FF</color>
     <color name="factory_tabs_off">#323232</color>
+    <color name="factory_brake_test">#EF7C00</color>
 
 </resources>

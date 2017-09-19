@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.fragments;
+package com.sunrise.treadmill.fragments.settings;
 
 import android.app.Service;
 import android.media.AudioManager;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/factory2_card1_1"
+    android:id="@+id/factory2_card1_2"
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"
@@ -13,18 +13,19 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/factory2_card1_1_display_mode"
+            android:id="@+id/factory2_card1_2_ctrl_page"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:gravity="center|left"
-            android:text="@string/display_mode"
+            android:text="@string/login_ctrl_page"
             android:textColor="@color/factory_white"
             android:textSize="42px" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ToggleButton
             android:layout_width="113dp"
@@ -45,28 +46,26 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/factory2_card1_1_pause_mode"
+            android:id="@+id/factory2_card1_2_key_test"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:gravity="center|left"
-            android:text="@string/pause_mode"
+            android:text="@string/key_test"
             android:textColor="@color/factory_white"
             android:textSize="42px" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
-        <ToggleButton
-            android:layout_width="113dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center|right"
-            android:background="@drawable/btn_factory_2_togg"
-            android:gravity="center|right"
-            android:text=""
-            android:textOff=""
-            android:textOn="" />
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="29dp"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_factory_2_start" />
 
     </LinearLayout>
 
@@ -77,28 +76,14 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/factory2_card1_1_key_tone"
+            android:id="@+id/factory2_card1_2_brake_test"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:gravity="center|left"
-            android:text="@string/key_tone"
-            android:textColor="@color/factory_white"
+            android:text="@string/brake_test"
+            android:textColor="@color/factory_brake_test"
             android:textSize="42px" />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1"/>
-
-        <ToggleButton
-            android:layout_width="113dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center|right"
-            android:background="@drawable/btn_factory_2_togg"
-            android:gravity="center|right"
-            android:text=""
-            android:textOff=""
-            android:textOn="" />
 
     </LinearLayout>
 
@@ -109,28 +94,28 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/factory2_card1_1_buzzer"
+            android:id="@+id/factory2_card1_2_level"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:gravity="center|left"
-            android:text="@string/buzzer"
+            android:text="@string/level"
             android:textColor="@color/factory_white"
             android:textSize="42px" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
-        <ToggleButton
-            android:layout_width="113dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center|right"
-            android:background="@drawable/btn_factory_2_togg"
-            android:gravity="center|right"
-            android:text=""
-            android:textOff=""
-            android:textOn="" />
+        <TextView
+            android:id="@+id/factory2_card1_2_level_value"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/img_number_frame_1"
+            android:gravity="center"
+            android:textSize="42px" />
 
     </LinearLayout>
 
@@ -141,28 +126,28 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/factory2_card1_1_child_lock"
+            android:id="@+id/factory2_card1_2_pwm"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:gravity="center|left"
-            android:text="@string/child_lock"
+            android:text="@string/pwm"
             android:textColor="@color/factory_white"
             android:textSize="42px" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
-        <ToggleButton
-            android:layout_width="113dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center|right"
-            android:background="@drawable/btn_factory_2_togg"
-            android:gravity="center|right"
-            android:text=""
-            android:textOff=""
-            android:textOn="" />
+        <TextView
+            android:id="@+id/factory2_card1_2_pwm_value"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/img_number_frame_1"
+            android:gravity="center"
+            android:textSize="42px" />
 
     </LinearLayout>
 </LinearLayout>

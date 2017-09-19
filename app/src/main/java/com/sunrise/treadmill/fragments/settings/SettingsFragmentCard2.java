@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.fragments;
+package com.sunrise.treadmill.fragments.settings;
 
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;

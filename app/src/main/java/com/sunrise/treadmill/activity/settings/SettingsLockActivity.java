@@ -6,18 +6,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
-import com.sunrise.treadmill.fragments.SettingsLockFragmentCard1;
-import com.sunrise.treadmill.fragments.SettingsLockFragmentCard2;
-import com.sunrise.treadmill.utils.ImageUtils;
+import com.sunrise.treadmill.fragments.settings.SettingsLockFragmentCard1;
+import com.sunrise.treadmill.fragments.settings.SettingsLockFragmentCard2;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
@@ -34,9 +31,6 @@ import butterknife.OnClick;
 public class SettingsLockActivity extends BaseFragmentActivity {
     @BindView(R.id.settings_view_bg)
     LinearLayout bgView;
-
-    @BindView(R.id.settings_views)
-    FrameLayout showView;
 
     @BindView(R.id.bottom_logo_tab_back)
     ImageButton back;
@@ -107,7 +101,7 @@ public class SettingsLockActivity extends BaseFragmentActivity {
             }
             FragmentTransaction ft = fragmentManager.beginTransaction();
             if (!tgFragment.isAdded()) {
-                ft.hide(nowFragment).add(R.id.settings_views, tgFragment).commit();
+                ft.hide(nowFragment).add(R.id.settings_lock_views, tgFragment).commit();
             } else {
                 ft.hide(nowFragment).show(tgFragment).commit();
             }
@@ -124,7 +118,7 @@ public class SettingsLockActivity extends BaseFragmentActivity {
         fragmentManager = getSupportFragmentManager();
         card1 = new SettingsLockFragmentCard1();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.add(R.id.settings_views, card1).commit();
+        ft.add(R.id.settings_lock_views, card1).commit();
         nowFragment = card1;
     }
 }

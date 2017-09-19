@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.fragments;
+package com.sunrise.treadmill.fragments.settings;
 
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
@@ -7,11 +7,11 @@ import com.sunrise.treadmill.base.BaseFragment;
  * Created by ChuHui on 2017/9/14.
  */
 
-public class Factory2FragmentCard1 extends BaseFragment {
+public class SettingsFragmentCard4 extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.factory2_fragment_card_1;
+        return R.layout.settings_fragment_card_4;
     }
 
     @Override

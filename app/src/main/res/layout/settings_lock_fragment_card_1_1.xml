@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/settings_lock_fragment_card_1_1"
     android:layout_width="0dp"
-    android:layout_weight="1"
     android:layout_height="match_parent"
+    android:layout_weight="1"
     android:orientation="vertical">
 
     <LinearLayout
@@ -87,7 +87,7 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/settings_card4_1_1_reset"
         android:layout_width="100dp"
         android:layout_height="41dp"

@@ -32,8 +32,17 @@
             android:textColor="@color/factory_tabs_on"
             android:textSize="30px" />
 
-        <include
-            layout="@layout/factory1_fragment_card"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/factory1_fragment_card" />
+        </RelativeLayout>
+
 
     </LinearLayout>
 

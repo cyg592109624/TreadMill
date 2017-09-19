@@ -25,7 +25,7 @@
         <include layout="@layout/activity_settings_lock_tabs" />
 
         <FrameLayout
-            android:id="@+id/settings_views"
+            android:id="@+id/settings_lock_views"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"

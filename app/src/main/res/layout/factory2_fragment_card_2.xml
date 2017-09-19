@@ -6,17 +6,7 @@
     android:orientation="horizontal"
     android:padding="0dp">
 
-    <include layout="@layout/factory2_fragment_card_1_1" />
-
-    <RelativeLayout
-        android:id="@+id/factory2_card1_key_board"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:visibility="gone">
-
-        <include layout="@layout/key_board" />
-    </RelativeLayout>
+    <include layout="@layout/factory2_fragment_card_2_1" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -27,5 +17,5 @@
         android:layout_marginTop="10dp"
         android:src="@mipmap/img_factory_line" />
 
-    <include layout="@layout/factory2_fragment_card_1_2" />
+    <include layout="@layout/factory2_fragment_card_2_2" />
 </LinearLayout>

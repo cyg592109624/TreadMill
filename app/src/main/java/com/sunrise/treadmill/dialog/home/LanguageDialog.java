@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.dialog;
+package com.sunrise.treadmill.dialog.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,9 +28,9 @@ import butterknife.ButterKnife;
  * 校正对话框
  */
 
-public class Home_LanguageDialog extends BaseDialogFragment {
+public class LanguageDialog extends BaseDialogFragment {
 
-    public static final String Home_Language_Dialog = "Home_LanguageDialog";
+    public static final String Home_Language_Dialog = "LanguageDialog";
     View inflaterView;
     private HomeLanguageDialogReturn dialogFragmentReturn;
     @BindViews({R.id.home_dialog_language_img_us, R.id.home_dialog_language_img_zh, R.id.home_dialog_language_img_de, R.id.home_dialog_language_img_tr, R.id.home_dialog_language_img_ir, R.id.home_dialog_language_img_es, R.id.home_dialog_language_img_pt, R.id.home_dialog_language_img_ru})
@@ -41,7 +41,7 @@ public class Home_LanguageDialog extends BaseDialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        inflaterView = inflater.inflate(R.layout.home_dialog_language, container);
+        inflaterView = inflater.inflate(R.layout.dialog_home_language, container);
         ButterKnife.bind(this, inflaterView);
         dialogFragmentReturn = (HomeLanguageDialogReturn) getActivity();
         return super.onCreateView(inflater, container, savedInstanceState);

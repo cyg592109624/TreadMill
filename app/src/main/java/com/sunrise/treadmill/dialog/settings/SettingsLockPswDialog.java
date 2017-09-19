@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.dialog;
+package com.sunrise.treadmill.dialog.settings;
 
 import android.view.View;
 
