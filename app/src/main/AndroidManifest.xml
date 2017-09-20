@@ -32,6 +32,14 @@
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape">
         </activity>
+        <activity
+            android:name=".activity.workout.HillActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="standard"
+            android:screenOrientation="sensorLandscape" >
+        </activity>
+
+
 
         <activity
             android:name=".activity.settings.SettingsActivity"

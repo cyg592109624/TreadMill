@@ -8,16 +8,13 @@
 
     <include layout="@layout/settings_lock_fragment_card_1_1" />
 
-    <RelativeLayout
-        android:id="@+id/settings_fragment_card_4_1_2_editView"
+    <com.sunrise.treadmill.views.MyKeyBoardView
+        android:id="@+id/settings_lock_fragment_card_1_2_keyboard"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:visibility="gone">
-
-        <include layout="@layout/key_board" />
-    </RelativeLayout>
+        android:visibility="gone" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -30,14 +27,11 @@
 
     <include layout="@layout/settings_lock_fragment_card_1_2" />
 
-    <RelativeLayout
-        android:id="@+id/settings_fragment_card_4_1_1_editView"
+    <com.sunrise.treadmill.views.MyKeyBoardView
+        android:id="@+id/settings_lock_fragment_card_1_1_keyboard"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:visibility="gone">
-
-        <include layout="@layout/key_board" />
-    </RelativeLayout>
+        android:visibility="gone" />
 </LinearLayout>

@@ -37,9 +37,6 @@ public class SettingsActivity extends BaseFragmentActivity {
     @BindView(R.id.settings_view_bg)
     LinearLayout bgView;
 
-    @BindView(R.id.bottom_logo_tab_home)
-    ImageButton backHome;
-
     @BindViews({R.id.settings_card_system, R.id.settings_card_bluetooth, R.id.settings_card_wifi, R.id.settings_card_lock, R.id.settings_title})
     List<TextView> txtList;
 

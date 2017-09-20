@@ -52,5 +52,7 @@
 
     </LinearLayout>
 
-    <include layout="@layout/bottom_logo_tab2" />
+    <com.sunrise.treadmill.views.MyBottomTabView2
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

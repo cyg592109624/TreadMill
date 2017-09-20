@@ -56,6 +56,8 @@ public class LogoImageView extends android.support.v7.widget.AppCompatImageView 
         int x = (int) event.getX();
         int y = (int) event.getY();
 
+
+
         switch(event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mLastMotionX = x;

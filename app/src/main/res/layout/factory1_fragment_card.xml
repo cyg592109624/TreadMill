@@ -28,14 +28,14 @@
             <RadioButton
                 android:layout_width="87dp"
                 android:layout_height="28dp"
-                android:background="@drawable/radio_btn_factory_1_imperial"
+                android:background="@drawable/btn_factory_1_imperial"
                 android:button="@null" />
 
             <RadioButton
                 android:layout_width="87dp"
                 android:layout_height="28dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/radio_btn_factory_1_metrial"
+                android:background="@drawable/btn_factory_1_metrial"
                 android:button="@null" />
         </RadioGroup>
 
@@ -66,21 +66,21 @@
             <RadioButton
                 android:layout_width="87dp"
                 android:layout_height="28dp"
-                android:background="@drawable/radio_btn_factory_1_bike"
+                android:background="@drawable/btn_factory_1_bike"
                 android:button="@null" />
 
             <RadioButton
                 android:layout_width="87dp"
                 android:layout_height="28dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/radio_btn_factory_1_recumbent"
+                android:background="@drawable/btn_factory_1_recumbent"
                 android:button="@null" />
 
             <RadioButton
                 android:layout_width="87dp"
                 android:layout_height="28dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/radio_btn_factory_1_elliptical"
+                android:background="@drawable/btn_factory_1_elliptical"
                 android:button="@null" />
 
         </RadioGroup>

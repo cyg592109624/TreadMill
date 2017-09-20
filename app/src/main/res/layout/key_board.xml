@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/key_board"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -35,7 +34,7 @@
             android:layout_height="32dp"
             android:orientation="horizontal">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/key_board_1"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
@@ -44,7 +43,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_key_board_1" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/key_board_2"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
@@ -53,7 +52,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_key_board_2" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/key_board_3"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
@@ -68,7 +67,7 @@
             android:layout_height="32dp"
             android:orientation="horizontal">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/key_board_4"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
@@ -77,7 +76,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_key_board_4" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/key_board_5"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
@@ -86,7 +85,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_key_board_5" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/key_board_6"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
@@ -101,7 +100,7 @@
             android:layout_height="32dp"
             android:orientation="horizontal">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/key_board_7"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
@@ -110,7 +109,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_key_board_7" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/key_board_8"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
@@ -119,7 +118,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_key_board_8" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/key_board_9"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
@@ -134,7 +133,7 @@
             android:layout_height="32dp"
             android:orientation="horizontal">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/key_board_0"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
@@ -143,7 +142,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_key_board_0" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/key_board_del"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
@@ -153,7 +152,7 @@
                 android:src="@drawable/btn_key_board_del" />
         </LinearLayout>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/key_board_enter"
             android:layout_width="match_parent"
             android:layout_height="32dp"
@@ -164,7 +163,7 @@
 
     </LinearLayout>
 
-    <ImageButton
+    <ImageView
         android:id="@+id/key_board_close"
         android:layout_width="20dp"
         android:layout_height="20dp"

@@ -29,4 +29,8 @@
     <color name="factory_tabs_off">#323232</color>
     <color name="factory_brake_test">#EF7C00</color>
 
+    <color name="workout_mode_white">#FFFFFF</color>
+
+
+
 </resources>
