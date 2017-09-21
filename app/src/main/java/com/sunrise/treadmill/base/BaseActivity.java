@@ -32,6 +32,7 @@ public abstract class BaseActivity extends Activity {
         amUtils=AMUtils.getInstance();
         amUtils.addActivity(this);
         setTextStyle();
+        init();
     }
 
     public abstract int getLayoutId();
@@ -42,6 +43,9 @@ public abstract class BaseActivity extends Activity {
         bind.unbind();
     }
     protected void setTextStyle() {
+
+    }
+    protected void init() {
 
     }
 

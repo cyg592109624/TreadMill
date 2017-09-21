@@ -16,7 +16,7 @@ public class SettingsLockPswDialog extends BaseDialogFragment {
     }
 
     @Override
-    public void init() {
+    protected void init() {
 
     }
 }

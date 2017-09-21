@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  */
 
 public class LanguageDialog extends BaseDialogFragment {
-    public static final String Home_Language_Dialog = "LanguageDialog";
+    public static final String TAG = "LanguageDialog";
     private HomeLanguageDialogReturn dialogFragmentReturn;
     @BindViews({R.id.home_dialog_language_img_us, R.id.home_dialog_language_img_zh, R.id.home_dialog_language_img_de, R.id.home_dialog_language_img_tr, R.id.home_dialog_language_img_ir, R.id.home_dialog_language_img_es, R.id.home_dialog_language_img_pt, R.id.home_dialog_language_img_ru})
     List<ImageView> imageViews;

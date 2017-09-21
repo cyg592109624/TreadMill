@@ -30,11 +30,10 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/factories_1"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="#00000000"
             android:scaleType="fitXY"
             android:src="@drawable/btn_factories_1" />
 
@@ -42,11 +41,10 @@
             android:layout_width="30dp"
             android:layout_height="1dp" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/factories_2"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="#00000000"
             android:scaleType="fitXY"
             android:src="@drawable/btn_factories_2" />
 

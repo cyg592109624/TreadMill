@@ -3,6 +3,7 @@ package com.sunrise.treadmill.activity.factory;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
@@ -24,7 +25,7 @@ import butterknife.OnClick;
 public class FactoriesActivity extends BaseActivity {
 
     @BindView(R.id.bottom_logo_tab_home)
-    ImageButton backHome;
+    ImageView backHome;
 
     @Override
     public int getLayoutId() {

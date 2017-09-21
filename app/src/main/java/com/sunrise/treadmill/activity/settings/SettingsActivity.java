@@ -53,12 +53,6 @@ public class SettingsActivity extends BaseFragmentActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        init();
-    }
-
-    @Override
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(this));
@@ -138,6 +132,7 @@ public class SettingsActivity extends BaseFragmentActivity {
         finishActivity();
     }
 
+    @Override
     protected void init() {
         fragmentManager = getSupportFragmentManager();
         card1 = new SettingsFragmentCard1();

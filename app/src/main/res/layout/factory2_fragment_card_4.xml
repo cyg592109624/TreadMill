@@ -23,6 +23,7 @@
         android:orientation="horizontal"></LinearLayout>
 
     <ImageView
+        android:id="@+id/factory2_card4_update_logo"
         android:layout_width="178dp"
         android:layout_height="35dp"
         android:scaleType="fitXY"

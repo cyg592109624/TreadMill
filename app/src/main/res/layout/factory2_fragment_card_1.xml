@@ -8,15 +8,13 @@
 
     <include layout="@layout/factory2_fragment_card_1_1" />
 
-    <RelativeLayout
-        android:id="@+id/factory2_card1_key_board"
+    <com.sunrise.treadmill.views.MyKeyBoardView
+        android:id="@+id/factory2_card1_1_keyboard"
         android:layout_width="0dp"
+        android:gravity="center"
+        android:visibility="gone"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:visibility="gone">
-
-        <include layout="@layout/key_board" />
-    </RelativeLayout>
+        android:layout_weight="1"/>
 
     <ImageView
         android:layout_width="wrap_content"

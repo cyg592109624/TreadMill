@@ -44,9 +44,8 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract int getLayoutId();
 
+    protected  void setTextStyle(){};
 
-    protected abstract void setTextStyle();
-
-    protected abstract void init();
+    protected  void init(){};
 
 }

@@ -20,6 +20,7 @@ import butterknife.Unbinder;
 public abstract class BaseFragmentActivity extends FragmentActivity {
     private Unbinder bind;
     private AMUtils amUtils;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +30,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         amUtils = AMUtils.getInstance();
         amUtils.addActivity(this);
         setTextStyle();
+        init();
     }
 
     public abstract int getLayoutId();
@@ -38,9 +40,13 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         super.onDestroy();
         bind.unbind();
     }
-    protected void setTextStyle() {
 
+    protected void setTextStyle() {
     }
+
+    protected void init() {
+    }
+
     public void finishActivity() {
         amUtils.finishActivity();
     }

@@ -50,12 +50,6 @@ public class Factory2Activity extends BaseFragmentActivity {
     private Factory2FragmentCard4 card4;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        init();
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.activity_factory2;
     }
@@ -138,7 +132,7 @@ public class Factory2Activity extends BaseFragmentActivity {
             nowFragment = tgFragment;
         }
     }
-
+    @Override
     protected void init() {
         fragmentManager = getSupportFragmentManager();
         card1 = new Factory2FragmentCard1();

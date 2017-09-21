@@ -63,8 +63,12 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
     public abstract int getLayoutId();
 
+    public View getParentView(){
+        return parentView;
+    }
+
     protected void setTextStyle(){};
-    public abstract void init();
+    protected void init(){};
 
     /**
      * 隐藏部分系统ui、部分button事件拦截

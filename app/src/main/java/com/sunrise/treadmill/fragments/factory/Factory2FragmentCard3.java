@@ -2,6 +2,7 @@ package com.sunrise.treadmill.fragments.factory;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by ChuHui on 2017/9/14.
@@ -42,18 +44,21 @@ public class Factory2FragmentCard3 extends BaseFragment {
         txtList.add((TextView) getParentView().findViewById(R.id.factory2_card3_3_download_failed));
 
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(getContext()));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(getContext()));
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(getContext()));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(getContext()));
         }
     }
 
     @Override
     protected void init() {
         card3_1_btn.setEnabled(false);
-        card3_1_btn.setPressed(false);
 
         card3_3_btn.setEnabled(false);
-        card3_3_btn.setPressed(false);
+    }
+
+    @OnClick({R.id.factory2_card3_1_btn,R.id.factory2_card3_3_btn})
+    public void card3Click(View view){
+
     }
 }

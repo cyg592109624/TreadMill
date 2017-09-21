@@ -108,10 +108,24 @@ public class TextUtils {
         }
     }
 
-    public  static void changeTextSize(TextView textView, float size){
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
+    public static void changeTextSize(TextView textView, float size) {
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
     }
-    public  static void changeTextSize(List<TextView> textViews, float size){
+
+    public static void changeTextSize(List<TextView> textViews, float size) {
+        for (TextView t : textViews) {
+            changeTextSize(t, size);
+        }
+    }
+
+    public static void changeTextBackground(TextView textView, int bgId) {
+        textView.setBackgroundResource(bgId);
+    }
+
+    public static void changeTextBackground(List<TextView> textViews, int bgId) {
+        for (TextView t : textViews) {
+            changeTextBackground(t, bgId);
+        }
 
     }
 }

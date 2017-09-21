@@ -62,7 +62,7 @@ public class NfcActivity extends BaseFragmentActivity {
                 case ShowError:
                     stopChange = true;
                     nfcDialog = new NfcDialog();
-                    nfcDialog.show(fragmentManager, NfcDialog.Home_Nfc_Dialog);
+                    nfcDialog.show(fragmentManager, NfcDialog.TAG);
                     break;
             }
         }
@@ -74,14 +74,9 @@ public class NfcActivity extends BaseFragmentActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        init();
-    }
-
     protected void init() {
         mHandler.sendEmptyMessageDelayed(ChangeImg_1, 1000);
-//        mHandler.sendEmptyMessageDelayed(StopChange, 4000);
+        mHandler.sendEmptyMessageDelayed(StopChange, 4000);
         mHandler.sendEmptyMessageDelayed(ShowError, 7000);
         mHandler.sendEmptyMessageDelayed(ClearShow, 10000);
 

@@ -43,8 +43,8 @@
                 android:max="100"
                 android:maxHeight="5dp"
                 android:minHeight="5dp"
-                android:progressDrawable="@drawable/bg_seek_bar"
-                android:thumb="@drawable/bg_seek_bar_thumb"
+                android:progressDrawable="@drawable/seek_bar"
+                android:thumb="@drawable/seek_bar_thumb"
                 android:thumbOffset="8dp" />
         </FrameLayout>
 
@@ -86,8 +86,8 @@
                 android:max="100"
                 android:maxHeight="5dp"
                 android:minHeight="5dp"
-                android:progressDrawable="@drawable/bg_seek_bar"
-                android:thumb="@drawable/bg_seek_bar_thumb"
+                android:progressDrawable="@drawable/seek_bar"
+                android:thumb="@drawable/seek_bar_thumb"
                 android:thumbOffset="8dp" />
         </FrameLayout>
 

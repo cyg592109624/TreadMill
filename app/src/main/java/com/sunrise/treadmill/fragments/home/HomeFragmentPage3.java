@@ -17,14 +17,4 @@ public class HomeFragmentPage3 extends BaseFragment {
         }
         return R.layout.home_fragment_page_3;
     }
-
-    @Override
-    protected void setTextStyle() {
-
-    }
-
-    @Override
-    protected void init() {
-
-    }
 }

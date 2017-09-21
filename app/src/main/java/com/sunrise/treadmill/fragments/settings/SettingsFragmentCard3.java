@@ -13,14 +13,4 @@ public class SettingsFragmentCard3 extends BaseFragment {
     public int getLayoutId() {
         return R.layout.settings_fragment_card_3;
     }
-
-    @Override
-    protected void setTextStyle() {
-
-    }
-
-    @Override
-    protected void init() {
-
-    }
 }

@@ -56,12 +56,6 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initFragment();
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.activity_home;
     }
@@ -69,8 +63,8 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     @Override
     public void onInitialResult(String result) {
-        Intent intent = new Intent(HomeActivity.this, NfcActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(HomeActivity.this, NfcActivity.class);
+//        startActivity(intent);
     }
 
     @Override
@@ -109,9 +103,10 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     }
 
-    private void initFragment() {
+    @Override
+    protected void init() {
         InitialiteDialog initialiteDialog = new InitialiteDialog();
-        initialiteDialog.show(fragmentManager, InitialiteDialog.Home_Initialite_Dialog);
+        initialiteDialog.show(fragmentManager, InitialiteDialog.TAG);
 
         List<Fragment> list = new ArrayList<Fragment>();
         list.add(new HomeFragmentPage1());
@@ -135,7 +130,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @OnClick(R.id.home_btn_language)
     public void changeLanguage() {
         LanguageDialog languageDialog = new LanguageDialog();
-        languageDialog.show(fragmentManager, LanguageDialog.Home_Language_Dialog);
+        languageDialog.show(fragmentManager, LanguageDialog.TAG);
     }
 
     @OnClick(R.id.home_btn_setting)

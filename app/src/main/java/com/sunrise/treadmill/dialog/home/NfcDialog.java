@@ -11,7 +11,7 @@ import com.sunrise.treadmill.base.BaseDialogFragment;
  */
 
 public class NfcDialog extends BaseDialogFragment {
-    public static final String Home_Nfc_Dialog = "NfcDialog";
+    public static final String TAG = "NfcDialog";
     private static final int CloseDialog = 1000;
     private Handler mHandler = new Handler() {
 

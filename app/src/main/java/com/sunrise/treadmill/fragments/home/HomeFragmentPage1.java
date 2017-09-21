@@ -27,16 +27,6 @@ public class HomeFragmentPage1 extends BaseFragment {
         return R.layout.home_fragment_page_1;
     }
 
-    @Override
-    protected void setTextStyle() {
-
-    }
-
-    @Override
-    protected void init() {
-
-    }
-
     @OnClick({R.id.workout_mode_hill})
     void selectWorkOutMode(View view) {
         Intent intent = new Intent();

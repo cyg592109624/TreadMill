@@ -21,12 +21,14 @@
             android:text="@string/display_mode"
             android:textColor="@color/factory_white"
             android:textSize="42px" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ToggleButton
+            android:id="@+id/factory2_card1_1_display_mode_toggle"
             android:layout_width="113dp"
             android:layout_height="28dp"
             android:layout_gravity="center|right"
@@ -53,12 +55,14 @@
             android:text="@string/pause_mode"
             android:textColor="@color/factory_white"
             android:textSize="42px" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ToggleButton
+            android:id="@+id/factory2_card1_1_pause_mode_toggle"
             android:layout_width="113dp"
             android:layout_height="28dp"
             android:layout_gravity="center|right"
@@ -85,12 +89,14 @@
             android:text="@string/key_tone"
             android:textColor="@color/factory_white"
             android:textSize="42px" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ToggleButton
+            android:id="@+id/factory2_card1_1_key_tone_toggle"
             android:layout_width="113dp"
             android:layout_height="28dp"
             android:layout_gravity="center|right"
@@ -117,12 +123,14 @@
             android:text="@string/buzzer"
             android:textColor="@color/factory_white"
             android:textSize="42px" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ToggleButton
+            android:id="@+id/factory2_card1_1_buzzer_toggle"
             android:layout_width="113dp"
             android:layout_height="28dp"
             android:layout_gravity="center|right"
@@ -149,12 +157,14 @@
             android:text="@string/child_lock"
             android:textColor="@color/factory_white"
             android:textSize="42px" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ToggleButton
+            android:id="@+id/factory2_card1_1_child_lock_toggle"
             android:layout_width="113dp"
             android:layout_height="28dp"
             android:layout_gravity="center|right"

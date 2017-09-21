@@ -49,12 +49,6 @@ public class SettingsLockActivity extends BaseFragmentActivity {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        init();
-    }
-
-    @Override
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(this));
@@ -113,7 +107,8 @@ public class SettingsLockActivity extends BaseFragmentActivity {
         finishActivity();
     }
 
-    private void init() {
+    @Override
+    protected void init() {
         fragmentManager = getSupportFragmentManager();
         card1 = new SettingsLockFragmentCard1();
         FragmentTransaction ft = fragmentManager.beginTransaction();

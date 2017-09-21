@@ -97,12 +97,14 @@ public class MyKeyBoardView extends LinearLayout {
                     break;
                 case R.id.key_board_enter:
                     if (keyBoardReturn != null) {
+                        showText.setText("");
                         keyBoardReturn.onEnter(oldText);
                         keyBoardReturn.onKeyBoardHide();
                     }
                     break;
                 case R.id.key_board_close:
                     if (keyBoardReturn != null) {
+                        showText.setText("");
                         keyBoardReturn.onKeyBoardHide();
                     }
                     break;
