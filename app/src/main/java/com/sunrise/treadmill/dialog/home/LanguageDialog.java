@@ -29,9 +29,7 @@ import butterknife.ButterKnife;
  */
 
 public class LanguageDialog extends BaseDialogFragment {
-
     public static final String Home_Language_Dialog = "LanguageDialog";
-    View inflaterView;
     private HomeLanguageDialogReturn dialogFragmentReturn;
     @BindViews({R.id.home_dialog_language_img_us, R.id.home_dialog_language_img_zh, R.id.home_dialog_language_img_de, R.id.home_dialog_language_img_tr, R.id.home_dialog_language_img_ir, R.id.home_dialog_language_img_es, R.id.home_dialog_language_img_pt, R.id.home_dialog_language_img_ru})
     List<ImageView> imageViews;
@@ -40,16 +38,8 @@ public class LanguageDialog extends BaseDialogFragment {
     List<TextView> textViews;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        inflaterView = inflater.inflate(R.layout.dialog_home_language, container);
-        ButterKnife.bind(this, inflaterView);
-        dialogFragmentReturn = (HomeLanguageDialogReturn) getActivity();
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    public View inflateView() {
-        return inflaterView;
+    public int getLayoutId() {
+        return R.layout.dialog_home_language;
     }
 
     @Override
@@ -61,6 +51,11 @@ public class LanguageDialog extends BaseDialogFragment {
         }
         TextUtils.changeTextColor(textViews, getResources().getColor(R.color.language_btn_on));
         ImageUtils.changeImageView(imageViews);
+    }
+
+    @Override
+    public void init() {
+        dialogFragmentReturn = (HomeLanguageDialogReturn) getActivity();
     }
 
 
@@ -137,5 +132,6 @@ public class LanguageDialog extends BaseDialogFragment {
         dismiss();
 
     }
+
 
 }

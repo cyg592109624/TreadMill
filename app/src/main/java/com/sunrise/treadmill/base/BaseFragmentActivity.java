@@ -3,6 +3,7 @@ package com.sunrise.treadmill.base;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,7 +20,6 @@ import butterknife.Unbinder;
 public abstract class BaseFragmentActivity extends FragmentActivity {
     private Unbinder bind;
     private AMUtils amUtils;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     protected void setTextStyle() {
 
     }
-
     public void finishActivity() {
         amUtils.finishActivity();
     }

@@ -48,14 +48,14 @@ public class SettingsActivity extends BaseFragmentActivity {
     private SettingsFragmentCard4 card4;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        init();
+    public int getLayoutId() {
+        return R.layout.activity_settings;
     }
 
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_settings;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
     }
 
     @Override
@@ -138,7 +138,7 @@ public class SettingsActivity extends BaseFragmentActivity {
         finishActivity();
     }
 
-    private void init() {
+    protected void init() {
         fragmentManager = getSupportFragmentManager();
         card1 = new SettingsFragmentCard1();
         FragmentTransaction ft = fragmentManager.beginTransaction();

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseDialogFragment;
+import com.sunrise.treadmill.interfaces.OnInitialReturn;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,21 +22,24 @@ import butterknife.ButterKnife;
  */
 
 public class InitialiteDialog extends BaseDialogFragment {
-    public static final String Home_Initialite_Dialog="InitialiteDialog";
+    public static final String Home_Initialite_Dialog = "InitialiteDialog";
 
-    private static final int clearAnim=6000;
-    View inflaterView;
+    private OnInitialReturn onInitialReturn;
+
+    private static final int clearAnim = 6000;
+
     @BindView(R.id.home_dialog_inititalite_img)
     ImageView img;
 
-    private Handler mHandler=new Handler(){
+    private Handler mHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case clearAnim:
                     img.clearAnimation();
                     dismiss();
+                    onInitialReturn.onInitialResult("");
                     break;
                 default:
                     break;
@@ -43,18 +47,16 @@ public class InitialiteDialog extends BaseDialogFragment {
         }
     };
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        inflaterView = inflater.inflate(R.layout.dialog_home_initialite, container);
-        ButterKnife.bind(this, inflaterView);
-        img.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.home_dialog_initialite));
-        mHandler.sendEmptyMessageDelayed(clearAnim,5000);
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public int getLayoutId() {
+        return R.layout.dialog_home_initialite;
     }
+
     @Override
-    public View inflateView() {
-        return inflaterView;
+    public void init() {
+        onInitialReturn= (OnInitialReturn) getActivity();
+        img.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.home_dialog_initialite));
+        mHandler.sendEmptyMessageDelayed(clearAnim, 5000);
     }
 
 

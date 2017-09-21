@@ -1,5 +1,4 @@
 package com.sunrise.treadmill.activity.factory;
-
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;

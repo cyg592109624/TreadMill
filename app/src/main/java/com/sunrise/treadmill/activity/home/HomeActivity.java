@@ -20,6 +20,7 @@ import com.sunrise.treadmill.fragments.home.HomeFragmentPage1;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage2;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage3;
 import com.sunrise.treadmill.interfaces.HomeLanguageDialogReturn;
+import com.sunrise.treadmill.interfaces.OnInitialReturn;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.views.LogoImageView;
 
@@ -33,7 +34,7 @@ import butterknife.OnClick;
  * Created by ChuHui on 2017/9/6.
  */
 
-public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDialogReturn, ViewPager.OnPageChangeListener {
+public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDialogReturn, OnInitialReturn, ViewPager.OnPageChangeListener {
 
     @BindView(R.id.home_btn_language)
     ImageButton btn_language;
@@ -65,6 +66,13 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
         return R.layout.activity_home;
     }
 
+
+    @Override
+    public void onInitialResult(String result) {
+        Intent intent = new Intent(HomeActivity.this, NfcActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onLanguageReturn(boolean isChange) {
         if (isChange) {
@@ -73,43 +81,6 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
             startActivity(intent);
         }
     }
-
-    @OnClick(R.id.home_btn_language)
-    public void changeLanguage() {
-        LanguageDialog languageDialog = new LanguageDialog();
-        languageDialog.show(fragmentManager, LanguageDialog.Home_Language_Dialog);
-    }
-
-    @OnClick(R.id.home_btn_setting)
-    public void toSettings() {
-        Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-        startActivity(intent);
-    }
-
-
-    private void initFragment() {
-        InitialiteDialog initialiteDialog = new InitialiteDialog();
-        initialiteDialog.show(fragmentManager, InitialiteDialog.Home_Initialite_Dialog);
-
-        List<Fragment> list = new ArrayList<Fragment>();
-        list.add(new HomeFragmentPage1());
-        list.add(new HomeFragmentPage2());
-        list.add(new HomeFragmentPage3());
-        fragmentAdapter = new HomeFragmentAdapter(fragmentManager, list);
-        viewPager.setAdapter(fragmentAdapter);
-        viewPager.setCurrentItem(0);
-        viewPager.setOnPageChangeListener(this);
-
-        logo.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Intent intent=new Intent(HomeActivity.this, FactoriesActivity.class);
-                startActivity(intent);
-                return true;
-            }
-        });
-    }
-
 
     @Override
     public void onPageSelected(int position) {
@@ -136,6 +107,41 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    private void initFragment() {
+        InitialiteDialog initialiteDialog = new InitialiteDialog();
+        initialiteDialog.show(fragmentManager, InitialiteDialog.Home_Initialite_Dialog);
+
+        List<Fragment> list = new ArrayList<Fragment>();
+        list.add(new HomeFragmentPage1());
+        list.add(new HomeFragmentPage2());
+        list.add(new HomeFragmentPage3());
+        fragmentAdapter = new HomeFragmentAdapter(fragmentManager, list);
+        viewPager.setAdapter(fragmentAdapter);
+        viewPager.setCurrentItem(0);
+        viewPager.setOnPageChangeListener(this);
+
+        logo.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, FactoriesActivity.class);
+                startActivity(intent);
+                return true;
+            }
+        });
+    }
+
+    @OnClick(R.id.home_btn_language)
+    public void changeLanguage() {
+        LanguageDialog languageDialog = new LanguageDialog();
+        languageDialog.show(fragmentManager, LanguageDialog.Home_Language_Dialog);
+    }
+
+    @OnClick(R.id.home_btn_setting)
+    public void toSettings() {
+        Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+        startActivity(intent);
     }
 
 }

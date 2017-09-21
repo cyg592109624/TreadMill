@@ -9,8 +9,14 @@ import com.sunrise.treadmill.base.BaseDialogFragment;
  */
 
 public class SettingsLockPswDialog extends BaseDialogFragment {
+
     @Override
-    public View inflateView() {
-        return null;
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void init() {
+
     }
 }

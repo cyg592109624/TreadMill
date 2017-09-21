@@ -32,10 +32,18 @@
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape">
         </activity>
+
+        <activity
+            android:name=".activity.home.NfcActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape">
+        </activity>
+
         <activity
             android:name=".activity.workout.HillActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="standard"
+            android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" >
         </activity>
 
@@ -51,7 +59,7 @@
         <activity
             android:name=".activity.settings.SettingsLockActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="standard"
+            android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" >
         </activity>
 

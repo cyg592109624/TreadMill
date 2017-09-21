@@ -16,12 +16,17 @@ import android.view.WindowManager;
 
 import com.sunrise.treadmill.R;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * Created by ChuHui on 2017/9/6.
  */
 
 public abstract class BaseDialogFragment extends DialogFragment {
     private static final int DIALOG_WIDTH = 10000;
+    private Unbinder bind;
+    private View parentView;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -32,10 +37,18 @@ public abstract class BaseDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        parentView = inflater.inflate(getLayoutId(), container, false);
         changeSystemUiState();
-        inflateView().setMinimumWidth(DIALOG_WIDTH);
+        parentView.setMinimumWidth(DIALOG_WIDTH);
+        return parentView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        bind = ButterKnife.bind(this, view);
         setTextStyle();
-        return inflateView();
+        init();
     }
 
     @Override
@@ -45,12 +58,13 @@ public abstract class BaseDialogFragment extends DialogFragment {
         WindowManager windowManager = getActivity().getWindowManager();
         DisplayMetrics dm = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(dm);
-        window.setLayout(dm.widthPixels + 100, window.getAttributes().height);
+        window.setLayout(dm.widthPixels + 120, window.getAttributes().height);
     }
 
-    public abstract View inflateView();
+    public abstract int getLayoutId();
 
-    protected void setTextStyle(){}
+    protected void setTextStyle(){};
+    public abstract void init();
 
     /**
      * 隐藏部分系统ui、部分button事件拦截
