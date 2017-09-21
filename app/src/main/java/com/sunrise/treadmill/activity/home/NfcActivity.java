@@ -81,7 +81,7 @@ public class NfcActivity extends BaseFragmentActivity {
 
     protected void init() {
         mHandler.sendEmptyMessageDelayed(ChangeImg_1, 1000);
-        mHandler.sendEmptyMessageDelayed(StopChange, 4000);
+//        mHandler.sendEmptyMessageDelayed(StopChange, 4000);
         mHandler.sendEmptyMessageDelayed(ShowError, 7000);
         mHandler.sendEmptyMessageDelayed(ClearShow, 10000);
 
