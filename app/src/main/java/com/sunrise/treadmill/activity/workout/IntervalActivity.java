@@ -21,10 +21,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by ChuHui on 2017/9/20.
+ * Created by ChuHui on 2017/9/22.
  */
 
-public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
+public class IntervalActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
     @BindView(R.id.workout_mode_head)
     MyWorkOutHead headView;
 
@@ -72,17 +72,9 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     }
 
     @Override
-    protected void init() {
-        headView.setHeadMsg(getResources().getString(R.string.workout_mode_hill), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_hill_icon);
-        genderView.setOnGenderReturn(this);
-        keyBoardView.setKeyBoardReturn(this);
-    }
-
-    @Override
     public void genderReturn(int gender) {
 
     }
-
 
     @Override
     public void onEnter(String result) {
@@ -121,6 +113,12 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         genderView.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    protected void init() {
+        headView.setHeadMsg(getResources().getString(R.string.workout_mode_interval), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_interval_icon);
+        genderView.setOnGenderReturn(this);
+        keyBoardView.setKeyBoardReturn(this);
+    }
 
 
     private boolean isShowingKeyBoard = false;
@@ -162,7 +160,7 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     }
 
     @OnClick({R.id.workout_mode_start})
-    public void beginWorkOut() {
+    public void beginWorkOut(){
 
     }
 
@@ -170,4 +168,5 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     public void onBackHome() {
         finishActivity();
     }
+
 }

@@ -20,24 +20,28 @@
             android:src="@mipmap/btn_home_hill_1" />
 
         <ImageView
+            android:id="@+id/workout_mode_interval"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@mipmap/btn_home_interval_1" />
 
         <ImageView
+            android:id="@+id/workout_mode_goal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@mipmap/btn_home_goal_1" />
 
         <ImageView
+            android:id="@+id/workout_mode_fitness_test"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@mipmap/btn_home_fitness_1" />
 
         <ImageView
+            android:id="@+id/workout_mode_hrc"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -52,18 +56,21 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/workout_mode_vr"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:src="@mipmap/btn_home_virtual_1" />
 
         <ImageView
+            android:id="@+id/workout_mode_user_program"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@mipmap/btn_home_userprogram_1" />
 
         <ImageView
+            android:id="@+id/workout_mode_quick_start"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/workout_edit_start_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center|left"
+        android:text="@string/workout_mode_hint_a"
+        android:textColor="@color/workout_mode_white"
+        android:textSize="40px" />
+
+    <ImageView
+        android:id="@+id/workout_mode_start"
+        android:layout_marginLeft="20dp"
+        android:layout_width="85dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/btn_start" />
+</LinearLayout>

@@ -171,4 +171,6 @@
     <string name="target_hr">Target HR</string>
     <string name="unit_kg">kg</string>
     <string name="unit_lb">lb</string>
+    <string name="value_nothing">—</string>
+
 </resources>

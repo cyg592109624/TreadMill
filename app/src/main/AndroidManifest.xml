@@ -46,8 +46,31 @@
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" >
         </activity>
+        <activity
+            android:name=".activity.workout.IntervalActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape" >
+        </activity>
 
-
+        <activity
+            android:name=".activity.workout.GoalActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape" >
+        </activity>
+        <activity
+            android:name=".activity.workout.FitnessTestActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape" >
+        </activity>
+        <activity
+            android:name=".activity.workout.HRCActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape" >
+        </activity>
 
         <activity
             android:name=".activity.settings.SettingsActivity"

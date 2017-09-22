@@ -10,4 +10,7 @@ public class Constant {
     public  static final String appMachineType="appMachineType";
     public  static final String appBrightness="appBrightness";
     public  static final String appSounds="appSounds";
+
+    public  static final String unitType_KM="km";
+    public  static final String unitType_MILE="mile";
 }

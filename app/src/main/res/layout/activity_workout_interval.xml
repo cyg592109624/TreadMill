@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <com.sunrise.treadmill.views.MyWorkOutHead
-        android:id="@+id/workout_mode_hill_head"
+        android:id="@+id/workout_mode_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -28,24 +28,26 @@
             <com.sunrise.treadmill.views.MyGenderView
                 android:id="@+id/workout_mode_gender_select"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <com.sunrise.treadmill.views.MyKeyBoardView
-                android:id="@+id/workout_mode_hill_keyboard"
+                android:id="@+id/workout_mode_keyboard"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:visibility="gone" />
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:orientation="vertical">
 
-            <include layout="@layout/activity_hill_2" />
-        </RelativeLayout>
+            <include layout="@layout/workout_edit_info_1" />
+
+            <include layout="@layout/workout_edit_start" />
+        </LinearLayout>
 
     </LinearLayout>
 

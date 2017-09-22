@@ -21,10 +21,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by ChuHui on 2017/9/20.
+ * Created by ChuHui on 2017/9/22.
  */
 
-public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
+public class FitnessTestActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
     @BindView(R.id.workout_mode_head)
     MyWorkOutHead headView;
 
@@ -38,12 +38,10 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     TextView ageValue;
     @BindView(R.id.workout_edit_weight_value)
     TextView weightValue;
-    @BindView(R.id.workout_edit_time_value)
-    TextView timeValue;
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_workout_hill;
+        return R.layout.activity_workout_fitness_test;
     }
 
     @Override
@@ -56,80 +54,28 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         txtList.add((TextView) findViewById(R.id.workout_edit_weight));
         txtList.add((TextView) findViewById(R.id.workout_edit_weight_unit));
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_time));
-        txtList.add((TextView) findViewById(R.id.workout_edit_time_unit));
-
         txtList.add((TextView) findViewById(R.id.workout_edit_start_hint));
 
         txtList.add(ageValue);
         txtList.add(weightValue);
-        txtList.add(timeValue);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(this));
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(this));
         }
     }
-
     @Override
     protected void init() {
-        headView.setHeadMsg(getResources().getString(R.string.workout_mode_hill), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_hill_icon);
+        headView.setHeadMsg(getResources().getString(R.string.workout_mode_fitness), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_fitness_test_icon);
         genderView.setOnGenderReturn(this);
         keyBoardView.setKeyBoardReturn(this);
     }
-
-    @Override
-    public void genderReturn(int gender) {
-
-    }
-
-
-    @Override
-    public void onEnter(String result) {
-        switch (reSetTG) {
-            case reSetAge:
-                ageValue.setText(result);
-                break;
-            case reSetWeight:
-                weightValue.setText(result);
-                break;
-            case reSetTime:
-                timeValue.setText(result);
-                break;
-        }
-    }
-
-    @Override
-    public void onKeyBoardHide() {
-        switch (reSetTG) {
-            case reSetAge:
-                TextUtils.changeTextColor(ageValue, getResources().getColor(R.color.factory_white));
-                TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_1);
-                break;
-            case reSetWeight:
-                TextUtils.changeTextColor(weightValue, getResources().getColor(R.color.factory_white));
-                TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_1);
-                break;
-            case reSetTime:
-                TextUtils.changeTextColor(timeValue, getResources().getColor(R.color.factory_white));
-                TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_1);
-                break;
-        }
-        reSetTG = reSetTG;
-        isShowingKeyBoard = false;
-        keyBoardView.setVisibility(View.GONE);
-        genderView.setVisibility(View.VISIBLE);
-    }
-
-
 
     private boolean isShowingKeyBoard = false;
     private static int reSetTG = -1;
     private static final int reSetAge = 1001;
     private static final int reSetWeight = 1002;
-    private static final int reSetTime = 1003;
-
-    @OnClick({R.id.workout_edit_age_value, R.id.workout_edit_weight_value, R.id.workout_edit_time_value})
+    @OnClick({R.id.workout_edit_age_value, R.id.workout_edit_weight_value})
     public void changValue(View view) {
         if (isShowingKeyBoard) {
             return;
@@ -152,13 +98,42 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
                 TextUtils.changeTextColor(weightValue, getResources().getColor(R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_2);
                 break;
-            case R.id.workout_edit_time_value:
-                reSetTG = reSetTime;
-                keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
-                TextUtils.changeTextColor(timeValue, getResources().getColor(R.color.factory_tabs_on));
-                TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_2);
+        }
+    }
+
+    @Override
+    public void genderReturn(int gender) {
+
+    }
+
+    @Override
+    public void onEnter(String result) {
+        switch (reSetTG) {
+            case reSetAge:
+                ageValue.setText(result);
+                break;
+            case reSetWeight:
+                weightValue.setText(result);
                 break;
         }
+    }
+
+    @Override
+    public void onKeyBoardHide() {
+        switch (reSetTG) {
+            case reSetAge:
+                TextUtils.changeTextColor(ageValue, getResources().getColor(R.color.factory_white));
+                TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_1);
+                break;
+            case reSetWeight:
+                TextUtils.changeTextColor(weightValue, getResources().getColor(R.color.factory_white));
+                TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_1);
+                break;
+        }
+        reSetTG = reSetTG;
+        isShowingKeyBoard = false;
+        keyBoardView.setVisibility(View.GONE);
+        genderView.setVisibility(View.VISIBLE);
     }
 
     @OnClick({R.id.workout_mode_start})
@@ -170,4 +145,6 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     public void onBackHome() {
         finishActivity();
     }
+
+
 }

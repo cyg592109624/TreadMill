@@ -1,7 +1,6 @@
 package com.sunrise.treadmill.views;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -34,7 +33,7 @@ public class MyGenderView extends LinearLayout {
 
     public MyGenderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        LayoutInflater.from(context).inflate(R.layout.gender, this, true);
+        LayoutInflater.from(context).inflate(R.layout.workout_gender, this, true);
         genderImg = findViewById(R.id.gender_img);
 
         male = findViewById(R.id.gender_male);

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/workout_edit_info_3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@mipmap/img_program_frame"
+    android:orientation="vertical"
+    android:paddingLeft="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/workout_edit_hrc60"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center|left"
+            android:text="@string/hrc_60"
+            android:textColor="@color/workout_mode_white"
+            android:textSize="46px" />
+
+        <TextView
+            android:id="@+id/workout_edit_hrc60_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@mipmap/img_number_frame_1"
+            android:gravity="center"
+            android:textColor="@color/workout_mode_white" />
+
+        <TextView
+            android:id="@+id/workout_edit_hrc60_unit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/unit_bpm"
+            android:textColor="@color/workout_mode_white"
+            android:textSize="46px" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/workout_edit_hrc80"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center|left"
+            android:text="@string/hrc_80"
+            android:textColor="@color/workout_mode_white"
+            android:textSize="46px" />
+
+        <TextView
+            android:id="@+id/workout_edit_hrc80_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@mipmap/img_number_frame_1"
+            android:gravity="center"
+            android:textColor="@color/workout_mode_white" />
+
+        <TextView
+            android:id="@+id/workout_edit_hrc80_unit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/unit_bpm"
+            android:textColor="@color/workout_mode_white"
+            android:textSize="46px" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/workout_edit_target_hr"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center|left"
+            android:text="@string/target_hr"
+            android:textColor="@color/workout_mode_white"
+            android:textSize="46px" />
+
+        <TextView
+            android:id="@+id/workout_edit_target_hr_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@mipmap/img_number_frame_1"
+            android:gravity="center"
+            android:textColor="@color/workout_mode_white" />
+
+        <TextView
+            android:id="@+id/workout_edit_target_hr_unit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/unit_bpm"
+            android:textColor="@color/workout_mode_white"
+            android:textSize="46px" />
+
+    </LinearLayout>
+
+</LinearLayout>

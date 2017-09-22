@@ -1,6 +1,8 @@
 package com.sunrise.treadmill.activity.workout;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
@@ -21,10 +23,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by ChuHui on 2017/9/20.
+ * Created by ChuHui on 2017/9/22.
  */
 
-public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
+public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
     @BindView(R.id.workout_mode_head)
     MyWorkOutHead headView;
 
@@ -41,9 +43,32 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     @BindView(R.id.workout_edit_time_value)
     TextView timeValue;
 
+
+
+    @BindView(R.id.workout_edit_hrc60_value)
+    TextView hrc60Value;
+    @BindView(R.id.workout_edit_hrc80_value)
+    TextView hrc80Value;
+    @BindView(R.id.workout_edit_target_hr_value)
+    TextView hrcTgValue;
+
+
+    @BindView(R.id.workout_edit_info_1)
+    LinearLayout infoType1;
+    @BindView(R.id.workout_edit_info_3)
+    LinearLayout infoType3;
+
+
+    @BindView(R.id.workout_mode_next)
+    ImageView nextImage;
+    @BindView(R.id.workout_mode_back)
+    ImageView backImage;
+    @BindView(R.id.workout_mode_start)
+    ImageView startImage;
+
     @Override
     public int getLayoutId() {
-        return R.layout.activity_workout_hill;
+        return R.layout.activity_workout_hrc;
     }
 
     @Override
@@ -59,11 +84,23 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         txtList.add((TextView) findViewById(R.id.workout_edit_time));
         txtList.add((TextView) findViewById(R.id.workout_edit_time_unit));
 
+        txtList.add((TextView) findViewById(R.id.workout_edit_hrc60));
+        txtList.add((TextView) findViewById(R.id.workout_edit_hrc60_unit));
+        txtList.add((TextView) findViewById(R.id.workout_edit_hrc80));
+        txtList.add((TextView) findViewById(R.id.workout_edit_hrc80_unit));
+        txtList.add((TextView) findViewById(R.id.workout_edit_target_hr));
+        txtList.add((TextView) findViewById(R.id.workout_edit_target_hr_unit));
+
+
         txtList.add((TextView) findViewById(R.id.workout_edit_start_hint));
 
         txtList.add(ageValue);
         txtList.add(weightValue);
         txtList.add(timeValue);
+
+        txtList.add(hrc60Value);
+        txtList.add(hrc80Value);
+        txtList.add(hrcTgValue);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(this));
         } else {
@@ -73,16 +110,18 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
 
     @Override
     protected void init() {
-        headView.setHeadMsg(getResources().getString(R.string.workout_mode_hill), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_hill_icon);
+        headView.setHeadMsg(getResources().getString(R.string.workout_mode_hrc), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_hrc_icon);
         genderView.setOnGenderReturn(this);
         keyBoardView.setKeyBoardReturn(this);
+        infoType1.setVisibility(View.VISIBLE);
+        infoType3.setVisibility(View.GONE);
     }
+
 
     @Override
     public void genderReturn(int gender) {
 
     }
-
 
     @Override
     public void onEnter(String result) {
@@ -95,6 +134,15 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
                 break;
             case reSetTime:
                 timeValue.setText(result);
+                break;
+            case reSetHRC60:
+                hrc60Value.setText(result);
+                break;
+            case reSetHRC80:
+                hrc80Value.setText(result);
+                break;
+            case reSetTargetHR:
+                hrcTgValue.setText(result);
                 break;
         }
     }
@@ -114,14 +162,29 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
                 TextUtils.changeTextColor(timeValue, getResources().getColor(R.color.factory_white));
                 TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_1);
                 break;
+            case reSetHRC60:
+                TextUtils.changeTextColor(hrc60Value, getResources().getColor(R.color.factory_white));
+                TextUtils.changeTextBackground(hrc60Value, R.mipmap.img_number_frame_1);
+                break;
+            case reSetHRC80:
+                TextUtils.changeTextColor(hrc80Value, getResources().getColor(R.color.factory_white));
+                TextUtils.changeTextBackground(hrc80Value, R.mipmap.img_number_frame_1);
+                break;
+            case reSetTargetHR:
+                TextUtils.changeTextColor(hrcTgValue, getResources().getColor(R.color.factory_white));
+                TextUtils.changeTextBackground(hrcTgValue, R.mipmap.img_number_frame_1);
+                break;
         }
         reSetTG = reSetTG;
         isShowingKeyBoard = false;
         keyBoardView.setVisibility(View.GONE);
         genderView.setVisibility(View.VISIBLE);
+        nextImage.setEnabled(true);
+        backImage.setEnabled(true);
+        //这个按钮还需要进行判断 这里暂时不做处理
+        startImage.setEnabled(true);
+
     }
-
-
 
     private boolean isShowingKeyBoard = false;
     private static int reSetTG = -1;
@@ -129,7 +192,12 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     private static final int reSetWeight = 1002;
     private static final int reSetTime = 1003;
 
-    @OnClick({R.id.workout_edit_age_value, R.id.workout_edit_weight_value, R.id.workout_edit_time_value})
+    private static final int reSetHRC60 = 1004;
+    private static final int reSetHRC80 = 1005;
+    private static final int reSetTargetHR = 1006;
+
+    @OnClick({R.id.workout_edit_age_value, R.id.workout_edit_weight_value, R.id.workout_edit_time_value,
+            R.id.workout_edit_hrc60_value, R.id.workout_edit_hrc80_value, R.id.workout_edit_target_hr_value})
     public void changValue(View view) {
         if (isShowingKeyBoard) {
             return;
@@ -137,6 +205,10 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         isShowingKeyBoard = true;
         keyBoardView.setVisibility(View.VISIBLE);
         genderView.setVisibility(View.GONE);
+
+        nextImage.setEnabled(false);
+        backImage.setEnabled(false);
+        startImage.setEnabled(false);
         switch (view.getId()) {
             default:
                 break;
@@ -158,8 +230,51 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
                 TextUtils.changeTextColor(timeValue, getResources().getColor(R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_2);
                 break;
+            case R.id.workout_edit_hrc60_value:
+                reSetTG = reSetHRC60;
+                keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
+                TextUtils.changeTextColor(hrc60Value, getResources().getColor(R.color.factory_tabs_on));
+                TextUtils.changeTextBackground(hrc60Value, R.mipmap.img_number_frame_2);
+                break;
+            case R.id.workout_edit_hrc80_value:
+                reSetTG = reSetHRC80;
+                keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
+                TextUtils.changeTextColor(hrc80Value, getResources().getColor(R.color.factory_tabs_on));
+                TextUtils.changeTextBackground(hrc80Value, R.mipmap.img_number_frame_2);
+                break;
+            case R.id.workout_edit_target_hr_value:
+                reSetTG = reSetTargetHR;
+                keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
+                TextUtils.changeTextColor(hrcTgValue, getResources().getColor(R.color.factory_tabs_on));
+                TextUtils.changeTextBackground(hrcTgValue, R.mipmap.img_number_frame_2);
+                break;
         }
     }
+
+    @OnClick({R.id.workout_mode_next})
+    public void onNextEdit() {
+        if (isShowingKeyBoard) {
+            return;
+        }
+        infoType1.setVisibility(View.GONE);
+        infoType3.setVisibility(View.VISIBLE);
+        nextImage.setVisibility(View.GONE);
+        backImage.setVisibility(View.VISIBLE);
+
+    }
+
+    @OnClick({R.id.workout_mode_back})
+    public void onBackEdit() {
+        if (isShowingKeyBoard) {
+            return;
+        }
+        infoType1.setVisibility(View.VISIBLE);
+        infoType3.setVisibility(View.GONE);
+        nextImage.setVisibility(View.VISIBLE);
+        backImage.setVisibility(View.GONE);
+
+    }
+
 
     @OnClick({R.id.workout_mode_start})
     public void beginWorkOut() {
