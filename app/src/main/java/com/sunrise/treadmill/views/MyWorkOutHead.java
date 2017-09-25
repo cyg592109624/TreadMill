@@ -42,4 +42,16 @@ public class MyWorkOutHead extends LinearLayout {
         workOutIcon.setImageResource(imgResource);
     }
 
+    public void setWorkOutModeName(String title) {
+        workOutMode.setText(title);
+    }
+
+    public void setWorkOutHint(String hint) {
+        workOutHint.setText(hint);
+    }
+
+    public void setWorkOutIcon(int imgResource) {
+        workOutIcon.setImageResource(imgResource);
+    }
+
 }

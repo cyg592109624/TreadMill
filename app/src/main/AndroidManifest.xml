@@ -71,6 +71,12 @@
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" >
         </activity>
+        <activity
+            android:name=".activity.workout.UserProgramActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape" >
+        </activity>
 
         <activity
             android:name=".activity.settings.SettingsActivity"
