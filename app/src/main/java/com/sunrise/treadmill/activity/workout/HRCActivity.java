@@ -59,11 +59,11 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
     LinearLayout infoType3;
 
 
-    @BindView(R.id.workout_mode_next)
+    @BindView(R.id.workout_mode_next_2)
     ImageView nextImage;
-    @BindView(R.id.workout_mode_back)
+    @BindView(R.id.workout_mode_back_2)
     ImageView backImage;
-    @BindView(R.id.workout_mode_start)
+    @BindView(R.id.workout_mode_start_2)
     ImageView startImage;
 
     @Override
@@ -78,6 +78,7 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         txtList.add((TextView) headView.findViewById(R.id.workout_head_hint));
 
         txtList.add((TextView) findViewById(R.id.workout_edit_age));
+
         txtList.add((TextView) findViewById(R.id.workout_edit_weight));
         txtList.add((TextView) findViewById(R.id.workout_edit_weight_unit));
 
@@ -86,13 +87,15 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
 
         txtList.add((TextView) findViewById(R.id.workout_edit_hrc60));
         txtList.add((TextView) findViewById(R.id.workout_edit_hrc60_unit));
+
         txtList.add((TextView) findViewById(R.id.workout_edit_hrc80));
         txtList.add((TextView) findViewById(R.id.workout_edit_hrc80_unit));
+
         txtList.add((TextView) findViewById(R.id.workout_edit_target_hr));
         txtList.add((TextView) findViewById(R.id.workout_edit_target_hr_unit));
 
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint));
+        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_2));
 
         txtList.add(ageValue);
         txtList.add(weightValue);
@@ -251,7 +254,7 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         }
     }
 
-    @OnClick({R.id.workout_mode_next})
+    @OnClick({R.id.workout_mode_next_2})
     public void onNextEdit() {
         if (isShowingKeyBoard) {
             return;
@@ -263,7 +266,7 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
 
     }
 
-    @OnClick({R.id.workout_mode_back})
+    @OnClick({R.id.workout_mode_back_2})
     public void onBackEdit() {
         if (isShowingKeyBoard) {
             return;
@@ -276,7 +279,7 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
     }
 
 
-    @OnClick({R.id.workout_mode_start})
+    @OnClick({R.id.workout_mode_start_2})
     public void beginWorkOut() {
 
     }

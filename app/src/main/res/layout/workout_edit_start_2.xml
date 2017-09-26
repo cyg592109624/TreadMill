@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/workout_edit_start_hint"
+        android:id="@+id/workout_edit_start_hint_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -26,13 +26,13 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:id="@+id/workout_mode_next"
+            android:id="@+id/workout_mode_next_2"
             android:layout_width="85dp"
             android:layout_height="35dp"
             android:scaleType="fitXY"
             android:src="@drawable/btn_next" />
         <ImageView
-            android:id="@+id/workout_mode_back"
+            android:id="@+id/workout_mode_back_2"
             android:visibility="gone"
             android:layout_width="85dp"
             android:layout_height="35dp"
@@ -45,7 +45,7 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:id="@+id/workout_mode_start"
+            android:id="@+id/workout_mode_start_2"
             android:layout_width="85dp"
             android:layout_height="35dp"
             android:scaleType="fitXY"

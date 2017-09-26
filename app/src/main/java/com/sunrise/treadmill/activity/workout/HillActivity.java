@@ -59,7 +59,7 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         txtList.add((TextView) findViewById(R.id.workout_edit_time));
         txtList.add((TextView) findViewById(R.id.workout_edit_time_unit));
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint));
+        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_1));
 
         txtList.add(ageValue);
         txtList.add(weightValue);
@@ -161,7 +161,7 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         }
     }
 
-    @OnClick({R.id.workout_mode_start})
+    @OnClick({R.id.workout_mode_start_1})
     public void beginWorkOut() {
 
     }

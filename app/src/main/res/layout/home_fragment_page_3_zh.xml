@@ -17,13 +17,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_mp4_1" />
+            android:src="@drawable/btn_home_mp4_1" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_screen_mirroring_1" />
+            android:src="@drawable/btn_home_screen_mirroring_1" />
 
         <View
             android:layout_width="0dp"
@@ -43,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_quickstart_1" />
+            android:src="@drawable/btn_home_quick_start"  />
 
     </LinearLayout>
 

@@ -172,4 +172,26 @@
     <string name="target_hr">Hedef KALP ATIŞI</string>
     <string name="unit_kg">kg</string>
     <string name="unit_lb">lb</string>
+    <string name="vr_a_1">Fransa Paris</string>
+    <string name="vr_a_2">Eyfel Kulesi</string>
+    <string name="vr_b_1">Çek Cumhuriyeti</string>
+    <string name="vr_b_2">Bohem Dağları</string>
+    <string name="vr_c_1">Almanya</string>
+    <string name="vr_c_2">Dresden Merkezi</string>
+    <string name="vr_d_1">Almanya</string>
+    <string name="vr_d_2">Balt Ahrenshoop</string>
+    <string name="vr_e_1">İtalya</string>
+    <string name="vr_e_2">Roma Colosseo</string>
+    <string name="vr_f_1">İtalya</string>
+    <string name="vr_f_2">Passo Oscuro</string>
+    <string name="vr_g_1">Birleşik Krallık Londra</string>
+    <string name="vr_g_2">Millennium Köprüsü</string>
+    <string name="vr_h_1">Avusturya</string>
+    <string name="vr_h_2">Wien Schonbrunn</string>
+    <string name="vr_i_1">Avusturya</string>
+    <string name="vr_i_2">Helmesgupf</string>
+    <string name="vr_j_1">Avusturya</string>
+    <string name="vr_j_2">Hallstatt</string>
+    <string name="vr_k_1">İngiliz</string>
+    <string name="vr_k_2">Vadi boyunca yeşil</string>
 </resources>

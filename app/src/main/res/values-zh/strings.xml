@@ -172,4 +172,26 @@
     <string name="target_hr">心率控制目标值</string>
     <string name="unit_kg">kg</string>
     <string name="unit_lb">lb</string>
+    <string name="vr_a_1">法国巴黎</string>
+    <string name="vr_a_2">埃菲尔铁塔</string>
+    <string name="vr_b_1">捷克共和国</string>
+    <string name="vr_b_2">波希米亚山脉</string>
+    <string name="vr_c_1">德国</string>
+    <string name="vr_c_2">德累斯顿中心</string>
+    <string name="vr_d_1">德国</string>
+    <string name="vr_d_2">带阿伦硕普</string>
+    <string name="vr_e_1">意大利</string>
+    <string name="vr_e_2">古罗马竞技场</string>
+    <string name="vr_f_1">意大利</string>
+    <string name="vr_f_2">帕索斯库洛</string>
+    <string name="vr_g_1">英国伦敦</string>
+    <string name="vr_g_2">千禧桥</string>
+    <string name="vr_h_1">奥地利</string>
+    <string name="vr_h_2">维也纳美泉宫</string>
+    <string name="vr_i_1">奥地利</string>
+    <string name="vr_i_2">山景</string>
+    <string name="vr_j_1">奥地利</string>
+    <string name="vr_j_2">哈尔施塔特</string>
+    <string name="vr_k_1">英国</string>
+    <string name="vr_k_2">翡翠谷</string>
 </resources>

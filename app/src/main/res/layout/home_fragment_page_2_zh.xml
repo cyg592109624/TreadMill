@@ -16,31 +16,31 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_bai_1" />
+            android:src="@drawable/btn_home_bai_1" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_weibo_1" />
+            android:src="@drawable/btn_home_weibo_1" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_i71_1" />
+            android:src="@drawable/btn_home_wei_i71" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_avin_1" />
+            android:src="@drawable/btn_home_avin_1" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_mp3_1" />
+            android:src="@drawable/btn_home_mp3_1" />
 
     </LinearLayout>
 
@@ -55,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_quickstart_1" />
+            android:src="@drawable/btn_home_quickstart_1" />
 
     </LinearLayout>
 

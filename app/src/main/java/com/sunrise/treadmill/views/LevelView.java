@@ -16,42 +16,61 @@ import com.sunrise.treadmill.R;
 
 public class LevelView extends View {
     private Paint mPaint;
-    private int bgViewHeight;
-    private int bgViewWidth;
+    private int viewHeight;
+    private int viewWidth;
 
+    private float toX;
+    private float toY;
 
-    /**
-     * 柱子顶部空位高度
-     */
-    private float paddingTop = 0;
-    /**
-     * 柱子低部空位高度
-     */
-    private float paddingBottom = 0;
-
-    /**
-     * 柱子的左右边距
-     */
-    private int space = 11;
-    /**
-     * 柱子的间距
-     */
-    private int margin = 4;
-    /**
-     * 柱子的宽度
-     */
-    private float rectCellWidth = 0;
     /**
      * 柱子的高度
      */
     private float maxTall = 0;
+
+
     /**
-     * 每一段的高度
+     * 柱子的上边距
      */
-    private float avgCell = 0;
+    private float topSpace = 0;
 
+    /**
+     * 柱子的下边距
+     */
+    private float bottomSpace = 0;
 
-    private RectCell[] rectList = new RectCell[30];
+    /**
+     * 柱子的左边距
+     */
+    private float leftSpace = 0;
+    /**
+     * 柱子的右边距
+     */
+    private float rightSpace = 0;
+
+    /**
+     * 柱子的宽度
+     */
+    private int columnWidth = 0;
+    /**
+     * 柱子的间隔
+     */
+    private int columnMargin = 0;
+
+    /**
+     * 柱子低部位置同时也是柱子的起点
+     */
+    private float columnStartArea = 0;
+
+    /**
+     * 每一段的高度 一共36段
+     */
+    private float levelHeight = 0;
+
+    private int levelCount = 36;
+
+    private  int columnCount=30;
+
+    private RectCell[] rectList;
 
     public LevelView(Context context) {
         this(context, null);
@@ -74,22 +93,45 @@ public class LevelView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        bgViewWidth = MeasureSpec.getSize(widthMeasureSpec);
-        bgViewHeight = MeasureSpec.getSize(heightMeasureSpec);
-
-        paddingBottom = bgViewHeight - (bgViewHeight / 10 - 4);
-
-        paddingTop = bgViewHeight / 5 - 10;
-
-        maxTall = paddingBottom - paddingTop;
-
-        avgCell = maxTall / 36;
-
-        rectCellWidth = (bgViewWidth - 2 * space - 29 * margin) / 30;
+        viewWidth = MeasureSpec.getSize(widthMeasureSpec);
+        viewHeight = MeasureSpec.getSize(heightMeasureSpec);
+        topSpace = 115f;
+        bottomSpace = 60f;
+        leftSpace = 159f;
+        rightSpace = 30f;
+        columnMargin = 6;
+        columnWidth = 41;
+        columnStartArea = viewHeight - bottomSpace;
+        rectList = new RectCell[columnCount];
     }
 
-    private float toX;
-    private float toY;
+    public void setTopSpace(float space) {
+        this.topSpace = space;
+    }
+
+    public void setBottomSpace(float space) {
+        this.bottomSpace = space;
+    }
+
+    public void setLeftSpace(float space) {
+        this.leftSpace = space;
+    }
+
+    public void setRightSpace(float space) {
+        this.rightSpace = space;
+    }
+
+    public void setColumnMargin(int columnMargin) {
+        this.columnMargin = columnMargin;
+    }
+
+    public void setColumnWidth(int columnWidth) {
+        this.columnWidth = columnWidth;
+    }
+
+    public void setColumnCount(int columnCount) {
+        this.columnCount = columnCount;
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -114,20 +156,20 @@ public class LevelView extends View {
     }
 
     private void calcPoint() {
-        if ((toX < space) | (toY < paddingTop - avgCell) | (toY > paddingBottom)) {
-            return;
+        float left = 0, right = 0, top = 0, bottom = 0;
+        top = toY;
+        bottom = columnStartArea;
+        if (top < topSpace) {
+            top = topSpace;
         }
-        float marginFrom = 0, marginTo = 0;
+        if (top > bottom) {
+            top = bottom;
+        }
         int tg = -1;
-        if (toY < paddingTop) {
-            toY = paddingTop;
-        } else if (toY > paddingBottom) {
-            toY = paddingBottom;
-        }
-        for (int i = 0; i < 30; i++) {
-            if (toX > (space + rectCellWidth * i + margin * i) && toX < (space + rectCellWidth * (i + 1) + margin * i)) {
-                marginFrom = space + rectCellWidth * i + margin * i;
-                marginTo = space + rectCellWidth * (i + 1) + margin * i;
+        for (int i = 0; i < columnCount; i++) {
+            if (toX > (leftSpace + columnWidth * i + columnMargin * i) && toX < (leftSpace + columnWidth * (i + 1) + columnMargin * i)) {
+                left = leftSpace + columnWidth * i + columnMargin * i;
+                right = leftSpace + columnWidth * (i + 1) + columnMargin * i;
                 tg = i;
                 break;
             }
@@ -138,23 +180,14 @@ public class LevelView extends View {
                 cell = new RectCell();
                 rectList[tg] = cell;
             }
-            float height = 0;
-            if (toY == paddingTop) {
-                height = toY;
-                cell.setLevel(36);
-            } else if (toY == paddingBottom) {
-                height = paddingBottom;
-                cell.setLevel(0);
-            } else {
-                for (int i = 0; i < 36; i++) {
-                    if (toY > (paddingBottom - avgCell * (i + 1)) && toY < (paddingBottom - avgCell * i)) {
-                        height = paddingTop + avgCell * (35 - i);
-                        cell.setLevel((36 - i));
-                        break;
-                    }
+            for(int i=0;i<levelCount;i++){
+                if (toY > (columnStartArea - levelHeight * (i + 1)) && toY < (columnStartArea - levelHeight * i)) {
+                    top = topSpace + levelHeight * (levelCount - i);
+                    cell.setLevel((levelCount - i));
+                    break;
                 }
             }
-            cell.setXY(marginFrom, height, marginTo, paddingBottom);
+            cell.setXY(left, top, right, bottom);
             invalidate();
         }
     }
@@ -166,7 +199,6 @@ public class LevelView extends View {
                 canvas.drawRect(cell.getToX1(), cell.getToY1(), cell.getToX2(), cell.getToY2(), mPaint);
             }
         }
-        invalidate();
     }
 
     private class RectCell {

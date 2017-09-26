@@ -16,31 +16,31 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_youtube_1" />
+            android:src="@drawable/btn_home_youtube_1" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_chrome_1" />
+            android:src="@drawable/btn_home_chrome_1" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_facebook_1" />
+            android:src="@drawable/btn_home_facebook_1" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_flikr_1" />
+            android:src="@drawable/btn_home_flikr_1" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_instagram_1" />
+            android:src="@drawable/btn_home_instagram_1" />
 
     </LinearLayout>
 
@@ -54,7 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/btn_home_quickstart_1" />
+            android:src="@drawable/btn_home_quickstart_1" />
 
     </LinearLayout>
 

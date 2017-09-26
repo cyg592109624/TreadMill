@@ -54,7 +54,7 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
         txtList.add((TextView) findViewById(R.id.workout_edit_weight));
         txtList.add((TextView) findViewById(R.id.workout_edit_weight_unit));
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint));
+        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_1));
 
         txtList.add(ageValue);
         txtList.add(weightValue);
@@ -136,7 +136,7 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
         genderView.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.workout_mode_start})
+    @OnClick({R.id.workout_mode_start_1})
     public void beginWorkOut() {
 
     }

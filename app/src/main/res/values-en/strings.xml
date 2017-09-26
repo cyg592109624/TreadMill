@@ -171,4 +171,27 @@
     <string name="target_hr">Target HR</string>
     <string name="unit_kg">kg</string>
     <string name="unit_lb">lb</string>
+    <string name="value_nothing" translatable="false">—</string>
+    <string name="vr_a_1">France Paris</string>
+    <string name="vr_a_2">Eiffel Tower</string>
+    <string name="vr_b_1">Czech Republic</string>
+    <string name="vr_b_2">Bohemian Mountains</string>
+    <string name="vr_c_1">Germany</string>
+    <string name="vr_c_2">Dresden Center</string>
+    <string name="vr_d_1">Germany</string>
+    <string name="vr_d_2">Balt Ahrenshoop</string>
+    <string name="vr_e_1">Italy</string>
+    <string name="vr_e_2">Rome Colosseo</string>
+    <string name="vr_f_1">Italy</string>
+    <string name="vr_f_2">Passo Oscuro</string>
+    <string name="vr_g_1">United Kingdom London</string>
+    <string name="vr_g_2">Millennium Bridge</string>
+    <string name="vr_h_1">Austria</string>
+    <string name="vr_h_2">Wien Schonbrunn</string>
+    <string name="vr_i_1">Austria</string>
+    <string name="vr_i_2">Helmesgupf</string>
+    <string name="vr_j_1">Austria</string>
+    <string name="vr_j_2">Hallstatt</string>
+    <string name="vr_k_1">British</string>
+    <string name="vr_k_2">Through the valley green</string>
 </resources>

@@ -43,7 +43,7 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_workout_hill;
+        return R.layout.activity_workout_interval;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
         txtList.add((TextView) findViewById(R.id.workout_edit_time));
         txtList.add((TextView) findViewById(R.id.workout_edit_time_unit));
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint));
+        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_1));
 
         txtList.add(ageValue);
         txtList.add(weightValue);
@@ -159,7 +159,7 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
         }
     }
 
-    @OnClick({R.id.workout_mode_start})
+    @OnClick({R.id.workout_mode_start_1})
     public void beginWorkOut(){
 
     }

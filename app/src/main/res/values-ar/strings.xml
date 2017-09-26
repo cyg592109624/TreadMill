@@ -172,4 +172,26 @@
     <string name="target_hr">HR هدف</string>
     <string name="unit_kg">kg</string>
     <string name="unit_lb">lb</string>
+    <string name="vr_a_2">" برج إيفيل"</string>
+    <string name="vr_a_1">فرنسا باريس،</string>
+    <string name="vr_b_1">" الجمهورية التشيكية"</string>
+    <string name="vr_b_2">جبال  بوهيميا</string>
+    <string name="vr_c_1">ألمانيا</string>
+    <string name="vr_c_2">، درسدن، حدد مركز</string>
+    <string name="vr_d_1">ألمانيا</string>
+    <string name="vr_d_2">بالت، أهرنشوب</string>
+    <string name="vr_e_1">إيطاليا</string>
+    <string name="vr_e_2">. روم، كولوسيو</string>
+    <string name="vr_f_1">إيطاليا</string>
+    <string name="vr_f_2">باسو أوسكورو</string>
+    <string name="vr_g_1">المملكة المتحدة لندن،</string>
+    <string name="vr_g_2">" ميلنيوم، بريدج"</string>
+    <string name="vr_h_1">النمسا</string>
+    <string name="vr_h_2">وين شونبرون</string>
+    <string name="vr_i_1">النمسا</string>
+    <string name="vr_i_2">هلمسغوب</string>
+    <string name="vr_j_1">النمسا</string>
+    <string name="vr_j_2">هالستات</string>
+    <string name="vr_k_1">البريطانيون،</string>
+    <string name="vr_k_2">" خل، ال التعريف، واد، غرين"</string>
 </resources>

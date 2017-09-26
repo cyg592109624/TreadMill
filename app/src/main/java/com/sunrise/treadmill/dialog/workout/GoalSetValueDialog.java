@@ -14,7 +14,12 @@ import com.sunrise.treadmill.activity.workout.GoalActivity;
 import com.sunrise.treadmill.base.BaseDialogFragment;
 import com.sunrise.treadmill.interfaces.OnGoalSetValueReturn;
 import com.sunrise.treadmill.interfaces.OnKeyBoardReturn;
+import com.sunrise.treadmill.utils.LanguageUtils;
+import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.views.MyKeyBoardView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -84,6 +89,15 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
                 editValue.setText(editable.toString());
             }
         });
+    }
+
+    @Override
+    protected void setTextStyle() {
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+            TextUtils.setTextTypeFace(editValue, TextUtils.Microsoft(getContext()));
+        } else {
+            TextUtils.setTextTypeFace(editValue, TextUtils.Arial(getContext()));
+        }
     }
 
     @Override

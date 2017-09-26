@@ -6,12 +6,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseActivity;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.dialog.workout.GoalSetValueDialog;
 import com.sunrise.treadmill.interfaces.OnGoalSetValueReturn;
+import com.sunrise.treadmill.utils.LanguageUtils;
+import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.views.MyWorkOutHead;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -49,7 +55,24 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
     @Override
     protected void init() {
         headView.setHeadMsg(getResources().getString(R.string.workout_mode_goal), getResources().getString(R.string.workout_mode_hint_g), R.mipmap.img_program_goal_icon);
+    }
 
+    @Override
+    protected void setTextStyle() {
+        List<TextView> txtList = new ArrayList<TextView>();
+        txtList.add((TextView) headView.findViewById(R.id.workout_head_mode));
+        txtList.add((TextView) headView.findViewById(R.id.workout_head_hint));
+
+        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_1));
+
+        txtList.add(timeValue);
+        txtList.add(distanceValue);
+        txtList.add(calValue);
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(this));
+        } else {
+            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(this));
+        }
     }
 
     private static int changeTg = -1;
@@ -103,7 +126,7 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
         changeTg = changeTg;
     }
 
-    @OnClick({R.id.workout_mode_start})
+    @OnClick({R.id.workout_mode_start_1})
     public void beginWorkOut() {
 
     }

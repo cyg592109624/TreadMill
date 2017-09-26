@@ -11,6 +11,7 @@ import com.sunrise.treadmill.activity.workout.HRCActivity;
 import com.sunrise.treadmill.activity.workout.HillActivity;
 import com.sunrise.treadmill.activity.workout.IntervalActivity;
 import com.sunrise.treadmill.activity.workout.UserProgramActivity;
+import com.sunrise.treadmill.activity.workout.VirtualRealityActivity;
 import com.sunrise.treadmill.base.BaseFragment;
 
 import java.util.List;
@@ -24,16 +25,14 @@ import butterknife.OnClick;
 
 public class HomeFragmentPage1 extends BaseFragment {
 
-    @BindViews({R.id.workout_mode_hill})
-    List<ImageView> workOutList;
-
     @Override
     public int getLayoutId() {
         return R.layout.home_fragment_page_1;
     }
 
     @OnClick({R.id.workout_mode_hill, R.id.workout_mode_interval, R.id.workout_mode_goal,
-            R.id.workout_mode_fitness_test, R.id.workout_mode_hrc,R.id.workout_mode_user_program})
+            R.id.workout_mode_fitness_test, R.id.workout_mode_hrc,R.id.workout_mode_user_program,
+            R.id.workout_mode_vr})
     void selectWorkOutMode(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -54,6 +53,9 @@ public class HomeFragmentPage1 extends BaseFragment {
                 break;
             case R.id.workout_mode_user_program:
                 intent.setClass(getActivity(), UserProgramActivity.class);
+                break;
+            case R.id.workout_mode_vr:
+                intent.setClass(getActivity(), VirtualRealityActivity.class);
                 break;
         }
         startActivity(intent);

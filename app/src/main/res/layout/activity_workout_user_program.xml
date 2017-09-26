@@ -11,6 +11,7 @@
         android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:id="@+id/workout_option_body"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="5dp"
@@ -49,6 +50,59 @@
 
             <include layout="@layout/workout_edit_start_2" />
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/workout_option_body2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:id="@+id/imageView_right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@mipmap/img_sportmode_profile_level_1" />
+
+            <ImageView
+                android:id="@+id/imageView_left"
+                android:layout_width="30dp"
+                android:layout_height="152dp"
+                android:layout_gravity="left|top"
+                android:layout_marginLeft="23dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/img_sportmode_profile_level_calibration_2" />
+
+            <com.sunrise.treadmill.views.LevelView
+                android:id="@+id/workout_edit_level_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/workout_edit_level_view_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:text="@string/workout_mode_hint_e"
+                android:textColor="@color/factory_tabs_on"
+                android:textSize="40px" />
+
+        </FrameLayout>
+
+        <include layout="@layout/workout_edit_start_3" />
 
     </LinearLayout>
 

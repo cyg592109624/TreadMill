@@ -172,4 +172,26 @@
     <string name="target_hr">Целевая ЧСС</string>
     <string name="unit_kg">kg</string>
     <string name="unit_lb">lb</string>
+    <string name="vr_a_1">Франция Париж</string>
+    <string name="vr_a_2">Эйфелева башня</string>
+    <string name="vr_b_1">"Чешская Республика "</string>
+    <string name="vr_b_2">Богемианские горы</string>
+    <string name="vr_c_1">Германия</string>
+    <string name="vr_c_2">Центр Дрездена</string>
+    <string name="vr_d_1">Германия</string>
+    <string name="vr_d_2">Balt Ahrenshoop</string>
+    <string name="vr_e_1">Италия</string>
+    <string name="vr_e_2">Рим Колизей</string>
+    <string name="vr_f_2">Passo Oscuro</string>
+    <string name="vr_f_1">Италия</string>
+    <string name="vr_g_1">Великобритания Лондон</string>
+    <string name="vr_g_2">Миллениум</string>
+    <string name="vr_h_1">Австрия</string>
+    <string name="vr_h_2">Вена Шёнбрунн</string>
+    <string name="vr_i_1">Австрия</string>
+    <string name="vr_i_2">Хельмесгупф</string>
+    <string name="vr_j_1">Австрия</string>
+    <string name="vr_j_2">Хальштатт</string>
+    <string name="vr_k_1">Британский</string>
+    <string name="vr_k_2">Через долину зеленый</string>
 </resources>

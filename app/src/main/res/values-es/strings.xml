@@ -172,4 +172,26 @@
     <string name="target_hr">FC objetivo</string>
     <string name="unit_kg">kg</string>
     <string name="unit_lb">lb</string>
+    <string name="vr_a_1">Francia París</string>
+    <string name="vr_a_2">Torre Eiffel</string>
+    <string name="vr_b_1">República Checa</string>
+    <string name="vr_b_2">Bohemia</string>
+    <string name="vr_c_1">Alemania</string>
+    <string name="vr_c_2">Dresden Center</string>
+    <string name="vr_d_1">Alemania</string>
+    <string name="vr_d_2">Balt Ahrenshoop</string>
+    <string name="vr_e_1">Italia</string>
+    <string name="vr_e_2">Roma Coliseo</string>
+    <string name="vr_f_1">Italia</string>
+    <string name="vr_f_2">Passo Oscuro</string>
+    <string name="vr_g_1">Reino Unido Londres</string>
+    <string name="vr_g_2">Puente del Milenio</string>
+    <string name="vr_h_1">Austria</string>
+    <string name="vr_h_2">Wien Schonbrunn</string>
+    <string name="vr_i_1">Austria</string>
+    <string name="vr_i_2">Helmesgupf</string>
+    <string name="vr_j_1">Austria</string>
+    <string name="vr_j_2">Hallstatt</string>
+    <string name="vr_k_1">Británico</string>
+    <string name="vr_k_2">a través del valle verde</string>
 </resources>

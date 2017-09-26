@@ -172,4 +172,26 @@
     <string name="target_hr">Ziel-HF</string>
     <string name="unit_kg">kg</string>
     <string name="unit_lb">lb</string>
+    <string name="vr_a_1">Frankreich Paris</string>
+    <string name="vr_a_2">Eiffelturm</string>
+    <string name="vr_b_1">Tschechische</string>
+    <string name="vr_b_2">Böhmen</string>
+    <string name="vr_c_1">Deutschland</string>
+    <string name="vr_c_2">Dresden Zentrum</string>
+    <string name="vr_d_1">Deutschland</string>
+    <string name="vr_d_2">Balt Ahrenshoop</string>
+    <string name="vr_e_1">Italien</string>
+    <string name="vr_e_2">Rom Kolosseum</string>
+    <string name="vr_f_1">Italien</string>
+    <string name="vr_f_2">Passo Oscuro</string>
+    <string name="vr_g_1">Vereinigtes Königreich London</string>
+    <string name="vr_g_2">Millennium Bridge</string>
+    <string name="vr_h_1">Österreich</string>
+    <string name="vr_h_2">Wien Schonbrunn</string>
+    <string name="vr_i_1">Österreich</string>
+    <string name="vr_i_2">Helmesgupf</string>
+    <string name="vr_j_1">Österreich</string>
+    <string name="vr_j_2">Hallstatt</string>
+    <string name="vr_k_1">Britisch</string>
+    <string name="vr_k_2">Durch das Tal grün</string>
 </resources>
