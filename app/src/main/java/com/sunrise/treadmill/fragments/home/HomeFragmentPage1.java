@@ -2,21 +2,17 @@ package com.sunrise.treadmill.fragments.home;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.activity.workout.FitnessTestActivity;
-import com.sunrise.treadmill.activity.workout.GoalActivity;
-import com.sunrise.treadmill.activity.workout.HRCActivity;
-import com.sunrise.treadmill.activity.workout.HillActivity;
-import com.sunrise.treadmill.activity.workout.IntervalActivity;
-import com.sunrise.treadmill.activity.workout.UserProgramActivity;
-import com.sunrise.treadmill.activity.workout.VirtualRealityActivity;
+import com.sunrise.treadmill.activity.workoutsetting.FitnessTestActivity;
+import com.sunrise.treadmill.activity.workoutsetting.GoalActivity;
+import com.sunrise.treadmill.activity.workoutsetting.HRCActivity;
+import com.sunrise.treadmill.activity.workoutsetting.HillActivity;
+import com.sunrise.treadmill.activity.workoutsetting.IntervalActivity;
+import com.sunrise.treadmill.activity.workoutsetting.UserProgramActivity;
+import com.sunrise.treadmill.activity.workoutsetting.VirtualRealityActivity;
 import com.sunrise.treadmill.base.BaseFragment;
 
-import java.util.List;
-
-import butterknife.BindViews;
 import butterknife.OnClick;
 
 /**

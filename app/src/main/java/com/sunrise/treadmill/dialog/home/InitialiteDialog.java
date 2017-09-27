@@ -20,7 +20,9 @@ public class InitialiteDialog extends BaseDialogFragment {
 
     private OnInitialReturn onInitialReturn;
 
-    private static final int clearAnim = 6000;
+    private int animRunningTime = 5000;
+
+    private static final int msg_clearAnim = 6001;
 
     @BindView(R.id.dialog_home_inititalite_img)
     ImageView img;
@@ -30,7 +32,7 @@ public class InitialiteDialog extends BaseDialogFragment {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case clearAnim:
+                case msg_clearAnim:
                     img.clearAnimation();
                     dismiss();
                     onInitialReturn.onInitialResult("");
@@ -48,9 +50,9 @@ public class InitialiteDialog extends BaseDialogFragment {
 
     @Override
     public void init() {
-        onInitialReturn= (OnInitialReturn) getActivity();
+        onInitialReturn = (OnInitialReturn) getActivity();
         img.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.home_dialog_initialite));
-        mHandler.sendEmptyMessageDelayed(clearAnim, 5000);
+        mHandler.sendEmptyMessageDelayed(msg_clearAnim, animRunningTime);
     }
 
 

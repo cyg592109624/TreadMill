@@ -1,6 +1,7 @@
 package com.sunrise.treadmill.activity;
 
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
@@ -18,12 +19,14 @@ import java.util.List;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class LogoActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
+
+    private  int permissionRequestCode=1001;
     private String[] lackOfPerms = {"android.permission.CHANGE_CONFIGURATION", "android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.WRITE_SETTINGS"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EasyPermissions.requestPermissions(this, "必要的权限", 0, lackOfPerms);
+        EasyPermissions.requestPermissions(this, "必要的权限", permissionRequestCode, lackOfPerms);
         syncLanguage();
     }
 

@@ -33,5 +33,9 @@
     <color name="workout_mode_select">#3C3C3C</color>
 
 
+    <color name="workout_mode_running_white">#FFFFFF</color>
+    <color name="workout_mode_running_head_value">#3C3C3C</color>
+
+
 
 </resources>

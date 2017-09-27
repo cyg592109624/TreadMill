@@ -41,49 +41,55 @@
         </activity>
 
         <activity
-            android:name=".activity.workout.HillActivity"
+            android:name=".activity.workoutsetting.HillActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" >
         </activity>
         <activity
-            android:name=".activity.workout.IntervalActivity"
+            android:name=".activity.workoutsetting.IntervalActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" >
         </activity>
 
         <activity
-            android:name=".activity.workout.GoalActivity"
+            android:name=".activity.workoutsetting.GoalActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" >
         </activity>
         <activity
-            android:name=".activity.workout.FitnessTestActivity"
+            android:name=".activity.workoutsetting.FitnessTestActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" >
         </activity>
         <activity
-            android:name=".activity.workout.HRCActivity"
+            android:name=".activity.workoutsetting.HRCActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" >
         </activity>
         <activity
-            android:name=".activity.workout.UserProgramActivity"
+            android:name=".activity.workoutsetting.UserProgramActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" >
         </activity>
         <activity
-            android:name=".activity.workout.VirtualRealityActivity"
+            android:name=".activity.workoutsetting.VirtualRealityActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" >
         </activity>
 
+        <activity
+            android:name=".activity.workoutrunning.HillRunningActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape" >
+        </activity>
 
 
         <activity

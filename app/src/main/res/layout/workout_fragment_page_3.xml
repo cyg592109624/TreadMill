@@ -56,7 +56,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/workout_mode_vr_place_i_name_1"
+            android:id="@+id/workout_mode_vr_name_9_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
@@ -71,7 +71,7 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:id="@+id/workout_mode_vr_place_j_name_1"
+            android:id="@+id/workout_mode_vr_name_10_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
@@ -115,7 +115,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/workout_mode_vr_place_i_name_2"
+            android:id="@+id/workout_mode_vr_name_9_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
@@ -130,7 +130,7 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:id="@+id/workout_mode_vr_place_f_name_2"
+            android:id="@+id/workout_mode_vr_name_10_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"

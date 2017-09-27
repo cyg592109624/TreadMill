@@ -68,7 +68,7 @@ public class LevelView extends View {
 
     private int levelCount = 36;
 
-    private  int columnCount=30;
+    private int columnCount = 30;
 
     private RectCell[] rectList;
 
@@ -101,7 +101,11 @@ public class LevelView extends View {
         rightSpace = 30f;
         columnMargin = 6;
         columnWidth = 41;
+
         columnStartArea = viewHeight - bottomSpace;
+        maxTall = columnStartArea - topSpace;
+
+        levelHeight = maxTall / levelCount;
         rectList = new RectCell[columnCount];
     }
 
@@ -180,7 +184,7 @@ public class LevelView extends View {
                 cell = new RectCell();
                 rectList[tg] = cell;
             }
-            for(int i=0;i<levelCount;i++){
+            for (int i = 0; i < levelCount; i++) {
                 if (toY > (columnStartArea - levelHeight * (i + 1)) && toY < (columnStartArea - levelHeight * i)) {
                     top = topSpace + levelHeight * (levelCount - i);
                     cell.setLevel((levelCount - i));
