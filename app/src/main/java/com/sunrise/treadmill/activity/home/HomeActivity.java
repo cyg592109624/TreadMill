@@ -107,7 +107,6 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     protected void init() {
         InitialiteDialog initialiteDialog = new InitialiteDialog();
         initialiteDialog.show(fragmentManager, InitialiteDialog.TAG);
-
         List<Fragment> list = new ArrayList<Fragment>();
         list.add(new HomeFragmentPage1());
         list.add(new HomeFragmentPage2());

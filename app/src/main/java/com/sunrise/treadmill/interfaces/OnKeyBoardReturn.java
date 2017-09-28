@@ -5,6 +5,6 @@ package com.sunrise.treadmill.interfaces;
  */
 
 public interface OnKeyBoardReturn {
-    void onEnter(String result);
-    void onKeyBoardHide();
+    void onKeyBoardEnter(String result);
+    void onKeyBoardClose();
 }

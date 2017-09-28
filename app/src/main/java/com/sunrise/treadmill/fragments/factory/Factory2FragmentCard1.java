@@ -78,7 +78,7 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
     }
 
     @Override
-    public void onEnter(String result) {
+    public void onKeyBoardEnter(String result) {
         switch (reSetTG) {
             case reSetLevel:
                 levelValue.setText(result);
@@ -91,7 +91,7 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
     }
 
     @Override
-    public void onKeyBoardHide() {
+    public void onKeyBoardClose() {
         switch (reSetTG) {
             case reSetLevel:
                 TextUtils.changeTextColor(levelValue, getResources().getColor(R.color.factory_white));

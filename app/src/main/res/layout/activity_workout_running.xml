@@ -4,16 +4,76 @@
     android:layout_height="match_parent"
     android:background="@mipmap/bk_4"
     android:orientation="vertical">
-    <include
-        layout="@layout/activity_workout_running_head"/>
-    <LinearLayout
+
+    <include layout="@layout/activity_workout_running_head" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/workout_running_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
 
-    <include
-        layout="@layout/activity_workout_running_bottom"/>
+            <ImageView
+                android:id="@+id/workout_running_rpm_img"
+                android:layout_width="213dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
+                android:src="@mipmap/img_sportmode_rpm_11" />
+
+            <FrameLayout
+                android:layout_width="212dp"
+                android:layout_height="86dp"
+                android:layout_alignParentBottom="true">
+
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="86dp"
+                    android:layout_gravity="right"
+                    android:src="@mipmap/img_sportmode_profile_level_1" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="66dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_sportmode_profile_level_calibration_2" />
+
+
+                <com.sunrise.treadmill.views.LevelView
+                    android:id="@+id/workout_running_level_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/workout_running_level_view_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:gravity="center"
+                    android:text="@string/workout_mode_hill"
+                    android:textColor="@color/factory_tabs_on"
+                    android:textSize="16px" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="130dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/btn_sportmode_media_1" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/activity_workout_running_bottom" />
 
 </LinearLayout>

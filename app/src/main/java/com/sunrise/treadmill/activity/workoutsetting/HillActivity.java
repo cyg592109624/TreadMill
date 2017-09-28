@@ -92,7 +92,7 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
 
 
     @Override
-    public void onEnter(String result) {
+    public void onKeyBoardEnter(String result) {
         switch (reSetTG) {
             default:
                 break;
@@ -109,7 +109,7 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     }
 
     @Override
-    public void onKeyBoardHide() {
+    public void onKeyBoardClose() {
         switch (reSetTG) {
             default:
                 break;

@@ -47,7 +47,6 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
     LevelView levelView;
 
 
-
     @BindView(R.id.workout_edit_age_value)
     TextView ageValue;
     @BindView(R.id.workout_edit_weight_value)
@@ -112,7 +111,7 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
 
 
     @Override
-    public void onEnter(String result) {
+    public void onKeyBoardEnter(String result) {
         switch (reSetTG) {
             default:
                 break;
@@ -129,7 +128,7 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
     }
 
     @Override
-    public void onKeyBoardHide() {
+    public void onKeyBoardClose() {
         switch (reSetTG) {
             case reSetAge:
                 TextUtils.changeTextColor(ageValue, getResources().getColor(R.color.factory_white));
@@ -220,7 +219,7 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
     }
 
 
-    @OnClick({R.id.workout_mode_start_2,R.id.workout_mode_start_3})
+    @OnClick({R.id.workout_mode_start_2, R.id.workout_mode_start_3})
     public void beginWorkOut() {
 
     }

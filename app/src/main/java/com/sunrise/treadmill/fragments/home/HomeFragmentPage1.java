@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity;
 import com.sunrise.treadmill.activity.workoutsetting.FitnessTestActivity;
 import com.sunrise.treadmill.activity.workoutsetting.GoalActivity;
 import com.sunrise.treadmill.activity.workoutsetting.HRCActivity;
@@ -27,8 +28,8 @@ public class HomeFragmentPage1 extends BaseFragment {
     }
 
     @OnClick({R.id.workout_mode_hill, R.id.workout_mode_interval, R.id.workout_mode_goal,
-            R.id.workout_mode_fitness_test, R.id.workout_mode_hrc,R.id.workout_mode_user_program,
-            R.id.workout_mode_vr})
+            R.id.workout_mode_fitness_test, R.id.workout_mode_hrc, R.id.workout_mode_user_program,
+            R.id.workout_mode_vr, R.id.workout_mode_quick_start})
     void selectWorkOutMode(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -52,6 +53,9 @@ public class HomeFragmentPage1 extends BaseFragment {
                 break;
             case R.id.workout_mode_vr:
                 intent.setClass(getActivity(), VirtualRealityActivity.class);
+                break;
+            case R.id.workout_mode_quick_start:
+                intent.setClass(getActivity(), HillRunningActivity.class);
                 break;
         }
         startActivity(intent);

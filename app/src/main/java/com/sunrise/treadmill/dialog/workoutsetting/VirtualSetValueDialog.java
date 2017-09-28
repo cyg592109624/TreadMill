@@ -95,12 +95,12 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
 
 
     @Override
-    public void onEnter(String result) {
+    public void onKeyBoardEnter(String result) {
         editValue.setText(result);
     }
 
     @Override
-    public void onKeyBoardHide() {
+    public void onKeyBoardClose() {
         startBtn.setEnabled(true);
         backBtn.setEnabled(true);
         vrImage.setVisibility(View.VISIBLE);

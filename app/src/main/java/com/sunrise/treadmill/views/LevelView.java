@@ -1,6 +1,8 @@
 package com.sunrise.treadmill.views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
@@ -9,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.bean.LevelColumn;
 
 /**
  * Created by ChuHui on 2017/9/22.
@@ -70,7 +73,14 @@ public class LevelView extends View {
 
     private int columnCount = 30;
 
-    private RectCell[] rectList;
+    private LevelColumn[] rectList;
+
+    private boolean slideEnable = true;
+
+    private Bitmap buoyBitmap;
+
+    private int tgLevel = 0;
+    private float buoyLeft;
 
     public LevelView(Context context) {
         this(context, null);
@@ -88,6 +98,14 @@ public class LevelView extends View {
         mPaint.setFilterBitmap(true);
         mPaint.setColor(getResources().getColor(R.color.factory_tabs_on));
 
+        rectList = new LevelColumn[columnCount];
+
+        topSpace = 115f;
+        bottomSpace = 60f;
+        leftSpace = 159f;
+        rightSpace = 30f;
+        columnMargin = 6;
+        columnWidth = 41;
     }
 
     @Override
@@ -95,18 +113,20 @@ public class LevelView extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         viewWidth = MeasureSpec.getSize(widthMeasureSpec);
         viewHeight = MeasureSpec.getSize(heightMeasureSpec);
-        topSpace = 115f;
-        bottomSpace = 60f;
-        leftSpace = 159f;
-        rightSpace = 30f;
-        columnMargin = 6;
-        columnWidth = 41;
+        calcLength();
+    }
 
+    public void calcLength() {
         columnStartArea = viewHeight - bottomSpace;
         maxTall = columnStartArea - topSpace;
-
         levelHeight = maxTall / levelCount;
-        rectList = new RectCell[columnCount];
+    }
+
+    public void setSpace(float top, float bottom, float left, float right) {
+        setTopSpace(top);
+        setBottomSpace(bottom);
+        setLeftSpace(left);
+        setRightSpace(right);
     }
 
     public void setTopSpace(float space) {
@@ -133,12 +153,48 @@ public class LevelView extends View {
         this.columnWidth = columnWidth;
     }
 
-    public void setColumnCount(int columnCount) {
-        this.columnCount = columnCount;
+    private float buoyBitmapWidth, buoyBitmapHeight;
+
+    public void setBuoyBitmap(int optionsWidth, int optionsHeight) {
+        if (optionsWidth < 0 | optionsHeight < 0) {
+            return;
+        }
+        buoyBitmapWidth = optionsWidth / 3;
+        buoyBitmapHeight = optionsHeight / 3;
+
+        buoyBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.img_sportmode_profile_dot_1).copy(Bitmap.Config.ARGB_8888, false);
+        //最后一个参数的作用是 是否裁剪原图
+        buoyBitmap = Bitmap.createScaledBitmap(buoyBitmap, optionsWidth, optionsHeight, false);
+    }
+
+    public void setTgLevel(int tgLevel) {
+        if (tgLevel > -1 && tgLevel < columnCount) {
+            this.tgLevel = tgLevel;
+        }
+        calcBuoyLeft();
+    }
+
+    private void calcBuoyLeft() {
+        buoyLeft = leftSpace + (columnMargin + columnWidth) * tgLevel;
+    }
+
+    public void reFlashView() {
+        invalidate();
+    }
+
+
+    public void setRectList(LevelColumn[] columns) {
+        if (columns.length != columnCount) {
+            return;
+        }
+        this.rectList = columns;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (!slideEnable) {
+            return true;
+        }
         final float x = event.getX();
         final float y = event.getY();
         switch (event.getAction()) {
@@ -157,6 +213,10 @@ public class LevelView extends View {
                 break;
         }
         return true;
+    }
+
+    public void setSlideEnable(boolean slideEnable) {
+        this.slideEnable = slideEnable;
     }
 
     private void calcPoint() {
@@ -179,9 +239,9 @@ public class LevelView extends View {
             }
         }
         if (tg != -1) {
-            RectCell cell = rectList[tg];
+            LevelColumn cell = rectList[tg];
             if (cell == null) {
-                cell = new RectCell();
+                cell = new LevelColumn();
                 rectList[tg] = cell;
             }
             for (int i = 0; i < levelCount; i++) {
@@ -198,66 +258,13 @@ public class LevelView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        for (RectCell cell : rectList) {
+        for (LevelColumn cell : rectList) {
             if (cell != null) {
                 canvas.drawRect(cell.getToX1(), cell.getToY1(), cell.getToX2(), cell.getToY2(), mPaint);
             }
         }
-    }
-
-    private class RectCell {
-        private float toX1, toX2, toY1, toY2;
-        private int level;
-
-        public RectCell() {
-
-        }
-
-        public void setXY(float x1, float y1, float x2, float y2) {
-            toX1 = x1;
-            toY1 = y1;
-            toX2 = x2;
-            toY2 = y2;
-        }
-
-        public float getToX1() {
-            return toX1;
-        }
-
-        public void setToX1(float toX1) {
-            this.toX1 = toX1;
-        }
-
-        public float getToX2() {
-            return toX2;
-        }
-
-        public void setToX2(float toX2) {
-            this.toX2 = toX2;
-        }
-
-        public float getToY1() {
-            return toY1;
-        }
-
-        public void setToY1(float toY1) {
-            this.toY1 = toY1;
-        }
-
-        public float getToY2() {
-            return toY2;
-        }
-
-        public void setToY2(float toY2) {
-            this.toY2 = toY2;
-        }
-
-        public int getLevel() {
-            return level;
-        }
-
-        public void setLevel(int level) {
-            this.level = level;
+        if (buoyBitmap != null) {
+            canvas.drawBitmap(buoyBitmap, buoyLeft + buoyBitmapWidth, topSpace - buoyBitmapHeight, null);
         }
     }
 }

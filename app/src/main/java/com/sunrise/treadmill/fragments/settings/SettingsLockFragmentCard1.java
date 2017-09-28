@@ -122,7 +122,7 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
     }
 
     @Override
-    public void onEnter(String result) {
+    public void onKeyBoardEnter(String result) {
         switch (reSetTG) {
             case reSetTime:
                 timeValue.setText(result);
@@ -136,7 +136,7 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
     }
 
     @Override
-    public void onKeyBoardHide() {
+    public void onKeyBoardClose() {
         switch (reSetTG) {
             case reSetTime:
                 TextUtils.changeTextColor(timeValue, getResources().getColor(R.color.settings_white));

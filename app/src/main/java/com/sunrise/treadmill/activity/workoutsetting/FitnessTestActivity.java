@@ -107,7 +107,7 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
     }
 
     @Override
-    public void onEnter(String result) {
+    public void onKeyBoardEnter(String result) {
         switch (reSetTG) {
             default:
                 break;
@@ -121,7 +121,7 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
     }
 
     @Override
-    public void onKeyBoardHide() {
+    public void onKeyBoardClose() {
         switch (reSetTG) {
             default:
                 break;

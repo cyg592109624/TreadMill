@@ -67,12 +67,12 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
     }
 
     @Override
-    public void onEnter(String result) {
+    public void onKeyBoardEnter(String result) {
         psw.setText(result);
     }
 
     @Override
-    public void onKeyBoardHide() {
+    public void onKeyBoardClose() {
         keyBoard.setVisibility(View.INVISIBLE);
         TextUtils.changeTextColor(psw, getResources().getColor(R.color.settings_white));
     }
