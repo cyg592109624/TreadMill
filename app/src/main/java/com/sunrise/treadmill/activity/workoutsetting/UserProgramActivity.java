@@ -43,6 +43,7 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
 
     @BindView(R.id.workout_mode_keyboard)
     MyKeyBoardView keyBoardView;
+
     @BindView(R.id.workout_edit_level_view)
     LevelView levelView;
 
@@ -72,6 +73,8 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
         headView.setHeadMsg(getResources().getString(R.string.workout_mode_user), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_user_program_icon);
         genderView.setOnGenderReturn(this);
         keyBoardView.setKeyBoardReturn(this);
+        levelView.setColumnMargin(5f);
+        levelView.setHintText(getResources().getString(R.string.workout_mode_hint_e));
     }
 
     @Override

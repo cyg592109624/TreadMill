@@ -1,15 +1,23 @@
 package com.sunrise.treadmill.activity.workoutrunning;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
+import com.sunrise.treadmill.dialog.workoutrunning.HillRunningPauseDialog;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.views.LevelView;
 
@@ -23,34 +31,19 @@ import butterknife.OnClick;
 public class HillRunningActivity extends BaseFragmentActivity {
 
     @BindView(R.id.workout_running_left)
-    LinearLayout leftView;
+    LinearLayout animView;
 
     @BindView(R.id.workout_running_level_view)
     LevelView levelView;
-
 
     @BindView(R.id.workout_running_stop)
     ImageView stopImg;
 
 
-    private static final int ANIMAL_TIME = 5000;
-    private static final int STOP_ANIMAL = 20001;
+    private int parentWidth;
+    private int parentHeight;
 
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                default:
-                    break;
-                case STOP_ANIMAL:
-                    isChangeLefView = false;
-                    levelView.clearAnimation();
-                    break;
-                case 2:
-                    break;
-            }
-        }
-    };
+    private FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
     public int getLayoutId() {
@@ -59,34 +52,63 @@ public class HillRunningActivity extends BaseFragmentActivity {
 
     @Override
     protected void init() {
-        levelView.setSpace(49f, 27f, 39f, 1f);
-        levelView.setColumnMargin(1);
-        levelView.setColumnWidth(19);
+        parentWidth = getWindowManager().getDefaultDisplay().getWidth();
+        parentHeight = getWindowManager().getDefaultDisplay().getHeight();
+
+        levelView.setColumnMargin(1f);
         levelView.calcLength();
         levelView.setBuoyBitmap(15, 11);
-        levelView.setTgLevel(9);
-        levelView.reFlashView();
+        levelView.setHintText(getResources().getString(R.string.workout_mode_hill));
         levelView.setSlideEnable(false);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        levelView.setTgLevel(4);
+        levelView.setColumn(4, 11);
+        levelView.reFlashView();
     }
 
     private boolean isChangeLefView = false;
 
     @OnClick(R.id.workout_running_left)
     public void showAnim() {
-        if (isChangeLefView) {
-            return;
+        if (!isChangeLefView) {
+            isChangeLefView = true;
+            anim(true);
+        } else {
+            isChangeLefView = false;
+            anim(false);
         }
-        isChangeLefView = true;
-        leftView.startAnimation(AnimationUtils.loadAnimation(HillRunningActivity.this, R.anim.workout_running_lef));
-
-        mHandler.sendEmptyMessageDelayed(STOP_ANIMAL, ANIMAL_TIME);
     }
 
+    private void anim(boolean isScale) {
+        PropertyValuesHolder scaleX = null;
+        PropertyValuesHolder scaleY = null;
+        PropertyValuesHolder translationX = null;
+        PropertyValuesHolder translationY = null;
+        if (isScale) {
+            scaleX = PropertyValuesHolder.ofFloat("scaleX", 1f, 1.4f);
+            scaleY = PropertyValuesHolder.ofFloat("scaleY", 1f, 1.4f);
+            translationX = PropertyValuesHolder.ofFloat("translationX", 0, (parentWidth - animView.getWidth()) / 2);
+            translationY = PropertyValuesHolder.ofFloat("translationY", 0, -(parentHeight - animView.getHeight()) / 5);
+        } else {
+            scaleX = PropertyValuesHolder.ofFloat("scaleX", 1.4f, 1f);
+            scaleY = PropertyValuesHolder.ofFloat("scaleY", 1.4f, 1f);
+            translationX = PropertyValuesHolder.ofFloat("translationX", (parentWidth - animView.getWidth()) / 2, 0);
+            translationY = PropertyValuesHolder.ofFloat("translationY", -(parentHeight - animView.getHeight()) / 5, 0);
+        }
+        ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(animView, scaleX, scaleY, translationX, translationY);
+        animator.setDuration(1000);
+        animator.start();
+
+    }
 
     @OnClick(R.id.workout_running_stop)
     public void stopSport() {
-//        ImageUtils.changeImageView(stopImg, R.drawable.btn_workout_running_start);
-        finishActivity();
+        HillRunningPauseDialog pauseDialog = new HillRunningPauseDialog();
+        pauseDialog.show(fragmentManager, HillRunningPauseDialog.TAG);
     }
 
     @OnClick({R.id.workout_running_level_up, R.id.workout_running_level_down})

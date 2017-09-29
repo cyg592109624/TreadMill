@@ -10,13 +10,15 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.bean.LevelColumn;
+import com.sunrise.treadmill.utils.LanguageUtils;
+import com.sunrise.treadmill.utils.TextUtils;
 
 /**
- * Created by ChuHui on 2017/9/22.
+ * 使用该view时必须与背景图等比例缩放
  */
-
 public class LevelView extends View {
     private Paint mPaint;
     private int viewHeight;
@@ -53,11 +55,11 @@ public class LevelView extends View {
     /**
      * 柱子的宽度
      */
-    private int columnWidth = 0;
+    private float columnWidth = 0;
     /**
      * 柱子的间隔
      */
-    private int columnMargin = 0;
+    private float columnMargin = 0;
 
     /**
      * 柱子低部位置同时也是柱子的起点
@@ -77,6 +79,7 @@ public class LevelView extends View {
 
     private boolean slideEnable = true;
 
+    private String hintText;
     private Bitmap buoyBitmap;
 
     private int tgLevel = 0;
@@ -98,14 +101,15 @@ public class LevelView extends View {
         mPaint.setFilterBitmap(true);
         mPaint.setColor(getResources().getColor(R.color.factory_tabs_on));
 
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+            mPaint.setTypeface(TextUtils.Microsoft(context));
+        } else {
+            mPaint.setTypeface(TextUtils.Arial(context));
+        }
+
         rectList = new LevelColumn[columnCount];
 
-        topSpace = 115f;
-        bottomSpace = 60f;
-        leftSpace = 159f;
-        rightSpace = 30f;
-        columnMargin = 6;
-        columnWidth = 41;
+        columnMargin = 2f;
     }
 
     @Override
@@ -113,44 +117,31 @@ public class LevelView extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         viewWidth = MeasureSpec.getSize(widthMeasureSpec);
         viewHeight = MeasureSpec.getSize(heightMeasureSpec);
+
         calcLength();
     }
 
     public void calcLength() {
+        topSpace = viewHeight * 0.191f;
+        bottomSpace = viewHeight * 0.095f;
+        leftSpace = viewWidth * 0.008f;
+        rightSpace = viewWidth * 0.008f;
+
+        columnWidth = (viewWidth - ((columnMargin * 29) + leftSpace + rightSpace)) / 30;
+
         columnStartArea = viewHeight - bottomSpace;
         maxTall = columnStartArea - topSpace;
         levelHeight = maxTall / levelCount;
+
+        mPaint.setTextSize(bottomSpace*0.7f);
     }
 
-    public void setSpace(float top, float bottom, float left, float right) {
-        setTopSpace(top);
-        setBottomSpace(bottom);
-        setLeftSpace(left);
-        setRightSpace(right);
-    }
-
-    public void setTopSpace(float space) {
-        this.topSpace = space;
-    }
-
-    public void setBottomSpace(float space) {
-        this.bottomSpace = space;
-    }
-
-    public void setLeftSpace(float space) {
-        this.leftSpace = space;
-    }
-
-    public void setRightSpace(float space) {
-        this.rightSpace = space;
-    }
-
-    public void setColumnMargin(int columnMargin) {
+    public void setColumnMargin(float columnMargin) {
         this.columnMargin = columnMargin;
     }
 
-    public void setColumnWidth(int columnWidth) {
-        this.columnWidth = columnWidth;
+    public void setHintText(String text) {
+        hintText = text;
     }
 
     private float buoyBitmapWidth, buoyBitmapHeight;
@@ -188,6 +179,29 @@ public class LevelView extends View {
             return;
         }
         this.rectList = columns;
+    }
+
+
+    public void setColumn(int level,int rank){
+        if((level>columnCount|level<-1)|(rank>levelCount|rank<-1)){
+            return;
+        }
+        LevelColumn cell=new LevelColumn();
+        cell.setToX1(leftSpace + columnWidth * level + columnMargin * level);
+        cell.setToX2(leftSpace + columnWidth * (level + 1) + columnMargin * level);
+        cell.setToY1(topSpace + levelHeight * (levelCount - rank));
+        cell.setToY2(columnStartArea);
+        cell.setLevel(rank);
+        rectList[level] = cell;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if(!slideEnable){
+            performClick();
+            return false;
+        }
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
@@ -265,6 +279,9 @@ public class LevelView extends View {
         }
         if (buoyBitmap != null) {
             canvas.drawBitmap(buoyBitmap, buoyLeft + buoyBitmapWidth, topSpace - buoyBitmapHeight, null);
+        }
+        if (hintText!=null) {
+            canvas.drawText(hintText, (viewWidth - hintText.length() * (bottomSpace*0.8f)) / 2, viewHeight - bottomSpace*0.15f, mPaint);
         }
     }
 }
