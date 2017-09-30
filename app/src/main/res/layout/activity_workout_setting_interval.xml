@@ -43,6 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6"
+            android:paddingLeft="10dp"
             android:orientation="vertical">
 
             <include layout="@layout/workout_edit_info_1" />
