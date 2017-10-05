@@ -48,7 +48,7 @@
 
             <include layout="@layout/workout_edit_info_2" />
 
-            <include layout="@layout/workout_edit_start" />
+            <include layout="@layout/workout_edit_start_1" />
         </LinearLayout>
 
     </LinearLayout>

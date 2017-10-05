@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.activity.workoutsetting;
 
+import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,9 +54,9 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
 
 
     @BindView(R.id.workout_edit_info_1)
-    LinearLayout infoType1;
+    ConstraintLayout infoType1;
     @BindView(R.id.workout_edit_info_3)
-    LinearLayout infoType3;
+    ConstraintLayout infoType3;
 
 
     @BindView(R.id.workout_mode_next_2)

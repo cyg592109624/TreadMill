@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.fragments.factory;
 
+import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ import butterknife.OnClick;
 
 public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardReturn {
     @BindView(R.id.factory2_card1_1)
-    LinearLayout card1_1;
+    ConstraintLayout card1_1;
 
     @BindView(R.id.factory2_card1_2_ctrl_page_toggle)
     ToggleButton ctrlPageToggle;

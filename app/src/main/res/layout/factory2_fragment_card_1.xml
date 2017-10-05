@@ -11,10 +11,10 @@
     <com.sunrise.treadmill.views.MyKeyBoardView
         android:id="@+id/factory2_card1_1_keyboard"
         android:layout_width="0dp"
-        android:gravity="center"
-        android:visibility="gone"
         android:layout_height="match_parent"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:gravity="center"
+        android:visibility="gone" />
 
     <ImageView
         android:layout_width="wrap_content"
