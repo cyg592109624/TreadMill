@@ -1,8 +1,8 @@
 package com.sunrise.treadmill.fragments.settings;
 
+import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
@@ -25,7 +25,7 @@ import butterknife.OnClick;
 
 public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoardReturn {
     @BindView(R.id.settings_lock_fragment_card_1_1)
-    LinearLayout leftLayout;
+    ConstraintLayout leftLayout;
 
     @BindView(R.id.settings_card4_1_1_reset)
     ImageView leftReset;
@@ -38,7 +38,7 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
 
 
     @BindView(R.id.settings_lock_fragment_card_1_2)
-    LinearLayout rightLayout;
+    ConstraintLayout rightLayout;
 
     @BindView(R.id.settings_card4_1_2_reset)
     ImageView rightReset;
@@ -63,7 +63,7 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
 
     @Override
     public int getLayoutId() {
-        return R.layout.settings_lock_fragment_card_1;
+        return R.layout.fragment_settings_lock_card_1;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.sunrise.treadmill.fragments.factory;
 
-import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,7 +33,7 @@ public class Factory2FragmentCard2 extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.factory2_fragment_card_2;
+        return R.layout.fragment_factory2_card_2;
     }
 
     @Override

@@ -11,6 +11,6 @@ public class SettingsFragmentCard3 extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.settings_fragment_card_3;
+        return R.layout.fragment_settings_card_3;
     }
 }

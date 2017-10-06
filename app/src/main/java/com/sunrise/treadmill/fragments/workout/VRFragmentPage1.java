@@ -25,7 +25,7 @@ public class VRFragmentPage1 extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.workout_fragment_page_1;
+        return R.layout.fragment_workout_vr_page_1;
     }
 
     @Override

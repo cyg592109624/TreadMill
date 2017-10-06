@@ -1,156 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/home_dialog_language_img_us"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/btn_home_language_us_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.299"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <ImageView
+            android:id="@+id/home_dialog_language_img_zh"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="14dp"
+            android:src="@mipmap/btn_home_language_cn_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/home_dialog_language_img_us"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <ImageView
+            android:id="@+id/home_dialog_language_img_de"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="14dp"
+            android:src="@mipmap/btn_home_language_de_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/home_dialog_language_img_zh"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <ImageView
+            android:id="@+id/home_dialog_language_img_tr"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="14dp"
+            android:src="@mipmap/btn_home_language_tr_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@+id/home_dialog_language_img_de"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <TextView
+            android:id="@+id/home_dialog_language_txt_us"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:text="@string/language_us"
+            android:textColor="@color/language_btn_off"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.299"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_dialog_language_img_us"
+            app:layout_constraintVertical_bias="0.0" />
 
-            <ImageView
-                android:id="@+id/home_dialog_language_img_us"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@mipmap/btn_home_language_us_3" />
-
-            <ImageView
-                android:id="@+id/home_dialog_language_img_zh"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@mipmap/btn_home_language_cn_3" />
-
-            <ImageView
-                android:id="@+id/home_dialog_language_img_de"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@mipmap/btn_home_language_de_3" />
-
-            <ImageView
-                android:id="@+id/home_dialog_language_img_tr"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@mipmap/btn_home_language_tr_3" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/home_dialog_language_txt_zh"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="14dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:text="@string/language_zh"
+            android:textColor="@color/language_btn_off"
+            app:layout_constraintLeft_toRightOf="@+id/home_dialog_language_txt_us"
+            app:layout_constraintTop_toBottomOf="@+id/home_dialog_language_img_zh" />
 
-            <TextView
-                android:id="@+id/home_dialog_language_txt_us"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="@string/language_us"
-                android:textColor="@color/language_btn_off" />
-
-            <TextView
-                android:id="@+id/home_dialog_language_txt_zh"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="@string/language_zh"
-                android:textColor="@color/language_btn_off" />
-
-            <TextView
-                android:id="@+id/home_dialog_language_txt_de"
-                android:layout_width="59dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="@string/language_de"
-                android:textColor="@color/language_btn_off" />
-
-            <TextView
-                android:id="@+id/home_dialog_language_txt_tr"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="@string/language_tr"
-                android:textColor="@color/language_btn_off" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/home_dialog_language_txt_de"
+            android:layout_width="59dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="14dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:text="@string/language_de"
+            android:textColor="@color/language_btn_off"
+            app:layout_constraintLeft_toRightOf="@+id/home_dialog_language_txt_zh"
+            app:layout_constraintTop_toBottomOf="@+id/home_dialog_language_img_de" />
 
-            <ImageView
-                android:id="@+id/home_dialog_language_img_ir"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@mipmap/btn_home_language_ir_3" />
-
-            <ImageView
-                android:id="@+id/home_dialog_language_img_es"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@mipmap/btn_home_language_esp_3" />
-
-            <ImageView
-                android:id="@+id/home_dialog_language_img_pt"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@mipmap/btn_home_language_pt_3" />
-
-            <ImageView
-                android:id="@+id/home_dialog_language_img_ru"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@mipmap/btn_home_language_rus_3" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/home_dialog_language_txt_tr"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:text="@string/language_tr"
+            android:textColor="@color/language_btn_off"
+            app:layout_constraintLeft_toRightOf="@+id/home_dialog_language_txt_de"
+            app:layout_constraintTop_toBottomOf="@+id/home_dialog_language_img_tr" />
 
-            <TextView
-                android:id="@+id/home_dialog_language_txt_ir"
-                android:layout_width="59dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="@string/language_ir"
-                android:textColor="@color/language_btn_off" />
+        <ImageView
+            android:id="@+id/home_dialog_language_img_ir"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/btn_home_language_ir_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.299"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_dialog_language_txt_us"
+            app:layout_constraintVertical_bias="0.1" />
 
-            <TextView
-                android:id="@+id/home_dialog_language_txt_es"
-                android:layout_width="59dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="@string/language_es"
-                android:textColor="@color/language_btn_off" />
+        <ImageView
+            android:id="@+id/home_dialog_language_img_es"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="14dp"
+            android:src="@mipmap/btn_home_language_esp_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/home_dialog_language_img_ir"
+            app:layout_constraintTop_toBottomOf="@+id/home_dialog_language_txt_zh"
+            app:layout_constraintVertical_bias="0.100" />
 
-            <TextView
-                android:id="@+id/home_dialog_language_txt_pt"
-                android:layout_width="59dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="@string/language_pt"
-                android:textColor="@color/language_btn_off" />
+        <ImageView
+            android:id="@+id/home_dialog_language_img_pt"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="14dp"
+            android:src="@mipmap/btn_home_language_pt_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/home_dialog_language_img_es"
+            app:layout_constraintTop_toBottomOf="@+id/home_dialog_language_txt_de"
+            app:layout_constraintVertical_bias="0.100" />
 
-            <TextView
-                android:id="@+id/home_dialog_language_txt_ru"
-                android:layout_width="59dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="@string/language_ru"
-                android:textColor="@color/language_btn_off" />
+        <ImageView
+            android:id="@+id/home_dialog_language_img_ru"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="14dp"
+            android:src="@mipmap/btn_home_language_rus_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/home_dialog_language_img_pt"
+            app:layout_constraintTop_toBottomOf="@+id/home_dialog_language_txt_tr"
+            app:layout_constraintVertical_bias="0.100" />
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/home_dialog_language_txt_ir"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="@string/language_ir"
+            android:textColor="@color/language_btn_off"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.299"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_dialog_language_img_ir"
+            app:layout_constraintVertical_bias="0.0" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/home_dialog_language_txt_es"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="14dp"
+            android:gravity="center"
+            android:text="@string/language_es"
+            android:textColor="@color/language_btn_off"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/home_dialog_language_txt_ir"
+            app:layout_constraintTop_toBottomOf="@+id/home_dialog_language_img_es"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/home_dialog_language_txt_pt"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="14dp"
+            android:gravity="center"
+            android:text="@string/language_pt"
+            android:textColor="@color/language_btn_off"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/home_dialog_language_txt_es"
+            app:layout_constraintTop_toBottomOf="@+id/home_dialog_language_img_pt"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/home_dialog_language_txt_ru"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="14dp"
+            android:gravity="center"
+            android:text="@string/language_ru"
+            android:textColor="@color/language_btn_off"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/home_dialog_language_txt_pt"
+            app:layout_constraintTop_toBottomOf="@+id/home_dialog_language_img_ru"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </android.support.constraint.ConstraintLayout>
 </RelativeLayout>

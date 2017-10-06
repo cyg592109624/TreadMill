@@ -13,8 +13,8 @@ public class HomeFragmentPage3 extends BaseFragment {
     @Override
     public int getLayoutId() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            return R.layout.home_fragment_page_3_zh;
+            return R.layout.fragment_home_page_3_zh;
         }
-        return R.layout.home_fragment_page_3;
+        return R.layout.fragment_home_page_3;
     }
 }

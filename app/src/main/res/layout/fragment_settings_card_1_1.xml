@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:padding="0dp">
+
+    <TextView
+        android:id="@+id/settings_card1_txt1"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center|left"
+        android:layout_marginLeft="0dp"
+        android:gravity="center|left"
+        android:text="@string/brightness"
+        android:textColor="@color/settings_white"
+        android:textSize="42px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/settings_card1_txt1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center|left"
+            android:paddingRight="15dp"
+            android:src="@mipmap/img_brightness_voice_bar_1_1" />
+
+        <SeekBar
+            android:id="@+id/settings_card1_seek_bar_bright"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center|left"
+            android:max="100"
+            android:maxHeight="5dp"
+            android:minHeight="5dp"
+            android:progressDrawable="@drawable/seek_bar"
+            android:thumb="@drawable/seek_bar_thumb"
+            android:thumbOffset="8dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/settings_card1_txt2"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center|left"
+        android:layout_marginLeft="0dp"
+        android:gravity="center|left"
+        android:text="@string/sounds"
+        android:textColor="@color/settings_white"
+        android:textSize="42px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_card1_txt1"
+        app:layout_constraintVertical_bias="0.116" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center|left"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/settings_card1_txt2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout2"
+        app:layout_constraintVertical_bias="0.114">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center|left"
+            android:paddingRight="15dp"
+            android:src="@mipmap/img_brightness_voice_bar_1_2" />
+
+        <SeekBar
+            android:id="@+id/settings_card1_seek_bar_sounds"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center|left"
+            android:max="100"
+            android:maxHeight="5dp"
+            android:minHeight="5dp"
+            android:progressDrawable="@drawable/seek_bar"
+            android:thumb="@drawable/seek_bar_thumb"
+            android:thumbOffset="8dp" />
+    </FrameLayout>
+
+
+</android.support.constraint.ConstraintLayout>

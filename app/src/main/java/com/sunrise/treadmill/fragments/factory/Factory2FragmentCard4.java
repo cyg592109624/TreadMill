@@ -9,9 +9,6 @@ import com.sunrise.treadmill.base.BaseFragment;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -25,7 +22,7 @@ public class Factory2FragmentCard4 extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.factory2_fragment_card_4;
+        return R.layout.fragment_factory2_card_4;
     }
 
     @Override

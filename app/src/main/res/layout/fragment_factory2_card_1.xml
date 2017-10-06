@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:padding="0dp">
 
-    <include layout="@layout/factory2_fragment_card_1_1" />
+    <include layout="@layout/fragment_factory2_card_1_1" />
 
     <com.sunrise.treadmill.views.MyKeyBoardView
         android:id="@+id/factory2_card1_1_keyboard"
@@ -25,5 +25,5 @@
         android:layout_marginTop="10dp"
         android:src="@mipmap/img_factory_line" />
 
-    <include layout="@layout/factory2_fragment_card_1_2" />
+    <include layout="@layout/fragment_factory2_card_1_2" />
 </LinearLayout>

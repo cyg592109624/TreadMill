@@ -2,7 +2,6 @@ package com.sunrise.treadmill.fragments.factory;
 
 import android.support.constraint.ConstraintLayout;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -42,7 +41,7 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
 
     @Override
     public int getLayoutId() {
-        return R.layout.factory2_fragment_card_1;
+        return R.layout.fragment_factory2_card_1;
     }
 
     @Override

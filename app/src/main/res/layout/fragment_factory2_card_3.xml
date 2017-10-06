@@ -6,9 +6,9 @@
     android:orientation="vertical"
     android:padding="0dp">
 
-    <include layout="@layout/factory2_fragment_card_3_1" />
+    <include layout="@layout/fragment_factory2_card_3_1" />
 
-    <include layout="@layout/factory2_fragment_card_3_2" />
+    <include layout="@layout/fragment_factory2_card_3_2" />
 
-    <include layout="@layout/factory2_fragment_card_3_3" />
+    <include layout="@layout/fragment_factory2_card_3_3" />
 </LinearLayout>

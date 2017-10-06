@@ -1,9 +1,7 @@
 package com.sunrise.treadmill.fragments.settings;
 
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
@@ -37,7 +35,7 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
 
     @Override
     public int getLayoutId() {
-        return R.layout.settings_lock_fragment_card_2;
+        return R.layout.fragment_settings_lock_card_2;
     }
 
     @Override

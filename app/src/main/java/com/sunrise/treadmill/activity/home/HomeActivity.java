@@ -35,13 +35,6 @@ import butterknife.OnClick;
  */
 
 public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDialogReturn, OnInitialReturn, ViewPager.OnPageChangeListener {
-
-    @BindView(R.id.home_btn_language)
-    ImageButton btn_language;
-
-    @BindView(R.id.home_btn_setting)
-    ImageButton btn_setting;
-
     @BindView(R.id.home_img_vp)
     ImageView selectTg;
 

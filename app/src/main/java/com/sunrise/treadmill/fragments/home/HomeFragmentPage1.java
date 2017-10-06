@@ -24,7 +24,7 @@ public class HomeFragmentPage1 extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.home_fragment_page_1;
+        return R.layout.fragment_home_page_1;
     }
 
     @OnClick({R.id.workout_mode_hill, R.id.workout_mode_interval, R.id.workout_mode_goal,

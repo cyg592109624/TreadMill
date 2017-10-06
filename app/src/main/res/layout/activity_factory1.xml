@@ -32,21 +32,13 @@
             android:textColor="@color/factory_tabs_on"
             android:textSize="30px" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="10dp">
-
-            <include layout="@layout/factory1_fragment_card" />
-        </RelativeLayout>
+        <include layout="@layout/fragment_factory1_card" />
 
 
     </LinearLayout>
+
     <com.sunrise.treadmill.views.MyBottomTabView2
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
