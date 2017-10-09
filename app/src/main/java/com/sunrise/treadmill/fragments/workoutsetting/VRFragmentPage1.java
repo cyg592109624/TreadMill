@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.fragments.workout;
+package com.sunrise.treadmill.fragments.workoutsetting;
 
 import android.view.View;
 import android.widget.TextView;
@@ -20,12 +20,12 @@ import butterknife.OnClick;
  * Created by ChuHui on 2017/9/26.
  */
 
-public class VRFragmentPage2 extends BaseFragment {
+public class VRFragmentPage1 extends BaseFragment {
     private OnVRSelectReturn onVRSelectReturn;
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_workout_vr_page_2;
+        return R.layout.fragment_workout_vr_page_1;
     }
 
     @Override
@@ -36,14 +36,14 @@ public class VRFragmentPage2 extends BaseFragment {
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_5_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_5_2));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_6_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_6_2));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_7_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_7_2));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_8_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_8_2));
+        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_1_1));
+        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_1_2));
+        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_2_1));
+        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_2_2));
+        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_3_1));
+        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_3_2));
+        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_4_1));
+        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_4_2));
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(getContext()));
         } else {
@@ -51,28 +51,29 @@ public class VRFragmentPage2 extends BaseFragment {
         }
     }
 
-    @OnClick({R.id.workout_mode_vr_img_5, R.id.workout_mode_vr_img_6, R.id.workout_mode_vr_img_7, R.id.workout_mode_vr_img_8})
+    @OnClick({R.id.workout_mode_vr_img_1, R.id.workout_mode_vr_img_2, R.id.workout_mode_vr_img_3, R.id.workout_mode_vr_img_4})
     public void onVRSelect(View view) {
         int selectVR;
         switch (view.getId()) {
             default:
                 selectVR = VirtualRealityActivity.selectNothing;
                 break;
-            case R.id.workout_mode_vr_img_5:
-                selectVR = VirtualRealityActivity.tgValue_5;
+            case R.id.workout_mode_vr_img_1:
+                selectVR = VirtualRealityActivity.tgValue_1;
                 break;
-            case R.id.workout_mode_vr_img_6:
-                selectVR = VirtualRealityActivity.tgValue_6;
+            case R.id.workout_mode_vr_img_2:
+                selectVR = VirtualRealityActivity.tgValue_2;
                 break;
-            case R.id.workout_mode_vr_img_7:
-                selectVR = VirtualRealityActivity.tgValue_7;
+            case R.id.workout_mode_vr_img_3:
+                selectVR = VirtualRealityActivity.tgValue_3;
                 break;
-            case R.id.workout_mode_vr_img_8:
-                selectVR = VirtualRealityActivity.tgValue_8;
+            case R.id.workout_mode_vr_img_4:
+                selectVR = VirtualRealityActivity.tgValue_4;
                 break;
         }
         if (selectVR != VirtualRealityActivity.selectNothing) {
             onVRSelectReturn.onVRSelect(selectVR);
         }
     }
+
 }

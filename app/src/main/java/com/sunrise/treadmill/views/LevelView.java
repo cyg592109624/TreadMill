@@ -281,7 +281,7 @@ public class LevelView extends View {
             canvas.drawBitmap(buoyBitmap, buoyLeft + buoyBitmapWidth, topSpace - buoyBitmapHeight, null);
         }
         if (hintText!=null) {
-            canvas.drawText(hintText, (viewWidth - hintText.length() * (bottomSpace*0.8f)) / 2, viewHeight - bottomSpace*0.15f, mPaint);
+            canvas.drawText(hintText, (viewWidth - hintText.length() * (bottomSpace*0.3f)) / 2, viewHeight - bottomSpace*0.18f, mPaint);
         }
     }
 }

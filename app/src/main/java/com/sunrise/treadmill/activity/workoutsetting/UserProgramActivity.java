@@ -91,8 +91,6 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
         txtList.add((TextView) findViewById(R.id.workout_edit_time));
         txtList.add((TextView) findViewById(R.id.workout_edit_time_unit));
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_level_view_hint));
-
         txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_2));
 
         txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_3));

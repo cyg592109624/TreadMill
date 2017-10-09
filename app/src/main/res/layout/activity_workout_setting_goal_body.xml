@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/workout_option_body"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/workout_mode_goal_time"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/btn_workout_goal_time"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:text="@string/value_nothing"
+        android:textColor="@color/workout_mode_white"
+        android:textSize="82px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/workout_mode_goal_distance"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/workout_mode_goal_distance"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/btn_workout_goal_distance_km"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:text="@string/value_nothing"
+        android:textColor="@color/workout_mode_white"
+        android:textSize="82px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/workout_mode_goal_time"
+        app:layout_constraintRight_toLeftOf="@+id/workout_mode_goal_calories"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/workout_mode_goal_calories"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/btn_workout_goal_calories"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:text="@string/value_nothing"
+        android:textColor="@color/workout_mode_white"
+        android:textSize="82px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/workout_mode_goal_distance"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/workout_edit_start_hint_1"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:gravity="center|left"
+        android:text="@string/workout_mode_hint_a"
+        android:textColor="@color/workout_mode_white"
+        android:textSize="40px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workout_mode_goal_time" />
+
+    <ImageView
+        android:id="@+id/workout_mode_start_1"
+        android:layout_width="85dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/btn_start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintLeft_toRightOf="@+id/workout_edit_start_hint_1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workout_mode_goal_calories"
+        app:layout_constraintVertical_bias="0.51" />
+
+</android.support.constraint.ConstraintLayout>

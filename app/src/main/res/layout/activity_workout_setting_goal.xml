@@ -10,75 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/workout_mode_goal_time"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@drawable/btn_workout_goal_time"
-            android:gravity="center"
-            android:scaleType="fitXY"
-            android:text="@string/value_nothing"
-            android:textColor="@color/workout_mode_white"
-            android:textSize="82px" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/workout_mode_goal_distance"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@drawable/btn_workout_goal_distance_km"
-            android:gravity="center"
-            android:scaleType="fitXY"
-            android:text="@string/value_nothing"
-            android:textColor="@color/workout_mode_white"
-            android:textSize="82px" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/workout_mode_goal_calories"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@drawable/btn_workout_goal_calories"
-            android:gravity="center"
-            android:scaleType="fitXY"
-            android:text="@string/value_nothing"
-            android:textColor="@color/workout_mode_white"
-            android:textSize="82px" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="75dp"
-        android:layout_weight="1">
-
-        <include layout="@layout/workout_edit_start_1" />
-    </LinearLayout>
+    <include layout="@layout/activity_workout_setting_goal_body" />
 
     <com.sunrise.treadmill.views.MyBottomTabView2
         android:layout_width="match_parent"

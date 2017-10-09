@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.fragments.workout;
+package com.sunrise.treadmill.fragments.workoutsetting;
 
 import android.view.View;
 import android.widget.TextView;

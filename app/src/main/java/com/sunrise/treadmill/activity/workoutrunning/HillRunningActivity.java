@@ -24,9 +24,4 @@ import butterknife.OnClick;
 
 public class HillRunningActivity extends BaseRunningActivity {
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 }

@@ -10,49 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:id="@+id/workout_option_body"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:orientation="vertical">
-
-            <com.sunrise.treadmill.views.MyGenderView
-                android:id="@+id/workout_mode_gender_select"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <com.sunrise.treadmill.views.MyKeyBoardView
-                android:id="@+id/workout_mode_keyboard"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:visibility="gone" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:orientation="vertical"
-            android:paddingLeft="10dp">
-
-            <include layout="@layout/workout_edit_info_1" />
-            <include layout="@layout/workout_edit_info_3" />
-
-            <include layout="@layout/workout_edit_start_2" />
-        </LinearLayout>
-
-    </LinearLayout>
+    <include layout="@layout/activity_workout_setting_hrc_body" />
 
     <com.sunrise.treadmill.views.MyBottomTabView2
         android:layout_width="match_parent"

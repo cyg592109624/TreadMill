@@ -3,6 +3,7 @@ package com.sunrise.treadmill.activity.workoutrunning;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
+import com.sunrise.treadmill.dialog.workoutrunning.CountDownDialog;
 import com.sunrise.treadmill.dialog.workoutrunning.HillRunningPauseDialog;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
@@ -56,7 +58,7 @@ public class BaseRunningActivity extends BaseFragmentActivity {
     LevelView levelView;
 
     @BindView(R.id.workout_running_media_1)
-    ImageView media1;
+    ConstraintLayout media1;
 
     @BindView(R.id.workout_running_media_2)
     ImageView media2;
@@ -68,11 +70,17 @@ public class BaseRunningActivity extends BaseFragmentActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_workout_running;
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+            return R.layout.activity_workout_running_zh;
+        } else {
+            return R.layout.activity_workout_running;
+        }
     }
 
     @Override
     protected void init() {
+        showCountDownDialog();
+
         parentWidth = getWindowManager().getDefaultDisplay().getWidth();
         parentHeight = getWindowManager().getDefaultDisplay().getHeight();
 
@@ -113,9 +121,7 @@ public class BaseRunningActivity extends BaseFragmentActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        levelView.setTgLevel(4);
-        levelView.setColumn(4, 11);
-        levelView.reFlashView();
+        setUpLevelView();
     }
 
     private boolean isShowView = false;
@@ -139,28 +145,6 @@ public class BaseRunningActivity extends BaseFragmentActivity {
         }
     }
 
-    private void animLeftView(boolean isScale) {
-        PropertyValuesHolder scaleX = null;
-        PropertyValuesHolder scaleY = null;
-        PropertyValuesHolder translationX = null;
-        PropertyValuesHolder translationY = null;
-        if (isScale) {
-            scaleX = PropertyValuesHolder.ofFloat("scaleX", 1f, 1.4f);
-            scaleY = PropertyValuesHolder.ofFloat("scaleY", 1f, 1.4f);
-            translationX = PropertyValuesHolder.ofFloat("translationX", 0, (parentWidth - leftView.getWidth()) / 2);
-            translationY = PropertyValuesHolder.ofFloat("translationY", 0, -(parentHeight - leftView.getHeight()) / 5);
-        } else {
-            scaleX = PropertyValuesHolder.ofFloat("scaleX", 1.4f, 1f);
-            scaleY = PropertyValuesHolder.ofFloat("scaleY", 1.4f, 1f);
-            translationX = PropertyValuesHolder.ofFloat("translationX", (parentWidth - leftView.getWidth()) / 2, 0);
-            translationY = PropertyValuesHolder.ofFloat("translationY", -(parentHeight - leftView.getHeight()) / 5, 0);
-        }
-        ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(leftView, scaleX, scaleY, translationX, translationY);
-        animator.setDuration(1000);
-        animator.start();
-
-    }
-
     @OnClick(R.id.workout_running_media_2)
     public void media2Pop() {
         if (!isShowView) {
@@ -181,6 +165,39 @@ public class BaseRunningActivity extends BaseFragmentActivity {
                 animRightView(false);
             }
         }
+    }
+
+    @OnClick(R.id.workout_running_stop)
+    public void stopSport() {
+        HillRunningPauseDialog pauseDialog = new HillRunningPauseDialog();
+        pauseDialog.show(fragmentManager, HillRunningPauseDialog.TAG);
+    }
+
+    @OnClick({R.id.workout_running_level_up, R.id.workout_running_level_down})
+    public void changeLevel(View view) {
+
+    }
+
+    private void animLeftView(boolean isScale) {
+        PropertyValuesHolder scaleX = null;
+        PropertyValuesHolder scaleY = null;
+        PropertyValuesHolder translationX = null;
+        PropertyValuesHolder translationY = null;
+        if (isScale) {
+            scaleX = PropertyValuesHolder.ofFloat("scaleX", 1f, 1.4f);
+            scaleY = PropertyValuesHolder.ofFloat("scaleY", 1f, 1.4f);
+            translationX = PropertyValuesHolder.ofFloat("translationX", 0, (parentWidth - leftView.getWidth()) / 2);
+            translationY = PropertyValuesHolder.ofFloat("translationY", 0, -(parentHeight - leftView.getHeight()) / 5);
+        } else {
+            scaleX = PropertyValuesHolder.ofFloat("scaleX", 1.4f, 1f);
+            scaleY = PropertyValuesHolder.ofFloat("scaleY", 1.4f, 1f);
+            translationX = PropertyValuesHolder.ofFloat("translationX", (parentWidth - leftView.getWidth()) / 2, 0);
+            translationY = PropertyValuesHolder.ofFloat("translationY", -(parentHeight - leftView.getHeight()) / 5, 0);
+        }
+        ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(leftView, scaleX, scaleY, translationX, translationY);
+        animator.setDuration(1000);
+        animator.start();
+
     }
 
     private void animRightView(final boolean translation) {
@@ -222,14 +239,18 @@ public class BaseRunningActivity extends BaseFragmentActivity {
         animator.start();
     }
 
-    @OnClick(R.id.workout_running_stop)
-    public void stopSport() {
-        HillRunningPauseDialog pauseDialog = new HillRunningPauseDialog();
-        pauseDialog.show(fragmentManager, HillRunningPauseDialog.TAG);
+    private void setUpLevelView() {
+        levelView.setTgLevel(4);
+        levelView.setColumn(4, 11);
+        levelView.setTgLevel(4);
+        levelView.setColumn(4, 11);
+        levelView.reFlashView();
+        levelView.setTgLevel(4);
+        levelView.setColumn(4, 11);
     }
 
-    @OnClick({R.id.workout_running_level_up, R.id.workout_running_level_down})
-    public void changeLevel(View view) {
+    private void showCountDownDialog() {
+        CountDownDialog downDialog = new CountDownDialog();
+        downDialog.show(fragmentManager, CountDownDialog.TAG);
     }
-
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/workout_running_media_layout"
+    android:layout_width="40dp"
+    android:layout_height="127dp"
+    android:layout_alignParentRight="true"
+    android:layout_centerInParent="true">
+        <ImageView
+            android:id="@+id/workout_running_media_1"
+            android:layout_width="247dp"
+            android:layout_height="127dp"
+            android:background="@mipmap/btn_sportmode_media_3"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/workout_running_media_2"
+            android:layout_width="40dp"
+            android:layout_height="127dp"
+            android:background="@mipmap/btn_sportmode_media_1" />
+</FrameLayout>

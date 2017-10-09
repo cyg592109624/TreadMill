@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.factory.FactoriesActivity;
 import com.sunrise.treadmill.activity.settings.SettingsActivity;
@@ -22,6 +23,7 @@ import com.sunrise.treadmill.fragments.home.HomeFragmentPage3;
 import com.sunrise.treadmill.interfaces.HomeLanguageDialogReturn;
 import com.sunrise.treadmill.interfaces.OnInitialReturn;
 import com.sunrise.treadmill.utils.ImageUtils;
+import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.views.LogoImageView;
 
 import java.util.ArrayList;

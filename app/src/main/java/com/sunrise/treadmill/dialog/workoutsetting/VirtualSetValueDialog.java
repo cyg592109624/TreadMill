@@ -124,7 +124,6 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
     public void back() {
         dismiss();
         VirtualRealityActivity activity = (VirtualRealityActivity) getActivity();
-        activity.setOptionBodyVisibility(View.VISIBLE);
     }
 
     private void changeVRImage(int vrNum) {
