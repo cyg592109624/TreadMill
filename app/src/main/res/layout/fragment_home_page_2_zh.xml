@@ -34,7 +34,7 @@
         android:id="@+id/home_app_mode_i71"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/btn_home_wei_i71"
+        android:src="@drawable/btn_home_i71_1"
         app:layout_constraintBottom_toTopOf="@+id/workout_mode_quick_start"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@+id/home_app_mode_weibo"

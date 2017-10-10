@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.workoutrunning.BaseRunningActivity;
 import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity;
 import com.sunrise.treadmill.base.BaseDialogFragment;
 
@@ -32,7 +33,7 @@ public class HillRunningPauseDialog extends BaseDialogFragment {
     @OnClick(R.id.workout_running_pause_quit)
     public void onQuit() {
         dismiss();
-        ((HillRunningActivity) getActivity()).finishActivity();
+        ((BaseRunningActivity) getActivity()).finishActivity();
     }
     @OnClick(R.id.workout_running_pause_continue)
     public void onContinue() {

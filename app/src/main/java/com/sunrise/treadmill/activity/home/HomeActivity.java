@@ -3,10 +3,8 @@ package com.sunrise.treadmill.activity.home;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.sunrise.treadmill.GlobalSetting;
@@ -19,7 +17,9 @@ import com.sunrise.treadmill.dialog.home.InitialiteDialog;
 import com.sunrise.treadmill.dialog.home.LanguageDialog;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage1;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage2;
+import com.sunrise.treadmill.fragments.home.HomeFragmentPage2_zh;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage3;
+import com.sunrise.treadmill.fragments.home.HomeFragmentPage3_zh;
 import com.sunrise.treadmill.interfaces.HomeLanguageDialogReturn;
 import com.sunrise.treadmill.interfaces.OnInitialReturn;
 import com.sunrise.treadmill.utils.ImageUtils;
@@ -58,7 +58,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     @Override
     public void onInitialResult(String result) {
-//        Intent intent = new Intent(HomeActivity.this, NfcActivity.class);
+//        Intent intent = new Intent(HomeActivity_zh.this, NfcActivity.class);
 //        startActivity(intent);
     }
 
@@ -104,8 +104,14 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
         initialiteDialog.show(fragmentManager, InitialiteDialog.TAG);
         List<Fragment> list = new ArrayList<Fragment>();
         list.add(new HomeFragmentPage1());
-        list.add(new HomeFragmentPage2());
-        list.add(new HomeFragmentPage3());
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+            list.add(new HomeFragmentPage2_zh());
+            list.add(new HomeFragmentPage3_zh());
+        } else {
+            list.add(new HomeFragmentPage2());
+            list.add(new HomeFragmentPage3());
+        }
+
         fragmentAdapter = new HomeFragmentAdapter(fragmentManager, list);
         viewPager.setAdapter(fragmentAdapter);
         viewPager.setCurrentItem(0);

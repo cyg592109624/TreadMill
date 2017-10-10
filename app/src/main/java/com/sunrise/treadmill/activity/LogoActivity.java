@@ -1,7 +1,6 @@
 package com.sunrise.treadmill.activity;
 
 import android.content.Intent;
-import android.os.Binder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
@@ -12,7 +11,6 @@ import com.sunrise.treadmill.base.BaseActivity;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.SPUtils;
-import com.sunrise.treadmill.utils.ScreenUtils;
 
 import java.util.List;
 
@@ -20,7 +18,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class LogoActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
 
-    private  int permissionRequestCode=1001;
+    private int permissionRequestCode = 1001;
     private String[] lackOfPerms = {"android.permission.CHANGE_CONFIGURATION", "android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.WRITE_SETTINGS"};
 
     @Override
@@ -51,7 +49,7 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
         String curPerm[] = new String[perms.size()];
         for (int i = 0; i < perms.size(); i++) {
             curPerm[i] = perms.get(i);
-            System.out.println("没有被允许的权限 --> "+perms.get(i));
+            System.out.println("没有被允许的权限 --> " + perms.get(i));
         }
         lackOfPerms = curPerm;
     }
@@ -69,14 +67,14 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
             SPUtils.put(getApplicationContext(), Constant.appLanguage, appLanguage);
             LanguageUtils.updateLanguage(LanguageUtils.buildLocale(he[0], he[1]), getResources());
             Intent intent = new Intent(LogoActivity.this, LogoActivity.class);
-            finish();
+            finishActivity();
             startActivity(intent);
         } else {
             try {
                 GlobalSetting.AppLanguage = LanguageUtils.getAppLanguage(getResources());
                 Thread.sleep(1000);
                 Intent intent = new Intent(LogoActivity.this, HomeActivity.class);
-                finish();
+                finishActivity();
                 startActivity(intent);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -9,8 +9,6 @@
     <string name="workout_mode_fitness">FITNESS TEST</string>
     <string name="workout_mode_user">USER PROGRAM</string>
     <string name="media_you">YouTube</string>
-    <string name="media_chrome">Chrome</string>
-    <string name="media_face">Facebook</string>
     <string name="media_music">MUSIC</string>
     <string name="media_video">VIDEO</string>
     <string name="media_insta">Instagram</string>
@@ -171,7 +169,6 @@
     <string name="target_hr">Target HR</string>
     <string name="unit_kg">kg</string>
     <string name="unit_lb">lb</string>
-    <string name="value_nothing" translatable="false">—</string>
     <string name="vr_a_1">France Paris</string>
     <string name="vr_a_2">Eiffel Tower</string>
     <string name="vr_b_1">Czech Republic</string>
@@ -194,4 +191,9 @@
     <string name="vr_j_2">Hallstatt</string>
     <string name="vr_k_1">British</string>
     <string name="vr_k_2">Through the valley green</string>
+    <string name="media_weibo">微博</string>
+    <string name="media_i71">愛奇藝</string>
+    <string name="media_face">Facebook</string>
+    <string name="media_chrome">Chrome</string>
+    <string name="media_bai">Bai 百度</string>
 </resources>

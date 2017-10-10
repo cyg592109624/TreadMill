@@ -9,16 +9,14 @@
     <string name="workout_mode_hrc">心率控制系统</string>
     <string name="workout_mode_fitness">运动测试模式</string>
     <string name="workout_mode_user">用户程序</string>
-    <string name="media_you">Bai 百度</string>
-    <string name="media_chrome">微博</string>
-    <string name="media_face">爱奇艺</string>
+    <string name="media_you">YouTube</string>
     <string name="media_music">MUSIC</string>
     <string name="media_video">VIDEO</string>
-    <string name="media_twitter"> </string>
+    <string name="media_twitter">Twitter</string>
     <string name="media_av">AV in</string>
     <string name="media_screen">Screen Mirroring</string>
-    <string name="media_flikr"> </string>
-    <string name="media_insta"> </string>
+    <string name="media_flikr">Flikr</string>
+    <string name="media_insta">Instagram</string>
     <string name="language_us">英语</string>
     <string name="language_zh">简体中文</string>
     <string name="language_de">德语</string>
@@ -194,4 +192,9 @@
     <string name="vr_j_2">哈尔施塔特</string>
     <string name="vr_k_1">英国</string>
     <string name="vr_k_2">翡翠谷</string>
+    <string name="media_weibo">微博</string>
+    <string name="media_i71">愛奇藝</string>
+    <string name="media_face">Facebook</string>
+    <string name="media_chrome">Chrome</string>
+    <string name="media_bai">Bai 百度</string>
 </resources>

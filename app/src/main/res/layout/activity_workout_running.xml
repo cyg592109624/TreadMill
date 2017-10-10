@@ -8,7 +8,7 @@
     <include layout="@layout/activity_workout_running_head" />
 
     <RelativeLayout
-        android:id="@+id/workout_running_main"
+        android:id="@+id/workout_running_body"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">

@@ -3,8 +3,10 @@ package com.sunrise.treadmill.fragments.home;
 import android.content.Intent;
 import android.view.View;
 
+import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity;
+import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity_zh;
 import com.sunrise.treadmill.activity.workoutsetting.FitnessTestActivity;
 import com.sunrise.treadmill.activity.workoutsetting.GoalActivity;
 import com.sunrise.treadmill.activity.workoutsetting.HRCActivity;
@@ -13,6 +15,7 @@ import com.sunrise.treadmill.activity.workoutsetting.IntervalActivity;
 import com.sunrise.treadmill.activity.workoutsetting.UserProgramActivity;
 import com.sunrise.treadmill.activity.workoutsetting.VirtualRealityActivity;
 import com.sunrise.treadmill.base.BaseFragment;
+import com.sunrise.treadmill.utils.LanguageUtils;
 
 import butterknife.OnClick;
 
@@ -55,7 +58,11 @@ public class HomeFragmentPage1 extends BaseFragment {
                 intent.setClass(getActivity(), VirtualRealityActivity.class);
                 break;
             case R.id.workout_mode_quick_start:
-                intent.setClass(getActivity(), HillRunningActivity.class);
+                if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+                    intent.setClass(getActivity(), HillRunningActivity_zh.class);
+                } else {
+                    intent.setClass(getActivity(), HillRunningActivity.class);
+                }
                 break;
         }
         startActivity(intent);

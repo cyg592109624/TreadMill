@@ -13,10 +13,10 @@ import butterknife.BindView;
  * Created by ChuHui on 2017/9/12.
  */
 
-public class HomeFragmentPage3 extends BaseFragment {
+public class HomeFragmentPage3_zh extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_home_page_3;
+        return R.layout.fragment_home_page_3_zh;
     }
 }

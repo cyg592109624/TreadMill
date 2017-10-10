@@ -48,20 +48,20 @@ public class BaseRunningActivity extends BaseFragmentActivity {
     TextView speedValue;
 
 
-    @BindView(R.id.workout_running_left)
+    @BindView(R.id.workout_running_body_1)
     LinearLayout leftView;
 
-    @BindView(R.id.workout_running_media_layout)
+    @BindView(R.id.workout_running_body_2)
     FrameLayout rightLayout;
 
     @BindView(R.id.workout_running_level_view)
     LevelView levelView;
 
     @BindView(R.id.workout_running_media_1)
-    ConstraintLayout media1;
+    ConstraintLayout mediaView;
 
-    @BindView(R.id.workout_running_media_2)
-    ImageView media2;
+    @BindView(R.id.workout_running_media_ctrl_1)
+    ImageView mediaCtrlImage;
 
     private int parentWidth;
     private int parentHeight;
@@ -80,7 +80,6 @@ public class BaseRunningActivity extends BaseFragmentActivity {
     @Override
     protected void init() {
         showCountDownDialog();
-
         parentWidth = getWindowManager().getDefaultDisplay().getWidth();
         parentHeight = getWindowManager().getDefaultDisplay().getHeight();
 
@@ -110,7 +109,6 @@ public class BaseRunningActivity extends BaseFragmentActivity {
         txtList.add(pulseValue);
         txtList.add(wattValue);
         txtList.add(speedValue);
-
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(this));
         } else {
@@ -128,7 +126,7 @@ public class BaseRunningActivity extends BaseFragmentActivity {
     private boolean isAnimLeftView = false;
     private boolean isAnimRightView = false;
 
-    @OnClick(R.id.workout_running_left)
+    @OnClick(R.id.workout_running_body_1)
     public void showLeftView() {
         if (isShowView) {
             if (isAnimLeftView) {
@@ -145,8 +143,8 @@ public class BaseRunningActivity extends BaseFragmentActivity {
         }
     }
 
-    @OnClick(R.id.workout_running_media_2)
-    public void media2Pop() {
+    @OnClick(R.id.workout_running_media_ctrl_1)
+    public void media1Pop() {
         if (!isShowView) {
             if (!isAnimLeftView) {
                 isShowView = true;
@@ -156,8 +154,8 @@ public class BaseRunningActivity extends BaseFragmentActivity {
         }
     }
 
-    @OnClick(R.id.workout_running_media_1)
-    public void media1Pop() {
+    @OnClick(R.id.workout_running_media_ctrl_2)
+    public void media2Pop() {
         if (isShowView) {
             if (isAnimRightView) {
                 isShowView = false;
@@ -203,9 +201,9 @@ public class BaseRunningActivity extends BaseFragmentActivity {
     private void animRightView(final boolean translation) {
         PropertyValuesHolder translationX = null;
         if (translation) {
-            translationX = PropertyValuesHolder.ofFloat("translationX", 0, -media1.getWidth());
+            translationX = PropertyValuesHolder.ofFloat("translationX", rightLayout.getWidth() - mediaCtrlImage.getWidth(), 0);
         } else {
-            translationX = PropertyValuesHolder.ofFloat("translationX", -media1.getWidth(), 0);
+            translationX = PropertyValuesHolder.ofFloat("translationX", 0, rightLayout.getWidth() - mediaCtrlImage.getWidth());
         }
         ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(rightLayout, translationX);
         animator.setDuration(1000);
@@ -213,16 +211,16 @@ public class BaseRunningActivity extends BaseFragmentActivity {
             @Override
             public void onAnimationStart(Animator animator) {
                 if (translation) {
-                    media1.setVisibility(View.VISIBLE);
-                    media2.setVisibility(View.GONE);
+                    mediaView.setVisibility(View.VISIBLE);
+                    mediaCtrlImage.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onAnimationEnd(Animator animator) {
                 if (!translation) {
-                    media1.setVisibility(View.INVISIBLE);
-                    media2.setVisibility(View.VISIBLE);
+                    mediaView.setVisibility(View.INVISIBLE);
+                    mediaCtrlImage.setVisibility(View.VISIBLE);
                 }
             }
 

@@ -10,8 +10,6 @@
     <string name="workout_mode_fitness">FITNESS TESTİ</string>
     <string name="workout_mode_user">KULLANICI PROGRAMI</string>
     <string name="media_you">YouTube</string>
-    <string name="media_chrome">Chrome</string>
-    <string name="media_face">Facebook</string>
     <string name="media_music">MUSIC</string>
     <string name="media_video">VIDEO</string>
     <string name="media_insta">Instagram</string>
@@ -194,4 +192,9 @@
     <string name="vr_j_2">Hallstatt</string>
     <string name="vr_k_1">İngiliz</string>
     <string name="vr_k_2">Vadi boyunca yeşil</string>
+    <string name="media_weibo">微博</string>
+    <string name="media_i71">愛奇藝</string>
+    <string name="media_face">Facebook</string>
+    <string name="media_chrome">Chrome</string>
+    <string name="media_bai">Bai 百度</string>
 </resources>

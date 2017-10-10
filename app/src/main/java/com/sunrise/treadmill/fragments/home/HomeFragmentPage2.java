@@ -13,10 +13,6 @@ public class HomeFragmentPage2 extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            return R.layout.fragment_home_page_2_zh;
-        } else {
-            return R.layout.fragment_home_page_2;
-        }
+        return R.layout.fragment_home_page_2;
     }
 }

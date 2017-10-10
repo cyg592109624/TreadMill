@@ -11,7 +11,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:scaleType="fitXY"
-        android:src="@drawable/btn_home_settings"
+        android:src="@drawable/btn_home_setting"
         app:layout_constraintBottom_toTopOf="@+id/home_viewPage"
         app:layout_constraintRight_toLeftOf="@+id/home_btn_language"
         app:layout_constraintTop_toTopOf="parent" />

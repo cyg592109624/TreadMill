@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity;
+import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity_zh;
 import com.sunrise.treadmill.base.BaseActivity;
 import com.sunrise.treadmill.interfaces.OnGenderReturn;
 import com.sunrise.treadmill.interfaces.OnKeyBoardReturn;
@@ -89,7 +90,6 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     public void genderReturn(int gender) {
 
     }
-
 
     @Override
     public void onKeyBoardEnter(String result) {
@@ -174,7 +174,12 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
 
     @OnClick({R.id.workout_mode_start_1})
     public void beginWorkOut() {
-        Intent intent = new Intent(HillActivity.this, HillRunningActivity.class);
+        Intent intent = new Intent();
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+            intent.setClass(HillActivity.this, HillRunningActivity_zh.class);
+        } else {
+            intent.setClass(HillActivity.this, HillRunningActivity.class);
+        }
         startActivity(intent);
     }
 
