@@ -131,6 +131,8 @@
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" >
         </activity>
+
+        <service android:name=".services.workoutrunning.FloatWindowService"/>
     </application>
 
 </manifest>
