@@ -5,6 +5,8 @@ import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.os.Binder;
 import android.os.IBinder;
@@ -24,8 +26,10 @@ import java.util.List;
 
 public class FloatWindowService extends Service implements FloatWindowBottomCallBack {
     private final int FloatWindowNotification = 62111;
+    private String workOutRunningActivity = "";
 
     private WindowManager mWindowManager;
+    public PackageManager packageManager;
 
     private WindowManager.LayoutParams headParams;
     private WindowManager.LayoutParams bottomParams;
@@ -53,9 +57,16 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     }
 
     @Override
+    public void unbindService(ServiceConnection conn) {
+        super.unbindService(conn);
+        onDestroy();
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
         mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        packageManager=getApplicationContext().getPackageManager();
         stageService();
         initWindowParams();
         initFloatWindow();
@@ -65,7 +76,6 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     public void onDestroy() {
         super.onDestroy();
         stopForeground(true);
-        hideFloatWindow();
     }
 
 
@@ -81,29 +91,43 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     @Override
     public void onWindyClick() {
-        //尝试再这里唤醒activity
-        List<ActivityManager.RunningTaskInfo> list = mActivityManager.getRunningTasks(10);
-        for (ActivityManager.RunningTaskInfo running : list) {
-            if (running.baseActivity.getClassName().equals("com.sunrise.reapp.MainActivity4")) {
-                mActivityManager.moveTaskToFront(running.id, ActivityManager.MOVE_TASK_WITH_HOME);
-            }
-        }
+        //尝试再这里唤醒activity 7.0这里有问题
+//        List<ActivityManager.AppTask> list = mActivityManager.getAppTasks();
+//        for (ActivityManager.AppTask running : list) {
+//            System.out.println(running.getTaskInfo().baseActivity.getClassName());
+//          if (running.baseActivity.getClassName().equals(workOutRunningActivity)) {
+//               mActivityManager.moveTaskToFront(running.pid, ActivityManager.MOVE_TASK_WITH_HOME);
+//           }
+//        }
+        packageManager.getLaunchIntentForPackage(workOutRunningActivity);
+
     }
+
+    private boolean isShowView = false;
 
     public void showFloatWindow() {
         if (floatWindowHead != null && floatWindowBottom != null) {
-            mWindowManager.addView(floatWindowHead, headParams);
-            mWindowManager.addView(floatWindowBottom, bottomParams);
+            if (!isShowView) {
+                isShowView = true;
+                mWindowManager.addView(floatWindowHead, headParams);
+                mWindowManager.addView(floatWindowBottom, bottomParams);
+            }
         }
     }
 
     public void hideFloatWindow() {
         if (floatWindowHead != null && floatWindowBottom != null) {
-            mWindowManager.removeView(floatWindowHead);
-            mWindowManager.removeView(floatWindowBottom);
+            if (!isShowView) {
+                isShowView = false;
+                mWindowManager.removeView(floatWindowHead);
+                mWindowManager.removeView(floatWindowBottom);
+            }
         }
     }
 
+    public void setRunningActivityName(String activityName) {
+        this.workOutRunningActivity = activityName;
+    }
 
     /**
      * 切为前台服务

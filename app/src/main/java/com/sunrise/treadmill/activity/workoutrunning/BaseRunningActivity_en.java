@@ -18,6 +18,10 @@ import butterknife.OnClick;
  */
 
 public class BaseRunningActivity_en extends BaseRunningActivity {
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_workout_running;
+    }
 
     @Override
     protected void setTextStyle() {

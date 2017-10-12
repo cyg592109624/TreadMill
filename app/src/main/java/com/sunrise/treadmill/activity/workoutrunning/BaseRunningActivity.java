@@ -3,6 +3,12 @@ package com.sunrise.treadmill.activity.workoutrunning;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.os.IBinder;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -16,6 +22,8 @@ import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.dialog.workoutrunning.CountDownDialog;
 import com.sunrise.treadmill.dialog.workoutrunning.HillRunningPauseDialog;
+import com.sunrise.treadmill.interfaces.FloatServiceBinder;
+import com.sunrise.treadmill.services.workoutrunning.FloatWindowService;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.views.LevelView;
@@ -30,7 +38,7 @@ import butterknife.OnClick;
  * Created by ChuHui on 2017/9/30.
  */
 
-public class BaseRunningActivity extends BaseFragmentActivity {
+public class BaseRunningActivity extends BaseFragmentActivity implements FloatServiceBinder {
 
     @BindView(R.id.workout_running_head_level_value)
     TextView levelValue;
@@ -67,6 +75,22 @@ public class BaseRunningActivity extends BaseFragmentActivity {
     private int parentHeight;
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
+    public PackageManager packageManager;
+
+    public FloatWindowService floatWindowServer;
+    private FloatServiceBinder serviceBinderFinish;
+    private ServiceConnection floatWindowConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            serviceBinderFinish.onBindSucceed(componentName, iBinder);
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            serviceBinderFinish.onServiceDisconnected(componentName);
+        }
+    };
 
     @Override
     public int getLayoutId() {
@@ -79,6 +103,16 @@ public class BaseRunningActivity extends BaseFragmentActivity {
 
     @Override
     protected void init() {
+        serviceBinderFinish = BaseRunningActivity.this;
+        packageManager=getApplicationContext().getPackageManager();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(BaseRunningActivity.this, FloatWindowService.class);
+                bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
+            }
+        }).start();
+
         showCountDownDialog();
         parentWidth = getWindowManager().getDefaultDisplay().getWidth();
         parentHeight = getWindowManager().getDefaultDisplay().getHeight();
@@ -117,10 +151,32 @@ public class BaseRunningActivity extends BaseFragmentActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(floatWindowConnection);
+    }
+
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         setUpLevelView();
     }
+
+    @Override
+    public void onBindSucceed(ComponentName componentName, IBinder iBinder) {
+        if (iBinder != null) {
+            floatWindowServer = ((FloatWindowService.FloatBinder) iBinder).getService();
+            String activityName = getPackageName() + "." + getLocalClassName();
+            System.out.println(activityName);
+            floatWindowServer.setRunningActivityName(activityName);
+        }
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName componentName) {
+
+    }
+
 
     private boolean isShowView = false;
     private boolean isAnimLeftView = false;
@@ -251,4 +307,6 @@ public class BaseRunningActivity extends BaseFragmentActivity {
         CountDownDialog downDialog = new CountDownDialog();
         downDialog.show(fragmentManager, CountDownDialog.TAG);
     }
+
+
 }

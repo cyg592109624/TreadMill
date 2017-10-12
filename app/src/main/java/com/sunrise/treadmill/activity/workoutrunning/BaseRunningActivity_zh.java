@@ -3,6 +3,7 @@ package com.sunrise.treadmill.activity.workoutrunning;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -32,6 +33,10 @@ import butterknife.OnClick;
 
 public class BaseRunningActivity_zh extends BaseRunningActivity {
     @Override
+    public int getLayoutId() {
+        return R.layout.activity_workout_running_zh;
+    }
+    @Override
     protected void setTextStyle() {
         super.setTextStyle();
         List<TextView> txtList = new ArrayList<>();
@@ -56,9 +61,17 @@ public class BaseRunningActivity_zh extends BaseRunningActivity {
             R.id.workout_running_media_av, R.id.workout_running_media_mp3, R.id.workout_running_media_mp4,
             R.id.workout_running_media_screen_mirroring})
     public void mediaClick(View view) {
-        switch (view.getId()){
+        Intent intent = null;
+        switch (view.getId()) {
             default:
                 break;
+            case R.id.workout_running_media_mp3:
+                intent = packageManager.getLaunchIntentForPackage("com.android.mediacenter");
+                break;
+        }
+        if (intent != null) {
+            startActivity(intent);
+            floatWindowServer.showFloatWindow();
         }
         media2Pop();
     }
