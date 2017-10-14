@@ -1,12 +1,15 @@
 package com.sunrise.treadmill.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by ChuHui on 2017/9/27.
  */
 
-public class WorkOut {
+public class WorkOut implements Parcelable {
     private int workOutMode;
     private String workOutModeName;
     /**
@@ -22,6 +25,31 @@ public class WorkOut {
     private int targetHR;
     private List<Level> levelList;
     private Level currentLevel;
+
+    protected WorkOut(Parcel in) {
+        workOutMode = in.readInt();
+        workOutModeName = in.readString();
+        gender = in.readInt();
+        age = in.readInt();
+        weight = in.readInt();
+        time = in.readInt();
+        distance = in.readInt();
+        hrc60 = in.readInt();
+        htc80 = in.readInt();
+        targetHR = in.readInt();
+    }
+
+    public static final Creator<WorkOut> CREATOR = new Creator<WorkOut>() {
+        @Override
+        public WorkOut createFromParcel(Parcel in) {
+            return new WorkOut(in);
+        }
+
+        @Override
+        public WorkOut[] newArray(int size) {
+            return new WorkOut[size];
+        }
+    };
 
     public int getWorkOutMode() {
         return workOutMode;
@@ -121,5 +149,26 @@ public class WorkOut {
 
     public void setCurrentLevel(Level currentLevel) {
         this.currentLevel = currentLevel;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(workOutMode);
+        parcel.writeString(workOutModeName);
+        parcel.writeInt(gender);
+        parcel.writeInt(age);
+        parcel.writeInt(weight);
+        parcel.writeInt(time);
+        parcel.writeInt(distance);
+        parcel.writeInt(hrc60);
+        parcel.writeInt(htc80);
+        parcel.writeInt(targetHR);
+        //34651321
     }
 }

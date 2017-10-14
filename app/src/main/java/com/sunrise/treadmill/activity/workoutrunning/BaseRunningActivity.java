@@ -75,10 +75,12 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     private int parentHeight;
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    public PackageManager packageManager;
+    public PackageManager packageManager  ;
 
     public FloatWindowService floatWindowServer;
+
     private FloatServiceBinder serviceBinderFinish;
+
     private ServiceConnection floatWindowConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -104,24 +106,18 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     @Override
     protected void init() {
         serviceBinderFinish = BaseRunningActivity.this;
-        packageManager=getApplicationContext().getPackageManager();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(BaseRunningActivity.this, FloatWindowService.class);
                 bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
+                packageManager = getApplicationContext().getPackageManager();
             }
         }).start();
-
         showCountDownDialog();
         parentWidth = getWindowManager().getDefaultDisplay().getWidth();
         parentHeight = getWindowManager().getDefaultDisplay().getHeight();
 
-        levelView.setColumnMargin(1f);
-        levelView.calcLength();
-        levelView.setBuoyBitmap(15, 11);
-        levelView.setHintText(getResources().getString(R.string.workout_mode_hill));
-        levelView.setSlideEnable(false);
     }
 
     @Override
@@ -151,6 +147,14 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (floatWindowServer != null) {
+            floatWindowServer.toggleFloatWindow();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         unbindService(floatWindowConnection);
@@ -166,9 +170,6 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     public void onBindSucceed(ComponentName componentName, IBinder iBinder) {
         if (iBinder != null) {
             floatWindowServer = ((FloatWindowService.FloatBinder) iBinder).getService();
-            String activityName = getPackageName() + "." + getLocalClassName();
-            System.out.println(activityName);
-            floatWindowServer.setRunningActivityName(activityName);
         }
     }
 
@@ -294,11 +295,11 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     }
 
     private void setUpLevelView() {
-        levelView.setTgLevel(4);
-        levelView.setColumn(4, 11);
-        levelView.setTgLevel(4);
-        levelView.setColumn(4, 11);
-        levelView.reFlashView();
+        levelView.setColumnMargin(1f);
+        levelView.calcLength();
+        levelView.setBuoyBitmap(15, 11);
+        levelView.setHintText(getResources().getString(R.string.workout_mode_hill));
+        levelView.setSlideEnable(false);
         levelView.setTgLevel(4);
         levelView.setColumn(4, 11);
     }

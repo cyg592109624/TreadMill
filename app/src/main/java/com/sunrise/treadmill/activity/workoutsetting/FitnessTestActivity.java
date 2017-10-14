@@ -14,6 +14,8 @@ import com.sunrise.treadmill.views.MyGenderView;
 import com.sunrise.treadmill.views.MyKeyBoardView;
 import com.sunrise.treadmill.views.MyWorkOutHead;
 
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +49,8 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
+        WeakReference<List<TextView>> ws = new WeakReference<List<TextView>>(txtList);
+
         txtList.add((TextView) headView.findViewById(R.id.workout_head_mode));
         txtList.add((TextView) headView.findViewById(R.id.workout_head_hint));
 
@@ -63,6 +67,7 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(this));
         }
+        ws.clear();
     }
     @Override
     protected void init() {

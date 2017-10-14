@@ -4,6 +4,9 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -32,10 +35,30 @@ import butterknife.OnClick;
  */
 
 public class BaseRunningActivity_zh extends BaseRunningActivity {
+    private static final int OPEN_APP = 10001;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Intent intent = null;
+            switch (msg.what) {
+                case OPEN_APP:
+                    intent = msg.getData().getParcelable("Intent");
+                    break;
+            }
+            if (intent != null) {
+                startActivity(intent);
+                floatWindowServer.toggleFloatWindow();
+                media2Pop();
+            }
+        }
+    };
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_workout_running_zh;
     }
+
     @Override
     protected void setTextStyle() {
         super.setTextStyle();
@@ -60,19 +83,25 @@ public class BaseRunningActivity_zh extends BaseRunningActivity {
     @OnClick({R.id.workout_running_media_bai, R.id.workout_running_media_weibo, R.id.workout_running_media_i71,
             R.id.workout_running_media_av, R.id.workout_running_media_mp3, R.id.workout_running_media_mp4,
             R.id.workout_running_media_screen_mirroring})
-    public void mediaClick(View view) {
-        Intent intent = null;
-        switch (view.getId()) {
-            default:
-                break;
-            case R.id.workout_running_media_mp3:
-                intent = packageManager.getLaunchIntentForPackage("com.android.mediacenter");
-                break;
-        }
-        if (intent != null) {
-            startActivity(intent);
-            floatWindowServer.showFloatWindow();
-        }
-        media2Pop();
+    public void mediaClick(final View view) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message msg = Message.obtain();
+                Bundle bundle = new Bundle();
+                Intent intent = null;
+                switch (view.getId()) {
+                    default:
+                        break;
+                    case R.id.workout_running_media_mp3:
+                        msg.what = OPEN_APP;
+                        intent = packageManager.getLaunchIntentForPackage("com.android.mediacenter");
+                        bundle.putParcelable("Intent", intent);
+                        msg.setData(bundle);
+                        break;
+                }
+                mHandler.sendMessage(msg);
+            }
+        }).start();
     }
 }

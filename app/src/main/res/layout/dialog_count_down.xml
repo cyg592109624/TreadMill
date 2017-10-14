@@ -7,7 +7,6 @@
     <ImageView
         android:id="@+id/workout_running_dialog_count_down_img"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/img_sportmode_countdown_1"/>
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

@@ -21,15 +21,16 @@ import com.sunrise.treadmill.views.FloatWindowHead;
 import java.util.List;
 
 /**
- * Created by ChuHui on 2017/10/11.
+ * Created by ChuHui on 2017/10/14.
  */
 
 public class FloatWindowService extends Service implements FloatWindowBottomCallBack {
+
     private final int FloatWindowNotification = 62111;
-    private String workOutRunningActivity = "";
+    private String workOutRunningActivity = "com.sunrise.treadmill.activity.home.HomeActivity";
 
     private WindowManager mWindowManager;
-    public PackageManager packageManager;
+    private ActivityManager mActivityManager;
 
     private WindowManager.LayoutParams headParams;
     private WindowManager.LayoutParams bottomParams;
@@ -37,7 +38,6 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     private FloatWindowHead floatWindowHead;
     private FloatWindowBottom floatWindowBottom;
 
-    private ActivityManager mActivityManager;
 
     private final IBinder floatBinder = new FloatBinder();
 
@@ -66,7 +66,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     public void onCreate() {
         super.onCreate();
         mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        packageManager=getApplicationContext().getPackageManager();
+        mWindowManager = (WindowManager) getApplication().getSystemService(getApplication().WINDOW_SERVICE);
         stageService();
         initWindowParams();
         initFloatWindow();
@@ -91,37 +91,31 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     @Override
     public void onWindyClick() {
-        //尝试再这里唤醒activity 7.0这里有问题
-//        List<ActivityManager.AppTask> list = mActivityManager.getAppTasks();
-//        for (ActivityManager.AppTask running : list) {
-//            System.out.println(running.getTaskInfo().baseActivity.getClassName());
-//          if (running.baseActivity.getClassName().equals(workOutRunningActivity)) {
-//               mActivityManager.moveTaskToFront(running.pid, ActivityManager.MOVE_TASK_WITH_HOME);
-//           }
-//        }
-        packageManager.getLaunchIntentForPackage(workOutRunningActivity);
-
-    }
-
-    private boolean isShowView = false;
-
-    public void showFloatWindow() {
-        if (floatWindowHead != null && floatWindowBottom != null) {
-            if (!isShowView) {
-                isShowView = true;
-                mWindowManager.addView(floatWindowHead, headParams);
-                mWindowManager.addView(floatWindowBottom, bottomParams);
+        List<ActivityManager.RunningTaskInfo> list = mActivityManager.getRunningTasks(10);
+        String cutTaskApp = "";
+        for (ActivityManager.RunningTaskInfo running : list) {
+            cutTaskApp = running.baseActivity.getClassName();
+            if (cutTaskApp.equals(workOutRunningActivity)) {
+                mActivityManager.moveTaskToFront(running.id, ActivityManager.MOVE_TASK_WITH_HOME);
             }
         }
     }
 
-    public void hideFloatWindow() {
+    private boolean isShowView = false;
+
+    /**
+     * 自动判断当前应该添加还是删除悬浮窗口
+     */
+    public void toggleFloatWindow() {
         if (floatWindowHead != null && floatWindowBottom != null) {
             if (!isShowView) {
-                isShowView = false;
+                mWindowManager.addView(floatWindowHead, headParams);
+                mWindowManager.addView(floatWindowBottom, bottomParams);
+            } else {
                 mWindowManager.removeView(floatWindowHead);
                 mWindowManager.removeView(floatWindowBottom);
             }
+            isShowView = !isShowView;
         }
     }
 
@@ -147,8 +141,6 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
      * 设置LayoutParams
      */
     private void initWindowParams() {
-        mWindowManager = (WindowManager) getApplication().getSystemService(getApplication().WINDOW_SERVICE);
-
         headParams = new WindowManager.LayoutParams();
         bottomParams = new WindowManager.LayoutParams();
         // 设置window type
@@ -201,5 +193,4 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         floatWindowBottom.setLayoutParams(bottomParams);
         floatWindowBottom.setWindowBottomCallBack(this);
     }
-
 }

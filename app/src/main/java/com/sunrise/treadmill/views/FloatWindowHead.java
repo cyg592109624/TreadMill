@@ -39,9 +39,15 @@ public class FloatWindowHead extends ConstraintLayout {
 
     public void levelChange(int i) {
         curLevel += i;
-        if (curLevel > 30 | curLevel < 0) {
+        if (curLevel > 30) {
+            curLevel = 30;
+            return;
+        }
+        if (curLevel < 0) {
+            curLevel = 0;
             return;
         }
         levelValue.setText(curLevel + "");
     }
+
 }

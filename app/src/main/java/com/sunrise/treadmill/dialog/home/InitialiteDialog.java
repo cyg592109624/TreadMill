@@ -2,7 +2,10 @@ package com.sunrise.treadmill.dialog.home;
 
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 import com.sunrise.treadmill.R;
@@ -19,29 +22,10 @@ public class InitialiteDialog extends BaseDialogFragment {
     public static final String TAG = "InitialiteDialog";
 
     private OnInitialReturn onInitialReturn;
-
-    private int animRunningTime = 5000;
-
-    private static final int msg_clearAnim = 6001;
+    private boolean isShowing = false;
 
     @BindView(R.id.dialog_home_inititalite_img)
     ImageView img;
-
-    private Handler mHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case msg_clearAnim:
-                    img.clearAnimation();
-                    dismiss();
-                    onInitialReturn.onInitialResult("");
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
 
     @Override
     public int getLayoutId() {
@@ -51,9 +35,37 @@ public class InitialiteDialog extends BaseDialogFragment {
     @Override
     public void init() {
         onInitialReturn = (OnInitialReturn) getActivity();
-        img.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.home_dialog_initialite));
-        mHandler.sendEmptyMessageDelayed(msg_clearAnim, animRunningTime);
+        animal();
     }
 
+    public void animal() {
+        if (!isShowing) {
+            isShowing = true;
+            Animation rotateAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.home_dialog_initialite);
+            rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
 
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    isShowing = false;
+                    dismiss();
+                    onInitialReturn.onInitialResult("");
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            img.startAnimation(rotateAnimation);
+        }
+    }
+
+    @Override
+    public void show(FragmentManager manager, String tag) {
+        super.show(manager, tag);
+    }
 }

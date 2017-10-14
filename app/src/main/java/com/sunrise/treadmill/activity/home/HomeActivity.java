@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.activity.home;
 
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Intent;
@@ -50,6 +51,19 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
+    private static final int INIT_FRAGMENT = 20001;
+
+    private android.os.Handler mHandler = new android.os.Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == INIT_FRAGMENT) {
+                viewPager.setAdapter(fragmentAdapter);
+                viewPager.setCurrentItem(0);
+                viewPager.setOnPageChangeListener(HomeActivity.this);
+            }
+        }
+    };
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_home;
@@ -60,6 +74,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     public void onInitialResult(String result) {
 //        Intent intent = new Intent(HomeActivity_zh.this, NfcActivity.class);
 //        startActivity(intent);
+        System.gc();
     }
 
     @Override
@@ -102,20 +117,22 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     protected void init() {
         InitialiteDialog initialiteDialog = new InitialiteDialog();
         initialiteDialog.show(fragmentManager, InitialiteDialog.TAG);
-        List<Fragment> list = new ArrayList<Fragment>();
-        list.add(new HomeFragmentPage1());
-        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            list.add(new HomeFragmentPage2_zh());
-            list.add(new HomeFragmentPage3_zh());
-        } else {
-            list.add(new HomeFragmentPage2());
-            list.add(new HomeFragmentPage3());
-        }
-
-        fragmentAdapter = new HomeFragmentAdapter(fragmentManager, list);
-        viewPager.setAdapter(fragmentAdapter);
-        viewPager.setCurrentItem(0);
-        viewPager.setOnPageChangeListener(this);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Fragment> list = new ArrayList<Fragment>();
+                list.add(new HomeFragmentPage1());
+                if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+                    list.add(new HomeFragmentPage2_zh());
+                    list.add(new HomeFragmentPage3_zh());
+                } else {
+                    list.add(new HomeFragmentPage2());
+                    list.add(new HomeFragmentPage3());
+                }
+                fragmentAdapter = new HomeFragmentAdapter(fragmentManager, list);
+                mHandler.sendEmptyMessage(INIT_FRAGMENT);
+            }
+        }).start();
 
         logo.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
