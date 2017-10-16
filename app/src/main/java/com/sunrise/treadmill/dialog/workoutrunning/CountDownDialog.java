@@ -1,15 +1,13 @@
 package com.sunrise.treadmill.dialog.workoutrunning;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.AnimationDrawable;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseDialogFragment;
-import com.sunrise.treadmill.utils.BitMapUtils;
-import com.sunrise.treadmill.utils.ImageUtils;
+import com.sunrise.treadmill.utils.AnimationsContainer;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 
@@ -30,24 +28,15 @@ public class CountDownDialog extends BaseDialogFragment {
 
     @Override
     protected void init() {
-//        reSetBitmap();
-        img.setImageResource(R.drawable.img_sportmode_countdown_1);
+        final AnimationsContainer.FramesSequenceAnimation animation = AnimationsContainer.getInstance(R.array.count_down, 1000).createProgressDialogAnim(img);
+        animation.start();
+        animation.setOnAnimStopListener((AnimationsContainer.OnAnimationStoppedListener) getActivity());
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                animation.stop();
+                dismiss();
+            }
+        }, 4000);
     }
-
-    private void reSetBitmap() {
-        try {
-//            Glide.with(getContext()).load(R.drawable.img_sportmode_countdown_1).into(img);
-//            Thread.sleep(1000);
-//            Glide.with(this).load(R.drawable.img_sportmode_countdown_2).into(img);
-//            Thread.sleep(1000);
-//            Glide.with(this).load(R.drawable.img_sportmode_countdown_3).into(img);
-//            Thread.sleep(1000);
-//            Glide.with(this).load(R.drawable.img_sportmode_countdown_4).into(img);
-//            Thread.sleep(1000);
-            dismiss();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }

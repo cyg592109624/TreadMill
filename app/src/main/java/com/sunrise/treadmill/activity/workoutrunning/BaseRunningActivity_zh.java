@@ -1,33 +1,20 @@
 package com.sunrise.treadmill.activity.workoutrunning;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.base.BaseFragmentActivity;
-import com.sunrise.treadmill.dialog.workoutrunning.CountDownDialog;
-import com.sunrise.treadmill.dialog.workoutrunning.HillRunningPauseDialog;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.LevelView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 
 /**

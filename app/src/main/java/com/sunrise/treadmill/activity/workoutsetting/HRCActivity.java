@@ -290,5 +290,6 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
     @OnClick(R.id.bottom_logo_tab_home)
     public void onBackHome() {
         finishActivity();
+        onDestroy();
     }
 }

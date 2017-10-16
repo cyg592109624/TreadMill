@@ -127,7 +127,7 @@ public class LanguageDialog extends BaseDialogFragment {
             SPUtils.put(getContext(), Constant.appLanguage, GlobalSetting.AppLanguage);
             dialogFragmentReturn.onLanguageReturn(isChange);
         } else {
-            dialogFragmentReturn.onLanguageReturn(false);
+            dialogFragmentReturn.onLanguageReturn(isChange);
         }
         dismiss();
 

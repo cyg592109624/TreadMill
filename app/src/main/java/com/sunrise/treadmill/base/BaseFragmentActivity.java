@@ -49,6 +49,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 
     public void finishActivity() {
         amUtils.finishActivity();
+        System.gc();
     }
 
     /**

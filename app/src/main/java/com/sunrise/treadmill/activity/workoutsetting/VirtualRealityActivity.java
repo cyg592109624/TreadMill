@@ -175,6 +175,7 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
     @OnClick(R.id.bottom_logo_tab_home)
     public void onBackHome() {
         finishActivity();
+        onDestroy();
     }
 
     @OnClick(R.id.dialog_workout_vr_edit_time)

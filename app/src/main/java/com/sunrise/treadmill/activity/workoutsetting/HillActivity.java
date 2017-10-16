@@ -186,5 +186,6 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     @OnClick(R.id.bottom_logo_tab_home)
     public void onBackHome() {
         finishActivity();
+        onDestroy();
     }
 }

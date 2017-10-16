@@ -40,7 +40,6 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        bind.unbind();
     }
     protected void setTextStyle() {
 
@@ -50,6 +49,7 @@ public abstract class BaseActivity extends Activity {
     }
 
     public void finishActivity(){
+        bind.unbind();
         amUtils.finishActivity();
     }
 

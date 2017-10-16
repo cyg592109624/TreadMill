@@ -19,4 +19,6 @@ public interface FloatWindowBottomCallBack {
      * 改变风量
      */
     void onWindyClick();
+
+    void onStopClick();
 }

@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.activity.home;
 
+import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,6 +26,7 @@ import com.sunrise.treadmill.interfaces.HomeLanguageDialogReturn;
 import com.sunrise.treadmill.interfaces.OnInitialReturn;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
+import com.sunrise.treadmill.utils.ThreadPoolUtils;
 import com.sunrise.treadmill.views.LogoImageView;
 
 import java.util.ArrayList;
@@ -51,38 +53,50 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
-    private static final int INIT_FRAGMENT = 20001;
-
-    private android.os.Handler mHandler = new android.os.Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == INIT_FRAGMENT) {
-                viewPager.setAdapter(fragmentAdapter);
-                viewPager.setCurrentItem(0);
-                viewPager.setOnPageChangeListener(HomeActivity.this);
-            }
-        }
-    };
-
     @Override
     public int getLayoutId() {
         return R.layout.activity_home;
     }
 
-
     @Override
-    public void onInitialResult(String result) {
-//        Intent intent = new Intent(HomeActivity_zh.this, NfcActivity.class);
-//        startActivity(intent);
-        System.gc();
+    protected void init() {
+        ThreadPoolUtils.runTaskOnThread(new Runnable() {
+            @Override
+            public void run() {
+                List<Fragment> list = new ArrayList<Fragment>();
+                list.add(new HomeFragmentPage1());
+                if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+                    list.add(new HomeFragmentPage2_zh());
+                    list.add(new HomeFragmentPage3_zh());
+                } else {
+                    list.add(new HomeFragmentPage2());
+                    list.add(new HomeFragmentPage3());
+                }
+                fragmentAdapter = new HomeFragmentAdapter(fragmentManager, list);
+                viewPager.setAdapter(fragmentAdapter);
+                viewPager.setCurrentItem(0);
+                viewPager.setOnPageChangeListener(HomeActivity.this);
+            }
+        });
+
+        logo.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, FactoriesActivity.class);
+                startActivity(intent);
+                return true;
+            }
+        });
     }
 
+    private int loadAtOnce = 1;
+
     @Override
-    public void onLanguageReturn(boolean isChange) {
-        if (isChange) {
-            Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
-            finishActivity();
-            startActivity(intent);
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (loadAtOnce == 1) {
+            showInitialDialog();
+            loadAtOnce += 1;
         }
     }
 
@@ -105,43 +119,26 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-
     }
 
     @Override
-    protected void init() {
-        InitialiteDialog initialiteDialog = new InitialiteDialog();
-        initialiteDialog.show(fragmentManager, InitialiteDialog.TAG);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                List<Fragment> list = new ArrayList<Fragment>();
-                list.add(new HomeFragmentPage1());
-                if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-                    list.add(new HomeFragmentPage2_zh());
-                    list.add(new HomeFragmentPage3_zh());
-                } else {
-                    list.add(new HomeFragmentPage2());
-                    list.add(new HomeFragmentPage3());
-                }
-                fragmentAdapter = new HomeFragmentAdapter(fragmentManager, list);
-                mHandler.sendEmptyMessage(INIT_FRAGMENT);
-            }
-        }).start();
+    public void onInitialResult(String result) {
+//        Intent intent = new Intent(HomeActivity_zh.this, NfcActivity.class);
+//        startActivity(intent);
+        System.gc();
+    }
 
-        logo.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, FactoriesActivity.class);
-                startActivity(intent);
-                return true;
-            }
-        });
+    @Override
+    public void onLanguageReturn(boolean isChange) {
+        if (isChange) {
+            Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+            finishActivity();
+            startActivity(intent);
+        }
     }
 
     @OnClick(R.id.home_btn_language)
@@ -154,6 +151,16 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     public void toSettings() {
         Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
         startActivity(intent);
+    }
+
+    private void showInitialDialog() {
+        ThreadPoolUtils.runTaskOnThread(new Runnable() {
+            @Override
+            public void run() {
+                InitialiteDialog initialiteDialog = new InitialiteDialog();
+                initialiteDialog.show(fragmentManager, InitialiteDialog.TAG);
+            }
+        });
     }
 
 }

@@ -4,9 +4,10 @@
     android:layout_height="match_parent"
     android:background="@mipmap/bk_pop"
     android:gravity="center">
+
     <ImageView
         android:id="@+id/workout_running_dialog_count_down_img"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

@@ -62,23 +62,22 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
         String appLanguage = (String) SPUtils.get(getApplicationContext(), Constant.appLanguage, LanguageUtils.en_US);
         //获取当前设置
         String nowAppLanguage = LanguageUtils.getAppLanguage(getResources());
-        if (!appLanguage.equals(nowAppLanguage)) {
-            String[] he = appLanguage.split("_");
-            SPUtils.put(getApplicationContext(), Constant.appLanguage, appLanguage);
-            LanguageUtils.updateLanguage(LanguageUtils.buildLocale(he[0], he[1]), getResources());
-            Intent intent = new Intent(LogoActivity.this, LogoActivity.class);
+        Intent intent = new Intent();
+        try {
+            if (appLanguage.equals(nowAppLanguage)) {
+                intent.setClass(LogoActivity.this, HomeActivity.class);
+            } else {
+                GlobalSetting.AppLanguage = appLanguage;
+                String[] he = appLanguage.split("_");
+                LanguageUtils.updateLanguage(LanguageUtils.buildLocale(he[0], he[1]), getResources());
+                intent.setClass(LogoActivity.this, LogoActivity.class);
+                Thread.sleep(300);
+            }
             finishActivity();
             startActivity(intent);
-        } else {
-            try {
-                GlobalSetting.AppLanguage = LanguageUtils.getAppLanguage(getResources());
-                Thread.sleep(1000);
-                Intent intent = new Intent(LogoActivity.this, HomeActivity.class);
-                finishActivity();
-                startActivity(intent);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            onDestroy();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

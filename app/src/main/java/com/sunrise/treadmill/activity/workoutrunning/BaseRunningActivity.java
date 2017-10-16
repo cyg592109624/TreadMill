@@ -21,11 +21,13 @@ import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.dialog.workoutrunning.CountDownDialog;
-import com.sunrise.treadmill.dialog.workoutrunning.HillRunningPauseDialog;
+import com.sunrise.treadmill.dialog.workoutrunning.PauseDialog;
 import com.sunrise.treadmill.interfaces.FloatServiceBinder;
 import com.sunrise.treadmill.services.workoutrunning.FloatWindowService;
+import com.sunrise.treadmill.utils.AnimationsContainer;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
+import com.sunrise.treadmill.utils.ThreadPoolUtils;
 import com.sunrise.treadmill.views.LevelView;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ import butterknife.OnClick;
  * Created by ChuHui on 2017/9/30.
  */
 
-public class BaseRunningActivity extends BaseFragmentActivity implements FloatServiceBinder {
+public class BaseRunningActivity extends BaseFragmentActivity implements FloatServiceBinder, AnimationsContainer.OnAnimationStoppedListener {
 
     @BindView(R.id.workout_running_head_level_value)
     TextView levelValue;
@@ -74,8 +76,8 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     private int parentWidth;
     private int parentHeight;
 
-    private FragmentManager fragmentManager = getSupportFragmentManager();
-    public PackageManager packageManager  ;
+    private FragmentManager fragmentManager;
+    public PackageManager packageManager;
 
     public FloatWindowService floatWindowServer;
 
@@ -85,7 +87,6 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             serviceBinderFinish.onBindSucceed(componentName, iBinder);
-
         }
 
         @Override
@@ -106,24 +107,16 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     @Override
     protected void init() {
         serviceBinderFinish = BaseRunningActivity.this;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(BaseRunningActivity.this, FloatWindowService.class);
-                bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
-                packageManager = getApplicationContext().getPackageManager();
-            }
-        }).start();
-        showCountDownDialog();
+        packageManager = getApplicationContext().getPackageManager();
+        fragmentManager = getSupportFragmentManager();
+        bindServer();
         parentWidth = getWindowManager().getDefaultDisplay().getWidth();
         parentHeight = getWindowManager().getDefaultDisplay().getHeight();
-
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<>();
-
         txtList.add((TextView) findViewById(R.id.workout_running_head_level));
         txtList.add((TextView) findViewById(R.id.workout_running_head_time));
         txtList.add((TextView) findViewById(R.id.workout_running_head_distance));
@@ -160,16 +153,23 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         unbindService(floatWindowConnection);
     }
 
+    private int loadAtOnce = 1;
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        setUpLevelView();
+        if (loadAtOnce == 1) {
+            setUpLevelView();
+            showCountDownDialog();
+            loadAtOnce += 1;
+        }
     }
 
     @Override
     public void onBindSucceed(ComponentName componentName, IBinder iBinder) {
         if (iBinder != null) {
             floatWindowServer = ((FloatWindowService.FloatBinder) iBinder).getService();
+            floatWindowServer.setRunningActivityName(getPackageName() + "." + getLocalClassName());
         }
     }
 
@@ -178,6 +178,10 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     }
 
+    @Override
+    public void AnimationStopped() {
+
+    }
 
     private boolean isShowView = false;
     private boolean isAnimLeftView = false;
@@ -224,8 +228,8 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @OnClick(R.id.workout_running_stop)
     public void stopSport() {
-        HillRunningPauseDialog pauseDialog = new HillRunningPauseDialog();
-        pauseDialog.show(fragmentManager, HillRunningPauseDialog.TAG);
+        PauseDialog pauseDialog = new PauseDialog();
+        pauseDialog.show(fragmentManager, PauseDialog.TAG);
     }
 
     @OnClick({R.id.workout_running_level_up, R.id.workout_running_level_down})
@@ -305,9 +309,23 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     }
 
     private void showCountDownDialog() {
-        CountDownDialog downDialog = new CountDownDialog();
-        downDialog.show(fragmentManager, CountDownDialog.TAG);
+        ThreadPoolUtils.runTaskOnThread(new Runnable() {
+            @Override
+            public void run() {
+                CountDownDialog downDialog = new CountDownDialog();
+                downDialog.show(fragmentManager, CountDownDialog.TAG);
+            }
+        });
     }
 
+    private void bindServer() {
+        ThreadPoolUtils.runTaskOnThread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(BaseRunningActivity.this, FloatWindowService.class);
+                bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
+            }
+        });
+    }
 
 }

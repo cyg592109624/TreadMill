@@ -228,5 +228,6 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
     @OnClick(R.id.bottom_logo_tab_home)
     public void onBackHome() {
         finishActivity();
+        onDestroy();
     }
 }

@@ -48,6 +48,11 @@ public class FloatWindowBottom extends ConstraintLayout {
         windowBottomCallBack.onWindyClick();
     }
 
+    @OnClick(R.id.workout_running_stop)
+    public void sportStop() {
+        windowBottomCallBack.onStopClick();
+    }
+
     public void setWindowBottomCallBack(FloatWindowBottomCallBack callBack) {
         this.windowBottomCallBack = callBack;
     }

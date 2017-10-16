@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.sunrise.treadmill">
 
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.REORDER_TASKS"/>
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
 
     <application
         android:name=".TreadApplication"
@@ -19,9 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:exported="true"
             android:name=".activity.LogoActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
+            android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape">
             <intent-filter>
@@ -31,147 +33,150 @@
         </activity>
 
         <activity
-            android:exported="false"
             android:name=".activity.home.HomeActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
+            android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape">
+
         </activity>
 
         <activity
-            android:exported="false"
             android:name=".activity.home.NfcActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
+            android:exported="false"
             android:screenOrientation="sensorLandscape">
+
         </activity>
 
         <activity
-            android:exported="false"
             android:name=".activity.workoutsetting.HillActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
         <activity
-            android:exported="false"
             android:name=".activity.workoutsetting.IntervalActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
 
         <activity
-            android:exported="false"
             android:name=".activity.workoutsetting.GoalActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
         <activity
-            android:exported="false"
             android:name=".activity.workoutsetting.FitnessTestActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
         <activity
-            android:exported="false"
             android:name=".activity.workoutsetting.HRCActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
         <activity
-            android:exported="false"
             android:name=".activity.workoutsetting.UserProgramActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
         <activity
-            android:exported="false"
             android:name=".activity.workoutsetting.VirtualRealityActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
 
         <activity
-            android:exported="false"
             android:name=".activity.workoutrunning.HillRunningActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
 
         <activity
-            android:exported="false"
             android:name=".activity.workoutrunning.HillRunningActivity_zh"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
 
         <activity
-            android:exported="false"
             android:name=".activity.workoutrunning.QuickStartRunningActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
         <activity
-            android:exported="false"
             android:name=".activity.workoutrunning.QuickStartRunningActivity_zh"
             android:configChanges="screenSize|keyboardHidden|orientation"
+            android:exported="false"
             android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:screenOrientation="sensorLandscape">
+            <intent-filter>
+                <action android:name="com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity_zh" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <activity
-            android:exported="false"
             android:name=".activity.settings.SettingsActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
 
         <activity
-            android:exported="false"
             android:name=".activity.settings.SettingsLockActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
 
         <activity
-            android:exported="false"
             android:name=".activity.factory.FactoriesActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
 
         <activity
-            android:exported="false"
             android:name=".activity.factory.Factory1Activity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
 
         <activity
-            android:exported="false"
             android:name=".activity.factory.Factory2Activity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape" >
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
 
 
-
-
-        <service android:name=".services.workoutrunning.FloatWindowService"/>
+        <service android:name=".services.workoutrunning.FloatWindowService" />
     </application>
 
 </manifest>

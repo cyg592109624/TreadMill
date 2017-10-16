@@ -14,10 +14,8 @@ import butterknife.OnClick;
  * Created by ChuHui on 2017/9/29.
  */
 
-public class HillRunningPauseDialog extends BaseDialogFragment {
-    public static final String TAG = "HillRunningPauseDialog";
-
-
+public class PauseDialog extends BaseDialogFragment {
+    public static final String TAG = "PauseDialog";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
