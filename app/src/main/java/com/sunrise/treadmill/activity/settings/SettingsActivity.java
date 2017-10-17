@@ -2,13 +2,10 @@ package com.sunrise.treadmill.activity.settings;
 
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -46,6 +43,13 @@ public class SettingsActivity extends BaseFragmentActivity {
     private SettingsFragmentCard2 card2;
     private SettingsFragmentCard3 card3;
     private SettingsFragmentCard4 card4;
+    private static final int CARD_1=0;
+    private static final int CARD_2=1;
+    private static final int CARD_3=2;
+    private static final int CARD_4=3;
+
+    private float fontSizeOn =35f;
+    private float fontSizeOff =30f;
 
     @Override
     public int getLayoutId() {
@@ -68,12 +72,12 @@ public class SettingsActivity extends BaseFragmentActivity {
         Fragment tgFragment = null;
         switch (view.getId()) {
             case R.id.settings_card_system:
-                tgCard = 0;
+                tgCard = CARD_1;
                 bgResource = R.mipmap.img_factory_3_1;
                 tgFragment = card1;
                 break;
             case R.id.settings_card_bluetooth:
-                tgCard = 1;
+                tgCard = CARD_2;
                 bgResource = R.mipmap.img_factory_3_2;
                 if(card2==null){
                     card2 = new SettingsFragmentCard2();
@@ -81,7 +85,7 @@ public class SettingsActivity extends BaseFragmentActivity {
                 tgFragment = card2;
                 break;
             case R.id.settings_card_wifi:
-                tgCard = 2;
+                tgCard = CARD_3;
                 bgResource = R.mipmap.img_factory_3_3;
                 if(card3==null){
                     card3 = new SettingsFragmentCard3();
@@ -89,7 +93,7 @@ public class SettingsActivity extends BaseFragmentActivity {
                 tgFragment = card3;
                 break;
             case R.id.settings_card_lock:
-                tgCard = 3;
+                tgCard = CARD_4;
                 bgResource = R.mipmap.img_factory_3_4;
 //                if(card4==null){
 //                    card4 = new SettingsFragmentCard4();
@@ -107,10 +111,10 @@ public class SettingsActivity extends BaseFragmentActivity {
             for (int i = 0; i < txtList.size() - 1; i++) {
                 if (i == tgCard) {
                     TextUtils.changeTextColor(txtList.get(i), getColor(R.color.settings_tabs_on));
-                    TextUtils.changeTextSize(txtList.get(i), 35f);
+                    TextUtils.changeTextSize(txtList.get(i), fontSizeOn);
                 } else {
                     TextUtils.changeTextColor(txtList.get(i), getColor(R.color.settings_tabs_off));
-                    TextUtils.changeTextSize(txtList.get(i), 30f);
+                    TextUtils.changeTextSize(txtList.get(i), fontSizeOff);
                 }
             }
             FragmentTransaction ft = fragmentManager.beginTransaction();
@@ -121,7 +125,7 @@ public class SettingsActivity extends BaseFragmentActivity {
             }
             nowFragment = tgFragment;
         }
-        if (tgCard == 3) {
+        if (tgCard == CARD_4) {
             Intent intent = new Intent(SettingsActivity.this, SettingsLockActivity.class);
             startActivity(intent);
         }

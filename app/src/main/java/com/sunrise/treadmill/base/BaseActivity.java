@@ -1,16 +1,13 @@
 package com.sunrise.treadmill.base;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 
-import com.sunrise.treadmill.utils.AMUtils;
+import com.sunrise.treadmill.utils.ActivityManageUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -21,7 +18,7 @@ import butterknife.Unbinder;
 
 public abstract class BaseActivity extends Activity {
     private Unbinder bind;
-    private AMUtils amUtils;
+    private ActivityManageUtils activityManageUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +26,16 @@ public abstract class BaseActivity extends Activity {
         changeSystemUiState();
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
-        amUtils=AMUtils.getInstance();
-        amUtils.addActivity(this);
+        activityManageUtils = ActivityManageUtils.getInstance();
+        activityManageUtils.addActivity(this);
         setTextStyle();
         init();
     }
 
+    /**
+     * 返回布局ID 给onCreate方法
+     * @return
+     */
     public abstract int getLayoutId();
 
     @Override
@@ -50,7 +51,7 @@ public abstract class BaseActivity extends Activity {
 
     public void finishActivity(){
         bind.unbind();
-        amUtils.finishActivity();
+        activityManageUtils.finishActivity();
     }
 
     /**
@@ -74,17 +75,23 @@ public abstract class BaseActivity extends Activity {
             public void onSystemUiVisibilityChange(int i) {
                 int uiOptions = -1;
                 //隐藏虚拟按键，并且全屏
-                if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
-                    uiOptions = View.GONE;
-                } else if (Build.VERSION.SDK_INT >= 19) {
-                    //for new api versions.
-                    uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav  bar
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE;
-                }
+//                if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+//                    uiOptions = View.GONE;
+//                } else if (Build.VERSION.SDK_INT >= 19) {
+//                    //for new api versions.
+//                    uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+//                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav  bar
+//                            | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+//                            | View.SYSTEM_UI_FLAG_IMMERSIVE;
+//                }
+                uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav  bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE;
                 decorView.setSystemUiVisibility(uiOptions);
             }
         });

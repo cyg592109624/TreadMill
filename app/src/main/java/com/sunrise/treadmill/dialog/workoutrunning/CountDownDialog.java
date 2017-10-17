@@ -23,7 +23,7 @@ public class CountDownDialog extends BaseDialogFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.dialog_count_down;
+        return R.layout.dialog_workout_running_count_down;
     }
 
     @Override

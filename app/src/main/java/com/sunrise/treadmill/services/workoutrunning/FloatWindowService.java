@@ -1,7 +1,5 @@
 package com.sunrise.treadmill.services.workoutrunning;
 
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.Service;
 import android.content.ComponentName;
@@ -12,14 +10,14 @@ import android.graphics.PixelFormat;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.dialog.workoutrunning.CountDownDialog;
-import com.sunrise.treadmill.interfaces.FloatWindowBottomCallBack;
+import com.sunrise.treadmill.interfaces.services.FloatWindowBottomCallBack;
 import com.sunrise.treadmill.views.FloatWindowBottom;
 import com.sunrise.treadmill.views.FloatWindowHead;
 
@@ -41,7 +39,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     private FloatWindowHead floatWindowHead;
     private FloatWindowBottom floatWindowBottom;
-    private RelativeLayout pauseDialog;
+    private ConstraintLayout pauseDialog;
 
     private final IBinder floatBinder = new FloatBinder();
 
@@ -69,7 +67,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     @Override
     public void onCreate() {
         super.onCreate();
-        mWindowManager = (WindowManager) getApplication().getSystemService(getApplication().WINDOW_SERVICE);
+        mWindowManager = (WindowManager) getApplication().getSystemService(Context.WINDOW_SERVICE);
         stageService();
         initWindowParams();
         initFloatWindow();
@@ -136,7 +134,6 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
      */
     private void stageService() {
         Notification.Builder builder = new Notification.Builder(getApplicationContext());
-        // builder.setContentInfo("补充内容");
         builder.setContentText("前台服务");
         builder.setContentTitle("悬浮窗口服务");
         builder.setSmallIcon(R.mipmap.ic_launcher);
@@ -159,7 +156,8 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         WindowManager.LayoutParams params = new WindowManager.LayoutParams();
         // 设置window type
         params.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
-        params.format = PixelFormat.RGBA_8888; // 设置图片格式，效果为背景透明
+        // 设置图片格式，效果为背景透明
+        params.format = PixelFormat.RGBA_8888;
 
         // 设置Window flag
         params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
@@ -190,7 +188,15 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     }
 
     private void initStopDialog() {
-        pauseDialog = (RelativeLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_workout_running_pause, null);
+        pauseDialog = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_workout_running_pause, null);
         pauseDialog.setLayoutParams(dialogParams);
+
+        pauseDialog.findViewById(R.id.workout_running_pause_continue).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
+
 }

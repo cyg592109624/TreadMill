@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.interfaces.OnGenderReturn;
+import com.sunrise.treadmill.interfaces.workoutsetting.OnGenderReturn;
 
 /**
  * Created by ChuHui on 2017/9/20.
@@ -52,6 +52,8 @@ public class MyGenderView extends LinearLayout {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
+                default:
+                    break;
                 case R.id.gender_male:
                     male.setChecked(true);
                     female.setChecked(false);

@@ -12,13 +12,13 @@ import com.sunrise.treadmill.base.BaseDialogFragment;
 
 public class NfcDialog extends BaseDialogFragment {
     public static final String TAG = "NfcDialog";
-    private static final int CloseDialog = 1000;
+    private static final int CLOSE_DIALOG = 1000;
     private Handler mHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case CloseDialog:
+                case CLOSE_DIALOG:
                     dismiss();
                     break;
                 default:
@@ -34,6 +34,6 @@ public class NfcDialog extends BaseDialogFragment {
 
     @Override
     public void init() {
-        mHandler.sendEmptyMessageDelayed(CloseDialog, 2000);
+        mHandler.sendEmptyMessageDelayed(CLOSE_DIALOG, 2000);
     }
 }

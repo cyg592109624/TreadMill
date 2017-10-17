@@ -1,6 +1,7 @@
 package com.sunrise.treadmill.fragments.factory;
 
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -25,7 +26,7 @@ import butterknife.OnClick;
 
 public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardReturn {
     @BindView(R.id.factory2_card1_1)
-    ConstraintLayout card1_1;
+    ConstraintLayout leftLayout;
 
     @BindView(R.id.factory2_card1_2_ctrl_page_toggle)
     ToggleButton ctrlPageToggle;
@@ -80,11 +81,13 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
     @Override
     public void onKeyBoardEnter(String result) {
         switch (reSetTG) {
-            case reSetLevel:
+            case RE_SET_LEVEL:
                 levelValue.setText(result);
                 break;
-            case reSetPWM:
+            case RE_SET_PWM:
                 pwmValue.setText(result);
+                break;
+            default:
                 break;
         }
 
@@ -93,19 +96,21 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
     @Override
     public void onKeyBoardClose() {
         switch (reSetTG) {
-            case reSetLevel:
-                TextUtils.changeTextColor(levelValue, getResources().getColor(R.color.factory_white));
+            default:
+                break;
+            case RE_SET_LEVEL:
+                TextUtils.changeTextColor(levelValue, ContextCompat.getColor(getContext(),R.color.factory_white));
                 TextUtils.changeTextBackground(levelValue, R.mipmap.img_number_frame_1);
                 break;
-            case reSetPWM:
-                TextUtils.changeTextColor(pwmValue, getResources().getColor(R.color.factory_white));
+            case RE_SET_PWM:
+                TextUtils.changeTextColor(pwmValue, ContextCompat.getColor(getContext(),R.color.factory_white));
                 TextUtils.changeTextBackground(pwmValue, R.mipmap.img_number_frame_1);
                 break;
         }
         reSetTG = reSetTG;
         isShowingKeyBoard = false;
         keyBoardView.setVisibility(View.GONE);
-        card1_1.setVisibility(View.VISIBLE);
+        leftLayout.setVisibility(View.VISIBLE);
     }
 
 
@@ -116,14 +121,15 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
         ToggleButton tb = (ToggleButton) view;
         boolean isCheck = tb.isChecked();
         switch (view.getId()) {
-
+            default:
+                break;
         }
     }
 
     private boolean isShowingKeyBoard = false;
     private static int reSetTG = -1;
-    private static final int reSetLevel = 1001;
-    private static final int reSetPWM = 1002;
+    private static final int RE_SET_LEVEL = 1001;
+    private static final int RE_SET_PWM = 1002;
 
     @OnClick({R.id.factory2_card1_2_pwm_value, R.id.factory2_card1_2_level_value})
     public void changeValue(View view) {
@@ -132,18 +138,20 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
         }
         isShowingKeyBoard = true;
         keyBoardView.setVisibility(View.VISIBLE);
-        card1_1.setVisibility(View.GONE);
+        leftLayout.setVisibility(View.GONE);
         switch (view.getId()) {
+            default:
+                break;
             case R.id.factory2_card1_2_level_value:
-                reSetTG = reSetLevel;
+                reSetTG = RE_SET_LEVEL;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_level);
-                TextUtils.changeTextColor(levelValue, getResources().getColor(R.color.factory_tabs_on));
+                TextUtils.changeTextColor(levelValue, ContextCompat.getColor(getContext(),R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(levelValue, R.mipmap.img_number_frame_2);
                 break;
             case R.id.factory2_card1_2_pwm_value:
-                reSetTG = reSetPWM;
+                reSetTG = RE_SET_PWM;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_pwm);
-                TextUtils.changeTextColor(pwmValue, getResources().getColor(R.color.factory_tabs_on));
+                TextUtils.changeTextColor(pwmValue, ContextCompat.getColor(getContext(),R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(pwmValue, R.mipmap.img_number_frame_2);
                 break;
         }

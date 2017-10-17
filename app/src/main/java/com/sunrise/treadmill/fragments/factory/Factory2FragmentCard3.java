@@ -23,9 +23,9 @@ import butterknife.OnClick;
 public class Factory2FragmentCard3 extends BaseFragment {
 
     @BindView(R.id.factory2_card3_1_btn)
-    ImageView card3_1_btn;
+    ImageView card3UpData;
     @BindView(R.id.factory2_card3_3_btn)
-    ImageView card3_3_btn;
+    ImageView card3Back;
 
     @Override
     public int getLayoutId() {
@@ -50,9 +50,9 @@ public class Factory2FragmentCard3 extends BaseFragment {
 
     @Override
     protected void init() {
-        card3_1_btn.setEnabled(false);
+        card3UpData.setEnabled(false);
 
-        card3_3_btn.setEnabled(false);
+        card3Back.setEnabled(false);
     }
 
     @OnClick({R.id.factory2_card3_1_btn,R.id.factory2_card3_3_btn})

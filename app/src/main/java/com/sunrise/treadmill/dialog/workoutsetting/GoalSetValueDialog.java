@@ -1,7 +1,9 @@
 package com.sunrise.treadmill.dialog.workoutsetting;
 
 import android.app.Dialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.TextView;
@@ -10,8 +12,9 @@ import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutsetting.GoalActivity;
+import com.sunrise.treadmill.activity.workoutsetting.WorkOutSettingCommon;
 import com.sunrise.treadmill.base.BaseDialogFragment;
-import com.sunrise.treadmill.interfaces.OnGoalSetValueReturn;
+import com.sunrise.treadmill.interfaces.workoutsetting.OnGoalSetValueReturn;
 import com.sunrise.treadmill.interfaces.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
@@ -48,27 +51,36 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
         keyBoardView.setKeyBoardReturn(this);
         onGoalSetValueReturn = (OnGoalSetValueReturn) getActivity();
         Bundle bundle = getArguments();
-        String setType = "";
+        int changeTg = 0;
         String oldValue = "";
         if (bundle != null) {
-            setType = (String) bundle.get(GoalActivity.SetTg);
-            oldValue = (String) bundle.get(GoalActivity.SetTgValue);
+            changeTg = bundle.getInt(GoalActivity.CHANGE_TG, WorkOutSettingCommon.RE_SET);
+            oldValue = (String) bundle.get(GoalActivity.CHANGE_TG_VALUE);
         }
         editValue.setText(oldValue);
-        if (!setType.equals("")) {
-            if (setType.equals(GoalActivity.SetTimeValue)) {
-                editValue.setBackground(getResources().getDrawable(R.drawable.btn_goal_time_3));
-            } else if (setType.equals(GoalActivity.SetDistanceValue)) {
-                //这还需判断单位
-                if (GlobalSetting.UnitType.equals(Constant.unitType_MILE)) {
-                    editValue.setBackground(getResources().getDrawable(R.drawable.btn_goal_distance_mile_3));
-                } else if(GlobalSetting.UnitType.equals(Constant.unitType_KM)) {
-                    editValue.setBackground(getResources().getDrawable(R.drawable.btn_goal_distance_km_3));
+        Drawable drawable = null;
+        switch (changeTg) {
+            default:
+                break;
+            case WorkOutSettingCommon.CHANGE_TIME:
+                drawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_goal_time_3);
+                break;
+            case WorkOutSettingCommon.CHANGE_DISTANCE:
+                drawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_goal_distance_mile_3);
+                break;
+            case WorkOutSettingCommon.CHANGE_CALORIES:
+                if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_MILE)) {
+                    drawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_goal_distance_mile_3);
+                } else if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_KM)) {
+
+                    drawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_goal_distance_km_3);
                 }
-            } else if (setType.equals(GoalActivity.SetCalValue)) {
-                editValue.setBackground(getResources().getDrawable(R.drawable.btn_goal_calories_3));
-            }
+                break;
         }
+        if (drawable != null) {
+            editValue.setBackground(drawable);
+        }
+
         ((TextView) keyBoardView.findViewById(R.id.key_board_edit_value)).addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

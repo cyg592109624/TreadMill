@@ -2,6 +2,7 @@ package com.sunrise.treadmill.dialog.workoutsetting;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -61,7 +62,7 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
         keyBoardView.setKeyBoardReturn(this);
         keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
         Bundle bundle = getArguments();
-        int vrNum = bundle.getInt(VirtualRealityActivity.SelectVRNum, VirtualRealityActivity.selectNothing);
+        int vrNum = bundle.getInt(VirtualRealityActivity.SELECT_VRNUM, VirtualRealityActivity.SELECT_NOTHING);
         changeVRImage(vrNum);
         ((TextView) keyBoardView.findViewById(R.id.key_board_edit_value)).addTextChangedListener(new TextWatcher() {
             @Override
@@ -105,7 +106,7 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
         backBtn.setEnabled(true);
         vrImage.setVisibility(View.VISIBLE);
         keyBoardView.setVisibility(View.GONE);
-        TextUtils.changeTextColor(editValue, getResources().getColor(R.color.workout_mode_white));
+        TextUtils.changeTextColor(editValue,  ContextCompat.getColor(getContext(),R.color.workout_mode_white));
         TextUtils.changeTextBackground(editValue, R.mipmap.btn_virtual_time_1);
     }
 
@@ -116,7 +117,7 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
         vrImage.setVisibility(View.GONE);
         keyBoardView.setVisibility(View.VISIBLE);
 
-        TextUtils.changeTextColor(editValue, getResources().getColor(R.color.workout_mode_select));
+        TextUtils.changeTextColor(editValue,  ContextCompat.getColor(getContext(),R.color.workout_mode_select));
         TextUtils.changeTextBackground(editValue, R.mipmap.btn_virtual_time_2);
     }
 
@@ -130,34 +131,34 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
         switch (vrNum) {
             default:
                 break;
-            case VirtualRealityActivity.tgValue_1:
+            case VirtualRealityActivity.TG_VALUE_1:
                 ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_01_4);
                 break;
-            case VirtualRealityActivity.tgValue_2:
+            case VirtualRealityActivity.TG_VALUE_2:
                 ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_02_4);
                 break;
-            case VirtualRealityActivity.tgValue_3:
+            case VirtualRealityActivity.TG_VALUE_3:
                 ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_03_4);
                 break;
-            case VirtualRealityActivity.tgValue_4:
+            case VirtualRealityActivity.TG_VALUE_4:
                 ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_04_4);
                 break;
-            case VirtualRealityActivity.tgValue_5:
+            case VirtualRealityActivity.TG_VALUE_5:
                 ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_05_4);
                 break;
-            case VirtualRealityActivity.tgValue_6:
+            case VirtualRealityActivity.TG_VALUE_6:
                 ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_06_4);
                 break;
-            case VirtualRealityActivity.tgValue_7:
+            case VirtualRealityActivity.TG_VALUE_7:
                 ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_07_4);
                 break;
-            case VirtualRealityActivity.tgValue_8:
+            case VirtualRealityActivity.TG_VALUE_8:
                 ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_08_4);
                 break;
-            case VirtualRealityActivity.tgValue_9:
+            case VirtualRealityActivity.TG_VALUE_9:
                 ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_09_4);
                 break;
-            case VirtualRealityActivity.tgValue_10:
+            case VirtualRealityActivity.TG_VALUE_10:
                 ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_10_4);
                 break;
         }

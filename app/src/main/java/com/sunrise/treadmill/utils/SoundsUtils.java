@@ -11,7 +11,7 @@ public class SoundsUtils {
     private static AudioManager mAudioManager;
     private static SoundsUtils soundsUtils;
 
-    private void SoundsUtils() {
+    private SoundsUtils() {
 
     }
 
@@ -22,6 +22,8 @@ public class SoundsUtils {
     public static int getRingMode() {
         int mode = mAudioManager.getRingerMode();
         switch (mode) {
+            default:
+                break;
             case AudioManager.RINGER_MODE_NORMAL:
                 //普通模式 2
                 break;

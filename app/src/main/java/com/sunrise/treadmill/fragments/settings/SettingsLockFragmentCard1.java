@@ -1,6 +1,7 @@
 package com.sunrise.treadmill.fragments.settings;
 
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,8 +59,8 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
     MyKeyBoardView leftKeyBoard;
 
     private static int reSetTG = -1;
-    private static final int reSetTime = 1001;
-    private static final int reSetDistance = 1002;
+    private static final int RE_SET_TIME = 1001;
+    private static final int RE_SET_DISTANCE = 1002;
 
     @Override
     public int getLayoutId() {
@@ -105,16 +106,16 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
     public void reSet(View view) {
         switch (view.getId()) {
             case R.id.settings_card4_1_1_reset:
-                reSetTG = reSetTime;
+                reSetTG = RE_SET_TIME;
                 rightLayout.setVisibility(View.GONE);
                 leftKeyBoard.setVisibility(View.VISIBLE);
-                TextUtils.changeTextColor(timeValue, getResources().getColor(R.color.settings_tabs_on));
+                TextUtils.changeTextColor(timeValue,  ContextCompat.getColor(getContext(),R.color.settings_tabs_on));
                 break;
             case R.id.settings_card4_1_2_reset:
-                reSetTG = reSetDistance;
+                reSetTG = RE_SET_DISTANCE;
                 leftLayout.setVisibility(View.GONE);
                 rightKeyBoard.setVisibility(View.VISIBLE);
-                TextUtils.changeTextColor(distanceValue, getResources().getColor(R.color.settings_tabs_on));
+                TextUtils.changeTextColor(distanceValue,  ContextCompat.getColor(getContext(),R.color.settings_tabs_on));
                 break;
             default:
                 break;
@@ -124,10 +125,10 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
     @Override
     public void onKeyBoardEnter(String result) {
         switch (reSetTG) {
-            case reSetTime:
+            case RE_SET_TIME:
                 timeValue.setText(result);
                 break;
-            case reSetDistance:
+            case RE_SET_DISTANCE:
                 distanceValue.setText(result);
                 break;
             default:
@@ -138,13 +139,13 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
     @Override
     public void onKeyBoardClose() {
         switch (reSetTG) {
-            case reSetTime:
-                TextUtils.changeTextColor(timeValue, getResources().getColor(R.color.settings_white));
+            case RE_SET_TIME:
+                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(getContext(),R.color.settings_white));
                 rightLayout.setVisibility(View.VISIBLE);
                 leftKeyBoard.setVisibility(View.GONE);
                 break;
-            case reSetDistance:
-                TextUtils.changeTextColor(distanceValue, getResources().getColor(R.color.settings_white));
+            case RE_SET_DISTANCE:
+                TextUtils.changeTextColor(distanceValue, ContextCompat.getColor(getContext(),R.color.settings_white));
                 leftLayout.setVisibility(View.VISIBLE);
                 rightKeyBoard.setVisibility(View.GONE);
                 break;

@@ -41,7 +41,10 @@ public abstract class BaseFragment extends Fragment {
     public View getParentView(){
         return parentView;
     }
-
+    /**
+     * 返回布局ID 给onCreateView方法
+     * @return
+     */
     public abstract int getLayoutId();
 
     protected  void setTextStyle(){};

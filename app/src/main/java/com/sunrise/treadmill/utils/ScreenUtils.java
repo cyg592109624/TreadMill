@@ -14,11 +14,11 @@ import android.view.WindowManager;
 
 public class ScreenUtils {
 
-    public static final int MaxBrightness = 255;
+    public static final int MAX_BRIGHTNESS = 255;
     private static ContentResolver mContentResolver;
     private static Window mWindow;
 
-    private void ScreenUtils() {
+    private ScreenUtils() {
 
     }
 

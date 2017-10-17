@@ -1,15 +1,11 @@
 package com.sunrise.treadmill.activity.home;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.base.BaseActivity;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.dialog.home.NfcDialog;
 
@@ -26,40 +22,42 @@ public class NfcActivity extends BaseFragmentActivity {
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private boolean stopChange = false;
 
-    private static final int ClearShow = -1;
-    private static final int ChangeImg_1 = 1001;
-    private static final int ChangeImg_2 = 1002;
-    private static final int StopChange = 1003;
-    private static final int ShowError = 1004;
+    private static final int CLEAR_SHOW = -1;
+    private static final int CHANGE_IMG_1 = 1001;
+    private static final int CHANGE_IMG_2 = 1002;
+    private static final int STOP_CHANGE = 1003;
+    private static final int SHOW_ERROR = 1004;
     private NfcDialog nfcDialog;
 
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case ClearShow:
+                default:
+                    break;
+                case CLEAR_SHOW:
                     stopChange = true;
                     if (nfcDialog != null) {
                         nfcDialog.dismiss();
                     }
                     finishActivity();
                     break;
-                case ChangeImg_1:
+                case CHANGE_IMG_1:
                     if (!stopChange) {
                         nfc.setImageResource(R.mipmap.img_nfc_2);
-                        mHandler.sendEmptyMessageDelayed(ChangeImg_2, 500);
+                        mHandler.sendEmptyMessageDelayed(CHANGE_IMG_2, 500);
                     }
                     break;
-                case ChangeImg_2:
+                case CHANGE_IMG_2:
                     if (!stopChange) {
                         nfc.setImageResource(R.mipmap.img_nfc_1);
-                        mHandler.sendEmptyMessageDelayed(ChangeImg_1, 500);
+                        mHandler.sendEmptyMessageDelayed(CHANGE_IMG_1, 500);
                     }
                     break;
-                case StopChange:
+                case STOP_CHANGE:
                     stopChange = true;
                     break;
-                case ShowError:
+                case SHOW_ERROR:
                     stopChange = true;
                     nfcDialog = new NfcDialog();
                     nfcDialog.show(fragmentManager, NfcDialog.TAG);
@@ -75,10 +73,10 @@ public class NfcActivity extends BaseFragmentActivity {
 
     @Override
     protected void init() {
-        mHandler.sendEmptyMessageDelayed(ChangeImg_1, 1000);
-        mHandler.sendEmptyMessageDelayed(StopChange, 4000);
-        mHandler.sendEmptyMessageDelayed(ShowError, 7000);
-        mHandler.sendEmptyMessageDelayed(ClearShow, 10000);
+        mHandler.sendEmptyMessageDelayed(CHANGE_IMG_1, 1000);
+        mHandler.sendEmptyMessageDelayed(STOP_CHANGE, 4000);
+        mHandler.sendEmptyMessageDelayed(SHOW_ERROR, 7000);
+        mHandler.sendEmptyMessageDelayed(CLEAR_SHOW, 10000);
 
     }
 }

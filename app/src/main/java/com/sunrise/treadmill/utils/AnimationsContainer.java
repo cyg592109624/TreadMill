@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Handler;
 import android.widget.ImageView;
 
@@ -20,7 +19,7 @@ import java.lang.ref.SoftReference;
  */
 
 public class AnimationsContainer {
-    public int FPS = 1000;  // 每秒播放帧数，fps = 1/t，t-动画两帧时间间隔
+    public int fps = 1000;  // 每秒播放帧数，fps = 1/t，t-动画两帧时间间隔
     private int resId = R.array.count_down; //图片资源
     private Context mContext = TreadApplication.getContext();
     // 单例
@@ -32,8 +31,9 @@ public class AnimationsContainer {
 
     //获取单例
     public static AnimationsContainer getInstance(int resId, int fps) {
-        if (mInstance == null)
+        if (mInstance == null){
             mInstance = new AnimationsContainer();
+        }
         return mInstance;
     }
 
@@ -49,7 +49,7 @@ public class AnimationsContainer {
      * @return progress dialog animation
      */
     public FramesSequenceAnimation createProgressDialogAnim(ImageView imageView) {
-        return new FramesSequenceAnimation(imageView, mProgressAnimFrames, FPS);
+        return new FramesSequenceAnimation(imageView, mProgressAnimFrames, fps);
     }
 
 
@@ -105,8 +105,9 @@ public class AnimationsContainer {
          */
         public synchronized void start() {
             mShouldRun = true;
-            if (mIsRunning)
+            if (mIsRunning){
                 return;
+            }
 
             Runnable runnable = new Runnable() {
                 @Override
@@ -115,7 +116,7 @@ public class AnimationsContainer {
                     if (!mShouldRun || imageView == null) {
                         mIsRunning = false;
                         if (mOnAnimationStoppedListener != null) {
-                            mOnAnimationStoppedListener.AnimationStopped();
+                            mOnAnimationStoppedListener.animationStopped();
                         }
                         return;
                     }
@@ -194,7 +195,7 @@ public class AnimationsContainer {
      * 停止播放监听
      */
     public interface OnAnimationStoppedListener {
-        void AnimationStopped();
+        void animationStopped();
     }
 
     public int getIndex() {

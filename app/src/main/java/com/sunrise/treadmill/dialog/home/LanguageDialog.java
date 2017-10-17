@@ -1,27 +1,24 @@
 package com.sunrise.treadmill.dialog.home;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseDialogFragment;
-import com.sunrise.treadmill.interfaces.HomeLanguageDialogReturn;
+import com.sunrise.treadmill.interfaces.home.HomeLanguageDialogReturn;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
-import com.sunrise.treadmill.utils.SPUtils;
+import com.sunrise.treadmill.utils.SharedPreferencesUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
 import java.util.List;
 
 import butterknife.BindViews;
 import butterknife.OnClick;
-import butterknife.ButterKnife;
 
 /**
  * Created by ChuHui on 2017/9/6.
@@ -49,7 +46,7 @@ public class LanguageDialog extends BaseDialogFragment {
         } else {
             TextUtils.setTextTypeFace(textViews, TextUtils.Arial(getContext()));
         }
-        TextUtils.changeTextColor(textViews, getResources().getColor(R.color.language_btn_on));
+        TextUtils.changeTextColor(textViews, ContextCompat.getColor(getContext(),R.color.language_btn_on));
         ImageUtils.changeImageView(imageViews);
     }
 
@@ -70,61 +67,61 @@ public class LanguageDialog extends BaseDialogFragment {
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.en_US)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.en_US;
-                    LanguageUtils.updateLanguage(LanguageUtils.Locale_US, getResources());
+                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_US, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_zh:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.zh_CN;
-                    LanguageUtils.updateLanguage(LanguageUtils.Locale_CN, getResources());
+                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_CN, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_de:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.de_DE)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.de_DE;
-                    LanguageUtils.updateLanguage(LanguageUtils.Locale_DE, getResources());
+                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_DE, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_tr:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.tr_TR)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.tr_TR;
-                    LanguageUtils.updateLanguage(LanguageUtils.Locale_TR, getResources());
+                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_TR, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_ir:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.ir_IR)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.ir_IR;
-                    LanguageUtils.updateLanguage(LanguageUtils.Locale_IR, getResources());
+                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_IR, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_es:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.es_ES)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.es_ES;
-                    LanguageUtils.updateLanguage(LanguageUtils.Locale_ESP, getResources());
+                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_ESP, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_pt:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.pt_PT)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.pt_PT;
-                    LanguageUtils.updateLanguage(LanguageUtils.Locale_PT, getResources());
+                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_PT, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_ru:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.ru_RU)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.ru_RU;
-                    LanguageUtils.updateLanguage(LanguageUtils.Locale_RU, getResources());
+                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_RU, getResources());
                 }
                 break;
         }
         if (isChange) {
-            SPUtils.put(getContext(), Constant.appLanguage, GlobalSetting.AppLanguage);
+            SharedPreferencesUtils.put(getContext(), Constant.APP_LANGUAGE, GlobalSetting.AppLanguage);
             dialogFragmentReturn.onLanguageReturn(isChange);
         } else {
             dialogFragmentReturn.onLanguageReturn(isChange);

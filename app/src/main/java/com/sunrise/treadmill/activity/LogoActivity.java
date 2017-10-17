@@ -10,7 +10,7 @@ import com.sunrise.treadmill.activity.home.HomeActivity;
 import com.sunrise.treadmill.base.BaseActivity;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.utils.LanguageUtils;
-import com.sunrise.treadmill.utils.SPUtils;
+import com.sunrise.treadmill.utils.SharedPreferencesUtils;
 
 import java.util.List;
 
@@ -46,12 +46,12 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
         //没有获取的权限
-        String curPerm[] = new String[perms.size()];
+        String []args = new String[perms.size()];
         for (int i = 0; i < perms.size(); i++) {
-            curPerm[i] = perms.get(i);
+            args[i] = perms.get(i);
             System.out.println("没有被允许的权限 --> " + perms.get(i));
         }
-        lackOfPerms = curPerm;
+        lackOfPerms = args;
     }
 
     /**
@@ -59,7 +59,7 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
      */
     private void syncLanguage() {
         //启动app时 获取语言设置
-        String appLanguage = (String) SPUtils.get(getApplicationContext(), Constant.appLanguage, LanguageUtils.en_US);
+        String appLanguage = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.APP_LANGUAGE, LanguageUtils.en_US);
         //获取当前设置
         String nowAppLanguage = LanguageUtils.getAppLanguage(getResources());
         Intent intent = new Intent();

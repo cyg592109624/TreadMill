@@ -60,6 +60,8 @@ public class MyKeyBoardView extends LinearLayout {
         public void onClick(View view) {
             String oldText = showText.getText().toString();
             switch (view.getId()) {
+                default:
+                    break;
                 case R.id.key_board_0:
                     showText.setText(oldText + "0");
                     break;

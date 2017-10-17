@@ -5,10 +5,8 @@ import android.view.View;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity;
-import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity_zh;
 import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity;
-import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity_zh;
+import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivityZh;
 import com.sunrise.treadmill.activity.workoutsetting.FitnessTestActivity;
 import com.sunrise.treadmill.activity.workoutsetting.GoalActivity;
 import com.sunrise.treadmill.activity.workoutsetting.HRCActivity;
@@ -38,6 +36,8 @@ public class HomeFragmentPage1 extends BaseFragment {
     void selectWorkOutMode(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
+            default:
+                break;
             case R.id.workout_mode_hill:
                 intent.setClass(getActivity(), HillActivity.class);
                 break;
@@ -61,7 +61,7 @@ public class HomeFragmentPage1 extends BaseFragment {
                 break;
             case R.id.workout_mode_quick_start:
                 if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-                    intent.setClass(getActivity(), QuickStartRunningActivity_zh.class);
+                    intent.setClass(getActivity(), QuickStartRunningActivityZh.class);
                 } else {
                     intent.setClass(getActivity(), QuickStartRunningActivity.class);
                 }

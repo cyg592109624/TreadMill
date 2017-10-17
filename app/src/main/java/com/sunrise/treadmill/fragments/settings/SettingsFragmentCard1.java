@@ -53,7 +53,7 @@ public class SettingsFragmentCard1 extends BaseFragment implements SeekBar.OnSee
 
         SoundsUtils.setAudioManager((AudioManager) getActivity().getSystemService(Service.AUDIO_SERVICE));
 
-        bright.setMax(ScreenUtils.MaxBrightness);
+        bright.setMax(ScreenUtils.MAX_BRIGHTNESS);
         sounds.setMax(SoundsUtils.getVoiceMusicMax());
 
         bright.setProgress(ScreenUtils.getScreenBrightness());
@@ -66,6 +66,8 @@ public class SettingsFragmentCard1 extends BaseFragment implements SeekBar.OnSee
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
         switch (seekBar.getId()) {
+            default:
+                break;
             case R.id.settings_card1_seek_bar_bright:
                 ScreenUtils.setBrightness(i);
                 break;

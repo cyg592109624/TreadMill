@@ -18,6 +18,8 @@ import butterknife.ButterKnife;
 
 public class FloatWindowHead extends ConstraintLayout {
     private int curLevel = 0;
+    private static final int MAX_LEVEL = 30;
+    private static final int MIN_LEVEL = 0;
 
     @BindView(R.id.workout_running_head_level_value)
     TextView levelValue;
@@ -39,12 +41,12 @@ public class FloatWindowHead extends ConstraintLayout {
 
     public void levelChange(int i) {
         curLevel += i;
-        if (curLevel > 30) {
-            curLevel = 30;
+        if (curLevel > MAX_LEVEL) {
+            curLevel = MAX_LEVEL;
             return;
         }
-        if (curLevel < 0) {
-            curLevel = 0;
+        if (curLevel < MIN_LEVEL) {
+            curLevel = MIN_LEVEL;
             return;
         }
         levelValue.setText(curLevel + "");

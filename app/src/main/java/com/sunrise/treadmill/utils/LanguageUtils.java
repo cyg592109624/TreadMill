@@ -21,57 +21,57 @@ public class LanguageUtils {
     /**
      * 伊朗 (阿拉伯联合酋长国)ar_AE
      */
-    public static final String ir = "ar";
+    public static final String IR = "ar";
     public static final String ir_IR = "ar_AE";
-    public static final Locale Locale_IR = new Locale("ar", "AE");
+    public static final Locale LOCALE_IR = new Locale("ar", "AE");
 
     /**
      * 德文 (德国)de_DE
      */
     public static final String de = "de";
     public static final String de_DE = "de_DE";
-    public static final Locale Locale_DE = new Locale("de", "DE");
+    public static final Locale LOCALE_DE = new Locale("de", "DE");
 
     /**
      * 英语(美国)en_US
      */
     public static final String en = "en";
     public static final String en_US = "en_US";
-    public static final Locale Locale_US = new Locale("en", "US");
+    public static final Locale LOCALE_US = new Locale("en", "US");
 
     /**
      * 西班牙文 (西班牙)es_ES
      */
     public static final String es = "es";
     public static final String es_ES = "es_ES";
-    public static final Locale Locale_ESP = new Locale("es", "ES");
+    public static final Locale LOCALE_ESP = new Locale("es", "ES");
     /**
      * 葡萄牙文 (葡萄牙)pt_PT
      */
     public static final String pt = "pt";
     public static final String pt_PT = "pt_PT";
-    public static final Locale Locale_PT = new Locale("pt", "PT");
+    public static final Locale LOCALE_PT = new Locale("pt", "PT");
 
     /**
      * 土耳其文 (土耳其)tr_TR
      */
     public static final String tr = "tr";
     public static final String tr_TR = "tr_TR";
-    public static final Locale Locale_TR = new Locale("tr", "TR");
+    public static final Locale LOCALE_TR = new Locale("tr", "TR");
 
     /**
      * 俄文 (俄罗斯)ru_RU
      */
     public static final String ru = "ru";
     public static final String ru_RU = "ru_RU";
-    public static final Locale Locale_RU = new Locale("ru", "RU");
+    public static final Locale LOCALE_RU = new Locale("ru", "RU");
 
     /**
      * 中文(简体)zh_CN
      */
     public static final String zh = "zh";
     public static final String zh_CN = "zh_CN";
-    public static final Locale Locale_CN = new Locale("zh", "CN");
+    public static final Locale LOCALE_CN = new Locale("zh", "CN");
 
     private LanguageUtils() {
 
@@ -94,7 +94,7 @@ public class LanguageUtils {
      * @return
      */
     public static Locale buildLocale(@NonNull String language, @NonNull String country) {
-        if (!language.equals("") && !country.equals("")) {
+        if (!"".equals(language) && !"".equals(country)) {
             Locale locale = new Locale(language, country);
             return locale;
         }

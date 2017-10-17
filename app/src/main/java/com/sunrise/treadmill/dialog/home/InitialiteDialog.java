@@ -1,16 +1,13 @@
 package com.sunrise.treadmill.dialog.home;
 
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseDialogFragment;
-import com.sunrise.treadmill.interfaces.OnInitialReturn;
+import com.sunrise.treadmill.interfaces.home.OnInitialReturn;
 
 import butterknife.BindView;
 

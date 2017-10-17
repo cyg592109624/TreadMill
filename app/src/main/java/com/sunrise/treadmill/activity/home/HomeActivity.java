@@ -1,7 +1,5 @@
 package com.sunrise.treadmill.activity.home;
 
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Intent;
@@ -13,17 +11,17 @@ import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.factory.FactoriesActivity;
 import com.sunrise.treadmill.activity.settings.SettingsActivity;
-import com.sunrise.treadmill.adapter.HomeFragmentAdapter;
+import com.sunrise.treadmill.adapter.home.HomeViewPageAdapter;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.dialog.home.InitialiteDialog;
 import com.sunrise.treadmill.dialog.home.LanguageDialog;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage1;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage2;
-import com.sunrise.treadmill.fragments.home.HomeFragmentPage2_zh;
+import com.sunrise.treadmill.fragments.home.HomeFragmentPage2Zh;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage3;
-import com.sunrise.treadmill.fragments.home.HomeFragmentPage3_zh;
-import com.sunrise.treadmill.interfaces.HomeLanguageDialogReturn;
-import com.sunrise.treadmill.interfaces.OnInitialReturn;
+import com.sunrise.treadmill.fragments.home.HomeFragmentPage3Zh;
+import com.sunrise.treadmill.interfaces.home.HomeLanguageDialogReturn;
+import com.sunrise.treadmill.interfaces.home.OnInitialReturn;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.ThreadPoolUtils;
@@ -37,8 +35,8 @@ import butterknife.OnClick;
 
 /**
  * Created by ChuHui on 2017/9/6.
+ * @author cyg
  */
-
 public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDialogReturn, OnInitialReturn, ViewPager.OnPageChangeListener {
     @BindView(R.id.home_img_vp)
     ImageView selectTg;
@@ -49,7 +47,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @BindView(R.id.home_viewPage)
     ViewPager viewPager;
 
-    private HomeFragmentAdapter fragmentAdapter;
+    private HomeViewPageAdapter fragmentAdapter;
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -66,16 +64,16 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
                 List<Fragment> list = new ArrayList<Fragment>();
                 list.add(new HomeFragmentPage1());
                 if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-                    list.add(new HomeFragmentPage2_zh());
-                    list.add(new HomeFragmentPage3_zh());
+                    list.add(new HomeFragmentPage2Zh());
+                    list.add(new HomeFragmentPage3Zh());
                 } else {
                     list.add(new HomeFragmentPage2());
                     list.add(new HomeFragmentPage3());
                 }
-                fragmentAdapter = new HomeFragmentAdapter(fragmentManager, list);
+                fragmentAdapter = new HomeViewPageAdapter(fragmentManager, list);
                 viewPager.setAdapter(fragmentAdapter);
                 viewPager.setCurrentItem(0);
-                viewPager.setOnPageChangeListener(HomeActivity.this);
+                viewPager.addOnPageChangeListener(HomeActivity.this);
             }
         });
 

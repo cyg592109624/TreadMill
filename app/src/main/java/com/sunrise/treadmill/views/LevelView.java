@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -99,7 +100,7 @@ public class LevelView extends View {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
         mPaint.setAntiAlias(true);
         mPaint.setFilterBitmap(true);
-        mPaint.setColor(getResources().getColor(R.color.factory_tabs_on));
+        mPaint.setColor(ContextCompat.getColor(getContext(), R.color.factory_tabs_on));
 
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             mPaint.setTypeface(TextUtils.Microsoft(context));
@@ -133,7 +134,7 @@ public class LevelView extends View {
         maxTall = columnStartArea - topSpace;
         levelHeight = maxTall / levelCount;
 
-        mPaint.setTextSize(bottomSpace*0.7f);
+        mPaint.setTextSize(bottomSpace * 0.7f);
     }
 
     public void setColumnMargin(float columnMargin) {
@@ -182,11 +183,11 @@ public class LevelView extends View {
     }
 
 
-    public void setColumn(int level,int rank){
-        if((level>columnCount|level<-1)|(rank>levelCount|rank<-1)){
+    public void setColumn(int level, int rank) {
+        if ((level > columnCount | level < -1) | (rank > levelCount | rank < -1)) {
             return;
         }
-        LevelColumn cell=new LevelColumn();
+        LevelColumn cell = new LevelColumn();
         cell.setToX1(leftSpace + columnWidth * level + columnMargin * level);
         cell.setToX2(leftSpace + columnWidth * (level + 1) + columnMargin * level);
         cell.setToY1(topSpace + levelHeight * (levelCount - rank));
@@ -197,7 +198,7 @@ public class LevelView extends View {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        if(!slideEnable){
+        if (!slideEnable) {
             performClick();
             return false;
         }
@@ -224,6 +225,8 @@ public class LevelView extends View {
                 break;
             case MotionEvent.ACTION_UP:
 
+                break;
+            default:
                 break;
         }
         return true;
@@ -280,8 +283,8 @@ public class LevelView extends View {
         if (buoyBitmap != null) {
             canvas.drawBitmap(buoyBitmap, buoyLeft + buoyBitmapWidth, topSpace - buoyBitmapHeight, null);
         }
-        if (hintText!=null) {
-            canvas.drawText(hintText, (viewWidth - hintText.length() * (bottomSpace*0.3f)) / 2, viewHeight - bottomSpace*0.18f, mPaint);
+        if (hintText != null) {
+            canvas.drawText(hintText, (viewWidth - hintText.length() * (bottomSpace * 0.3f)) / 2, viewHeight - bottomSpace * 0.18f, mPaint);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.fragments.settings;
 
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,7 +62,7 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
     @OnClick(R.id.settings_card4_2_reset)
     public void reSet(View view) {
         keyBoard.setVisibility(View.VISIBLE);
-        TextUtils.changeTextColor(psw, getResources().getColor(R.color.settings_tabs_on));
+        TextUtils.changeTextColor(psw,  ContextCompat.getColor(getContext(),R.color.settings_tabs_on));
     }
 
     @Override
@@ -72,6 +73,6 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
     @Override
     public void onKeyBoardClose() {
         keyBoard.setVisibility(View.INVISIBLE);
-        TextUtils.changeTextColor(psw, getResources().getColor(R.color.settings_white));
+        TextUtils.changeTextColor(psw, ContextCompat.getColor(getContext(),R.color.settings_white));
     }
 }

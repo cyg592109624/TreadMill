@@ -4,10 +4,9 @@ import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.Toast;
 
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.interfaces.FloatWindowBottomCallBack;
+import com.sunrise.treadmill.interfaces.services.FloatWindowBottomCallBack;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.IBinder;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -19,10 +20,14 @@ import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.summary.SummaryActivity;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
+import com.sunrise.treadmill.dialog.workoutrunning.CoolDownDialog;
 import com.sunrise.treadmill.dialog.workoutrunning.CountDownDialog;
 import com.sunrise.treadmill.dialog.workoutrunning.PauseDialog;
-import com.sunrise.treadmill.interfaces.FloatServiceBinder;
+import com.sunrise.treadmill.interfaces.services.FloatServiceBinder;
+import com.sunrise.treadmill.interfaces.workoutrunning.CoolDownDialogClick;
+import com.sunrise.treadmill.interfaces.workoutrunning.PauseDialogClick;
 import com.sunrise.treadmill.services.workoutrunning.FloatWindowService;
 import com.sunrise.treadmill.utils.AnimationsContainer;
 import com.sunrise.treadmill.utils.LanguageUtils;
@@ -40,7 +45,8 @@ import butterknife.OnClick;
  * Created by ChuHui on 2017/9/30.
  */
 
-public class BaseRunningActivity extends BaseFragmentActivity implements FloatServiceBinder, AnimationsContainer.OnAnimationStoppedListener {
+public class BaseRunningActivity extends BaseFragmentActivity implements FloatServiceBinder,
+        AnimationsContainer.OnAnimationStoppedListener, PauseDialogClick, CoolDownDialogClick {
 
     @BindView(R.id.workout_running_head_level_value)
     TextView levelValue;
@@ -76,6 +82,9 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     private int parentWidth;
     private int parentHeight;
 
+    private static final int MAX_LEVEL=30;
+    private static final int MIN_LEVEL=0;
+
     private FragmentManager fragmentManager;
     public PackageManager packageManager;
 
@@ -110,8 +119,10 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         packageManager = getApplicationContext().getPackageManager();
         fragmentManager = getSupportFragmentManager();
         bindServer();
-        parentWidth = getWindowManager().getDefaultDisplay().getWidth();
-        parentHeight = getWindowManager().getDefaultDisplay().getHeight();
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getRealMetrics(dm);
+        parentWidth = dm.widthPixels;
+        parentHeight = dm.heightPixels;
     }
 
     @Override
@@ -179,8 +190,30 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     }
 
     @Override
-    public void AnimationStopped() {
+    public void animationStopped() {
+        //倒数结束时触发
+    }
 
+    @Override
+    public void onPauseQuit() {
+        showCoolDownDialog();
+    }
+
+    @Override
+    public void onPauseContinue() {
+        showCountDownDialog();
+    }
+
+    @Override
+    public void onPauseTimeOut() {
+        //进入统计页面
+        goToSummary();
+    }
+
+    @Override
+    public void onCoolDownSkip() {
+        //进入统计页面
+        goToSummary();
     }
 
     private boolean isShowView = false;
@@ -234,6 +267,16 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @OnClick({R.id.workout_running_level_up, R.id.workout_running_level_down})
     public void changeLevel(View view) {
+        switch (view.getId()) {
+            default:
+                break;
+            case R.id.workout_running_level_up:
+                changeLevel(1);
+                break;
+            case R.id.workout_running_level_down:
+                changeLevel(-1);
+                break;
+        }
 
     }
 
@@ -312,8 +355,18 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         ThreadPoolUtils.runTaskOnThread(new Runnable() {
             @Override
             public void run() {
-                CountDownDialog downDialog = new CountDownDialog();
-                downDialog.show(fragmentManager, CountDownDialog.TAG);
+                CountDownDialog dialog = new CountDownDialog();
+                dialog.show(fragmentManager, CountDownDialog.TAG);
+            }
+        });
+    }
+
+    private void showCoolDownDialog() {
+        ThreadPoolUtils.runTaskOnThread(new Runnable() {
+            @Override
+            public void run() {
+                CoolDownDialog dialog = new CoolDownDialog();
+                dialog.show(fragmentManager, CoolDownDialog.TAG);
             }
         });
     }
@@ -328,4 +381,27 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         });
     }
 
+    private int curLevel = 0;
+
+    private void changeLevel(int i) {
+        curLevel += i;
+        if (curLevel > MAX_LEVEL) {
+            curLevel = MAX_LEVEL;
+            return;
+        }
+        if (curLevel < MIN_LEVEL) {
+            curLevel = MIN_LEVEL;
+            return;
+        }
+        levelValue.setText(curLevel + "");
+    }
+
+    /**
+     * 跳转到summary界面
+     * 必然带数据跳转
+     */
+    private void goToSummary() {
+        Intent intent = new Intent(BaseRunningActivity.this, SummaryActivity.class);
+        startActivity(intent);
+    }
 }

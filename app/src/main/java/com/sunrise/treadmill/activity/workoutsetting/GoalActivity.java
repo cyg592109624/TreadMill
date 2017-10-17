@@ -9,7 +9,7 @@ import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.dialog.workoutsetting.GoalSetValueDialog;
-import com.sunrise.treadmill.interfaces.OnGoalSetValueReturn;
+import com.sunrise.treadmill.interfaces.workoutsetting.OnGoalSetValueReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.views.MyWorkOutHead;
@@ -25,12 +25,8 @@ import butterknife.OnClick;
  */
 
 public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValueReturn {
-    public static final String SetTg = "SetTg";
-    public static final String SetTgValue = "SetTgValue";
-
-    public static final String SetTimeValue = "SetTimeValue";
-    public static final String SetDistanceValue = "SetDistanceValue";
-    public static final String SetCalValue = "SetCalValue";
+    public static final String CHANGE_TG = "CHANGE_TG";
+    public static final String CHANGE_TG_VALUE = "CHANGE_TG_VALUE";
 
     @BindView(R.id.workout_mode_head)
     MyWorkOutHead headView;
@@ -73,38 +69,35 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
         }
     }
 
-    private static int changeTg = -1;
-    private static final int changeTime = 1001;
-    private static final int changeDistance = 1002;
-    private static final int changeCal = 1003;
 
     private GoalSetValueDialog dialog;
+
     @OnClick({R.id.workout_mode_goal_time, R.id.workout_mode_goal_distance, R.id.workout_mode_goal_calories})
     public void changeGoalValue(View view) {
         Bundle bundle = new Bundle();
-        boolean hasSelect=true;
+        boolean hasSelect = true;
         switch (view.getId()) {
             default:
-                hasSelect=false;
+                hasSelect = false;
                 break;
             case R.id.workout_mode_goal_time:
-                changeTg = changeTime;
-                bundle.putString(SetTgValue, timeValue.getText().toString());
-                bundle.putString(SetTg, SetTimeValue);
+                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_TIME;
+                bundle.putString(CHANGE_TG_VALUE, timeValue.getText().toString());
+                bundle.putInt(CHANGE_TG, WorkOutSettingCommon.CHANGE_TIME);
                 break;
             case R.id.workout_mode_goal_distance:
-                changeTg = changeDistance;
-                bundle.putString(SetTgValue, distanceValue.getText().toString());
-                bundle.putString(SetTg, SetDistanceValue);
+                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_DISTANCE;
+                bundle.putString(CHANGE_TG_VALUE, distanceValue.getText().toString());
+                bundle.putInt(CHANGE_TG, WorkOutSettingCommon.CHANGE_DISTANCE);
                 break;
             case R.id.workout_mode_goal_calories:
-                changeTg = changeCal;
-                bundle.putString(SetTgValue, calValue.getText().toString());
-                bundle.putString(SetTg, SetCalValue);
+                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_CALORIES;
+                bundle.putString(CHANGE_TG_VALUE, calValue.getText().toString());
+                bundle.putInt(CHANGE_TG, WorkOutSettingCommon.CHANGE_CALORIES);
                 break;
         }
-        if(hasSelect){
-            if(dialog==null){
+        if (hasSelect) {
+            if (dialog == null) {
                 dialog = new GoalSetValueDialog();
             }
             dialog.setArguments(bundle);
@@ -114,20 +107,20 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
 
     @Override
     public void onGoalSetValueResult(String result) {
-        switch (changeTg) {
+        switch (WorkOutSettingCommon.changeTg) {
             default:
                 break;
-            case changeTime:
+            case WorkOutSettingCommon.CHANGE_TIME:
                 timeValue.setText(result);
                 break;
-            case changeDistance:
+            case WorkOutSettingCommon.CHANGE_DISTANCE:
                 distanceValue.setText(result);
                 break;
-            case changeCal:
+            case WorkOutSettingCommon.CHANGE_CALORIES:
                 calValue.setText(result);
                 break;
         }
-        changeTg = changeTg;
+        WorkOutSettingCommon.changeTg = WorkOutSettingCommon.RE_SET;
     }
 
     @OnClick({R.id.workout_mode_start_1})
@@ -138,7 +131,6 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
     @OnClick(R.id.bottom_logo_tab_home)
     public void onBackHome() {
         finishActivity();
-        onDestroy();
     }
 
 }

@@ -19,9 +19,9 @@
     </style>
 
     <style name="Dialog_No_BG">
-        <item name="android:background">@drawable/bg_dialog3</item>
+        <item name="android:background">@drawable/bg_dialog_3</item>
         <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowBackground">@drawable/bg_dialog3</item>
+        <item name="android:windowBackground">@drawable/bg_dialog_3</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowFrame">@null</item>

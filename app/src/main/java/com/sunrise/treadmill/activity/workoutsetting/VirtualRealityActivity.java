@@ -3,6 +3,7 @@ package com.sunrise.treadmill.activity.workoutsetting;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,13 +12,13 @@ import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.adapter.WorkOutVRAdapter;
+import com.sunrise.treadmill.adapter.workoutsetting.VrViewPageAdapter;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
-import com.sunrise.treadmill.fragments.workoutsetting.VRFragmentPage1;
-import com.sunrise.treadmill.fragments.workoutsetting.VRFragmentPage2;
-import com.sunrise.treadmill.fragments.workoutsetting.VRFragmentPage3;
+import com.sunrise.treadmill.fragments.workoutsetting.VrFragmentPage1;
+import com.sunrise.treadmill.fragments.workoutsetting.VrFragmentPage2;
+import com.sunrise.treadmill.fragments.workoutsetting.VrFragmentPage3;
 import com.sunrise.treadmill.interfaces.OnKeyBoardReturn;
-import com.sunrise.treadmill.interfaces.OnVRSelectReturn;
+import com.sunrise.treadmill.interfaces.workoutsetting.OnVrSelectReturn;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
@@ -32,23 +33,24 @@ import butterknife.OnClick;
 
 /**
  * Created by ChuHui on 2017/9/26.
+ * @author cyg
  */
 
-public class VirtualRealityActivity extends BaseFragmentActivity implements ViewPager.OnPageChangeListener, OnVRSelectReturn, OnKeyBoardReturn {
-    public static final String SelectVRNum = "SelectVRNum";
+public class VirtualRealityActivity extends BaseFragmentActivity implements ViewPager.OnPageChangeListener, OnVrSelectReturn, OnKeyBoardReturn {
+    public static final String SELECT_VRNUM = "SELECT_VRNUM";
 
-    public static final int selectNothing = -1;
-    public static final int tgValue_1 = 10001;
-    public static final int tgValue_2 = 10002;
-    public static final int tgValue_3 = 10003;
-    public static final int tgValue_4 = 10004;
-    public static final int tgValue_5 = 10005;
-    public static final int tgValue_6 = 10006;
-    public static final int tgValue_7 = 10007;
-    public static final int tgValue_8 = 10008;
-    public static final int tgValue_9 = 10009;
-    public static final int tgValue_10 = 10010;
-    public static final int tgValue_11 = 10011;
+    public static final int SELECT_NOTHING = -1;
+    public static final int TG_VALUE_1 = 10001;
+    public static final int TG_VALUE_2 = 10002;
+    public static final int TG_VALUE_3 = 10003;
+    public static final int TG_VALUE_4 = 10004;
+    public static final int TG_VALUE_5 = 10005;
+    public static final int TG_VALUE_6 = 10006;
+    public static final int TG_VALUE_7 = 10007;
+    public static final int TG_VALUE_8 = 10008;
+    public static final int TG_VALUE_9 = 10009;
+    public static final int TG_VALUE_10 = 10010;
+    public static final int TG_VALUE_11 = 10011;
 
     @BindView(R.id.workout_mode_head)
     MyWorkOutHead headView;
@@ -82,7 +84,7 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
     ImageView backBtn;
 
 
-    private WorkOutVRAdapter fragmentAdapter;
+    private VrViewPageAdapter fragmentAdapter;
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -100,13 +102,13 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
         keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
 
         List<Fragment> list = new ArrayList<Fragment>();
-        list.add(new VRFragmentPage1());
-        list.add(new VRFragmentPage2());
-        list.add(new VRFragmentPage3());
-        fragmentAdapter = new WorkOutVRAdapter(fragmentManager, list);
+        list.add(new VrFragmentPage1());
+        list.add(new VrFragmentPage2());
+        list.add(new VrFragmentPage3());
+        fragmentAdapter = new VrViewPageAdapter(fragmentManager, list);
         viewPage.setAdapter(fragmentAdapter);
         viewPage.setCurrentItem(0);
-        viewPage.setOnPageChangeListener(this);
+        viewPage.addOnPageChangeListener(this);
     }
 
     @Override
@@ -152,11 +154,12 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
 
     @Override
     public void onVRSelect(int vrNum) {
-        if (vrNum != selectNothing) {
+        if (vrNum != SELECT_NOTHING) {
             showOptionBody(false);
             changeSelectVRImage(vrNum);
         }
     }
+
     @Override
     public void onKeyBoardEnter(String result) {
         editValue.setText(result);
@@ -168,14 +171,13 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
         backBtn.setEnabled(true);
         selectVRImage.setVisibility(View.VISIBLE);
         keyBoardView.setVisibility(View.GONE);
-        TextUtils.changeTextColor(editValue, getResources().getColor(R.color.workout_mode_white));
+        TextUtils.changeTextColor(editValue, ContextCompat.getColor(getApplicationContext(), (R.color.workout_mode_white)));
         TextUtils.changeTextBackground(editValue, R.mipmap.btn_virtual_time_1);
     }
 
     @OnClick(R.id.bottom_logo_tab_home)
     public void onBackHome() {
         finishActivity();
-        onDestroy();
     }
 
     @OnClick(R.id.dialog_workout_vr_edit_time)
@@ -185,7 +187,7 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
         selectVRImage.setVisibility(View.GONE);
         keyBoardView.setVisibility(View.VISIBLE);
 
-        TextUtils.changeTextColor(editValue, getResources().getColor(R.color.workout_mode_select));
+        TextUtils.changeTextColor(editValue, ContextCompat.getColor(getApplicationContext(), R.color.workout_mode_select));
         TextUtils.changeTextBackground(editValue, R.mipmap.btn_virtual_time_2);
     }
 
@@ -194,11 +196,11 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
         showOptionBody(true);
     }
 
-    private void showOptionBody(boolean isShowOptionBody1){
-        if(isShowOptionBody1){
+    private void showOptionBody(boolean isShowOptionBody1) {
+        if (isShowOptionBody1) {
             optionBody.setVisibility(View.VISIBLE);
             optionBody2.setVisibility(View.GONE);
-        }else {
+        } else {
             optionBody.setVisibility(View.GONE);
             optionBody2.setVisibility(View.VISIBLE);
         }
@@ -208,34 +210,34 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
         switch (vrNum) {
             default:
                 break;
-            case VirtualRealityActivity.tgValue_1:
+            case VirtualRealityActivity.TG_VALUE_1:
                 ImageUtils.changeImageView(selectVRImage, R.mipmap.img_program_virtual_01_4);
                 break;
-            case VirtualRealityActivity.tgValue_2:
+            case VirtualRealityActivity.TG_VALUE_2:
                 ImageUtils.changeImageView(selectVRImage, R.mipmap.img_program_virtual_02_4);
                 break;
-            case VirtualRealityActivity.tgValue_3:
+            case VirtualRealityActivity.TG_VALUE_3:
                 ImageUtils.changeImageView(selectVRImage, R.mipmap.img_program_virtual_03_4);
                 break;
-            case VirtualRealityActivity.tgValue_4:
+            case VirtualRealityActivity.TG_VALUE_4:
                 ImageUtils.changeImageView(selectVRImage, R.mipmap.img_program_virtual_04_4);
                 break;
-            case VirtualRealityActivity.tgValue_5:
+            case VirtualRealityActivity.TG_VALUE_5:
                 ImageUtils.changeImageView(selectVRImage, R.mipmap.img_program_virtual_05_4);
                 break;
-            case VirtualRealityActivity.tgValue_6:
+            case VirtualRealityActivity.TG_VALUE_6:
                 ImageUtils.changeImageView(selectVRImage, R.mipmap.img_program_virtual_06_4);
                 break;
-            case VirtualRealityActivity.tgValue_7:
+            case VirtualRealityActivity.TG_VALUE_7:
                 ImageUtils.changeImageView(selectVRImage, R.mipmap.img_program_virtual_07_4);
                 break;
-            case VirtualRealityActivity.tgValue_8:
+            case VirtualRealityActivity.TG_VALUE_8:
                 ImageUtils.changeImageView(selectVRImage, R.mipmap.img_program_virtual_08_4);
                 break;
-            case VirtualRealityActivity.tgValue_9:
+            case VirtualRealityActivity.TG_VALUE_9:
                 ImageUtils.changeImageView(selectVRImage, R.mipmap.img_program_virtual_09_4);
                 break;
-            case VirtualRealityActivity.tgValue_10:
+            case VirtualRealityActivity.TG_VALUE_10:
                 ImageUtils.changeImageView(selectVRImage, R.mipmap.img_program_virtual_10_4);
                 break;
         }

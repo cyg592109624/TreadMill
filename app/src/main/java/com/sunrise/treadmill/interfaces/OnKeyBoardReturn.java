@@ -5,6 +5,14 @@ package com.sunrise.treadmill.interfaces;
  */
 
 public interface OnKeyBoardReturn {
+    /**
+     *  输入结果
+     * @param result 返回输入结果
+     */
     void onKeyBoardEnter(String result);
+
+    /**
+     * 关闭动作触发
+     */
     void onKeyBoardClose();
 }
