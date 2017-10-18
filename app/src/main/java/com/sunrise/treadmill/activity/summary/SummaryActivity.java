@@ -39,19 +39,14 @@ public class SummaryActivity extends BaseFragmentActivity implements ViewPager.O
 
     @Override
     protected void init() {
-        ThreadPoolUtils.runTaskOnThread(new Runnable() {
-            @Override
-            public void run() {
-                List<Fragment> list = new ArrayList<Fragment>();
-                list.add(new SummaryFragmentPage1());
-                list.add(new SummaryFragmentPage2());
-                list.add(new SummaryFragmentPage3());
-                viewPageAdapter = new SummaryViewPageAdapter(fragmentManager, list);
-                viewPager.setAdapter(viewPageAdapter);
-                viewPager.setCurrentItem(0);
-                viewPager.addOnPageChangeListener(SummaryActivity.this);
-            }
-        });
+        List<Fragment> list = new ArrayList<Fragment>();
+        list.add(new SummaryFragmentPage1());
+        list.add(new SummaryFragmentPage2());
+        list.add(new SummaryFragmentPage3());
+        viewPageAdapter = new SummaryViewPageAdapter(fragmentManager, list);
+        viewPager.setAdapter(viewPageAdapter);
+        viewPager.setCurrentItem(0);
+        viewPager.addOnPageChangeListener(SummaryActivity.this);
     }
 
     @Override

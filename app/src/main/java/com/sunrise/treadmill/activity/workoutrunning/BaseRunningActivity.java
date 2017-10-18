@@ -277,7 +277,16 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
                 changeLevel(-1);
                 break;
         }
+    }
 
+    private void bindServer() {
+        ThreadPoolUtils.runTaskOnThread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(BaseRunningActivity.this, FloatWindowService.class);
+                bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
+            }
+        });
     }
 
     private void animLeftView(boolean isScale) {
@@ -371,15 +380,6 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         });
     }
 
-    private void bindServer() {
-        ThreadPoolUtils.runTaskOnThread(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(BaseRunningActivity.this, FloatWindowService.class);
-                bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
-            }
-        });
-    }
 
     private int curLevel = 0;
 
