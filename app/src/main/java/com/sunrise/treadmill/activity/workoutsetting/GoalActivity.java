@@ -9,10 +9,10 @@ import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.dialog.workoutsetting.GoalSetValueDialog;
-import com.sunrise.treadmill.interfaces.workoutsetting.OnGoalSetValueReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnGoalSetValueReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.MyWorkOutHead;
+import com.sunrise.treadmill.views.workout.setting.WorkOutSettingHead;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
     public static final String CHANGE_TG_VALUE = "CHANGE_TG_VALUE";
 
     @BindView(R.id.workout_mode_head)
-    MyWorkOutHead headView;
+    WorkOutSettingHead headView;
 
     @BindView(R.id.workout_mode_goal_time)
     TextView timeValue;
@@ -44,6 +44,15 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
     @Override
     public int getLayoutId() {
         return R.layout.activity_workout_setting_goal;
+    }
+    @Override
+    public void clearObj() {
+        headView=null;
+        timeValue=null;
+        distanceValue=null;
+        calValue=null;
+        fragmentManager=null;
+        setContentView(R.layout.view_null);
     }
 
     @Override

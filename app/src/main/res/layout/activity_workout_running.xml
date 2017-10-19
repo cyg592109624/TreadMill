@@ -5,7 +5,10 @@
     android:background="@mipmap/bk_4"
     android:orientation="vertical">
 
-    <include layout="@layout/activity_workout_running_head" />
+    <com.sunrise.treadmill.views.workout.running.FloatWindowHead
+        android:id="@+id/workout_running_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:id="@+id/workout_running_body"
@@ -19,6 +22,9 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/activity_workout_running_bottom" />
+    <com.sunrise.treadmill.views.workout.running.FloatWindowBottom
+        android:id="@+id/workout_running_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

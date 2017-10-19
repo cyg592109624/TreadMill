@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.dialog.workoutrunning;
 
+import android.content.DialogInterface;
 import android.widget.ImageView;
 
 import com.sunrise.treadmill.R;
@@ -27,6 +28,12 @@ public class CountDownDialog extends BaseDialogFragment {
     }
 
     @Override
+    public void clearObj() {
+        img=null;
+        parentView=null;
+    }
+
+    @Override
     protected void init() {
         final AnimationsContainer.FramesSequenceAnimation animation = AnimationsContainer.getInstance(R.array.count_down, 1000).createProgressDialogAnim(img);
         animation.start();
@@ -38,5 +45,11 @@ public class CountDownDialog extends BaseDialogFragment {
                 dismiss();
             }
         }, 4000);
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        img=null;
     }
 }

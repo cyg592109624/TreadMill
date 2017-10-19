@@ -254,6 +254,7 @@
         android:gravity="center"
         android:text="@string/unit_kph"
         android:textColor="@color/workout_mode_running_head_value"
+        android:textSize="28px"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_speed_value"
         app:layout_constraintTop_toBottomOf="@+id/workout_running_head_speed" />
 

@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.496" />
 
 
-    <com.sunrise.treadmill.views.MyKeyBoardView
+    <com.sunrise.treadmill.views.workout.setting.MyKeyBoardView
         android:id="@+id/dialog_workout_vr_keyboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

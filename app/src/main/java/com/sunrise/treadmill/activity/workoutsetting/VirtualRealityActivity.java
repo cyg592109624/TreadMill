@@ -17,13 +17,13 @@ import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.fragments.workoutsetting.VrFragmentPage1;
 import com.sunrise.treadmill.fragments.workoutsetting.VrFragmentPage2;
 import com.sunrise.treadmill.fragments.workoutsetting.VrFragmentPage3;
-import com.sunrise.treadmill.interfaces.OnKeyBoardReturn;
-import com.sunrise.treadmill.interfaces.workoutsetting.OnVrSelectReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnVrSelectReturn;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.MyKeyBoardView;
-import com.sunrise.treadmill.views.MyWorkOutHead;
+import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.WorkOutSettingHead;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
     public static final int TG_VALUE_11 = 10011;
 
     @BindView(R.id.workout_mode_head)
-    MyWorkOutHead headView;
+    WorkOutSettingHead headView;
 
     @BindView(R.id.workout_option_body)
     LinearLayout optionBody;
@@ -91,6 +91,23 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
     @Override
     public int getLayoutId() {
         return R.layout.activity_workout_setting_virtual_reality;
+    }
+
+    @Override
+    public void clearObj() {
+        headView=null;
+        optionBody=null;
+        optionBody2=null;
+        viewPage=null;
+        viewPageTg=null;
+        selectVRImage=null;
+        editValue=null;
+        keyBoardView=null;
+        startBtn=null;
+        backBtn=null;
+        fragmentAdapter=null;
+        fragmentManager=null;
+        setContentView(R.layout.view_null);
     }
 
     @Override

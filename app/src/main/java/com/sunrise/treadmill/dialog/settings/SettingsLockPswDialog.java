@@ -16,6 +16,11 @@ public class SettingsLockPswDialog extends BaseDialogFragment {
     }
 
     @Override
+    public void clearObj() {
+
+    }
+
+    @Override
     protected void init() {
 
     }

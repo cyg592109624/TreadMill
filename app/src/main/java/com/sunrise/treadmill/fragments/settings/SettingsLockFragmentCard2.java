@@ -8,10 +8,10 @@ import android.widget.TextView;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
-import com.sunrise.treadmill.interfaces.OnKeyBoardReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +40,14 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
     }
 
     @Override
+    public void clearObj() {
+        psw = null;
+        keyBoard = null;
+        reSet = null;
+        parentView = null;
+    }
+
+    @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
         txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_2_customer_psw));
@@ -62,7 +70,7 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
     @OnClick(R.id.settings_card4_2_reset)
     public void reSet(View view) {
         keyBoard.setVisibility(View.VISIBLE);
-        TextUtils.changeTextColor(psw,  ContextCompat.getColor(getContext(),R.color.settings_tabs_on));
+        TextUtils.changeTextColor(psw, ContextCompat.getColor(getContext(), R.color.settings_tabs_on));
     }
 
     @Override
@@ -73,6 +81,6 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
     @Override
     public void onKeyBoardClose() {
         keyBoard.setVisibility(View.INVISIBLE);
-        TextUtils.changeTextColor(psw, ContextCompat.getColor(getContext(),R.color.settings_white));
+        TextUtils.changeTextColor(psw, ContextCompat.getColor(getContext(), R.color.settings_white));
     }
 }

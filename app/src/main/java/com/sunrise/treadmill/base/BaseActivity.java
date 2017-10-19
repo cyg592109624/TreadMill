@@ -37,11 +37,18 @@ public abstract class BaseActivity extends Activity {
      * @return
      */
     public abstract int getLayoutId();
+    /**
+     * 清空资源引用
+     * @return
+     */
+    public abstract void clearObj();
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
+
     protected void setTextStyle() {
 
     }
@@ -50,6 +57,7 @@ public abstract class BaseActivity extends Activity {
     }
 
     public void finishActivity(){
+        clearObj();
         bind.unbind();
         activityManageUtils.finishActivity();
     }

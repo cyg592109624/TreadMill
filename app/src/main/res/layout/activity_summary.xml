@@ -20,19 +20,19 @@
 
 
     <ImageView
-    android:id="@+id/summary_fragment_img"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingBottom="2dp"
-    android:paddingTop="2dp"
-    android:src="@mipmap/img_virtual_reality_page_1"
-    app:layout_constraintBottom_toTopOf="@+id/myBottomTabView1"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="1.0" />
+        android:id="@+id/summary_fragment_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        android:src="@mipmap/img_virtual_reality_page_1"
+        app:layout_constraintBottom_toTopOf="@+id/myBottomTabView1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <com.sunrise.treadmill.views.MyBottomTabView1
+    <com.sunrise.treadmill.views.MainBottomTabView2
         android:id="@+id/myBottomTabView1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

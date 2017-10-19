@@ -7,13 +7,13 @@ import android.widget.TextView;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseActivity;
-import com.sunrise.treadmill.interfaces.workoutsetting.OnGenderReturn;
-import com.sunrise.treadmill.interfaces.OnKeyBoardReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnGenderReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.MyGenderView;
-import com.sunrise.treadmill.views.MyKeyBoardView;
-import com.sunrise.treadmill.views.MyWorkOutHead;
+import com.sunrise.treadmill.views.workout.setting.MyGenderView;
+import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.WorkOutSettingHead;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import butterknife.OnClick;
 
 public class IntervalActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
     @BindView(R.id.workout_mode_head)
-    MyWorkOutHead headView;
+    WorkOutSettingHead headView;
 
     @BindView(R.id.workout_mode_gender_select)
     MyGenderView genderView;
@@ -45,6 +45,17 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
     @Override
     public int getLayoutId() {
         return R.layout.activity_workout_setting_interval;
+    }
+
+    @Override
+    public void clearObj() {
+        headView=null;
+        genderView=null;
+        keyBoardView=null;
+        ageValue=null;
+        weightValue=null;
+        timeValue=null;
+        setContentView(R.layout.view_null);
     }
 
     @Override

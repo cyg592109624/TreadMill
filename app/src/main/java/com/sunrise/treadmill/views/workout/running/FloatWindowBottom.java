@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.views;
+package com.sunrise.treadmill.views.workout.running;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.interfaces.services.FloatWindowBottomCallBack;
+import com.sunrise.treadmill.interfaces.services.RunningActivityBottomCallBack;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -34,22 +35,30 @@ public class FloatWindowBottom extends ConstraintLayout {
 
     @OnClick(R.id.workout_running_level_up)
     public void levelUp() {
-        windowBottomCallBack.onLevelUp();
+        if (windowBottomCallBack != null) {
+            windowBottomCallBack.onLevelUp();
+        }
     }
 
     @OnClick(R.id.workout_running_level_down)
     public void levelDown() {
-        windowBottomCallBack.onLevelDown();
+        if (windowBottomCallBack != null) {
+            windowBottomCallBack.onLevelDown();
+        }
     }
 
     @OnClick(R.id.workout_running_windy)
     public void windyChange() {
-        windowBottomCallBack.onWindyClick();
+        if (windowBottomCallBack != null) {
+            windowBottomCallBack.onWindyClick();
+        }
     }
 
     @OnClick(R.id.workout_running_stop)
     public void sportStop() {
-        windowBottomCallBack.onStopClick();
+        if (windowBottomCallBack != null) {
+            windowBottomCallBack.onStopClick();
+        }
     }
 
     public void setWindowBottomCallBack(FloatWindowBottomCallBack callBack) {

@@ -5,6 +5,8 @@ package com.sunrise.treadmill;
  */
 
 public class Constant {
+    public static int initialFinish=-1;
+
     public static final String APP_LANGUAGE = "APP_LANGUAGE";
 
     public static final String APP_MACHINE_TYPE = "APP_MACHINE_TYPE";
@@ -19,7 +21,7 @@ public class Constant {
     public static final String WORK_OUT_MODE_HRC = "HRC";
     public static final String WORK_OUT_MODE_VR = "Virtual Reality";
     public static final String WORK_OUT_MODE_USER_PROGRAM = "User Program";
-    public static final String WorkOutMode_QUICK_START = "Quick Start";
+    public static final String WORK_OUT_MODE_QUICK_START = "Quick Start";
 
 
     public static final int WORK_OUT_MODE_1 = 40001;

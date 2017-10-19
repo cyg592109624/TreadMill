@@ -72,6 +72,15 @@ public class NfcActivity extends BaseFragmentActivity {
     }
 
     @Override
+    public void clearObj() {
+        nfc=null;
+        fragmentManager=null;
+        mHandler=null;
+        nfcDialog=null;
+        setContentView(R.layout.view_null);
+    }
+
+    @Override
     protected void init() {
         mHandler.sendEmptyMessageDelayed(CHANGE_IMG_1, 1000);
         mHandler.sendEmptyMessageDelayed(STOP_CHANGE, 4000);

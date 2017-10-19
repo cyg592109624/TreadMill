@@ -37,6 +37,14 @@ public class Factory2FragmentCard2 extends BaseFragment {
     }
 
     @Override
+    public void clearObj() {
+        reSet = null;
+        totalTime = null;
+        totalDistance = null;
+        parentView = null;
+    }
+
+    @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
 

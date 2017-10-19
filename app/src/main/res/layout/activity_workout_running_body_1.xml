@@ -25,7 +25,7 @@
             android:scaleType="fitXY"
             android:src="@mipmap/img_sportmode_profile_level_calibration_2" />
 
-        <com.sunrise.treadmill.views.LevelView
+        <com.sunrise.treadmill.views.workout.LevelView
             android:id="@+id/workout_running_level_view"
             android:layout_width="200dp"
             android:layout_height="86dp"

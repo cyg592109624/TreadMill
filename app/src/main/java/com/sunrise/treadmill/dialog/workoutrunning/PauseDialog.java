@@ -2,15 +2,12 @@ package com.sunrise.treadmill.dialog.workoutrunning;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutrunning.BaseRunningActivity;
-import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity;
 import com.sunrise.treadmill.base.BaseDialogFragment;
-import com.sunrise.treadmill.interfaces.workoutrunning.PauseDialogClick;
+import com.sunrise.treadmill.interfaces.workout.running.DialogPauseClick;
 
-import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -24,12 +21,13 @@ import butterknife.OnClick;
 
 public class PauseDialog extends BaseDialogFragment {
     public static final String TAG = "PauseDialog";
-    private PauseDialogClick pauseDialogClick;
+    private DialogPauseClick pauseDialogClick;
     private ScheduledExecutorService pool;
     private int delayTime=60000*3;
     private TimerTask task=new TimerTask() {
         @Override
         public void run() {
+            dismiss();
             pauseDialogClick.onPauseTimeOut();
         }
     };
@@ -45,6 +43,13 @@ public class PauseDialog extends BaseDialogFragment {
         return R.layout.dialog_workout_running_pause;
     }
 
+    @Override
+    public void clearObj() {
+        pauseDialogClick = null;
+        pool = null;
+        task = null;
+
+    }
     @Override
     protected void init() {
         pauseDialogClick=(BaseRunningActivity)getActivity();

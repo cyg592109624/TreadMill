@@ -32,6 +32,12 @@ public class Factory1Activity extends BaseActivity {
     }
 
     @Override
+    public void clearObj() {
+        backHome=null;
+        setContentView(R.layout.view_null);
+    }
+
+    @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
         txtList.add((TextView) findViewById(R.id.factory_1_title));

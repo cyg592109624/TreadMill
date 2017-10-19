@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.services.workoutrunning;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.Service;
 import android.content.ComponentName;
@@ -12,14 +13,16 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.workoutrunning.BaseRunningActivity;
+import com.sunrise.treadmill.base.BaseActivity;
+import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.interfaces.services.FloatWindowBottomCallBack;
-import com.sunrise.treadmill.views.FloatWindowBottom;
-import com.sunrise.treadmill.views.FloatWindowHead;
+import com.sunrise.treadmill.utils.DensityUtils;
+import com.sunrise.treadmill.views.workout.running.FloatWindowBottom;
+import com.sunrise.treadmill.views.workout.running.FloatWindowHead;
 
 
 /**
@@ -27,19 +30,27 @@ import com.sunrise.treadmill.views.FloatWindowHead;
  */
 
 public class FloatWindowService extends Service implements FloatWindowBottomCallBack {
-
     private final int FloatWindowNotification = 62111;
     private String runningActivityName = "";
 
+    private static final int LEVEL_UP = 1;
+
+    private static final int LEVEL_DOWN = -1;
+
+    private BaseRunningActivity activity;
+
     private WindowManager mWindowManager;
 
-    private WindowManager.LayoutParams headParams;
-    private WindowManager.LayoutParams bottomParams;
+    private WindowManager.LayoutParams paramsHead;
+    private WindowManager.LayoutParams paramsBottom;
+
     private WindowManager.LayoutParams dialogParams;
 
     private FloatWindowHead floatWindowHead;
     private FloatWindowBottom floatWindowBottom;
-    private ConstraintLayout pauseDialog;
+
+    private ConstraintLayout dialogPause;
+    private ConstraintLayout dialogCoolDown;
 
     private final IBinder floatBinder = new FloatBinder();
 
@@ -71,7 +82,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         stageService();
         initWindowParams();
         initFloatWindow();
-        initStopDialog();
+        initDialog();
     }
 
     @Override
@@ -80,19 +91,19 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         stopForeground(true);
     }
 
-
     @Override
     public void onLevelUp() {
-        floatWindowHead.levelChange(1);
+        floatWindowHead.levelChange(LEVEL_UP);
     }
 
     @Override
     public void onLevelDown() {
-        floatWindowHead.levelChange(-1);
+        floatWindowHead.levelChange(LEVEL_DOWN);
     }
 
     @Override
     public void onWindyClick() {
+        activity.onLevelChange(floatWindowHead.curLevel);
         Intent intent = new Intent();
         ComponentName componentName = new ComponentName("com.sunrise.treadmill", runningActivityName);
         intent.setAction(runningActivityName);
@@ -104,7 +115,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     @Override
     public void onStopClick() {
-        mWindowManager.addView(pauseDialog, bottomParams);
+        mWindowManager.addView(dialogPause, paramsBottom);
     }
 
     private boolean isShowView = false;
@@ -115,8 +126,8 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     public void toggleFloatWindow() {
         if (floatWindowHead != null && floatWindowBottom != null) {
             if (!isShowView) {
-                mWindowManager.addView(floatWindowHead, headParams);
-                mWindowManager.addView(floatWindowBottom, bottomParams);
+                mWindowManager.addView(floatWindowHead, paramsHead);
+                mWindowManager.addView(floatWindowBottom, paramsBottom);
             } else {
                 mWindowManager.removeView(floatWindowHead);
                 mWindowManager.removeView(floatWindowBottom);
@@ -127,6 +138,14 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     public void setRunningActivityName(String activityName) {
         this.runningActivityName = activityName;
+    }
+
+    public void setActivity(BaseRunningActivity act) {
+        this.activity = act;
+    }
+
+    public void onLevelChange(int value) {
+        floatWindowHead.setLevelValue(value);
     }
 
     /**
@@ -146,13 +165,12 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
      * 设置LayoutParams
      */
     private void initWindowParams() {
-        headParams = setUpParams(0, -1080);
-        bottomParams = setUpParams(0, 1080);
-        dialogParams = setUpParams(0, 1080);
+        paramsHead = setUpParams(0, -1080);
+        paramsBottom = setUpParams(0, 1080);
+        dialogParams = setUpParams(0, DensityUtils.dp2px(getApplicationContext(), 52));
     }
 
     private WindowManager.LayoutParams setUpParams(int x, int y) {
-
         WindowManager.LayoutParams params = new WindowManager.LayoutParams();
         // 设置window type
         params.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
@@ -181,22 +199,19 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         floatWindowHead = new FloatWindowHead(getApplicationContext());
         floatWindowBottom = new FloatWindowBottom(getApplicationContext());
 
-        floatWindowHead.setLayoutParams(headParams);
+        floatWindowHead.setLayoutParams(paramsHead);
 
-        floatWindowBottom.setLayoutParams(bottomParams);
-        floatWindowBottom.setWindowBottomCallBack(this);
+        floatWindowBottom.setLayoutParams(paramsBottom);
+        floatWindowBottom.setWindowBottomCallBack(FloatWindowService.this);
     }
 
-    private void initStopDialog() {
-        pauseDialog = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_workout_running_pause, null);
-        pauseDialog.setLayoutParams(dialogParams);
+    private void initDialog() {
 
-        pauseDialog.findViewById(R.id.workout_running_pause_continue).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        dialogPause = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_workout_running_pause, null);
+        dialogCoolDown = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_workout_running_cool_down, null);
 
-            }
-        });
+        dialogPause.setLayoutParams(dialogParams);
+        dialogCoolDown.setLayoutParams(dialogParams);
     }
 
 }

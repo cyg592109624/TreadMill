@@ -31,7 +31,12 @@ public class Factory2FragmentCard3 extends BaseFragment {
     public int getLayoutId() {
         return R.layout.fragment_factory2_card_3;
     }
-
+    @Override
+    public void clearObj() {
+        card3UpData = null;
+        card3Back = null;
+        parentView = null;
+    }
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();

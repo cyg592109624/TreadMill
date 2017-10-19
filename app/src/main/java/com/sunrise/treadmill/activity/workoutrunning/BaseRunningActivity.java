@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
@@ -16,7 +17,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
@@ -26,17 +26,16 @@ import com.sunrise.treadmill.dialog.workoutrunning.CoolDownDialog;
 import com.sunrise.treadmill.dialog.workoutrunning.CountDownDialog;
 import com.sunrise.treadmill.dialog.workoutrunning.PauseDialog;
 import com.sunrise.treadmill.interfaces.services.FloatServiceBinder;
-import com.sunrise.treadmill.interfaces.workoutrunning.CoolDownDialogClick;
-import com.sunrise.treadmill.interfaces.workoutrunning.PauseDialogClick;
+import com.sunrise.treadmill.interfaces.services.FloatWindowBottomCallBack;
+import com.sunrise.treadmill.interfaces.workout.running.DialogCoolDownClick;
+import com.sunrise.treadmill.interfaces.workout.running.DialogPauseClick;
 import com.sunrise.treadmill.services.workoutrunning.FloatWindowService;
 import com.sunrise.treadmill.utils.AnimationsContainer;
 import com.sunrise.treadmill.utils.LanguageUtils;
-import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.utils.ThreadPoolUtils;
-import com.sunrise.treadmill.views.LevelView;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.sunrise.treadmill.views.workout.running.FloatWindowBottom;
+import com.sunrise.treadmill.views.workout.running.FloatWindowHead;
+import com.sunrise.treadmill.views.workout.LevelView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -45,24 +44,8 @@ import butterknife.OnClick;
  * Created by ChuHui on 2017/9/30.
  */
 
-public class BaseRunningActivity extends BaseFragmentActivity implements FloatServiceBinder,
-        AnimationsContainer.OnAnimationStoppedListener, PauseDialogClick, CoolDownDialogClick {
-
-    @BindView(R.id.workout_running_head_level_value)
-    TextView levelValue;
-    @BindView(R.id.workout_running_head_time_value)
-    TextView timeValue;
-    @BindView(R.id.workout_running_head_distance_value)
-    TextView distanceValue;
-    @BindView(R.id.workout_running_head_calories_value)
-    TextView caloriesValue;
-    @BindView(R.id.workout_running_head_pulse_value)
-    TextView pulseValue;
-    @BindView(R.id.workout_running_head_watt_value)
-    TextView wattValue;
-    @BindView(R.id.workout_running_head_speed_value)
-    TextView speedValue;
-
+public class BaseRunningActivity extends BaseFragmentActivity implements FloatServiceBinder, AnimationsContainer.OnAnimationStoppedListener,
+        DialogPauseClick, DialogCoolDownClick, FloatWindowBottomCallBack {
 
     @BindView(R.id.workout_running_body_1)
     LinearLayout leftView;
@@ -79,11 +62,14 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     @BindView(R.id.workout_running_media_ctrl_1)
     ImageView mediaCtrlImage;
 
+    @BindView(R.id.workout_running_head)
+    FloatWindowHead headView;
+
+    @BindView(R.id.workout_running_bottom)
+    FloatWindowBottom bottomView;
+
     private int parentWidth;
     private int parentHeight;
-
-    private static final int MAX_LEVEL=30;
-    private static final int MIN_LEVEL=0;
 
     private FragmentManager fragmentManager;
     public PackageManager packageManager;
@@ -114,54 +100,36 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     }
 
     @Override
+    public void clearObj() {
+        leftView = null;
+        rightLayout = null;
+        levelView = null;
+        mediaView = null;
+        mediaCtrlImage = null;
+        headView = null;
+        bottomView = null;
+        fragmentManager = null;
+        packageManager = null;
+        floatWindowServer = null;
+        setContentView(R.layout.view_null);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        bindServer();
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     protected void init() {
         serviceBinderFinish = BaseRunningActivity.this;
         packageManager = getApplicationContext().getPackageManager();
         fragmentManager = getSupportFragmentManager();
-        bindServer();
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getRealMetrics(dm);
         parentWidth = dm.widthPixels;
         parentHeight = dm.heightPixels;
-    }
-
-    @Override
-    protected void setTextStyle() {
-        List<TextView> txtList = new ArrayList<>();
-        txtList.add((TextView) findViewById(R.id.workout_running_head_level));
-        txtList.add((TextView) findViewById(R.id.workout_running_head_time));
-        txtList.add((TextView) findViewById(R.id.workout_running_head_distance));
-        txtList.add((TextView) findViewById(R.id.workout_running_head_calories));
-        txtList.add((TextView) findViewById(R.id.workout_running_head_pulse));
-        txtList.add((TextView) findViewById(R.id.workout_running_head_watt));
-        txtList.add((TextView) findViewById(R.id.workout_running_head_speed));
-
-        txtList.add(levelValue);
-        txtList.add(timeValue);
-        txtList.add(distanceValue);
-        txtList.add(caloriesValue);
-        txtList.add(pulseValue);
-        txtList.add(wattValue);
-        txtList.add(speedValue);
-        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(this));
-        } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(this));
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (floatWindowServer != null) {
-            floatWindowServer.toggleFloatWindow();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unbindService(floatWindowConnection);
+        bottomView.setWindowBottomCallBack(this);
     }
 
     private int loadAtOnce = 1;
@@ -170,9 +138,25 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (loadAtOnce == 1) {
-            setUpLevelView();
             showCountDownDialog();
+            setUpLevelView();
             loadAtOnce += 1;
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        floatWindowServer.toggleFloatWindow();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            unbindService(floatWindowConnection);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -181,6 +165,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         if (iBinder != null) {
             floatWindowServer = ((FloatWindowService.FloatBinder) iBinder).getService();
             floatWindowServer.setRunningActivityName(getPackageName() + "." + getLocalClassName());
+            floatWindowServer.setActivity(BaseRunningActivity.this);
         }
     }
 
@@ -191,7 +176,32 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @Override
     public void animationStopped() {
-        //倒数结束时触发
+
+    }
+
+    @Override
+    public void onLevelUp() {
+        headView.levelChange(1);
+    }
+
+    @Override
+    public void onLevelDown() {
+        headView.levelChange(-1);
+    }
+
+    @Override
+    public void onWindyClick() {
+    }
+
+    @Override
+    public void onStopClick() {
+        ShowPauseDialog();
+    }
+
+    @Override
+    public void onCoolDownSkip() {
+        finishActivity();
+        goToSummary();
     }
 
     @Override
@@ -206,15 +216,9 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @Override
     public void onPauseTimeOut() {
-        //进入统计页面
-        goToSummary();
+
     }
 
-    @Override
-    public void onCoolDownSkip() {
-        //进入统计页面
-        goToSummary();
-    }
 
     private boolean isShowView = false;
     private boolean isAnimLeftView = false;
@@ -257,36 +261,6 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
                 animRightView(false);
             }
         }
-    }
-
-    @OnClick(R.id.workout_running_stop)
-    public void stopSport() {
-        PauseDialog pauseDialog = new PauseDialog();
-        pauseDialog.show(fragmentManager, PauseDialog.TAG);
-    }
-
-    @OnClick({R.id.workout_running_level_up, R.id.workout_running_level_down})
-    public void changeLevel(View view) {
-        switch (view.getId()) {
-            default:
-                break;
-            case R.id.workout_running_level_up:
-                changeLevel(1);
-                break;
-            case R.id.workout_running_level_down:
-                changeLevel(-1);
-                break;
-        }
-    }
-
-    private void bindServer() {
-        ThreadPoolUtils.runTaskOnThread(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(BaseRunningActivity.this, FloatWindowService.class);
-                bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
-            }
-        });
     }
 
     private void animLeftView(boolean isScale) {
@@ -350,6 +324,16 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         animator.start();
     }
 
+    private void bindServer() {
+        ThreadPoolUtils.runTaskOnThread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(BaseRunningActivity.this, FloatWindowService.class);
+                bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
+            }
+        });
+    }
+
     private void setUpLevelView() {
         levelView.setColumnMargin(1f);
         levelView.calcLength();
@@ -370,6 +354,16 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         });
     }
 
+    private void ShowPauseDialog() {
+        ThreadPoolUtils.runTaskOnThread(new Runnable() {
+            @Override
+            public void run() {
+                PauseDialog pauseDialog = new PauseDialog();
+                pauseDialog.show(fragmentManager, PauseDialog.TAG);
+            }
+        });
+    }
+
     private void showCoolDownDialog() {
         ThreadPoolUtils.runTaskOnThread(new Runnable() {
             @Override
@@ -380,22 +374,6 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         });
     }
 
-
-    private int curLevel = 0;
-
-    private void changeLevel(int i) {
-        curLevel += i;
-        if (curLevel > MAX_LEVEL) {
-            curLevel = MAX_LEVEL;
-            return;
-        }
-        if (curLevel < MIN_LEVEL) {
-            curLevel = MIN_LEVEL;
-            return;
-        }
-        levelValue.setText(curLevel + "");
-    }
-
     /**
      * 跳转到summary界面
      * 必然带数据跳转
@@ -403,5 +381,9 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     private void goToSummary() {
         Intent intent = new Intent(BaseRunningActivity.this, SummaryActivity.class);
         startActivity(intent);
+    }
+
+    public void onLevelChange(int value) {
+        headView.setLevelValue(value);
     }
 }

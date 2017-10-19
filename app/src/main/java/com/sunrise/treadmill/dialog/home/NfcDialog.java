@@ -31,7 +31,10 @@ public class NfcDialog extends BaseDialogFragment {
     public int getLayoutId() {
         return R.layout.dialog_home_nfc;
     }
-
+    @Override
+    public void clearObj() {
+        mHandler=null;
+    }
     @Override
     public void init() {
         mHandler.sendEmptyMessageDelayed(CLOSE_DIALOG, 2000);

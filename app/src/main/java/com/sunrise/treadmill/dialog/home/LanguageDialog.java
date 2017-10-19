@@ -38,7 +38,12 @@ public class LanguageDialog extends BaseDialogFragment {
     public int getLayoutId() {
         return R.layout.dialog_home_language;
     }
-
+    @Override
+    public void clearObj() {
+        dialogFragmentReturn=null;
+        imageViews=null;
+        textViews=null;
+    }
     @Override
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {

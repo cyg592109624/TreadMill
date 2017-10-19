@@ -9,14 +9,14 @@ import android.widget.TextView;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseActivity;
-import com.sunrise.treadmill.interfaces.workoutsetting.OnGenderReturn;
-import com.sunrise.treadmill.interfaces.OnKeyBoardReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnGenderReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.LevelView;
-import com.sunrise.treadmill.views.MyGenderView;
-import com.sunrise.treadmill.views.MyKeyBoardView;
-import com.sunrise.treadmill.views.MyWorkOutHead;
+import com.sunrise.treadmill.views.workout.LevelView;
+import com.sunrise.treadmill.views.workout.setting.MyGenderView;
+import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.WorkOutSettingHead;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ import butterknife.OnClick;
 public class UserProgramActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
 
     @BindView(R.id.workout_mode_head)
-    MyWorkOutHead headView;
+    WorkOutSettingHead headView;
 
     @BindView(R.id.workout_option_body)
     LinearLayout optionBody;
@@ -67,6 +67,23 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
     @Override
     public int getLayoutId() {
         return R.layout.activity_workout_setting_user_program;
+    }
+
+    @Override
+    public void clearObj() {
+        headView=null;
+        optionBody=null;
+        optionBody2=null;
+        genderView=null;
+        keyBoardView=null;
+        levelView=null;
+        ageValue=null;
+        weightValue=null;
+        timeValue=null;
+        nextImage=null;
+        backImage=null;
+        startImage=null;
+        setContentView(R.layout.view_null);
     }
 
     @Override

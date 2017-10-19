@@ -19,4 +19,9 @@ public class HomeFragmentPage3 extends BaseFragment {
     public int getLayoutId() {
         return R.layout.fragment_home_page_3;
     }
+
+    @Override
+    public void clearObj() {
+        parentView = null;
+    }
 }

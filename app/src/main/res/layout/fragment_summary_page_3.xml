@@ -9,7 +9,7 @@
     android:paddingRight="14dp"
     android:paddingTop="58dp">
 
-    <com.sunrise.treadmill.views.LineChat
+    <com.sunrise.treadmill.views.summary.LineChat
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -13,6 +13,7 @@
         android:id="@+id/workout_running_media_1"
         android:layout_width="306dp"
         android:layout_height="158dp"
+        android:visibility="invisible"
         android:background="@mipmap/btn_sportmode_media_3">
 
         <View

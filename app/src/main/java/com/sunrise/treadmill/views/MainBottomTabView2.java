@@ -14,20 +14,21 @@ import com.sunrise.treadmill.R;
  * Created by ChuHui on 2017/9/20.
  */
 
-public class MyBottomTabView1 extends LinearLayout {
-    private LogoImageView icon;
-    public MyBottomTabView1(Context context) {
+public class MainBottomTabView2 extends LinearLayout {
+    private ImageView icon;
+
+    public MainBottomTabView2(Context context) {
         this(context, null);
     }
 
-    public MyBottomTabView1(Context context, @Nullable AttributeSet attrs) {
+    public MainBottomTabView2(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MyBottomTabView1(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MainBottomTabView2(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        LayoutInflater.from(context).inflate(R.layout.bottom_logo_tab, this, true);
-        icon = (LogoImageView) findViewById(R.id.bottom_logo);
+        LayoutInflater.from(context).inflate(R.layout.bottom_logo_tab2, this, true);
+        icon = (ImageView)findViewById(R.id.bottom_logo);
         //这里应该有一个判断 来决定当前icon的外观
     }
 

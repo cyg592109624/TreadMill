@@ -30,6 +30,12 @@ public class InitialiteDialog extends BaseDialogFragment {
     }
 
     @Override
+    public void clearObj() {
+        img=null;
+        onInitialReturn=null;
+    }
+
+    @Override
     public void init() {
         onInitialReturn = (OnInitialReturn) getActivity();
         animal();

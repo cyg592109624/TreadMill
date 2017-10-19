@@ -39,6 +39,7 @@ public class BaseRunningActivityZh extends BaseRunningActivity {
             if (intent != null) {
                 startActivity(intent);
                 floatWindowServer.toggleFloatWindow();
+                floatWindowServer.onLevelChange(headView.curLevel);
                 media2Pop();
             }
         }
@@ -46,7 +47,6 @@ public class BaseRunningActivityZh extends BaseRunningActivity {
 
     @Override
     public int getLayoutId() {
-        System.out.println("getLayoutId()被调用");
         return R.layout.activity_workout_running_zh;
     }
 

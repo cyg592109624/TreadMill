@@ -7,7 +7,7 @@ import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutsetting.VirtualRealityActivity;
 import com.sunrise.treadmill.base.BaseFragment;
-import com.sunrise.treadmill.interfaces.workoutsetting.OnVrSelectReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnVrSelectReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
@@ -31,6 +31,12 @@ public class VrFragmentPage1 extends BaseFragment {
     @Override
     protected void init() {
         onVrSelectReturn = (OnVrSelectReturn) getActivity();
+    }
+
+    @Override
+    public void clearObj() {
+        onVrSelectReturn = null;
+        parentView = null;
     }
 
     @Override

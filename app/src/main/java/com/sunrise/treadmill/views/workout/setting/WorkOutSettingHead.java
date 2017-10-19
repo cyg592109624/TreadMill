@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.views;
+package com.sunrise.treadmill.views.workout.setting;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -14,21 +14,21 @@ import com.sunrise.treadmill.R;
  * Created by ChuHui on 2017/9/20.
  */
 
-public class MyWorkOutHead extends LinearLayout {
+public class WorkOutSettingHead extends LinearLayout {
     private TextView workOutMode;
 
     private TextView workOutHint;
     private ImageView workOutIcon;
 
-    public MyWorkOutHead(Context context) {
+    public WorkOutSettingHead(Context context) {
         this(context, null);
     }
 
-    public MyWorkOutHead(Context context, @Nullable AttributeSet attrs) {
+    public WorkOutSettingHead(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MyWorkOutHead(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public WorkOutSettingHead(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.workout_head, this, true);
         workOutMode = findViewById(R.id.workout_head_mode);

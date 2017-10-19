@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.views;
+package com.sunrise.treadmill.views.workout;
 
 import android.content.Context;
 import android.graphics.Bitmap;

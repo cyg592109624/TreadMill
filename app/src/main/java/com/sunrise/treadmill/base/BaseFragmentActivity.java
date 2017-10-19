@@ -35,6 +35,11 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
      * @return
      */
     public abstract int getLayoutId();
+    /**
+     * 清空资源引用
+     * @return
+     */
+    public abstract void clearObj();
 
     @Override
     protected void onDestroy() {
@@ -49,6 +54,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     }
 
     public void finishActivity() {
+        clearObj();
         activityManageUtils.finishActivity();
         System.gc();
     }

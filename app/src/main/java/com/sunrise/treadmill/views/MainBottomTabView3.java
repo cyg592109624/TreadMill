@@ -14,18 +14,18 @@ import com.sunrise.treadmill.R;
  * Created by ChuHui on 2017/9/20.
  */
 
-public class MyBottomTabView3 extends LinearLayout {
+public class MainBottomTabView3 extends LinearLayout {
     private ImageView icon;
 
-    public MyBottomTabView3(Context context) {
+    public MainBottomTabView3(Context context) {
         this(context, null);
     }
 
-    public MyBottomTabView3(Context context, @Nullable AttributeSet attrs) {
+    public MainBottomTabView3(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MyBottomTabView3(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MainBottomTabView3(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.bottom_logo_tab3, this, true);
         icon = (ImageView) findViewById(R.id.bottom_logo);

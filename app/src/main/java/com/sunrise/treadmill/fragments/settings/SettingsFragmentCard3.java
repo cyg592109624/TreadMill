@@ -13,4 +13,9 @@ public class SettingsFragmentCard3 extends BaseFragment {
     public int getLayoutId() {
         return R.layout.fragment_settings_card_3;
     }
+
+    @Override
+    public void clearObj() {
+        parentView = null;
+    }
 }

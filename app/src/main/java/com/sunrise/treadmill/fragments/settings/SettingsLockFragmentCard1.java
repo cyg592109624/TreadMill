@@ -9,10 +9,10 @@ import android.widget.TextView;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
-import com.sunrise.treadmill.interfaces.OnKeyBoardReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +65,20 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
     @Override
     public int getLayoutId() {
         return R.layout.fragment_settings_lock_card_1;
+    }
+
+    @Override
+    public void clearObj() {
+        leftLayout=null;
+        leftReset=null;
+        timeValue=null;
+        remainingTimeValue=null;
+        rightLayout=null;
+        distanceValue=null;
+        remainingDistanceValue=null;
+        rightKeyBoard=null;
+        leftKeyBoard=null;
+        parentView = null;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.views;
+package com.sunrise.treadmill.views.workout.setting;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.interfaces.workoutsetting.OnGenderReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnGenderReturn;
 
 /**
  * Created by ChuHui on 2017/9/20.

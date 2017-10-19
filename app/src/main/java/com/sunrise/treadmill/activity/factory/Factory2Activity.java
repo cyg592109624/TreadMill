@@ -53,7 +53,17 @@ public class Factory2Activity extends BaseFragmentActivity {
     public int getLayoutId() {
         return R.layout.activity_factory2;
     }
-
+    @Override
+    public void clearObj() {
+        bgView=null;
+        txtList=null;
+        backHome=null;
+        card1=null;
+        card2=null;
+        card3=null;
+        card4=null;
+        setContentView(R.layout.view_null);
+    }
     @Override
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {

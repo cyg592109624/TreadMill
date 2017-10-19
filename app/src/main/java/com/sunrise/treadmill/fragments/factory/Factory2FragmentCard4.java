@@ -26,6 +26,12 @@ public class Factory2FragmentCard4 extends BaseFragment {
     }
 
     @Override
+    public void clearObj() {
+        upDataLogo = null;
+        parentView = null;
+    }
+
+    @Override
     protected void setTextStyle() {
         TextView hint = (TextView) getParentView().findViewById(R.id.factory2_card4_hint);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {

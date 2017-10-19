@@ -15,4 +15,9 @@ public class HomeFragmentPage2Zh extends BaseFragment {
     public int getLayoutId() {
         return R.layout.fragment_home_page_2_zh;
     }
+
+    @Override
+    public void clearObj() {
+        parentView = null;
+    }
 }

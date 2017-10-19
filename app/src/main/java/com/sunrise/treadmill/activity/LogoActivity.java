@@ -34,6 +34,12 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
     }
 
     @Override
+    public void clearObj() {
+        lackOfPerms=null;
+        setContentView(R.layout.view_null);
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);

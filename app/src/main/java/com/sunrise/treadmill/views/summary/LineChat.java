@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.views;
+package com.sunrise.treadmill.views.summary;
 
 import android.content.Context;
 import android.graphics.Canvas;

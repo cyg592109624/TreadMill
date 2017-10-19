@@ -5,4 +5,9 @@ package com.sunrise.treadmill.activity.workoutrunning;
  */
 
 public class QuickStartRunningActivityZh extends BaseRunningActivityZh {
+    @Override
+    protected void init() {
+        super.init();
+
+    }
 }

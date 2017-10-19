@@ -19,7 +19,7 @@
         android:layout_weight="1"
         android:gravity="center">
 
-        <com.sunrise.treadmill.views.MyKeyBoardView
+        <com.sunrise.treadmill.views.workout.setting.MyKeyBoardView
             android:id="@+id/settings_card4_2_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

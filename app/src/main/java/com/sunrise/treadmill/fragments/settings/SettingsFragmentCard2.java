@@ -13,4 +13,10 @@ public class SettingsFragmentCard2 extends BaseFragment {
     public int getLayoutId() {
         return R.layout.fragment_settings_card_2;
     }
+
+    @Override
+    public void clearObj() {
+        parentView = null;
+    }
+
 }

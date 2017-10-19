@@ -19,6 +19,11 @@ public class Factory2FragmentCard2Dialog extends BaseDialogFragment {
         return R.layout.dialog_factory2_card2;
     }
 
+    @Override
+    public void clearObj() {
+
+    }
+
     @OnClick({R.id.dialog_factory2_card2_yes, R.id.dialog_factory2_card2_no})
     public void conformReset(View view) {
         switch (view.getId()) {

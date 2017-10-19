@@ -12,6 +12,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/workout_running_media_1"
         android:layout_width="306dp"
+        android:visibility="invisible"
         android:layout_height="158dp"
         android:background="@mipmap/btn_sportmode_media_3">
 

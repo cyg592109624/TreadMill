@@ -26,6 +26,10 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -141,18 +145,12 @@
         </activity>
 
 
-
         <activity
             android:name=".activity.summary.SummaryActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:exported="true"
+            android:exported="false"
             android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="sensorLandscape"></activity>
 
         <activity
             android:name=".activity.settings.SettingsActivity"

@@ -27,7 +27,6 @@ public class BaseRunningActivityEn extends BaseRunningActivity {
     protected void setTextStyle() {
         super.setTextStyle();
         List<TextView> txtList = new ArrayList<>();
-
         txtList.add((TextView) findViewById(R.id.workout_running_media_youtube_name));
         txtList.add((TextView) findViewById(R.id.workout_running_media_chrome_name));
         txtList.add((TextView) findViewById(R.id.workout_running_media_facebook_name));

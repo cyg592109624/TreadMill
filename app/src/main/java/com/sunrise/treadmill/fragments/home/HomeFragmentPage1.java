@@ -29,7 +29,10 @@ public class HomeFragmentPage1 extends BaseFragment {
     public int getLayoutId() {
         return R.layout.fragment_home_page_1;
     }
-
+    @Override
+    public void clearObj() {
+        parentView = null;
+    }
     @OnClick({R.id.workout_mode_hill, R.id.workout_mode_interval, R.id.workout_mode_goal,
             R.id.workout_mode_fitness_test, R.id.workout_mode_hrc, R.id.workout_mode_user_program,
             R.id.workout_mode_vr, R.id.workout_mode_quick_start})

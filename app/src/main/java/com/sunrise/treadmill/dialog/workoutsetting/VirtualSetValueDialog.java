@@ -13,11 +13,11 @@ import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutsetting.VirtualRealityActivity;
 import com.sunrise.treadmill.base.BaseDialogFragment;
-import com.sunrise.treadmill.interfaces.OnKeyBoardReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +37,7 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
 
     @BindView(R.id.dialog_workout_vr_edit_time)
     TextView editValue;
+
     @BindView(R.id.dialog_workout_vr_keyboard)
     MyKeyBoardView keyBoardView;
 
@@ -57,6 +58,16 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
         return R.layout.dialog_workout_setting_vr;
     }
 
+    @Override
+    public void clearObj() {
+        vrImage = null;
+        editValue = null;
+        keyBoardView = null;
+        startBtn = null;
+        backBtn = null;
+        keyBoardView = null;
+
+    }
     @Override
     protected void init() {
         keyBoardView.setKeyBoardReturn(this);

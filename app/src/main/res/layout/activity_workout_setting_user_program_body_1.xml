@@ -10,13 +10,13 @@
     android:orientation="horizontal"
     android:paddingBottom="5dp">
 
-    <com.sunrise.treadmill.views.MyGenderView
+    <com.sunrise.treadmill.views.workout.setting.MyGenderView
         android:id="@+id/workout_mode_gender_select"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="5" />
 
-    <com.sunrise.treadmill.views.MyKeyBoardView
+    <com.sunrise.treadmill.views.workout.setting.MyKeyBoardView
         android:id="@+id/workout_mode_keyboard"
         android:layout_width="0dp"
         android:layout_height="match_parent"

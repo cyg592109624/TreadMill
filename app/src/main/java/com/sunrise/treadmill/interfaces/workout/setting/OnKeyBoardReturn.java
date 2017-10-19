@@ -1,4 +1,4 @@
-package com.sunrise.treadmill.interfaces;
+package com.sunrise.treadmill.interfaces.workout.setting;
 
 /**
  * Created by ChuHui on 2017/9/20.

@@ -33,6 +33,12 @@ public class FactoriesActivity extends BaseActivity {
     }
 
     @Override
+    public void clearObj() {
+        backHome=null;
+        setContentView(R.layout.view_null);
+    }
+
+    @Override
     protected void setTextStyle() {
         TextView title = (TextView) findViewById(R.id.factories_title);
         TextView hint = (TextView) findViewById(R.id.factories_hint);

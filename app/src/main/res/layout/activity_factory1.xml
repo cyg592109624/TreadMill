@@ -37,7 +37,7 @@
 
     </LinearLayout>
 
-    <com.sunrise.treadmill.views.MyBottomTabView2
+    <com.sunrise.treadmill.views.MainBottomTabView2
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

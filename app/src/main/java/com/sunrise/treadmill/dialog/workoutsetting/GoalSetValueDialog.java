@@ -14,11 +14,11 @@ import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutsetting.GoalActivity;
 import com.sunrise.treadmill.activity.workoutsetting.WorkOutSettingCommon;
 import com.sunrise.treadmill.base.BaseDialogFragment;
-import com.sunrise.treadmill.interfaces.workoutsetting.OnGoalSetValueReturn;
-import com.sunrise.treadmill.interfaces.OnKeyBoardReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnGoalSetValueReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
 
 import butterknife.BindView;
 
@@ -46,6 +46,12 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
         return R.layout.dialog_workout_setting_goal;
     }
 
+    @Override
+    public void clearObj() {
+        editValue = null;
+        keyBoardView = null;
+        onGoalSetValueReturn = null;
+    }
     @Override
     protected void init() {
         keyBoardView.setKeyBoardReturn(this);

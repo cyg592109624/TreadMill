@@ -1,10 +1,10 @@
-package com.sunrise.treadmill.interfaces.workoutrunning;
+package com.sunrise.treadmill.interfaces.workout.running;
 
 /**
  * Created by ChuHui on 2017/10/17.
  */
 
-public interface PauseDialogClick {
+public interface DialogPauseClick {
     /**
      * 离开workout running
      */

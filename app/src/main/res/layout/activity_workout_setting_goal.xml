@@ -5,14 +5,14 @@
     android:background="@mipmap/bk_pop"
     android:orientation="vertical">
 
-    <com.sunrise.treadmill.views.MyWorkOutHead
+    <com.sunrise.treadmill.views.workout.setting.WorkOutSettingHead
         android:id="@+id/workout_mode_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <include layout="@layout/activity_workout_setting_goal_body" />
 
-    <com.sunrise.treadmill.views.MyBottomTabView2
+    <com.sunrise.treadmill.views.MainBottomTabView2
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.factory.FactoriesActivity;
@@ -35,6 +36,7 @@ import butterknife.OnClick;
 
 /**
  * Created by ChuHui on 2017/9/6.
+ *
  * @author cyg
  */
 public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDialogReturn, OnInitialReturn, ViewPager.OnPageChangeListener {
@@ -54,6 +56,16 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @Override
     public int getLayoutId() {
         return R.layout.activity_home;
+    }
+
+    @Override
+    public void clearObj() {
+        selectTg=null;
+        logo=null;
+        viewPager=null;
+        fragmentAdapter=null;
+        fragmentManager=null;
+        setContentView(R.layout.view_null);
     }
 
     @Override
@@ -87,14 +99,13 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
         });
     }
 
-    private int loadAtOnce = 1;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (loadAtOnce == 1) {
+        if (Constant.initialFinish == -1) {
             showInitialDialog();
-            loadAtOnce += 1;
+            Constant.initialFinish = 1;
         }
     }
 

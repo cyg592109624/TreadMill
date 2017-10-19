@@ -2,6 +2,7 @@ package com.sunrise.treadmill.fragments.settings;
 
 import android.app.Service;
 import android.media.AudioManager;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -31,6 +32,13 @@ public class SettingsFragmentCard1 extends BaseFragment implements SeekBar.OnSee
     @Override
     public int getLayoutId() {
         return R.layout.fragment_settings_card_1;
+    }
+
+    @Override
+    public void clearObj() {
+        bright = null;
+        sounds = null;
+        parentView = null;
     }
 
     @Override

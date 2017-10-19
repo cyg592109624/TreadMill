@@ -16,7 +16,7 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragment extends Fragment {
     private Unbinder bind;
-    private View parentView;
+    public View parentView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,6 +36,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        clearObj();
         bind.unbind();
     }
     public View getParentView(){
@@ -46,6 +47,11 @@ public abstract class BaseFragment extends Fragment {
      * @return
      */
     public abstract int getLayoutId();
+    /**
+     * 清空资源引用
+     * @return
+     */
+    public abstract void clearObj();
 
     protected  void setTextStyle(){};
 

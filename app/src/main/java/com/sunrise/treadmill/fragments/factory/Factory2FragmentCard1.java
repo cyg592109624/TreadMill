@@ -9,10 +9,10 @@ import android.widget.ToggleButton;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
-import com.sunrise.treadmill.interfaces.OnKeyBoardReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +43,16 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
     @Override
     public int getLayoutId() {
         return R.layout.fragment_factory2_card_1;
+    }
+
+    @Override
+    public void clearObj() {
+        leftLayout=null;
+        ctrlPageToggle=null;
+        levelValue=null;
+        pwmValue=null;
+        keyBoardView=null;
+        parentView = null;
     }
 
     @Override

@@ -49,6 +49,18 @@ public class SettingsLockActivity extends BaseFragmentActivity {
     }
 
     @Override
+    public void clearObj() {
+        bgView=null;
+        txtList=null;
+        fragmentManager=null;
+        nowFragment=null;
+        card1=null;
+        card2=null;
+        back=null;
+        setContentView(R.layout.view_null);
+    }
+
+    @Override
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(this));

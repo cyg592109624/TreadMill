@@ -1,15 +1,15 @@
 package com.sunrise.treadmill.dialog.workoutrunning;
 
+import android.content.DialogInterface;
+
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutrunning.BaseRunningActivity;
 import com.sunrise.treadmill.base.BaseDialogFragment;
-import com.sunrise.treadmill.interfaces.workoutrunning.CoolDownDialogClick;
+import com.sunrise.treadmill.interfaces.workout.running.DialogCoolDownClick;
 
-import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.OnClick;
@@ -20,12 +20,13 @@ import butterknife.OnClick;
 
 public class CoolDownDialog extends BaseDialogFragment {
     public static final String TAG = "CoolDownDialog";
-    private CoolDownDialogClick dialogClick;
+    private DialogCoolDownClick dialogClick;
     private int delayTime = 60000 * 3;
     private ScheduledExecutorService pool;
     private TimerTask task = new TimerTask() {
         @Override
         public void run() {
+            dismiss();
             dialogClick.onCoolDownSkip();
         }
     };
@@ -33,6 +34,14 @@ public class CoolDownDialog extends BaseDialogFragment {
     @Override
     public int getLayoutId() {
         return R.layout.dialog_workout_running_cool_down;
+    }
+
+    @Override
+    public void clearObj() {
+        dialogClick = null;
+        pool = null;
+        task = null;
+
     }
 
     @Override
