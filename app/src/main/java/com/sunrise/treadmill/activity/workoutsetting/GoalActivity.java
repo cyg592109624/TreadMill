@@ -1,7 +1,6 @@
 package com.sunrise.treadmill.activity.workoutsetting;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,26 +32,31 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
 
     @BindView(R.id.workout_mode_goal_time)
     TextView timeValue;
+
     @BindView(R.id.workout_mode_goal_distance)
     TextView distanceValue;
+
     @BindView(R.id.workout_mode_goal_calories)
     TextView calValue;
 
-
-    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private GoalSetValueDialog dialog;
 
     @Override
     public int getLayoutId() {
         return R.layout.activity_workout_setting_goal;
     }
+
     @Override
-    public void clearObj() {
-        headView=null;
-        timeValue=null;
-        distanceValue=null;
-        calValue=null;
-        fragmentManager=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+        headView.recycle();
+        headView = null;
+
+        timeValue = null;
+        distanceValue = null;
+        calValue = null;
+
+        dialog.onDestroyView();
+        dialog = null;
     }
 
     @Override
@@ -63,23 +67,21 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) headView.findViewById(R.id.workout_head_mode));
-        txtList.add((TextView) headView.findViewById(R.id.workout_head_hint));
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_1));
+        txtList.add((TextView) findViewById(R.id.workout_mode_goal_hint));
 
         txtList.add(timeValue);
         txtList.add(distanceValue);
         txtList.add(calValue);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(activityContext));
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(activityContext));
         }
+        txtList.clear();
+        txtList = null;
     }
 
-
-    private GoalSetValueDialog dialog;
 
     @OnClick({R.id.workout_mode_goal_time, R.id.workout_mode_goal_distance, R.id.workout_mode_goal_calories})
     public void changeGoalValue(View view) {
@@ -132,7 +134,7 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
         WorkOutSettingCommon.changeTg = WorkOutSettingCommon.RE_SET;
     }
 
-    @OnClick({R.id.workout_mode_start_1})
+    @OnClick({R.id.workout_mode_goal_start})
     public void beginWorkOut() {
 
     }

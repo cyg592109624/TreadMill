@@ -28,8 +28,8 @@ public class LineChat extends View {
     private float avgWidth;
     private float avgHeight;
 
-    private final Paint mGesturePaint = new Paint();
-    private final Path mPath = new Path();
+    private Paint mGesturePaint = new Paint();
+    private Path mPath = new Path();
     private List<Integer> data;
     private int dataSize = 31;
     private int rankCount = 36;
@@ -104,5 +104,14 @@ public class LineChat extends View {
             mX = x;
             mY = y;
         }
+    }
+
+    public void recycle() {
+        mGesturePaint.reset();
+        mGesturePaint = null;
+        mPath.reset();
+        mPath = null;
+        data.clear();
+        data = null;
     }
 }

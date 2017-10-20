@@ -48,6 +48,13 @@ public class MyGenderView extends LinearLayout {
         onGenderReturn = genderReturn;
     }
 
+    public void recycle() {
+        male = null;
+        female = null;
+        onGenderReturn = null;
+        genderImg = null;
+    }
+
     private View.OnClickListener radioClick = new OnClickListener() {
         @Override
         public void onClick(View view) {

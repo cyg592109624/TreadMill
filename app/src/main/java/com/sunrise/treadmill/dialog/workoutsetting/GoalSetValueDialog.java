@@ -47,14 +47,15 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
         editValue = null;
+        keyBoardView.recycle();
         keyBoardView = null;
         onGoalSetValueReturn = null;
     }
     @Override
     protected void init() {
-        keyBoardView.setKeyBoardReturn(this);
+        keyBoardView.setKeyBoardReturn(GoalSetValueDialog.this);
         onGoalSetValueReturn = (OnGoalSetValueReturn) getActivity();
         Bundle bundle = getArguments();
         int changeTg = 0;

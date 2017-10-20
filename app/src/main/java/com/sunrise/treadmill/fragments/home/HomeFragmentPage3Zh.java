@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
+import com.sunrise.treadmill.interfaces.home.OnModeSelectReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 
 import butterknife.BindView;
@@ -14,6 +15,7 @@ import butterknife.BindView;
  */
 
 public class HomeFragmentPage3Zh extends BaseFragment {
+    private OnModeSelectReturn selectReturn;
 
     @Override
     public int getLayoutId() {
@@ -21,7 +23,15 @@ public class HomeFragmentPage3Zh extends BaseFragment {
     }
 
     @Override
-    public void clearObj() {
-        parentView = null;
+    protected void init() {
+        selectReturn = (OnModeSelectReturn) getActivity();
+    }
+
+    @Override
+    public void recycleObject() {
+    }
+
+    public void setSelectReturn(OnModeSelectReturn selectReturn) {
+        this.selectReturn = selectReturn;
     }
 }

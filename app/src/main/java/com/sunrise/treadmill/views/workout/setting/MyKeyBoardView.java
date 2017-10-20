@@ -121,4 +121,12 @@ public class MyKeyBoardView extends LinearLayout {
     public void setKeyBoardReturn(@NonNull OnKeyBoardReturn onKeyBoardReturn) {
         keyBoardReturn = onKeyBoardReturn;
     }
+
+
+    public void recycle() {
+        title = null;
+        showText = null;
+        keyBoardReturn = null;
+        keyBoardClick = null;
+    }
 }

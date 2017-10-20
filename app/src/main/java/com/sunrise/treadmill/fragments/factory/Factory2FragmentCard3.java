@@ -31,26 +31,29 @@ public class Factory2FragmentCard3 extends BaseFragment {
     public int getLayoutId() {
         return R.layout.fragment_factory2_card_3;
     }
+
     @Override
-    public void clearObj() {
+    public void recycleObject() {
         card3UpData = null;
         card3Back = null;
-        parentView = null;
     }
+
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
 
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card3_1_usb));
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card3_2_updating));
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card3_2_not_shut_down));
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card3_3_download_failed));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card3_1_usb));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card3_2_updating));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card3_2_not_shut_down));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card3_3_download_failed));
 
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(getContext()));
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(getContext()));
         }
+        txtList.clear();
+        txtList = null;
     }
 
     @Override
@@ -60,8 +63,8 @@ public class Factory2FragmentCard3 extends BaseFragment {
         card3Back.setEnabled(false);
     }
 
-    @OnClick({R.id.factory2_card3_1_btn,R.id.factory2_card3_3_btn})
-    public void card3Click(View view){
+    @OnClick({R.id.factory2_card3_1_btn, R.id.factory2_card3_3_btn})
+    public void card3Click(View view) {
 
     }
 }

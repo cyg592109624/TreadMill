@@ -118,7 +118,6 @@ public class LevelView extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         viewWidth = MeasureSpec.getSize(widthMeasureSpec);
         viewHeight = MeasureSpec.getSize(heightMeasureSpec);
-
         calcLength();
     }
 
@@ -286,5 +285,15 @@ public class LevelView extends View {
         if (hintText != null) {
             canvas.drawText(hintText, (viewWidth - hintText.length() * (bottomSpace * 0.3f)) / 2, viewHeight - bottomSpace * 0.18f, mPaint);
         }
+    }
+
+    public void recycle() {
+        mPaint.reset();
+        mPaint = null;
+        if (buoyBitmap != null) {
+            buoyBitmap.recycle();
+        }
+        buoyBitmap = null;
+        rectList = null;
     }
 }

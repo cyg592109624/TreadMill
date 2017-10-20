@@ -13,6 +13,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.sunrise.treadmill.R;
@@ -89,6 +90,32 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     public void onDestroy() {
         super.onDestroy();
         stopForeground(true);
+        activity = null;
+        View[] views = {floatWindowHead, floatWindowBottom, dialogPause, dialogCoolDown};
+        for (View v : views) {
+            reMoveView(v);
+        }
+        views = null;
+        mWindowManager = null;
+
+        paramsHead = null;
+        paramsBottom = null;
+
+        dialogParams = null;
+
+        floatWindowHead.recycle();
+        floatWindowHead.removeAllViews();
+        floatWindowHead = null;
+
+        floatWindowBottom.recycle();
+        floatWindowBottom.removeAllViews();
+        floatWindowBottom = null;
+
+        dialogPause.removeAllViews();
+        dialogPause = null;
+
+        dialogCoolDown.removeAllViews();
+        dialogCoolDown = null;
     }
 
     @Override
@@ -212,6 +239,13 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
         dialogPause.setLayoutParams(dialogParams);
         dialogCoolDown.setLayoutParams(dialogParams);
+    }
+
+    private void reMoveView(View view) {
+        try {
+            mWindowManager.removeView(view);
+        } catch (Exception e) {
+        }
     }
 
 }

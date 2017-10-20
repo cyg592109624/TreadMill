@@ -1,11 +1,9 @@
 package com.sunrise.treadmill.activity.settings;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,14 +29,9 @@ public class SettingsLockActivity extends BaseFragmentActivity {
     @BindView(R.id.settings_view_bg)
     LinearLayout bgView;
 
-    @BindView(R.id.bottom_logo_tab_back)
-    ImageButton back;
-
-
     @BindViews({R.id.settings_card_lock, R.id.settings_card_psw, R.id.settings_title})
     List<TextView> txtList;
 
-    private FragmentManager fragmentManager;
     private Fragment nowFragment;
     private SettingsLockFragmentCard1 card1;
     private SettingsLockFragmentCard2 card2;
@@ -49,23 +42,21 @@ public class SettingsLockActivity extends BaseFragmentActivity {
     }
 
     @Override
-    public void clearObj() {
-        bgView=null;
-        txtList=null;
-        fragmentManager=null;
-        nowFragment=null;
-        card1=null;
-        card2=null;
-        back=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+        bgView = null;
+        txtList.clear();
+        txtList = null;
+        nowFragment = null;
+        card1 = null;
+        card2 = null;
     }
 
     @Override
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(activityContext));
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(activityContext));
         }
     }
 
@@ -83,7 +74,7 @@ public class SettingsLockActivity extends BaseFragmentActivity {
             case R.id.settings_card_psw:
                 tgCard = 1;
                 bgResource = R.mipmap.img_factory_2_2;
-                if(card2==null){
+                if (card2 == null) {
                     card2 = new SettingsLockFragmentCard2();
                 }
                 tgFragment = card2;
@@ -97,10 +88,10 @@ public class SettingsLockActivity extends BaseFragmentActivity {
             bgView.setBackgroundResource(bgResource);
             for (int i = 0; i < txtList.size() - 1; i++) {
                 if (i == tgCard) {
-                    TextUtils.changeTextColor(txtList.get(i), getColor(R.color.settings_tabs_on));
+                    TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext,R.color.settings_tabs_on));
                     TextUtils.changeTextSize(txtList.get(i), 35f);
                 } else {
-                    TextUtils.changeTextColor(txtList.get(i), getColor(R.color.settings_tabs_off));
+                    TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext,R.color.settings_tabs_off));
                     TextUtils.changeTextSize(txtList.get(i), 30f);
                 }
             }
@@ -121,7 +112,6 @@ public class SettingsLockActivity extends BaseFragmentActivity {
 
     @Override
     protected void init() {
-        fragmentManager = getSupportFragmentManager();
         card1 = new SettingsLockFragmentCard1();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.add(R.id.settings_lock_views, card1).commit();

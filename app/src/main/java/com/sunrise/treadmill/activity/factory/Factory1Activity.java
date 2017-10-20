@@ -1,21 +1,16 @@
 package com.sunrise.treadmill.activity.factory;
 
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseActivity;
-import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.OnClick;
 
 /**
@@ -23,8 +18,6 @@ import butterknife.OnClick;
  */
 
 public class Factory1Activity extends BaseActivity {
-    @BindView(R.id.bottom_logo_tab_home)
-    ImageButton backHome;
 
     @Override
     public int getLayoutId() {
@@ -32,9 +25,8 @@ public class Factory1Activity extends BaseActivity {
     }
 
     @Override
-    public void clearObj() {
-        backHome=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+
     }
 
     @Override
@@ -50,6 +42,8 @@ public class Factory1Activity extends BaseActivity {
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(this));
         }
+        txtList.clear();
+        txtList=null;
     }
 
     @OnClick(R.id.bottom_logo_tab_home)

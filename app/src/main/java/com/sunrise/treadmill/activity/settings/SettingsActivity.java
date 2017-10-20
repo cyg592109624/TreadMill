@@ -3,8 +3,8 @@ package com.sunrise.treadmill.activity.settings;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,19 +37,18 @@ public class SettingsActivity extends BaseFragmentActivity {
     @BindViews({R.id.settings_card_system, R.id.settings_card_bluetooth, R.id.settings_card_wifi, R.id.settings_card_lock, R.id.settings_title})
     List<TextView> txtList;
 
-    private FragmentManager fragmentManager;
     private Fragment nowFragment;
     private SettingsFragmentCard1 card1;
     private SettingsFragmentCard2 card2;
     private SettingsFragmentCard3 card3;
     private SettingsFragmentCard4 card4;
-    private static final int CARD_1=0;
-    private static final int CARD_2=1;
-    private static final int CARD_3=2;
-    private static final int CARD_4=3;
+    private static final int CARD_1 = 0;
+    private static final int CARD_2 = 1;
+    private static final int CARD_3 = 2;
+    private static final int CARD_4 = 3;
 
-    private float fontSizeOn =35f;
-    private float fontSizeOff =30f;
+    private static final float SELECT_TEXT_SIZE = 35f;
+    private static final float UN_SELECT_TEXT_SIZE = 30f;
 
     @Override
     public int getLayoutId() {
@@ -57,25 +56,30 @@ public class SettingsActivity extends BaseFragmentActivity {
     }
 
     @Override
-    public void clearObj() {
-        bgView=null;
-        txtList=null;
-        fragmentManager=null;
-        nowFragment=null;
-        card1=null;
-        card2=null;
-        card3=null;
-        card4=null;
-        bgView=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+        bgView = null;
+        txtList = null;
+        nowFragment = null;
+        card1 = null;
+        card2 = null;
+        card3 = null;
+        card4 = null;
+        bgView = null;
     }
 
     @Override
+    protected void init() {
+        card1 = new SettingsFragmentCard1();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.add(R.id.settings_views, card1).commit();
+        nowFragment = card1;
+    }
+    @Override
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(activityContext));
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(activityContext));
         }
     }
 
@@ -93,7 +97,7 @@ public class SettingsActivity extends BaseFragmentActivity {
             case R.id.settings_card_bluetooth:
                 tgCard = CARD_2;
                 bgResource = R.mipmap.img_factory_3_2;
-                if(card2==null){
+                if (card2 == null) {
                     card2 = new SettingsFragmentCard2();
                 }
                 tgFragment = card2;
@@ -101,7 +105,7 @@ public class SettingsActivity extends BaseFragmentActivity {
             case R.id.settings_card_wifi:
                 tgCard = CARD_3;
                 bgResource = R.mipmap.img_factory_3_3;
-                if(card3==null){
+                if (card3 == null) {
                     card3 = new SettingsFragmentCard3();
                 }
                 tgFragment = card3;
@@ -124,11 +128,11 @@ public class SettingsActivity extends BaseFragmentActivity {
             bgView.setBackgroundResource(bgResource);
             for (int i = 0; i < txtList.size() - 1; i++) {
                 if (i == tgCard) {
-                    TextUtils.changeTextColor(txtList.get(i), getColor(R.color.settings_tabs_on));
-                    TextUtils.changeTextSize(txtList.get(i), fontSizeOn);
+                    TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext,R.color.settings_tabs_on));
+                    TextUtils.changeTextSize(txtList.get(i), SELECT_TEXT_SIZE);
                 } else {
-                    TextUtils.changeTextColor(txtList.get(i), getColor(R.color.settings_tabs_off));
-                    TextUtils.changeTextSize(txtList.get(i), fontSizeOff);
+                    TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext,R.color.settings_tabs_off));
+                    TextUtils.changeTextSize(txtList.get(i), UN_SELECT_TEXT_SIZE);
                 }
             }
             FragmentTransaction ft = fragmentManager.beginTransaction();
@@ -140,7 +144,7 @@ public class SettingsActivity extends BaseFragmentActivity {
             nowFragment = tgFragment;
         }
         if (tgCard == CARD_4) {
-            Intent intent = new Intent(SettingsActivity.this, SettingsLockActivity.class);
+            Intent intent = new Intent(activityContext, SettingsLockActivity.class);
             startActivity(intent);
         }
     }
@@ -150,12 +154,4 @@ public class SettingsActivity extends BaseFragmentActivity {
         finishActivity();
     }
 
-    @Override
-    protected void init() {
-        fragmentManager = getSupportFragmentManager();
-        card1 = new SettingsFragmentCard1();
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.add(R.id.settings_views, card1).commit();
-        nowFragment = card1;
-    }
 }

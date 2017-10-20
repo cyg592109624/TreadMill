@@ -20,7 +20,7 @@ public class Factory2FragmentCard2Dialog extends BaseDialogFragment {
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
 
     }
 

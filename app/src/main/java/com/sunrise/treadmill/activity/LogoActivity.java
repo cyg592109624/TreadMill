@@ -34,15 +34,14 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
     }
 
     @Override
-    public void clearObj() {
-        lackOfPerms=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+        lackOfPerms = null;
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults,activityContext);
     }
 
     @Override
@@ -52,7 +51,7 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
         //没有获取的权限
-        String []args = new String[perms.size()];
+        String[] args = new String[perms.size()];
         for (int i = 0; i < perms.size(); i++) {
             args[i] = perms.get(i);
             System.out.println("没有被允许的权限 --> " + perms.get(i));
@@ -65,23 +64,22 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
      */
     private void syncLanguage() {
         //启动app时 获取语言设置
-        String appLanguage = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.APP_LANGUAGE, LanguageUtils.en_US);
+        String appLanguage = (String) SharedPreferencesUtils.get(activityContext, Constant.APP_LANGUAGE, LanguageUtils.zh_CN);
         //获取当前设置
-        String nowAppLanguage = LanguageUtils.getAppLanguage(getResources());
+        String nowAppLanguage = LanguageUtils.getAppLanguage(activityContext.getResources());
         Intent intent = new Intent();
         try {
             if (appLanguage.equals(nowAppLanguage)) {
-                intent.setClass(LogoActivity.this, HomeActivity.class);
+                intent.setClass(activityContext, HomeActivity.class);
             } else {
                 GlobalSetting.AppLanguage = appLanguage;
                 String[] he = appLanguage.split("_");
-                LanguageUtils.updateLanguage(LanguageUtils.buildLocale(he[0], he[1]), getResources());
-                intent.setClass(LogoActivity.this, LogoActivity.class);
+                LanguageUtils.updateLanguage(LanguageUtils.buildLocale(he[0], he[1]), activityContext.getResources());
+                intent.setClass(activityContext, LogoActivity.class);
                 Thread.sleep(300);
             }
             finishActivity();
             startActivity(intent);
-            onDestroy();
         } catch (Exception e) {
             e.printStackTrace();
         }

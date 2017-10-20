@@ -59,15 +59,18 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
         vrImage = null;
         editValue = null;
-        keyBoardView = null;
-        startBtn = null;
-        backBtn = null;
+
+        keyBoardView.recycle();
         keyBoardView = null;
 
+        startBtn = null;
+        backBtn = null;
+
     }
+
     @Override
     protected void init() {
         keyBoardView.setKeyBoardReturn(this);
@@ -96,13 +99,15 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_edit_start_hint_4));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_edit_start_hint_4));
         txtList.add(editValue);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(getContext()));
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(getContext()));
         }
+        txtList.clear();
+        txtList = null;
     }
 
 
@@ -117,7 +122,7 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
         backBtn.setEnabled(true);
         vrImage.setVisibility(View.VISIBLE);
         keyBoardView.setVisibility(View.GONE);
-        TextUtils.changeTextColor(editValue,  ContextCompat.getColor(getContext(),R.color.workout_mode_white));
+        TextUtils.changeTextColor(editValue, ContextCompat.getColor(getContext(), R.color.workout_mode_white));
         TextUtils.changeTextBackground(editValue, R.mipmap.btn_virtual_time_1);
     }
 
@@ -128,7 +133,7 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
         vrImage.setVisibility(View.GONE);
         keyBoardView.setVisibility(View.VISIBLE);
 
-        TextUtils.changeTextColor(editValue,  ContextCompat.getColor(getContext(),R.color.workout_mode_select));
+        TextUtils.changeTextColor(editValue, ContextCompat.getColor(getContext(), R.color.workout_mode_select));
         TextUtils.changeTextBackground(editValue, R.mipmap.btn_virtual_time_2);
     }
 

@@ -1,12 +1,14 @@
 package com.sunrise.treadmill.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 
+import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.utils.ActivityManageUtils;
 
 import butterknife.ButterKnife;
@@ -18,7 +20,7 @@ import butterknife.Unbinder;
 
 public abstract class BaseActivity extends Activity {
     private Unbinder bind;
-    private ActivityManageUtils activityManageUtils;
+    public Context activityContext = BaseActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,40 +28,8 @@ public abstract class BaseActivity extends Activity {
         changeSystemUiState();
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
-        activityManageUtils = ActivityManageUtils.getInstance();
-        activityManageUtils.addActivity(this);
         setTextStyle();
         init();
-    }
-
-    /**
-     * 返回布局ID 给onCreate方法
-     * @return
-     */
-    public abstract int getLayoutId();
-    /**
-     * 清空资源引用
-     * @return
-     */
-    public abstract void clearObj();
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    protected void setTextStyle() {
-
-    }
-    protected void init() {
-
-    }
-
-    public void finishActivity(){
-        clearObj();
-        bind.unbind();
-        activityManageUtils.finishActivity();
     }
 
     /**
@@ -104,4 +74,42 @@ public abstract class BaseActivity extends Activity {
             }
         });
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.out.println(getClass().getName() + "  ----  > onDestroy()被调用");
+    }
+
+    /**
+     * 返回布局ID 给onCreate方法
+     *
+     * @return
+     */
+    public abstract int getLayoutId();
+
+    /**
+     * 清空资源引用
+     *
+     * @return
+     */
+    public abstract void recycleObject();
+
+    protected void setTextStyle() {
+
+    }
+
+    protected void init() {
+
+    }
+
+    public void finishActivity() {
+        setContentView(R.layout.view_null);
+        recycleObject();
+        bind.unbind();
+        bind = null;
+        System.gc();
+        finish();
+    }
+
 }

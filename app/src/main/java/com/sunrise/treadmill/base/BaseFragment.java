@@ -3,6 +3,7 @@ package com.sunrise.treadmill.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,15 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment {
     private Unbinder bind;
     public View parentView;
+
+    public FragmentManager fragmentManager ;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         parentView = inflater.inflate(getLayoutId(), container, false);
+        fragmentManager = getActivity().getSupportFragmentManager();
+
         return parentView;
     }
 
@@ -36,25 +42,33 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        clearObj();
+        System.out.println(getClass().getName()+"  ----  > onDestroyView()被调用");
+        recycleObject();
         bind.unbind();
+        bind = null;
+        fragmentManager = null;
+        parentView = null;
+        System.gc();
     }
-    public View getParentView(){
-        return parentView;
-    }
+
     /**
      * 返回布局ID 给onCreateView方法
+     *
      * @return
      */
     public abstract int getLayoutId();
+
     /**
      * 清空资源引用
+     *
      * @return
      */
-    public abstract void clearObj();
+    public abstract void recycleObject();
 
-    protected  void setTextStyle(){};
+    protected void setTextStyle() {
+    }
 
-    protected  void init(){};
+    protected void init() {
+    }
 
 }

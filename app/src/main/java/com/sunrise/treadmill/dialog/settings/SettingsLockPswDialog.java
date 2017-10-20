@@ -16,7 +16,7 @@ public class SettingsLockPswDialog extends BaseDialogFragment {
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
 
     }
 

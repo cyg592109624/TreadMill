@@ -29,10 +29,10 @@ public class VrFragmentPage2 extends BaseFragment {
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
         onVrSelectReturn = null;
-        parentView = null;
     }
+
     @Override
     protected void init() {
         onVrSelectReturn = (OnVrSelectReturn) getActivity();
@@ -41,19 +41,21 @@ public class VrFragmentPage2 extends BaseFragment {
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_5_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_5_2));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_6_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_6_2));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_7_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_7_2));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_8_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_8_2));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_5_1));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_5_2));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_6_1));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_6_2));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_7_1));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_7_2));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_8_1));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_8_2));
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(getContext()));
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(getContext()));
         }
+        txtList.clear();
+        txtList = null;
     }
 
     @OnClick({R.id.workout_mode_vr_img_5, R.id.workout_mode_vr_img_6, R.id.workout_mode_vr_img_7, R.id.workout_mode_vr_img_8})

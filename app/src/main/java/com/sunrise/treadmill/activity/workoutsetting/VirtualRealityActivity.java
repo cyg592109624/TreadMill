@@ -1,8 +1,9 @@
 package com.sunrise.treadmill.activity.workoutsetting;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.sunrise.treadmill.fragments.workoutsetting.VrFragmentPage2;
 import com.sunrise.treadmill.fragments.workoutsetting.VrFragmentPage3;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.interfaces.workout.setting.OnVrSelectReturn;
+import com.sunrise.treadmill.utils.BitMapUtils;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
@@ -33,6 +35,7 @@ import butterknife.OnClick;
 
 /**
  * Created by ChuHui on 2017/9/26.
+ *
  * @author cyg
  */
 
@@ -84,9 +87,8 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
     ImageView backBtn;
 
 
+    private Bitmap selectTgBitmap;
     private VrViewPageAdapter fragmentAdapter;
-
-    private FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
     public int getLayoutId() {
@@ -94,20 +96,31 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
     }
 
     @Override
-    public void clearObj() {
-        headView=null;
-        optionBody=null;
-        optionBody2=null;
-        viewPage=null;
-        viewPageTg=null;
-        selectVRImage=null;
-        editValue=null;
-        keyBoardView=null;
-        startBtn=null;
-        backBtn=null;
-        fragmentAdapter=null;
-        fragmentManager=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+        headView.recycle();
+        headView = null;
+
+        keyBoardView.recycle();
+        keyBoardView = null;
+
+        optionBody = null;
+        optionBody2 = null;
+
+        selectVRImage = null;
+
+        editValue = null;
+        startBtn = null;
+        backBtn = null;
+
+        viewPageTg = null;
+        if (selectTgBitmap != null) {
+            selectTgBitmap.recycle();
+            selectTgBitmap = null;
+        }
+        viewPage.removeAllViews();
+        viewPage = null;
+        fragmentAdapter.recycle();
+        fragmentAdapter = null;
     }
 
     @Override
@@ -140,6 +153,8 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(this));
         }
+        txtList.clear();
+        txtList = null;
     }
 
     @Override
@@ -149,15 +164,21 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
 
     @Override
     public void onPageSelected(int position) {
+        if (selectTgBitmap != null) {
+            selectTgBitmap.recycle();
+        }
         switch (position) {
             case 0:
-                ImageUtils.changeImageView(viewPageTg, R.mipmap.img_virtual_reality_page_1);
+                selectTgBitmap = BitMapUtils.loadMipMapResource(activityContext.getResources(), R.mipmap.img_virtual_reality_page_1);
+                ImageUtils.changeImageView(viewPageTg, selectTgBitmap);
                 break;
             case 1:
-                ImageUtils.changeImageView(viewPageTg, R.mipmap.img_virtual_reality_page_2);
+                selectTgBitmap = BitMapUtils.loadMipMapResource(activityContext.getResources(), R.mipmap.img_virtual_reality_page_2);
+                ImageUtils.changeImageView(viewPageTg, selectTgBitmap);
                 break;
             case 2:
-                ImageUtils.changeImageView(viewPageTg, R.mipmap.img_virtual_reality_page_3);
+                selectTgBitmap = BitMapUtils.loadMipMapResource(activityContext.getResources(), R.mipmap.img_virtual_reality_page_3);
+                ImageUtils.changeImageView(viewPageTg, selectTgBitmap);
                 break;
             default:
                 break;
@@ -188,7 +209,7 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
         backBtn.setEnabled(true);
         selectVRImage.setVisibility(View.VISIBLE);
         keyBoardView.setVisibility(View.GONE);
-        TextUtils.changeTextColor(editValue, ContextCompat.getColor(getApplicationContext(), (R.color.workout_mode_white)));
+        TextUtils.changeTextColor(editValue, ContextCompat.getColor(activityContext, (R.color.workout_mode_white)));
         TextUtils.changeTextBackground(editValue, R.mipmap.btn_virtual_time_1);
     }
 
@@ -204,7 +225,7 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
         selectVRImage.setVisibility(View.GONE);
         keyBoardView.setVisibility(View.VISIBLE);
 
-        TextUtils.changeTextColor(editValue, ContextCompat.getColor(getApplicationContext(), R.color.workout_mode_select));
+        TextUtils.changeTextColor(editValue, ContextCompat.getColor(activityContext, R.color.workout_mode_select));
         TextUtils.changeTextBackground(editValue, R.mipmap.btn_virtual_time_2);
     }
 

@@ -4,6 +4,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.sunrise.treadmill.R;
+
 /**
  * Created by ChuHui on 2017/10/14.
  */
@@ -36,5 +38,9 @@ public class BitMapUtils {
             inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
         }
         return inSampleSize;
+    }
+
+    public static Bitmap loadMipMapResource(Resources resources, int id) {
+        return BitmapFactory.decodeResource(resources, id);
     }
 }

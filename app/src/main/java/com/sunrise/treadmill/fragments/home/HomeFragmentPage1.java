@@ -3,8 +3,10 @@ package com.sunrise.treadmill.fragments.home;
 import android.content.Intent;
 import android.view.View;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.home.HomeActivity;
 import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity;
 import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivityZh;
 import com.sunrise.treadmill.activity.workoutsetting.FitnessTestActivity;
@@ -15,6 +17,7 @@ import com.sunrise.treadmill.activity.workoutsetting.IntervalActivity;
 import com.sunrise.treadmill.activity.workoutsetting.UserProgramActivity;
 import com.sunrise.treadmill.activity.workoutsetting.VirtualRealityActivity;
 import com.sunrise.treadmill.base.BaseFragment;
+import com.sunrise.treadmill.interfaces.home.OnModeSelectReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 
 import butterknife.OnClick;
@@ -25,52 +28,58 @@ import butterknife.OnClick;
 
 public class HomeFragmentPage1 extends BaseFragment {
 
+    private OnModeSelectReturn selectReturn;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_home_page_1;
     }
+
     @Override
-    public void clearObj() {
-        parentView = null;
+    protected void init() {
+        selectReturn = (OnModeSelectReturn) getActivity();
     }
+
+    @Override
+    public void recycleObject() {
+        selectReturn = null;
+    }
+
     @OnClick({R.id.workout_mode_hill, R.id.workout_mode_interval, R.id.workout_mode_goal,
             R.id.workout_mode_fitness_test, R.id.workout_mode_hrc, R.id.workout_mode_user_program,
             R.id.workout_mode_vr, R.id.workout_mode_quick_start})
-    void selectWorkOutMode(View view) {
-        Intent intent = new Intent();
+    public  void selectWorkOutMode(View view) {
         switch (view.getId()) {
             default:
                 break;
             case R.id.workout_mode_hill:
-                intent.setClass(getActivity(), HillActivity.class);
+                selectReturn.onSelectResult(Constant.MODE_HILL);
                 break;
             case R.id.workout_mode_interval:
-                intent.setClass(getActivity(), IntervalActivity.class);
+                selectReturn.onSelectResult(Constant.MODE_INTERVAL);
                 break;
             case R.id.workout_mode_goal:
-                intent.setClass(getActivity(), GoalActivity.class);
+                selectReturn.onSelectResult(Constant.MODE_GOAL);
                 break;
             case R.id.workout_mode_fitness_test:
-                intent.setClass(getActivity(), FitnessTestActivity.class);
+                selectReturn.onSelectResult(Constant.MODE_FITNESS_TEST);
                 break;
             case R.id.workout_mode_hrc:
-                intent.setClass(getActivity(), HRCActivity.class);
+                selectReturn.onSelectResult(Constant.MODE_HRC);
                 break;
             case R.id.workout_mode_user_program:
-                intent.setClass(getActivity(), UserProgramActivity.class);
+                selectReturn.onSelectResult(Constant.MODE_USER_PROGRAM);
                 break;
             case R.id.workout_mode_vr:
-                intent.setClass(getActivity(), VirtualRealityActivity.class);
+                selectReturn.onSelectResult(Constant.MODE_VR);
                 break;
             case R.id.workout_mode_quick_start:
-                if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-                    intent.setClass(getActivity(), QuickStartRunningActivityZh.class);
-                } else {
-                    intent.setClass(getActivity(), QuickStartRunningActivity.class);
-                }
+                selectReturn.onSelectResult(Constant.MODE_QUICK_START);
                 break;
         }
-        startActivity(intent);
     }
 
+    public void setSelectReturn(OnModeSelectReturn selectReturn){
+        this.selectReturn=selectReturn;
+    }
 }

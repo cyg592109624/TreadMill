@@ -1,5 +1,7 @@
 package com.sunrise.treadmill.activity.home;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +10,8 @@ import android.widget.ImageView;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.dialog.home.NfcDialog;
+import com.sunrise.treadmill.utils.BitMapUtils;
+import com.sunrise.treadmill.utils.ImageUtils;
 
 import butterknife.BindView;
 
@@ -18,8 +22,8 @@ import butterknife.BindView;
 public class NfcActivity extends BaseFragmentActivity {
     @BindView(R.id.nfc_img)
     ImageView nfc;
+    private Bitmap nfcBitmap;
 
-    private FragmentManager fragmentManager = getSupportFragmentManager();
     private boolean stopChange = false;
 
     private static final int CLEAR_SHOW = -1;
@@ -32,6 +36,9 @@ public class NfcActivity extends BaseFragmentActivity {
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            if (nfcBitmap != null) {
+                nfcBitmap.recycle();
+            }
             switch (msg.what) {
                 default:
                     break;
@@ -44,13 +51,15 @@ public class NfcActivity extends BaseFragmentActivity {
                     break;
                 case CHANGE_IMG_1:
                     if (!stopChange) {
-                        nfc.setImageResource(R.mipmap.img_nfc_2);
+                        nfcBitmap = BitMapUtils.loadMipMapResource(getResources(), R.mipmap.img_nfc_2);
+                        ImageUtils.changeImageView(nfc, nfcBitmap);
                         mHandler.sendEmptyMessageDelayed(CHANGE_IMG_2, 500);
                     }
                     break;
                 case CHANGE_IMG_2:
                     if (!stopChange) {
-                        nfc.setImageResource(R.mipmap.img_nfc_1);
+                        nfcBitmap = BitMapUtils.loadMipMapResource(getResources(), R.mipmap.img_nfc_1);
+                        ImageUtils.changeImageView(nfc, nfcBitmap);
                         mHandler.sendEmptyMessageDelayed(CHANGE_IMG_1, 500);
                     }
                     break;
@@ -72,12 +81,14 @@ public class NfcActivity extends BaseFragmentActivity {
     }
 
     @Override
-    public void clearObj() {
-        nfc=null;
-        fragmentManager=null;
-        mHandler=null;
-        nfcDialog=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+        if (nfcBitmap != null) {
+            nfcBitmap.recycle();
+            nfcBitmap = null;
+        }
+        nfc = null;
+        mHandler = null;
+        nfcDialog = null;
     }
 
     @Override

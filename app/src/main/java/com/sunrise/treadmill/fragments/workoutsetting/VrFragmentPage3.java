@@ -29,31 +29,35 @@ public class VrFragmentPage3 extends BaseFragment {
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
         onVrSelectReturn = null;
-        parentView = null;
     }
+
     @Override
     protected void init() {
         onVrSelectReturn = (OnVrSelectReturn) getActivity();
     }
+
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_9_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_9_2));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_10_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_10_2));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_9_1));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_9_2));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_10_1));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_10_2));
 
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(getContext()));
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(getContext()));
         }
+        txtList.clear();
+        txtList = null;
     }
+
     @OnClick({R.id.workout_mode_vr_img_9, R.id.workout_mode_vr_img_10})
     public void onVRSelect(View view) {
-        int selectVR ;
+        int selectVR;
         switch (view.getId()) {
             default:
                 selectVR = VirtualRealityActivity.SELECT_NOTHING;

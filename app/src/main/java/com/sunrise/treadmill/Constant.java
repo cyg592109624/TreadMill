@@ -5,7 +5,7 @@ package com.sunrise.treadmill;
  */
 
 public class Constant {
-    public static int initialFinish=-1;
+    public static int initialFinish = -1;
 
     public static final String APP_LANGUAGE = "APP_LANGUAGE";
 
@@ -24,13 +24,14 @@ public class Constant {
     public static final String WORK_OUT_MODE_QUICK_START = "Quick Start";
 
 
-    public static final int WORK_OUT_MODE_1 = 40001;
-    public static final int WORK_OUT_MODE_2 = 40002;
-    public static final int WORK_OUT_MODE_3 = 40003;
-    public static final int WORK_OUT_MODE_4 = 40004;
-    public static final int WORK_OUT_MODE_5 = 40005;
-    public static final int WORK_OUT_MODE_6 = 40006;
-    public static final int WORK_OUT_MODE_7 = 40007;
-    public static final int WORK_OUT_MODE_8 = 40008;
+    public static final int MODE_HILL = 20001;
+    public static final int MODE_INTERVAL = 20002;
+    public static final int MODE_GOAL = 20003;
+    public static final int MODE_FITNESS_TEST = 20004;
+    public static final int MODE_HRC = 20005;
+    public static final int MODE_VR = 20006;
+    public static final int MODE_USER_PROGRAM = 20007;
+    public static final int MODE_QUICK_START = 20008;
+
 
 }

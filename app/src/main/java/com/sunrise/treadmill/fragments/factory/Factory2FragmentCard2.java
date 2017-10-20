@@ -37,42 +37,42 @@ public class Factory2FragmentCard2 extends BaseFragment {
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
         reSet = null;
         totalTime = null;
         totalDistance = null;
-        parentView = null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
 
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card2_1_total_time));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card2_1_total_time));
         txtList.add(totalTime);
 
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card2_1_total_distance));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card2_1_total_distance));
         txtList.add(totalDistance);
 
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card2_2_ver_sdk));
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card2_2_ver_sdk_value));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card2_2_ver_sdk));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card2_2_ver_sdk_value));
 
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card2_2_ver_firmware));
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card2_2_ver_firmware_value));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card2_2_ver_firmware));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card2_2_ver_firmware_value));
 
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card2_2_ver_soft));
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card2_2_ver_soft_value));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card2_2_ver_soft));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card2_2_ver_soft_value));
 
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(getContext()));
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(getContext()));
         }
+        txtList.clear();
+        txtList=null;
     }
 
     @OnClick(R.id.factory2_card2_1_reset)
     public void reSetValue() {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         Factory2FragmentCard2Dialog dialog = new Factory2FragmentCard2Dialog();
         dialog.show(fragmentManager, Factory2FragmentCard2Dialog.TAG);
     }

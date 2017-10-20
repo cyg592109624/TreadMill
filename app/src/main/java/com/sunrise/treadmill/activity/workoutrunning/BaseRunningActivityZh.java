@@ -51,6 +51,12 @@ public class BaseRunningActivityZh extends BaseRunningActivity {
     }
 
     @Override
+    public void recycleObject() {
+        super.recycleObject();
+        mHandler = null;
+    }
+
+    @Override
     protected void setTextStyle() {
         super.setTextStyle();
         List<TextView> txtList = new ArrayList<>();
@@ -65,34 +71,41 @@ public class BaseRunningActivityZh extends BaseRunningActivity {
         txtList.add((TextView) findViewById(R.id.workout_running_media_screen_mirroring_name));
 
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(activityContext));
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(activityContext));
         }
+        txtList.clear();
+        txtList=null;
     }
 
     @OnClick({R.id.workout_running_media_bai, R.id.workout_running_media_weibo, R.id.workout_running_media_i71,
             R.id.workout_running_media_av, R.id.workout_running_media_mp3, R.id.workout_running_media_mp4,
             R.id.workout_running_media_screen_mirroring})
     public void mediaClick(final View view) {
-        ThreadPoolUtils.runTaskOnThread(new Runnable() {
-            @Override
-            public void run() {
-                Message msg = Message.obtain();
-                Bundle bundle = new Bundle();
-                Intent intent = null;
-                switch (view.getId()) {
-                    default:
-                        break;
-                    case R.id.workout_running_media_mp3:
-                        msg.what = OPEN_APP;
-                        intent = packageManager.getLaunchIntentForPackage("com.android.mediacenter");
-                        bundle.putParcelable("Intent", intent);
-                        msg.setData(bundle);
-                        break;
+        final Message msg = Message.obtain();
+        Bundle bundle = new Bundle();
+        Intent intent = null;
+        switch (view.getId()) {
+            default:
+                break;
+            case R.id.workout_running_media_mp3:
+                msg.what = OPEN_APP;
+                intent = packageManager.getLaunchIntentForPackage("com.android.mediacenter");
+                bundle.putParcelable("Intent", intent);
+                msg.setData(bundle);
+                break;
+        }
+        if (intent != null) {
+            ThreadPoolUtils.runTaskOnThread(new Runnable() {
+                @Override
+                public void run() {
+                    mHandler.sendMessage(msg);
                 }
-                mHandler.sendMessage(msg);
-            }
-        });
+            });
+
+        } else {
+            bundle = null;
+        }
     }
 }

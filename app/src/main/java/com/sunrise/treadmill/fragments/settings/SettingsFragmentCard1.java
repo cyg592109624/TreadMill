@@ -35,23 +35,26 @@ public class SettingsFragmentCard1 extends BaseFragment implements SeekBar.OnSee
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
+        bright.setOnSeekBarChangeListener(null);
         bright = null;
+        sounds.setOnSeekBarChangeListener(null);
         sounds = null;
-        parentView = null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<>();
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card1_txt1));
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card1_txt2));
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card1_txt1));
+        txtList.add((TextView)parentView.findViewById(R.id.settings_card1_txt2));
 
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(getContext()));
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(getContext()));
         }
+        txtList.clear();
+        txtList=null;
     }
 
     @Override
@@ -67,8 +70,8 @@ public class SettingsFragmentCard1 extends BaseFragment implements SeekBar.OnSee
         bright.setProgress(ScreenUtils.getScreenBrightness());
         sounds.setProgress(SoundsUtils.getVoiceMusic());
 
-        bright.setOnSeekBarChangeListener(this);
-        sounds.setOnSeekBarChangeListener(this);
+        bright.setOnSeekBarChangeListener(SettingsFragmentCard1.this);
+        sounds.setOnSeekBarChangeListener(SettingsFragmentCard1.this);
     }
 
     @Override

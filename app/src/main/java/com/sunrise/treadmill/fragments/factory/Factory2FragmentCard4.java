@@ -26,19 +26,19 @@ public class Factory2FragmentCard4 extends BaseFragment {
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
         upDataLogo = null;
-        parentView = null;
     }
 
     @Override
     protected void setTextStyle() {
-        TextView hint = (TextView) getParentView().findViewById(R.id.factory2_card4_hint);
+        TextView hint = (TextView) parentView.findViewById(R.id.factory2_card4_hint);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(hint, TextUtils.Microsoft(getContext()));
         } else {
             TextUtils.setTextTypeFace(hint, TextUtils.Arial(getContext()));
         }
+        hint = null;
     }
 
     @Override

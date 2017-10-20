@@ -38,12 +38,14 @@ public class LanguageDialog extends BaseDialogFragment {
     public int getLayoutId() {
         return R.layout.dialog_home_language;
     }
+
     @Override
-    public void clearObj() {
-        dialogFragmentReturn=null;
-        imageViews=null;
-        textViews=null;
+    public void recycleObject() {
+        dialogFragmentReturn = null;
+        imageViews = null;
+        textViews = null;
     }
+
     @Override
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
@@ -51,7 +53,7 @@ public class LanguageDialog extends BaseDialogFragment {
         } else {
             TextUtils.setTextTypeFace(textViews, TextUtils.Arial(getContext()));
         }
-        TextUtils.changeTextColor(textViews, ContextCompat.getColor(getContext(),R.color.language_btn_on));
+        TextUtils.changeTextColor(textViews, ContextCompat.getColor(getContext(), R.color.language_btn_on));
         ImageUtils.changeImageView(imageViews);
     }
 

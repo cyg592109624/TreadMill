@@ -72,30 +72,33 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
     }
 
     @Override
-    public void clearObj() {
-        headView=null;
-        genderView=null;
-        keyBoardView=null;
-        ageValue=null;
-        weightValue=null;
-        timeValue=null;
-        hrc60Value=null;
-        hrc80Value=null;
-        hrcTgValue=null;
-        infoType1=null;
-        infoType3=null;
-        nextImage=null;
-        backImage=null;
-        startImage=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+        headView.recycle();
+        headView = null;
+
+        genderView.recycle();
+        genderView = null;
+
+        keyBoardView.recycle();
+        keyBoardView = null;
+
+        ageValue = null;
+        weightValue = null;
+        timeValue = null;
+        hrc60Value = null;
+        hrc80Value = null;
+        hrcTgValue = null;
+        infoType1 = null;
+        infoType3 = null;
+
+        nextImage = null;
+        backImage = null;
+        startImage = null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) headView.findViewById(R.id.workout_head_mode));
-        txtList.add((TextView) headView.findViewById(R.id.workout_head_hint));
-
         txtList.add((TextView) findViewById(R.id.workout_edit_age));
 
         txtList.add((TextView) findViewById(R.id.workout_edit_weight));
@@ -123,10 +126,12 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         txtList.add(hrc80Value);
         txtList.add(hrcTgValue);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(activityContext));
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(activityContext));
         }
+        txtList.clear();
+        txtList = null;
     }
 
     @Override
@@ -176,15 +181,15 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
             default:
                 break;
             case WorkOutSettingCommon.CHANGE_AGE:
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_white));
+                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_1);
                 break;
             case WorkOutSettingCommon.CHANGE_WEIGHT:
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_white));
+                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_1);
                 break;
             case WorkOutSettingCommon.CHANGE_TIME:
-                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_white));
+                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_1);
                 break;
             case WorkOutSettingCommon.CHANGE_HRC_60:
@@ -192,11 +197,11 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
                 TextUtils.changeTextBackground(hrc60Value, R.mipmap.img_number_frame_1);
                 break;
             case WorkOutSettingCommon.CHANGE_HRC_80:
-                TextUtils.changeTextColor(hrc80Value, ContextCompat.getColor(getApplicationContext(), R.color.factory_white));
+                TextUtils.changeTextColor(hrc80Value, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(hrc80Value, R.mipmap.img_number_frame_1);
                 break;
             case WorkOutSettingCommon.CHANGE_TARGET_HR:
-                TextUtils.changeTextColor(hrcTgValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_white));
+                TextUtils.changeTextColor(hrcTgValue, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(hrcTgValue, R.mipmap.img_number_frame_1);
                 break;
         }
@@ -232,37 +237,37 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
             case R.id.workout_edit_age_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_AGE;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_age);
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_tabs_on));
+                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_2);
                 break;
             case R.id.workout_edit_weight_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_WEIGHT;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_weight);
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_tabs_on));
+                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_2);
                 break;
             case R.id.workout_edit_time_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_TIME;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
-                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_tabs_on));
+                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_2);
                 break;
             case R.id.workout_edit_hrc60_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_HRC_60;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
-                TextUtils.changeTextColor(hrc60Value, ContextCompat.getColor(getApplicationContext(), R.color.factory_tabs_on));
+                TextUtils.changeTextColor(hrc60Value, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(hrc60Value, R.mipmap.img_number_frame_2);
                 break;
             case R.id.workout_edit_hrc80_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_HRC_80;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
-                TextUtils.changeTextColor(hrc80Value, ContextCompat.getColor(getApplicationContext(), R.color.factory_tabs_on));
+                TextUtils.changeTextColor(hrc80Value, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(hrc80Value, R.mipmap.img_number_frame_2);
                 break;
             case R.id.workout_edit_target_hr_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_TARGET_HR;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
-                TextUtils.changeTextColor(hrcTgValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_tabs_on));
+                TextUtils.changeTextColor(hrcTgValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(hrcTgValue, R.mipmap.img_number_frame_2);
                 break;
         }

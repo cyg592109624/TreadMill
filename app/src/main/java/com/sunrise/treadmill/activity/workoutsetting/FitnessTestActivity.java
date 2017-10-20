@@ -38,6 +38,7 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
 
     @BindView(R.id.workout_edit_age_value)
     TextView ageValue;
+
     @BindView(R.id.workout_edit_weight_value)
     TextView weightValue;
 
@@ -47,43 +48,45 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
     }
 
     @Override
-    public void clearObj() {
-        headView=null;
-        genderView=null;
-        keyBoardView=null;
-        weightValue=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+        headView.recycle();
+        headView = null;
+
+        genderView.recycle();
+        genderView = null;
+
+        keyBoardView.recycle();
+        keyBoardView = null;
+
+        ageValue = null;
+        weightValue = null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        WeakReference<List<TextView>> ws = new WeakReference<List<TextView>>(txtList);
-
-        txtList.add((TextView) headView.findViewById(R.id.workout_head_mode));
-        txtList.add((TextView) headView.findViewById(R.id.workout_head_hint));
 
         txtList.add((TextView) findViewById(R.id.workout_edit_age));
         txtList.add((TextView) findViewById(R.id.workout_edit_weight));
         txtList.add((TextView) findViewById(R.id.workout_edit_weight_unit));
-
         txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_1));
 
         txtList.add(ageValue);
         txtList.add(weightValue);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(activityContext));
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(activityContext));
         }
-        ws.clear();
+        txtList.clear();
+        txtList = null;
     }
 
     @Override
     protected void init() {
         headView.setHeadMsg(getResources().getString(R.string.workout_mode_fitness), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_fitness_test_icon);
-        genderView.setOnGenderReturn(this);
-        keyBoardView.setKeyBoardReturn(this);
+        genderView.setOnGenderReturn(FitnessTestActivity.this);
+        keyBoardView.setKeyBoardReturn(FitnessTestActivity.this);
     }
 
     private boolean isShowingKeyBoard = false;
@@ -102,13 +105,13 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
             case R.id.workout_edit_age_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_AGE;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_age);
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_tabs_on));
+                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_2);
                 break;
             case R.id.workout_edit_weight_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_WEIGHT;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_weight);
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_tabs_on));
+                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_2);
                 break;
         }
@@ -139,11 +142,11 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
             default:
                 break;
             case WorkOutSettingCommon.CHANGE_AGE:
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_white));
+                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_1);
                 break;
             case WorkOutSettingCommon.CHANGE_WEIGHT:
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_white));
+                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_1);
                 break;
         }

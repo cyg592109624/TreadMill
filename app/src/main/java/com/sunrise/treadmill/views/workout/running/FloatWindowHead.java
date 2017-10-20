@@ -80,6 +80,8 @@ public class FloatWindowHead extends ConstraintLayout {
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(getContext()));
         }
+        txtList.clear();
+        txtList = null;
     }
 
     public void levelChange(int i) {
@@ -100,4 +102,13 @@ public class FloatWindowHead extends ConstraintLayout {
         levelValue.setText(curLevel + "");
     }
 
+    public void recycle() {
+        levelValue = null;
+        timeValue = null;
+        distanceValue = null;
+        caloriesValue = null;
+        pulseValue = null;
+        wattValue = null;
+        speedValue = null;
+    }
 }

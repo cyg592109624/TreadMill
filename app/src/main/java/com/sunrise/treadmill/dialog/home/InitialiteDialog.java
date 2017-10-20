@@ -30,9 +30,9 @@ public class InitialiteDialog extends BaseDialogFragment {
     }
 
     @Override
-    public void clearObj() {
-        img=null;
-        onInitialReturn=null;
+    public void recycleObject() {
+        img = null;
+        onInitialReturn = null;
     }
 
     @Override

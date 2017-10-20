@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.utils;
 
+import android.graphics.Bitmap;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,5 +39,9 @@ public class ImageUtils {
         } else if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             changeImageView(imgViews.get(1), R.mipmap.btn_home_language_cn_4);
         }
+    }
+
+    public static void changeImageView(ImageView imageView, Bitmap bitmap) {
+        imageView.setImageBitmap(bitmap);
     }
 }

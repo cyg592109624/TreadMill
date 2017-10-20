@@ -64,4 +64,8 @@ public class FloatWindowBottom extends ConstraintLayout {
     public void setWindowBottomCallBack(FloatWindowBottomCallBack callBack) {
         this.windowBottomCallBack = callBack;
     }
+
+    public void recycle(){
+        windowBottomCallBack=null;
+    }
 }

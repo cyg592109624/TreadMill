@@ -37,7 +37,7 @@ public class CoolDownDialog extends BaseDialogFragment {
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
         dialogClick = null;
         pool = null;
         task = null;

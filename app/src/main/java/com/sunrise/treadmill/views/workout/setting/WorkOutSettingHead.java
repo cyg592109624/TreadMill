@@ -8,7 +8,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.utils.LanguageUtils;
+import com.sunrise.treadmill.utils.TextUtils;
 
 /**
  * Created by ChuHui on 2017/9/20.
@@ -34,6 +37,13 @@ public class WorkOutSettingHead extends LinearLayout {
         workOutMode = findViewById(R.id.workout_head_mode);
         workOutHint = findViewById(R.id.workout_head_hint);
         workOutIcon = findViewById(R.id.workout_head_icon);
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+            TextUtils.setTextTypeFace(workOutHint, TextUtils.Microsoft(context));
+            TextUtils.setTextTypeFace(workOutHint, TextUtils.Microsoft(context));
+        } else {
+            TextUtils.setTextTypeFace(workOutMode, TextUtils.Arial(context));
+            TextUtils.setTextTypeFace(workOutMode, TextUtils.Arial(context));
+        }
     }
 
     public void setHeadMsg(String title, String hint, int imgResource) {
@@ -52,6 +62,12 @@ public class WorkOutSettingHead extends LinearLayout {
 
     public void setWorkOutIcon(int imgResource) {
         workOutIcon.setImageResource(imgResource);
+    }
+
+    public void recycle() {
+        workOutMode = null;
+        workOutHint = null;
+        workOutIcon = null;
     }
 
 }

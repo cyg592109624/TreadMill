@@ -70,27 +70,36 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
     }
 
     @Override
-    public void clearObj() {
-        headView=null;
-        optionBody=null;
-        optionBody2=null;
-        genderView=null;
-        keyBoardView=null;
-        levelView=null;
-        ageValue=null;
-        weightValue=null;
-        timeValue=null;
-        nextImage=null;
-        backImage=null;
-        startImage=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+        headView.recycle();
+        headView = null;
+
+        genderView.recycle();
+        genderView = null;
+
+        keyBoardView.recycle();
+        keyBoardView = null;
+
+        optionBody = null;
+        optionBody2 = null;
+
+        levelView.recycle();
+        levelView = null;
+
+        ageValue = null;
+        weightValue = null;
+        timeValue = null;
+
+        nextImage = null;
+        backImage = null;
+        startImage = null;
     }
 
     @Override
     protected void init() {
         headView.setHeadMsg(getResources().getString(R.string.workout_mode_user), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_user_program_icon);
-        genderView.setOnGenderReturn(this);
-        keyBoardView.setKeyBoardReturn(this);
+        genderView.setOnGenderReturn(UserProgramActivity.this);
+        keyBoardView.setKeyBoardReturn(UserProgramActivity.this);
         levelView.setColumnMargin(5f);
         levelView.setHintText(getResources().getString(R.string.workout_mode_hint_e));
     }
@@ -98,8 +107,6 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) headView.findViewById(R.id.workout_head_mode));
-        txtList.add((TextView) headView.findViewById(R.id.workout_head_hint));
 
         txtList.add((TextView) findViewById(R.id.workout_edit_age));
 
@@ -117,10 +124,12 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
         txtList.add(weightValue);
         txtList.add(timeValue);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(activityContext));
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(activityContext));
         }
+        txtList.clear();
+        txtList = null;
     }
 
     @Override
@@ -152,15 +161,15 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
             default:
                 break;
             case WorkOutSettingCommon.CHANGE_AGE:
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_white));
+                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_1);
                 break;
             case WorkOutSettingCommon.CHANGE_WEIGHT:
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_white));
+                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_1);
                 break;
             case WorkOutSettingCommon.CHANGE_TIME:
-                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_white));
+                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_1);
                 break;
         }
@@ -196,19 +205,19 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
             case R.id.workout_edit_age_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_AGE;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_age);
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_tabs_on));
+                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_2);
                 break;
             case R.id.workout_edit_weight_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_WEIGHT;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_weight);
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_tabs_on));
+                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_2);
                 break;
             case R.id.workout_edit_time_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_TIME;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
-                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(getApplicationContext(), R.color.factory_tabs_on));
+                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_2);
                 break;
         }

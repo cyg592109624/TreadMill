@@ -15,7 +15,6 @@ public class SettingsFragmentCard3 extends BaseFragment {
     }
 
     @Override
-    public void clearObj() {
-        parentView = null;
+    public void recycleObject() {
     }
 }

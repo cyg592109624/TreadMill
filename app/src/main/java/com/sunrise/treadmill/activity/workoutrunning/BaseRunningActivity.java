@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -71,22 +70,21 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     private int parentWidth;
     private int parentHeight;
 
-    private FragmentManager fragmentManager;
     public PackageManager packageManager;
 
     public FloatWindowService floatWindowServer;
 
-    private FloatServiceBinder serviceBinderFinish;
+    private FloatServiceBinder serviceBinder;
 
     private ServiceConnection floatWindowConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            serviceBinderFinish.onBindSucceed(componentName, iBinder);
+            serviceBinder.onBindSucceed(componentName, iBinder);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
-            serviceBinderFinish.onServiceDisconnected(componentName);
+            serviceBinder.onServiceDisconnected(componentName);
         }
     };
 
@@ -100,7 +98,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
         leftView = null;
         rightLayout = null;
         levelView = null;
@@ -108,10 +106,12 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         mediaCtrlImage = null;
         headView = null;
         bottomView = null;
-        fragmentManager = null;
+
         packageManager = null;
+        unbindService(floatWindowConnection);
+        floatWindowConnection = null;
+        serviceBinder = null;
         floatWindowServer = null;
-        setContentView(R.layout.view_null);
     }
 
     @Override
@@ -122,9 +122,9 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @Override
     protected void init() {
-        serviceBinderFinish = BaseRunningActivity.this;
+        serviceBinder = BaseRunningActivity.this;
         packageManager = getApplicationContext().getPackageManager();
-        fragmentManager = getSupportFragmentManager();
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getRealMetrics(dm);
         parentWidth = dm.widthPixels;
@@ -148,16 +148,6 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     protected void onRestart() {
         super.onRestart();
         floatWindowServer.toggleFloatWindow();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        try {
-            unbindService(floatWindowConnection);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -328,7 +318,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         ThreadPoolUtils.runTaskOnThread(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(BaseRunningActivity.this, FloatWindowService.class);
+                Intent intent = new Intent(activityContext, FloatWindowService.class);
                 bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
             }
         });

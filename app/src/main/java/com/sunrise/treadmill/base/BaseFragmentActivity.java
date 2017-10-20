@@ -1,11 +1,14 @@
 package com.sunrise.treadmill.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.utils.ActivityManageUtils;
 
 import butterknife.ButterKnife;
@@ -17,46 +20,18 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragmentActivity extends FragmentActivity {
     private Unbinder bind;
-    private ActivityManageUtils activityManageUtils;
+
+    public FragmentManager fragmentManager = getSupportFragmentManager();
+    public Context activityContext= BaseFragmentActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         changeSystemUiState();
+        super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
-        activityManageUtils = ActivityManageUtils.getInstance();
-        activityManageUtils.addActivity(this);
         setTextStyle();
         init();
-    }
-    /**
-     * 返回布局ID 给onCreate方法
-     * @return
-     */
-    public abstract int getLayoutId();
-    /**
-     * 清空资源引用
-     * @return
-     */
-    public abstract void clearObj();
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        bind.unbind();
-    }
-
-    protected void setTextStyle() {
-    }
-
-    protected void init() {
-    }
-
-    public void finishActivity() {
-        clearObj();
-        activityManageUtils.finishActivity();
-        System.gc();
     }
 
     /**
@@ -101,4 +76,43 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
             }
         });
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.out.println(getClass().getName() + "  ----  > onDestroy()被调用");
+    }
+
+    /**
+     * 返回布局ID 给onCreate方法
+     *
+     * @return
+     */
+    public abstract int getLayoutId();
+
+    /**
+     * 清空资源引用
+     *
+     * @return
+     */
+    public abstract void recycleObject();
+
+    protected void setTextStyle() {
+
+    }
+
+    protected void init() {
+    }
+
+    public void finishActivity() {
+        fragmentManager = null;
+        setContentView(R.layout.view_null);
+        System.out.println("BaseActivity  ----  > onDestroy()被调用");
+        recycleObject();
+        bind.unbind();
+        bind = null;
+        System.gc();
+        finish();
+    }
+
 }

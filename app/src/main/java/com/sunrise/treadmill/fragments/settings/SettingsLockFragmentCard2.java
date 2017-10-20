@@ -40,25 +40,29 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
         psw = null;
+
+        keyBoard.recycle();
         keyBoard = null;
+
         reSet = null;
-        parentView = null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_2_customer_psw));
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_2_srs_psw));
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_2_srs_psw_value));
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_2_customer_psw));
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_2_srs_psw));
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_2_srs_psw_value));
         txtList.add(psw);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(getContext()));
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(getContext()));
         }
+        txtList.clear();
+        txtList=null;
     }
 
     @Override

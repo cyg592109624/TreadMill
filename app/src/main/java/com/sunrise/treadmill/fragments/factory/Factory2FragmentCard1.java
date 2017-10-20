@@ -46,32 +46,32 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
     }
 
     @Override
-    public void clearObj() {
-        leftLayout=null;
-        ctrlPageToggle=null;
-        levelValue=null;
-        pwmValue=null;
-        keyBoardView=null;
-        parentView = null;
+    public void recycleObject() {
+        leftLayout = null;
+        ctrlPageToggle = null;
+        levelValue = null;
+        pwmValue = null;
+        keyBoardView.recycle();
+        keyBoardView = null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card1_1_display_mode));
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card1_1_pause_mode));
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card1_1_key_tone));
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card1_1_buzzer));
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card1_1_child_lock));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card1_1_display_mode));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card1_1_pause_mode));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card1_1_key_tone));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card1_1_buzzer));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card1_1_child_lock));
 
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card1_2_ctrl_page));
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card1_2_key_test));
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card1_2_brake_test));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card1_2_ctrl_page));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card1_2_key_test));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card1_2_brake_test));
 
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card1_2_level));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card1_2_level));
         txtList.add(levelValue);
 
-        txtList.add((TextView) getParentView().findViewById(R.id.factory2_card1_2_pwm));
+        txtList.add((TextView) parentView.findViewById(R.id.factory2_card1_2_pwm));
         txtList.add(pwmValue);
 
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
@@ -79,6 +79,8 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(getContext()));
         }
+        txtList.clear();
+        txtList=null;
     }
 
     @Override
@@ -109,11 +111,11 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
             default:
                 break;
             case RE_SET_LEVEL:
-                TextUtils.changeTextColor(levelValue, ContextCompat.getColor(getContext(),R.color.factory_white));
+                TextUtils.changeTextColor(levelValue, ContextCompat.getColor(getContext(), R.color.factory_white));
                 TextUtils.changeTextBackground(levelValue, R.mipmap.img_number_frame_1);
                 break;
             case RE_SET_PWM:
-                TextUtils.changeTextColor(pwmValue, ContextCompat.getColor(getContext(),R.color.factory_white));
+                TextUtils.changeTextColor(pwmValue, ContextCompat.getColor(getContext(), R.color.factory_white));
                 TextUtils.changeTextBackground(pwmValue, R.mipmap.img_number_frame_1);
                 break;
         }
@@ -155,13 +157,13 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
             case R.id.factory2_card1_2_level_value:
                 reSetTG = RE_SET_LEVEL;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_level);
-                TextUtils.changeTextColor(levelValue, ContextCompat.getColor(getContext(),R.color.factory_tabs_on));
+                TextUtils.changeTextColor(levelValue, ContextCompat.getColor(getContext(), R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(levelValue, R.mipmap.img_number_frame_2);
                 break;
             case R.id.factory2_card1_2_pwm_value:
                 reSetTG = RE_SET_PWM;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_pwm);
-                TextUtils.changeTextColor(pwmValue, ContextCompat.getColor(getContext(),R.color.factory_tabs_on));
+                TextUtils.changeTextColor(pwmValue, ContextCompat.getColor(getContext(), R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(pwmValue, R.mipmap.img_number_frame_2);
                 break;
         }

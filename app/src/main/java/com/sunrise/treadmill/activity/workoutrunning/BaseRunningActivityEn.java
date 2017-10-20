@@ -25,7 +25,6 @@ public class BaseRunningActivityEn extends BaseRunningActivity {
 
     @Override
     protected void setTextStyle() {
-        super.setTextStyle();
         List<TextView> txtList = new ArrayList<>();
         txtList.add((TextView) findViewById(R.id.workout_running_media_youtube_name));
         txtList.add((TextView) findViewById(R.id.workout_running_media_chrome_name));
@@ -40,10 +39,12 @@ public class BaseRunningActivityEn extends BaseRunningActivity {
         txtList.add((TextView) findViewById(R.id.workout_running_media_screen_mirroring_name));
 
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(activityContext));
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(activityContext));
         }
+        txtList.clear();
+        txtList=null;
     }
 
     @OnClick({R.id.workout_running_media_youtube, R.id.workout_running_media_chrome, R.id.workout_running_media_facebook,
@@ -51,7 +52,7 @@ public class BaseRunningActivityEn extends BaseRunningActivity {
             R.id.workout_running_media_mp4, R.id.workout_running_media_av, R.id.workout_running_media_twitter,
             R.id.workout_running_media_screen_mirroring})
     public void mediaClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             default:
                 break;
         }

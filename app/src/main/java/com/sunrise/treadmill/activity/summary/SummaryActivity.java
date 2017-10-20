@@ -1,8 +1,9 @@
 package com.sunrise.treadmill.activity.summary;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 
@@ -13,8 +14,8 @@ import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.fragments.summary.SummaryFragmentPage1;
 import com.sunrise.treadmill.fragments.summary.SummaryFragmentPage2;
 import com.sunrise.treadmill.fragments.summary.SummaryFragmentPage3;
+import com.sunrise.treadmill.utils.BitMapUtils;
 import com.sunrise.treadmill.utils.ImageUtils;
-import com.sunrise.treadmill.utils.ThreadPoolUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class SummaryActivity extends BaseFragmentActivity implements ViewPager.O
     @BindView(R.id.summary_viewPage)
     ViewPager viewPager;
 
-    private FragmentManager fragmentManager;
+    private Bitmap selectTgBitmap;
     private SummaryViewPageAdapter viewPageAdapter;
 
     @Override
@@ -41,17 +42,20 @@ public class SummaryActivity extends BaseFragmentActivity implements ViewPager.O
     }
 
     @Override
-    public void clearObj() {
-        selectTg=null;
-        viewPager=null;
-        fragmentManager=null;
-        viewPageAdapter=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+        selectTg = null;
+        if (selectTgBitmap != null) {
+            selectTgBitmap.recycle();
+            selectTgBitmap = null;
+        }
+        viewPager.removeAllViews();
+        viewPager = null;
+        viewPageAdapter.recycle();
+        viewPageAdapter = null;
     }
 
     @Override
     protected void init() {
-        fragmentManager = getSupportFragmentManager();
         List<Fragment> list = new ArrayList<Fragment>();
         list.add(new SummaryFragmentPage1());
         list.add(new SummaryFragmentPage2());
@@ -60,6 +64,7 @@ public class SummaryActivity extends BaseFragmentActivity implements ViewPager.O
         viewPager.setAdapter(viewPageAdapter);
         viewPager.setCurrentItem(0);
         viewPager.addOnPageChangeListener(SummaryActivity.this);
+        viewPager.setOffscreenPageLimit(3);
     }
 
     @Override
@@ -68,15 +73,21 @@ public class SummaryActivity extends BaseFragmentActivity implements ViewPager.O
 
     @Override
     public void onPageSelected(int position) {
+        if (selectTgBitmap != null) {
+            selectTgBitmap.recycle();
+        }
         switch (position) {
             case 0:
-                ImageUtils.changeImageView(selectTg, R.mipmap.img_virtual_reality_page_1);
+                selectTgBitmap = BitMapUtils.loadMipMapResource(activityContext.getResources(), R.mipmap.img_virtual_reality_page_1);
+                ImageUtils.changeImageView(selectTg, selectTgBitmap);
                 break;
             case 1:
-                ImageUtils.changeImageView(selectTg, R.mipmap.img_virtual_reality_page_2);
+                selectTgBitmap = BitMapUtils.loadMipMapResource(activityContext.getResources(), R.mipmap.img_virtual_reality_page_2);
+                ImageUtils.changeImageView(selectTg, selectTgBitmap);
                 break;
             case 2:
-                ImageUtils.changeImageView(selectTg, R.mipmap.img_virtual_reality_page_3);
+                selectTgBitmap = BitMapUtils.loadMipMapResource(activityContext.getResources(), R.mipmap.img_virtual_reality_page_3);
+                ImageUtils.changeImageView(selectTg, selectTgBitmap);
                 break;
             default:
                 break;
@@ -89,9 +100,9 @@ public class SummaryActivity extends BaseFragmentActivity implements ViewPager.O
 
 
     @OnClick(R.id.bottom_logo_tab_home)
-    public void onHomeClick(){
-        Intent intent=new Intent(SummaryActivity.this, HomeActivity.class);
-        startActivity(intent);
+    public void onHomeClick() {
+        Intent intent = new Intent(activityContext, HomeActivity.class);
         finishActivity();
+        startActivity(intent);
     }
 }

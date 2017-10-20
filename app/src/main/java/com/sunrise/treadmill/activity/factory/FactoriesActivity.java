@@ -1,9 +1,8 @@
 package com.sunrise.treadmill.activity.factory;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
@@ -12,10 +11,6 @@ import com.sunrise.treadmill.base.BaseActivity;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.OnClick;
 
 /**
@@ -24,18 +19,14 @@ import butterknife.OnClick;
 
 public class FactoriesActivity extends BaseActivity {
 
-    @BindView(R.id.bottom_logo_tab_home)
-    ImageView backHome;
-
     @Override
     public int getLayoutId() {
         return R.layout.activity_factories;
     }
 
     @Override
-    public void clearObj() {
-        backHome=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+
     }
 
     @Override
@@ -49,6 +40,8 @@ public class FactoriesActivity extends BaseActivity {
             TextUtils.setTextTypeFace(title, TextUtils.ArialBold(this));
             TextUtils.setTextTypeFace(hint, TextUtils.Arial(this));
         }
+        title = null;
+        hint = null;
     }
 
     @OnClick({R.id.factories_1, R.id.factories_2})

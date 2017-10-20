@@ -10,16 +10,11 @@ import com.sunrise.treadmill.utils.LanguageUtils;
  */
 
 public class TreadApplication extends Application {
-    private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        context = getApplicationContext();
         GlobalSetting.AppLanguage = LanguageUtils.getAppLanguage(getResources());
     }
 
-    public static Context getContext() {
-        return context;
-    }
 }

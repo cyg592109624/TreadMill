@@ -68,32 +68,33 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
     }
 
     @Override
-    public void clearObj() {
-        leftLayout=null;
-        leftReset=null;
-        timeValue=null;
-        remainingTimeValue=null;
-        rightLayout=null;
-        distanceValue=null;
-        remainingDistanceValue=null;
-        rightKeyBoard=null;
-        leftKeyBoard=null;
-        parentView = null;
+    public void recycleObject() {
+        leftLayout = null;
+        leftReset = null;
+        timeValue = null;
+        remainingTimeValue = null;
+        rightLayout = null;
+        distanceValue = null;
+        remainingDistanceValue = null;
+        rightKeyBoard.recycle();
+        rightKeyBoard = null;
+        leftKeyBoard.recycle();
+        leftKeyBoard = null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<>();
 
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_1_1_time));
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_1_1_time_unit));
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_1_1_remaining_time));
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_1_1_remaining_time_unit));
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_1_time));
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_1_time_unit));
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_1_remaining_time));
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_1_remaining_time_unit));
 
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_1_2_distance));
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_1_2_distance_unit));
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_1_2_remaining_distance));
-        txtList.add((TextView) getParentView().findViewById(R.id.settings_card4_1_2_remaining_distance_unit));
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_2_distance));
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_2_distance_unit));
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_2_remaining_distance));
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_2_remaining_distance_unit));
 
         txtList.add(timeValue);
         txtList.add(remainingTimeValue);
@@ -105,6 +106,8 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(getContext()));
         }
+        txtList.clear();
+        txtList = null;
     }
 
     @Override
@@ -123,13 +126,13 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
                 reSetTG = RE_SET_TIME;
                 rightLayout.setVisibility(View.GONE);
                 leftKeyBoard.setVisibility(View.VISIBLE);
-                TextUtils.changeTextColor(timeValue,  ContextCompat.getColor(getContext(),R.color.settings_tabs_on));
+                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(getContext(), R.color.settings_tabs_on));
                 break;
             case R.id.settings_card4_1_2_reset:
                 reSetTG = RE_SET_DISTANCE;
                 leftLayout.setVisibility(View.GONE);
                 rightKeyBoard.setVisibility(View.VISIBLE);
-                TextUtils.changeTextColor(distanceValue,  ContextCompat.getColor(getContext(),R.color.settings_tabs_on));
+                TextUtils.changeTextColor(distanceValue, ContextCompat.getColor(getContext(), R.color.settings_tabs_on));
                 break;
             default:
                 break;
@@ -154,12 +157,12 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
     public void onKeyBoardClose() {
         switch (reSetTG) {
             case RE_SET_TIME:
-                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(getContext(),R.color.settings_white));
+                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(getContext(), R.color.settings_white));
                 rightLayout.setVisibility(View.VISIBLE);
                 leftKeyBoard.setVisibility(View.GONE);
                 break;
             case RE_SET_DISTANCE:
-                TextUtils.changeTextColor(distanceValue, ContextCompat.getColor(getContext(),R.color.settings_white));
+                TextUtils.changeTextColor(distanceValue, ContextCompat.getColor(getContext(), R.color.settings_white));
                 leftLayout.setVisibility(View.VISIBLE);
                 rightKeyBoard.setVisibility(View.GONE);
                 break;

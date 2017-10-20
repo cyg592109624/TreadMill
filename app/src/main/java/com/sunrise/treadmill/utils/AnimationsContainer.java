@@ -21,18 +21,19 @@ import java.lang.ref.SoftReference;
 public class AnimationsContainer {
     public int fps = 1000;  // 每秒播放帧数，fps = 1/t，t-动画两帧时间间隔
     private int resId = R.array.count_down; //图片资源
-    private Context mContext = TreadApplication.getContext();
+    private Context mContext ;
     // 单例
     private static AnimationsContainer mInstance;
 
 
-    public AnimationsContainer() {
+    private AnimationsContainer(Context context) {
+        mContext=context;
     }
 
     //获取单例
-    public static AnimationsContainer getInstance(int resId, int fps) {
+    public static AnimationsContainer getInstance(Context context,int resId, int fps) {
         if (mInstance == null){
-            mInstance = new AnimationsContainer();
+            mInstance = new AnimationsContainer(context);
         }
         return mInstance;
     }
@@ -42,13 +43,14 @@ public class AnimationsContainer {
     }
 
     // 从xml中读取资源ID数组
-    private int[] mProgressAnimFrames = getData(resId);
+    private int[] mProgressAnimFrames;
 
     /**
      * @param imageView
      * @return progress dialog animation
      */
     public FramesSequenceAnimation createProgressDialogAnim(ImageView imageView) {
+        mProgressAnimFrames = getData(resId);
         return new FramesSequenceAnimation(imageView, mProgressAnimFrames, fps);
     }
 
@@ -180,7 +182,6 @@ public class AnimationsContainer {
      */
     private int[] getData(int resId) {
         TypedArray array = mContext.getResources().obtainTypedArray(resId);
-
         int len = array.length();
         int[] intArray = new int[array.length()];
 

@@ -44,7 +44,7 @@ public class PauseDialog extends BaseDialogFragment {
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
         pauseDialogClick = null;
         pool = null;
         task = null;

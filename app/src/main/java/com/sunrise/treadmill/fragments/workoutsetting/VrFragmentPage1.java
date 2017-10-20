@@ -34,27 +34,28 @@ public class VrFragmentPage1 extends BaseFragment {
     }
 
     @Override
-    public void clearObj() {
+    public void recycleObject() {
         onVrSelectReturn = null;
-        parentView = null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_1_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_1_2));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_2_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_2_2));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_3_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_3_2));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_4_1));
-        txtList.add((TextView) getParentView().findViewById(R.id.workout_mode_vr_name_4_2));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_1_1));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_1_2));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_2_1));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_2_2));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_3_1));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_3_2));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_4_1));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_mode_vr_name_4_2));
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(getContext()));
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(getContext()));
         }
+        txtList.clear();
+        txtList = null;
     }
 
     @OnClick({R.id.workout_mode_vr_img_1, R.id.workout_mode_vr_img_2, R.id.workout_mode_vr_img_3, R.id.workout_mode_vr_img_4})

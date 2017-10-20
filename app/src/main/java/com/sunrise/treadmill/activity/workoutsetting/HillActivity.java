@@ -56,24 +56,26 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     }
 
     @Override
-    public void clearObj() {
-        headView=null;
-        genderView=null;
-        keyBoardView=null;
-        ageValue=null;
-        headView=null;
-        weightValue=null;
-        timeValue=null;
-        startBtn=null;
-        setContentView(R.layout.view_null);
+    public void recycleObject() {
+        headView.recycle();
+        headView = null;
+
+        genderView.recycle();
+        genderView = null;
+
+        keyBoardView.recycle();
+        keyBoardView = null;
+
+        ageValue = null;
+        headView = null;
+        weightValue = null;
+        timeValue = null;
+        startBtn = null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) headView.findViewById(R.id.workout_head_mode));
-        txtList.add((TextView) headView.findViewById(R.id.workout_head_hint));
-
         txtList.add((TextView) findViewById(R.id.workout_edit_age));
         txtList.add((TextView) findViewById(R.id.workout_edit_weight));
         txtList.add((TextView) findViewById(R.id.workout_edit_weight_unit));
@@ -87,17 +89,19 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         txtList.add(weightValue);
         txtList.add(timeValue);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(activityContext));
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(this));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(activityContext));
         }
+        txtList.clear();
+        txtList = null;
     }
 
     @Override
     protected void init() {
         headView.setHeadMsg(getResources().getString(R.string.workout_mode_hill), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_hill_icon);
-        genderView.setOnGenderReturn(this);
-        keyBoardView.setKeyBoardReturn(this);
+        genderView.setOnGenderReturn(HillActivity.this);
+        keyBoardView.setKeyBoardReturn(HillActivity.this);
     }
 
     @Override
@@ -128,15 +132,15 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
             default:
                 break;
             case WorkOutSettingCommon.CHANGE_AGE:
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(getApplicationContext(),R.color.factory_white));
+                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_1);
                 break;
             case WorkOutSettingCommon.CHANGE_WEIGHT:
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(getApplicationContext(),R.color.factory_white));
+                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_1);
                 break;
             case WorkOutSettingCommon.CHANGE_TIME:
-                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(getApplicationContext(),R.color.factory_white));
+                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(activityContext, R.color.factory_white));
                 TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_1);
                 break;
         }
@@ -148,6 +152,7 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     }
 
     private boolean isShowingKeyBoard = false;
+
     @OnClick({R.id.workout_edit_age_value, R.id.workout_edit_weight_value, R.id.workout_edit_time_value})
     public void changValue(View view) {
         if (isShowingKeyBoard) {
@@ -163,19 +168,19 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
             case R.id.workout_edit_age_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_AGE;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_age);
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(getApplicationContext(),R.color.factory_tabs_on));
+                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_2);
                 break;
             case R.id.workout_edit_weight_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_WEIGHT;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_weight);
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(getApplicationContext(),R.color.factory_tabs_on));
+                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_2);
                 break;
             case R.id.workout_edit_time_value:
                 WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_TIME;
                 keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
-                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(getApplicationContext(),R.color.factory_tabs_on));
+                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
                 TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_2);
                 break;
         }
@@ -185,9 +190,9 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     public void beginWorkOut() {
         Intent intent = new Intent();
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            intent.setClass(HillActivity.this, HillRunningActivityZh.class);
+            intent.setClass(activityContext, HillRunningActivityZh.class);
         } else {
-            intent.setClass(HillActivity.this, HillRunningActivity.class);
+            intent.setClass(activityContext, HillRunningActivity.class);
         }
         startActivity(intent);
     }

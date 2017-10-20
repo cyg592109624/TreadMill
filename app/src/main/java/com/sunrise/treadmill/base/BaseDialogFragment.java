@@ -1,8 +1,8 @@
 package com.sunrise.treadmill.base;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -27,6 +27,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     public static final int DIALOG_WIDTH = 10000;
     private Unbinder bind;
     public View parentView;
+    public Context fragmentContext;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         parentView = inflater.inflate(getLayoutId(), container, false);
         changeSystemUiState();
         parentView.setMinimumWidth(DIALOG_WIDTH);
+        fragmentContext = ((BaseFragmentActivity) getActivity()).activityContext;
         return parentView;
     }
 
@@ -58,32 +60,19 @@ public abstract class BaseDialogFragment extends DialogFragment {
         WindowManager windowManager = getActivity().getWindowManager();
         DisplayMetrics dm = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(dm);
-        window.setLayout(dm.widthPixels+200, window.getAttributes().height);
+        window.setLayout(dm.widthPixels + 200, window.getAttributes().height);
     }
 
     @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        clearObj();
+    public void onDestroyView() {
+        super.onDestroyView();
+        System.out.println(getClass().getName() + "  ----  > onDestroyView()被调用");
+        recycleObject();
+        bind.unbind();
+        bind = null;
+        parentView = null;
+        System.gc();
     }
-
-    /**
-     * 返回布局ID 给onCreateView方法
-     * @return
-     */
-    public abstract int getLayoutId();
-    /**
-     * 清空资源引用
-     * @return
-     */
-    public abstract void clearObj();
-
-    public View getParentView(){
-        return parentView;
-    }
-
-    protected void setTextStyle(){};
-    protected void init(){};
 
     /**
      * 隐藏部分系统ui、部分button事件拦截
@@ -121,5 +110,30 @@ public abstract class BaseDialogFragment extends DialogFragment {
         });
 
     }
+
+    /**
+     * 返回布局ID 给onCreateView方法
+     *
+     * @return
+     */
+    public abstract int getLayoutId();
+
+    /**
+     * 清空资源引用
+     *
+     * @return
+     */
+    public abstract void recycleObject();
+
+    protected void setTextStyle() {
+    }
+
+    ;
+
+    protected void init() {
+    }
+
+    ;
+
 
 }

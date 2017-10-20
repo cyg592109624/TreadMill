@@ -28,14 +28,14 @@ public class CountDownDialog extends BaseDialogFragment {
     }
 
     @Override
-    public void clearObj() {
-        img=null;
-        parentView=null;
+    public void recycleObject() {
+        img = null;
+        parentView = null;
     }
 
     @Override
     protected void init() {
-        final AnimationsContainer.FramesSequenceAnimation animation = AnimationsContainer.getInstance(R.array.count_down, 1000).createProgressDialogAnim(img);
+        final AnimationsContainer.FramesSequenceAnimation animation = AnimationsContainer.getInstance(fragmentContext, R.array.count_down, 1000).createProgressDialogAnim(img);
         animation.start();
         animation.setOnAnimStopListener((AnimationsContainer.OnAnimationStoppedListener) getActivity());
         new Timer().schedule(new TimerTask() {
@@ -45,11 +45,5 @@ public class CountDownDialog extends BaseDialogFragment {
                 dismiss();
             }
         }, 4000);
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        img=null;
     }
 }
