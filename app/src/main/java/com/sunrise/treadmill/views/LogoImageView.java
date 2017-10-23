@@ -46,9 +46,6 @@ public class LogoImageView extends android.support.v7.widget.AppCompatImageView 
      */
     private static final int TOUCH_SLOP = 100;
 
-    public LogoImageView(Context context) {
-        super(context);
-    }
 
     public LogoImageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);

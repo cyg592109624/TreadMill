@@ -34,10 +34,6 @@ public class LineChat extends View {
     private int dataSize = 31;
     private int rankCount = 36;
 
-    public LineChat(Context context) {
-        this(context, null);
-    }
-
     public LineChat(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }

@@ -24,26 +24,7 @@
         android:gravity="center"
         android:visibility="gone" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="6"
-        android:orientation="vertical"
-        android:paddingLeft="10dp">
-
-        <include layout="@layout/workout_edit_info_1" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <include layout="@layout/workout_edit_start_1" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+     <include
+         layout="@layout/activity_workout_setting_edit_body1"/>
 
 </LinearLayout>

@@ -44,7 +44,6 @@ public class SettingsLockActivity extends BaseFragmentActivity {
     @Override
     public void recycleObject() {
         bgView = null;
-        txtList.clear();
         txtList = null;
         nowFragment = null;
         card1 = null;

@@ -2,12 +2,18 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="52dp"
-    android:background="@mipmap/img_sportmode_top_bar"
-    android:paddingLeft="40dp">
+    android:background="@mipmap/img_sportmode_top_bar">
 
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="36dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/workout_running_head_level"
@@ -15,11 +21,11 @@
         android:layout_height="23dp"
         android:gravity="center"
         android:text="@string/level"
-        android:textSize="35px"
+        android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.00"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/view"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -31,7 +37,7 @@
         android:layout_marginLeft="5dp"
         android:gravity="center"
         android:text="@string/time"
-        android:textSize="35px"
+        android:textSize="11sp"
         app:layout_constraintHorizontal_bias="0.00"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_level"
         app:layout_constraintRight_toRightOf="parent"
@@ -44,7 +50,7 @@
         android:layout_marginLeft="5dp"
         android:gravity="center"
         android:text="@string/distance"
-        android:textSize="35px"
+        android:textSize="11sp"
         app:layout_constraintHorizontal_bias="0.00"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_time"
         app:layout_constraintRight_toRightOf="parent"
@@ -57,7 +63,7 @@
         android:layout_marginLeft="5dp"
         android:gravity="center"
         android:text="@string/calories"
-        android:textSize="35px"
+        android:textSize="11sp"
         app:layout_constraintHorizontal_bias="0.00"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_distance"
         app:layout_constraintRight_toRightOf="parent"
@@ -70,7 +76,7 @@
         android:layout_marginLeft="5dp"
         android:gravity="center"
         android:text="@string/pulse"
-        android:textSize="35px"
+        android:textSize="11sp"
         app:layout_constraintHorizontal_bias="0.00"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_calories"
         app:layout_constraintRight_toRightOf="parent"
@@ -84,7 +90,7 @@
         android:layout_marginLeft="5dp"
         android:gravity="center"
         android:text="@string/watt"
-        android:textSize="35px"
+        android:textSize="11sp"
         app:layout_constraintHorizontal_bias="0.00"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_pulse"
         app:layout_constraintRight_toRightOf="parent"
@@ -98,7 +104,7 @@
         android:layout_marginTop="0dp"
         android:gravity="center"
         android:text="@string/speed"
-        android:textSize="35px"
+        android:textSize="11sp"
         app:layout_constraintHorizontal_bias="0.00"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_watt"
         app:layout_constraintRight_toRightOf="parent"
@@ -129,10 +135,10 @@
         android:gravity="center"
         android:text="1"
         android:textColor="@color/workout_mode_running_head_value"
-        android:textSize="40px"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/view"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workout_running_head_level"
         app:layout_constraintVertical_bias="0.0" />
@@ -145,7 +151,7 @@
         android:gravity="center"
         android:text="1"
         android:textColor="@color/workout_mode_running_head_value"
-        android:textSize="40px"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_level_value"
         app:layout_constraintTop_toBottomOf="@+id/workout_running_head_time"
@@ -153,24 +159,24 @@
 
     <TextView
         android:id="@+id/workout_running_head_distance_value"
-        android:layout_width="55dp"
+        android:layout_width="50dp"
         android:layout_height="29dp"
         android:layout_marginLeft="5dp"
         android:gravity="center"
         android:text="1"
         android:textColor="@color/workout_mode_running_head_value"
-        android:textSize="40px"
+        android:textSize="15sp"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_time_value"
         app:layout_constraintTop_toBottomOf="@+id/workout_running_head_distance" />
 
     <TextView
         android:id="@+id/workout_running_head_distance_unit"
-        android:layout_width="20dp"
+        android:layout_width="25dp"
         android:layout_height="29dp"
         android:gravity="center"
         android:text="@string/unit_km"
         android:textColor="@color/workout_mode_running_head_value"
-        android:textSize="28px"
+        android:textSize="11sp"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_distance_value"
         app:layout_constraintTop_toBottomOf="@+id/workout_running_head_distance" />
 
@@ -182,7 +188,7 @@
         android:gravity="center"
         android:text="1"
         android:textColor="@color/workout_mode_running_head_value"
-        android:textSize="40px"
+        android:textSize="15sp"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_distance_unit"
         app:layout_constraintTop_toBottomOf="@+id/workout_running_head_calories" />
 
@@ -195,25 +201,25 @@
         android:gravity="center"
         android:text="@string/unit_kcal"
         android:textColor="@color/workout_mode_running_head_value"
-        android:textSize="28px"
+        android:textSize="11sp"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_calories_value"
         app:layout_constraintTop_toBottomOf="@+id/workout_running_head_calories" />
 
     <TextView
         android:id="@+id/workout_running_head_pulse_value"
-        android:layout_width="58dp"
+        android:layout_width="60dp"
         android:layout_height="29dp"
         android:layout_marginLeft="5dp"
         android:gravity="center"
         android:text="1"
         android:textColor="@color/workout_mode_running_head_value"
-        android:textSize="40px"
+        android:textSize="15sp"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_calories_unit"
         app:layout_constraintTop_toBottomOf="@+id/workout_running_head_pulse" />
 
     <ImageView
         android:id="@+id/workout_running_head_pulse_unit"
-        android:layout_width="17dp"
+        android:layout_width="15dp"
         android:layout_height="29dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
@@ -229,7 +235,7 @@
         android:gravity="center"
         android:text="1"
         android:textColor="@color/workout_mode_running_head_value"
-        android:textSize="40px"
+        android:textSize="15sp"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_pulse_unit"
         app:layout_constraintTop_toBottomOf="@+id/workout_running_head_watt" />
 
@@ -241,7 +247,7 @@
         android:gravity="center"
         android:text="1"
         android:textColor="@color/workout_mode_running_head_value"
-        android:textSize="40px"
+        android:textSize="15sp"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_watt_value"
         app:layout_constraintTop_toBottomOf="@+id/workout_running_head_speed" />
 
@@ -254,7 +260,7 @@
         android:gravity="center"
         android:text="@string/unit_kph"
         android:textColor="@color/workout_mode_running_head_value"
-        android:textSize="28px"
+        android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_speed_value"
         app:layout_constraintTop_toBottomOf="@+id/workout_running_head_speed" />
 

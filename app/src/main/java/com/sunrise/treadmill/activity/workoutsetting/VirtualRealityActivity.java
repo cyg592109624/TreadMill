@@ -139,6 +139,7 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
         viewPage.setAdapter(fragmentAdapter);
         viewPage.setCurrentItem(0);
         viewPage.addOnPageChangeListener(this);
+        viewPage.setOffscreenPageLimit(3);
     }
 
     @Override

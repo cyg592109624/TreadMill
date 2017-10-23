@@ -223,8 +223,8 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
      * 创建悬浮窗口
      */
     private void initFloatWindow() {
-        floatWindowHead = new FloatWindowHead(getApplicationContext());
-        floatWindowBottom = new FloatWindowBottom(getApplicationContext());
+        floatWindowHead = new FloatWindowHead(getApplicationContext(),null);
+        floatWindowBottom = new FloatWindowBottom(getApplicationContext(),null);
 
         floatWindowHead.setLayoutParams(paramsHead);
 

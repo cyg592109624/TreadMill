@@ -55,7 +55,7 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
         distanceValue = null;
         calValue = null;
 
-        dialog.onDestroyView();
+//        dialog.onDestroyView();
         dialog = null;
     }
 

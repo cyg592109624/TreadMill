@@ -1,6 +1,7 @@
 package com.sunrise.treadmill.views.workout;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -81,14 +82,14 @@ public class LevelView extends View {
     private boolean slideEnable = true;
 
     private String hintText;
+
     private Bitmap buoyBitmap;
+
+    private float buoyBitmapWidth, buoyBitmapHeight;
+
 
     private int tgLevel = 0;
     private float buoyLeft;
-
-    public LevelView(Context context) {
-        this(context, null);
-    }
 
     public LevelView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
@@ -96,12 +97,10 @@ public class LevelView extends View {
 
     public LevelView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
         mPaint.setAntiAlias(true);
         mPaint.setFilterBitmap(true);
         mPaint.setColor(ContextCompat.getColor(getContext(), R.color.factory_tabs_on));
-
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             mPaint.setTypeface(TextUtils.Microsoft(context));
         } else {
@@ -110,7 +109,17 @@ public class LevelView extends View {
 
         rectList = new LevelColumn[columnCount];
 
-        columnMargin = 2f;
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.levelView);
+        columnMargin = ta.getFloat(R.styleable.levelView_columnMargin, 2f);
+        hintText = ta.getString(R.styleable.levelView_hintText);
+        slideEnable = ta.getBoolean(R.styleable.levelView_slideEnable, true);
+        int opWidth = ta.getInt(R.styleable.levelView_buoyBitmapWidth, -1);
+        int opHeight = ta.getInt(R.styleable.levelView_buoyBitmapHeight, -1);
+        ta.recycle();
+        ta = null;
+        if (opWidth > 1 && opHeight > 1) {
+            setBuoyBitmap(opWidth, opHeight);
+        }
     }
 
     @Override
@@ -133,7 +142,7 @@ public class LevelView extends View {
         maxTall = columnStartArea - topSpace;
         levelHeight = maxTall / levelCount;
 
-        mPaint.setTextSize(bottomSpace * 0.7f);
+        mPaint.setTextSize(bottomSpace * 0.8f);
     }
 
     public void setColumnMargin(float columnMargin) {
@@ -143,8 +152,6 @@ public class LevelView extends View {
     public void setHintText(String text) {
         hintText = text;
     }
-
-    private float buoyBitmapWidth, buoyBitmapHeight;
 
     public void setBuoyBitmap(int optionsWidth, int optionsHeight) {
         if (optionsWidth < 0 | optionsHeight < 0) {
@@ -186,7 +193,10 @@ public class LevelView extends View {
         if ((level > columnCount | level < -1) | (rank > levelCount | rank < -1)) {
             return;
         }
-        LevelColumn cell = new LevelColumn();
+        LevelColumn cell = rectList[level];
+        if (cell == null) {
+            cell = new LevelColumn();
+        }
         cell.setToX1(leftSpace + columnWidth * level + columnMargin * level);
         cell.setToX2(leftSpace + columnWidth * (level + 1) + columnMargin * level);
         cell.setToY1(topSpace + levelHeight * (levelCount - rank));
@@ -282,8 +292,8 @@ public class LevelView extends View {
         if (buoyBitmap != null) {
             canvas.drawBitmap(buoyBitmap, buoyLeft + buoyBitmapWidth, topSpace - buoyBitmapHeight, null);
         }
-        if (hintText != null) {
-            canvas.drawText(hintText, (viewWidth - hintText.length() * (bottomSpace * 0.3f)) / 2, viewHeight - bottomSpace * 0.18f, mPaint);
+        if (!"".equals(hintText)) {
+            canvas.drawText(hintText, (viewWidth - hintText.length() * (bottomSpace * 0.8f)) / 2, viewHeight - bottomSpace * 0.18f, mPaint);
         }
     }
 

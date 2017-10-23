@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="52dp"
-    android:background="@mipmap/bk_pop">
+    android:background="@drawable/bg_pop2">
 
     <ImageView
         android:id="@+id/imageView4"

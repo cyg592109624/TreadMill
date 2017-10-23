@@ -129,6 +129,8 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         getWindowManager().getDefaultDisplay().getRealMetrics(dm);
         parentWidth = dm.widthPixels;
         parentHeight = dm.heightPixels;
+        dm=null;
+
         bottomView.setWindowBottomCallBack(this);
     }
 
@@ -139,7 +141,6 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         super.onWindowFocusChanged(hasFocus);
         if (loadAtOnce == 1) {
             showCountDownDialog();
-            setUpLevelView();
             loadAtOnce += 1;
         }
     }
@@ -190,7 +191,6 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @Override
     public void onCoolDownSkip() {
-        finishActivity();
         goToSummary();
     }
 
@@ -270,7 +270,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
             translationY = PropertyValuesHolder.ofFloat("translationY", -(parentHeight - leftView.getHeight()) / 5, 0);
         }
         ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(leftView, scaleX, scaleY, translationX, translationY);
-        animator.setDuration(1000);
+        animator.setDuration(500);
         animator.start();
 
     }
@@ -283,7 +283,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
             translationX = PropertyValuesHolder.ofFloat("translationX", 0, rightLayout.getWidth() - mediaCtrlImage.getWidth());
         }
         ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(rightLayout, translationX);
-        animator.setDuration(1000);
+        animator.setDuration(500);
         animator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
@@ -324,16 +324,6 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         });
     }
 
-    private void setUpLevelView() {
-        levelView.setColumnMargin(1f);
-        levelView.calcLength();
-        levelView.setBuoyBitmap(15, 11);
-        levelView.setHintText(getResources().getString(R.string.workout_mode_hill));
-        levelView.setSlideEnable(false);
-        levelView.setTgLevel(4);
-        levelView.setColumn(4, 11);
-    }
-
     private void showCountDownDialog() {
         ThreadPoolUtils.runTaskOnThread(new Runnable() {
             @Override
@@ -370,6 +360,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
      */
     private void goToSummary() {
         Intent intent = new Intent(BaseRunningActivity.this, SummaryActivity.class);
+        finishActivity();
         startActivity(intent);
     }
 

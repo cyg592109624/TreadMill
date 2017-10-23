@@ -13,7 +13,7 @@
         android:gravity="center|left"
         android:text="@string/workout_mode_hint_b"
         android:textColor="@color/workout_mode_white"
-        android:textSize="40px"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -86,36 +86,30 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     @Override
     protected void init() {
-        ThreadPoolUtils.runTaskOnThread(new Runnable() {
-            @Override
-            public void run() {
-                List<Fragment> list = new ArrayList<Fragment>();
-                HomeFragmentPage1 page1 = new HomeFragmentPage1();
-                page1.setSelectReturn(HomeActivity.this);
-                list.add(page1);
-                if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-                    HomeFragmentPage2Zh page2 = new HomeFragmentPage2Zh();
-                    HomeFragmentPage3Zh page3 = new HomeFragmentPage3Zh();
-                    page2.setSelectReturn(HomeActivity.this);
-                    page3.setSelectReturn(HomeActivity.this);
-                    list.add(page2);
-                    list.add(page3);
-                } else {
-                    HomeFragmentPage2 page2 = new HomeFragmentPage2();
-                    HomeFragmentPage3 page3 = new HomeFragmentPage3();
-                    page2.setSelectReturn(HomeActivity.this);
-                    page3.setSelectReturn(HomeActivity.this);
-                    list.add(page2);
-                    list.add(page3);
-                }
-                fragmentAdapter = new HomeViewPageAdapter(fragmentManager, list);
-                viewPager.setAdapter(fragmentAdapter);
-                viewPager.setCurrentItem(0);
-                viewPager.addOnPageChangeListener(HomeActivity.this);
-                viewPager.setOffscreenPageLimit(3);
-            }
-        });
-
+        List<Fragment> list = new ArrayList<Fragment>();
+        HomeFragmentPage1 page1 = new HomeFragmentPage1();
+        page1.setSelectReturn(HomeActivity.this);
+        list.add(page1);
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+            HomeFragmentPage2Zh page2 = new HomeFragmentPage2Zh();
+            HomeFragmentPage3Zh page3 = new HomeFragmentPage3Zh();
+            page2.setSelectReturn(HomeActivity.this);
+            page3.setSelectReturn(HomeActivity.this);
+            list.add(page2);
+            list.add(page3);
+        } else {
+            HomeFragmentPage2 page2 = new HomeFragmentPage2();
+            HomeFragmentPage3 page3 = new HomeFragmentPage3();
+            page2.setSelectReturn(HomeActivity.this);
+            page3.setSelectReturn(HomeActivity.this);
+            list.add(page2);
+            list.add(page3);
+        }
+        fragmentAdapter = new HomeViewPageAdapter(fragmentManager, list);
+        viewPager.setAdapter(fragmentAdapter);
+        viewPager.setCurrentItem(0);
+        viewPager.addOnPageChangeListener(HomeActivity.this);
+        viewPager.setOffscreenPageLimit(3);
         logo.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {

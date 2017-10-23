@@ -5,7 +5,6 @@ import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
@@ -14,9 +13,6 @@ import com.sunrise.treadmill.utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by ChuHui on 2017/10/11.
@@ -27,24 +23,7 @@ public class FloatWindowHead extends ConstraintLayout {
     private static final int MAX_LEVEL = 30;
     private static final int MIN_LEVEL = 0;
 
-    @BindView(R.id.workout_running_head_level_value)
-    TextView levelValue;
-    @BindView(R.id.workout_running_head_time_value)
-    TextView timeValue;
-    @BindView(R.id.workout_running_head_distance_value)
-    TextView distanceValue;
-    @BindView(R.id.workout_running_head_calories_value)
-    TextView caloriesValue;
-    @BindView(R.id.workout_running_head_pulse_value)
-    TextView pulseValue;
-    @BindView(R.id.workout_running_head_watt_value)
-    TextView wattValue;
-    @BindView(R.id.workout_running_head_speed_value)
-    TextView speedValue;
-
-    public FloatWindowHead(Context context) {
-        this(context, null);
-    }
+    TextView levelValue, timeValue, distanceValue, caloriesValue, pulseValue, wattValue, speedValue;
 
     public FloatWindowHead(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -53,10 +32,18 @@ public class FloatWindowHead extends ConstraintLayout {
     public FloatWindowHead(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.float_window_workout_running_head, this, true);
-        ButterKnife.bind(this);
+
+        levelValue = (TextView) findViewById(R.id.workout_running_head_level_value);
+        timeValue = (TextView) findViewById(R.id.workout_running_head_time_value);
+        distanceValue = (TextView) findViewById(R.id.workout_running_head_distance_value);
+        caloriesValue = (TextView) findViewById(R.id.workout_running_head_calories_value);
+        pulseValue = (TextView) findViewById(R.id.workout_running_head_pulse_value);
+        wattValue = (TextView) findViewById(R.id.workout_running_head_watt_value);
+        speedValue = (TextView) findViewById(R.id.workout_running_head_speed_value);
         levelValue.setText("" + curLevel);
         setTextStyle();
     }
+
 
     private void setTextStyle() {
         List<TextView> txtList = new ArrayList<>();

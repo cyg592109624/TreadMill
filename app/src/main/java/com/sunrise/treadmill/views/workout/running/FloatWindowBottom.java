@@ -4,13 +4,10 @@ import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.interfaces.services.FloatWindowBottomCallBack;
-import com.sunrise.treadmill.interfaces.services.RunningActivityBottomCallBack;
-
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by ChuHui on 2017/10/11.
@@ -19,10 +16,6 @@ import butterknife.OnClick;
 public class FloatWindowBottom extends ConstraintLayout {
     private FloatWindowBottomCallBack windowBottomCallBack;
 
-    public FloatWindowBottom(Context context) {
-        this(context, null);
-    }
-
     public FloatWindowBottom(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
@@ -30,42 +23,42 @@ public class FloatWindowBottom extends ConstraintLayout {
     public FloatWindowBottom(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.float_window_workout_running_bottom, this, true);
-        ButterKnife.bind(this);
+        findViewById(R.id.workout_running_level_up).setOnClickListener(bottomClick);
+        findViewById(R.id.workout_running_level_down).setOnClickListener(bottomClick);
+        findViewById(R.id.workout_running_windy).setOnClickListener(bottomClick);
+        findViewById(R.id.workout_running_stop).setOnClickListener(bottomClick);
     }
 
-    @OnClick(R.id.workout_running_level_up)
-    public void levelUp() {
-        if (windowBottomCallBack != null) {
-            windowBottomCallBack.onLevelUp();
+    private View.OnClickListener bottomClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (windowBottomCallBack != null) {
+                switch (view.getId()) {
+                    default:
+                        break;
+                    case R.id.workout_running_level_up:
+                        windowBottomCallBack.onLevelUp();
+                        break;
+                    case R.id.workout_running_level_down:
+                        windowBottomCallBack.onLevelDown();
+                        break;
+                    case R.id.workout_running_windy:
+                        windowBottomCallBack.onWindyClick();
+                        break;
+                    case R.id.workout_running_stop:
+                        windowBottomCallBack.onStopClick();
+                        break;
+                }
+            }
         }
-    }
+    };
 
-    @OnClick(R.id.workout_running_level_down)
-    public void levelDown() {
-        if (windowBottomCallBack != null) {
-            windowBottomCallBack.onLevelDown();
-        }
-    }
-
-    @OnClick(R.id.workout_running_windy)
-    public void windyChange() {
-        if (windowBottomCallBack != null) {
-            windowBottomCallBack.onWindyClick();
-        }
-    }
-
-    @OnClick(R.id.workout_running_stop)
-    public void sportStop() {
-        if (windowBottomCallBack != null) {
-            windowBottomCallBack.onStopClick();
-        }
-    }
 
     public void setWindowBottomCallBack(FloatWindowBottomCallBack callBack) {
         this.windowBottomCallBack = callBack;
     }
 
-    public void recycle(){
-        windowBottomCallBack=null;
+    public void recycle() {
+        windowBottomCallBack = null;
     }
 }

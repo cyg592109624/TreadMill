@@ -107,7 +107,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     public void finishActivity() {
         fragmentManager = null;
         setContentView(R.layout.view_null);
-        System.out.println("BaseActivity  ----  > onDestroy()被调用");
         recycleObject();
         bind.unbind();
         bind = null;

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/workout_mode_hill_1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,35 +14,54 @@
         android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="1"
-        android:scaleType="fitXY"
-        android:src="@mipmap/img_gender_draw_1" />
+        android:src="@mipmap/img_gender_draw_1"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <RadioGroup
-        android:layout_width="match_parent"
+        android:id="@+id/radioGroup"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gender_img">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
         <RadioButton
             android:id="@+id/gender_male"
             android:layout_width="60dp"
             android:layout_height="25dp"
             android:background="@drawable/btn_workout_male"
-            android:button="@null"
-            android:scaleType="fitXY" />
+            android:button="@null" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
         <RadioButton
             android:id="@+id/gender_female"
             android:layout_width="60dp"
             android:layout_height="25dp"
-            android:layout_marginLeft="70dp"
             android:background="@drawable/btn_workout_female"
-            android:button="@null"
-            android:scaleType="fitXY" />
+            android:button="@null" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
     </RadioGroup>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

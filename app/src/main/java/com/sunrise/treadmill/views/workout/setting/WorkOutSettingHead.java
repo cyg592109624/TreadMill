@@ -33,7 +33,7 @@ public class WorkOutSettingHead extends LinearLayout {
 
     public WorkOutSettingHead(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        LayoutInflater.from(context).inflate(R.layout.workout_head, this, true);
+        LayoutInflater.from(context).inflate(R.layout.workout_setting_head, this, true);
         workOutMode = findViewById(R.id.workout_head_mode);
         workOutHint = findViewById(R.id.workout_head_hint);
         workOutIcon = findViewById(R.id.workout_head_icon);

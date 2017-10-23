@@ -33,7 +33,7 @@ public class MyKeyBoardView extends LinearLayout {
 
     public MyKeyBoardView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-       LayoutInflater.from(context).inflate(R.layout.key_board, this, true);
+        LayoutInflater.from(context).inflate(R.layout.key_board, this, true);
 
         title = (ImageView) findViewById(R.id.key_board_title);
         showText = (TextView) findViewById(R.id.key_board_edit_value);

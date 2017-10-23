@@ -100,8 +100,8 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
         headView.setHeadMsg(getResources().getString(R.string.workout_mode_user), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_user_program_icon);
         genderView.setOnGenderReturn(UserProgramActivity.this);
         keyBoardView.setKeyBoardReturn(UserProgramActivity.this);
-        levelView.setColumnMargin(5f);
-        levelView.setHintText(getResources().getString(R.string.workout_mode_hint_e));
+//        levelView.setColumnMargin(5f);
+//        levelView.setHintText(getResources().getString(R.string.workout_mode_hint_e));
     }
 
     @Override
@@ -229,6 +229,7 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
             return;
         }
         headView.setWorkOutHint(getResources().getString(R.string.workout_mode_hint_e));
+
         optionBody.setVisibility(View.GONE);
         optionBody2.setVisibility(View.VISIBLE);
     }

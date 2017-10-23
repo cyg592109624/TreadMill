@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:levelView="http://schemas.android.com/apk/res-auto"
     android:id="@+id/workout_running_body_1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -29,7 +30,12 @@
             android:id="@+id/workout_running_level_view"
             android:layout_width="200dp"
             android:layout_height="86dp"
-            android:background="@mipmap/img_sportmode_profile_level_1" />
+            android:background="@mipmap/img_sportmode_profile_level_1"
+            levelView:columnMargin="0.8"
+            levelView:hintText="@string/workout_mode_hill"
+            levelView:slideEnable="false"
+            levelView:buoyBitmapWidth="15"
+            levelView:buoyBitmapHeight="11"/>
 
     </LinearLayout>
 
