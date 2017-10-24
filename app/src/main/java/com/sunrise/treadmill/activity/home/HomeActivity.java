@@ -54,9 +54,6 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @BindView(R.id.home_img_vp)
     ImageView selectTg;
 
-    @BindView(R.id.bottom_logo)
-    LogoImageView logo;
-
     @BindView(R.id.home_viewPage)
     ViewPager viewPager;
 
@@ -76,7 +73,6 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
             selectTgBitmap.recycle();
             selectTgBitmap = null;
         }
-        logo = null;
         viewPager.removeAllViews();
         viewPager = null;
         fragmentAdapter.recycle();
@@ -110,6 +106,8 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
         viewPager.setCurrentItem(0);
         viewPager.addOnPageChangeListener(HomeActivity.this);
         viewPager.setOffscreenPageLimit(3);
+
+        LogoImageView logo = findViewById(R.id.bottom_logo);
         logo.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -180,43 +178,51 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @Override
     public void onSelectResult(int result) {
         Intent intent = null;
-        if (result == Constant.MODE_QUICK_START) {
-            if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-                intent = new Intent(HomeActivity.this, QuickStartRunningActivityZh.class);
-            } else {
-                intent = new Intent(HomeActivity.this, QuickStartRunningActivity.class);
-            }
-            finishActivity();
+//        if (result == Constant.MODE_QUICK_START) {
+//            if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+//                intent = new Intent(HomeActivity.this, QuickStartRunningActivityZh.class);
+//            } else {
+//                intent = new Intent(HomeActivity.this, QuickStartRunningActivity.class);
+//            }
+//            finishActivity();
+//            startActivity(intent);
+//        } else {
+//
+//        }
+        switch (result) {
+            default:
+                break;
+            case Constant.MODE_HILL:
+                intent = new Intent(HomeActivity.this, HillActivity.class);
+                break;
+            case Constant.MODE_INTERVAL:
+                intent = new Intent(HomeActivity.this, IntervalActivity.class);
+                break;
+            case Constant.MODE_GOAL:
+                intent = new Intent(HomeActivity.this, GoalActivity.class);
+                break;
+            case Constant.MODE_FITNESS_TEST:
+                intent = new Intent(HomeActivity.this, FitnessTestActivity.class);
+                break;
+            case Constant.MODE_HRC:
+                intent = new Intent(HomeActivity.this, HRCActivity.class);
+                break;
+            case Constant.MODE_VR:
+                intent = new Intent(HomeActivity.this, VirtualRealityActivity.class);
+                break;
+            case Constant.MODE_USER_PROGRAM:
+                intent = new Intent(HomeActivity.this, UserProgramActivity.class);
+                break;
+            case Constant.MODE_QUICK_START:
+                if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+                    intent = new Intent(HomeActivity.this, QuickStartRunningActivityZh.class);
+                } else {
+                    intent = new Intent(HomeActivity.this, QuickStartRunningActivity.class);
+                }
+                break;
+        }
+        if (intent != null) {
             startActivity(intent);
-        } else {
-            switch (result) {
-                default:
-                    break;
-                case Constant.MODE_HILL:
-                    intent = new Intent(HomeActivity.this, HillActivity.class);
-                    break;
-                case Constant.MODE_INTERVAL:
-                    intent = new Intent(HomeActivity.this, IntervalActivity.class);
-                    break;
-                case Constant.MODE_GOAL:
-                    intent = new Intent(HomeActivity.this, GoalActivity.class);
-                    break;
-                case Constant.MODE_FITNESS_TEST:
-                    intent = new Intent(HomeActivity.this, FitnessTestActivity.class);
-                    break;
-                case Constant.MODE_HRC:
-                    intent = new Intent(HomeActivity.this, HRCActivity.class);
-                    break;
-                case Constant.MODE_VR:
-                    intent = new Intent(HomeActivity.this, VirtualRealityActivity.class);
-                    break;
-                case Constant.MODE_USER_PROGRAM:
-                    intent = new Intent(HomeActivity.this, UserProgramActivity.class);
-                    break;
-            }
-            if (intent != null) {
-                startActivity(intent);
-            }
         }
     }
 

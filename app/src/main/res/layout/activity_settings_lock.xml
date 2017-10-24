@@ -35,7 +35,5 @@
 
     </LinearLayout>
 
-    <com.sunrise.treadmill.views.MainBottomTabView3
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/bottom_logo_tab3" />
 </LinearLayout>

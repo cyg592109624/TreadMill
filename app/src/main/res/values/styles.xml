@@ -38,14 +38,24 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="settings_tabs_on" parent="settings_tabs">
+    <style name="settings_tabs_on" >
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
         <item name="android:textColor">@color/settings_tabs_on</item>
-        <item name="android:textSize">35px</item>
+        <item name="android:textSize">10pt</item>
     </style>
 
-    <style name="settings_tabs_off" parent="settings_tabs">
+    <style name="settings_tabs_off">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
         <item name="android:textColor">@color/settings_tabs_off</item>
-        <item name="android:textSize">30px</item>
+        <item name="android:textSize">8pt</item>
     </style>
 
 
@@ -66,4 +76,23 @@
         <item name="android:textColor">@color/factory_tabs_off</item>
         <item name="android:textSize">30px</item>
     </style>
+
+    <style name="vr_item_text_1">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center|left</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:gravity">center|left</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="vr_item_text_2">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center|left</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:gravity">center|left</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

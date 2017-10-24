@@ -7,73 +7,62 @@
 
     <ImageView
         android:id="@+id/home_app_mode_mp3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="240dp"
+        android:layout_height="200dp"
         android:src="@drawable/btn_home_mp3_1"
         app:layout_constraintBottom_toTopOf="@+id/workout_mode_quick_start"
-        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/home_app_mode_mp4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/home_app_mode_mp4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="240dp"
+        android:layout_height="200dp"
         android:src="@drawable/btn_home_mp4_1"
         app:layout_constraintBottom_toTopOf="@+id/workout_mode_quick_start"
-        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@+id/home_app_mode_mp3"
         app:layout_constraintRight_toLeftOf="@+id/home_app_mode_avin"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/home_app_mode_avin"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="240dp"
+        android:layout_height="200dp"
         android:src="@drawable/btn_home_avin_1"
         app:layout_constraintBottom_toTopOf="@+id/workout_mode_quick_start"
-        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@+id/home_app_mode_mp4"
         app:layout_constraintRight_toLeftOf="@+id/home_app_mode_twitter"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/home_app_mode_twitter"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="240dp"
+        android:layout_height="200dp"
         android:src="@drawable/btn_home_twitter_1"
         app:layout_constraintBottom_toTopOf="@+id/workout_mode_quick_start"
-        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@+id/home_app_mode_avin"
         app:layout_constraintRight_toLeftOf="@+id/home_app_mode_screen_mirror"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/home_app_mode_screen_mirror"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="240dp"
+        android:layout_height="200dp"
         android:src="@drawable/btn_home_screen_mirroring_1"
         app:layout_constraintBottom_toTopOf="@+id/workout_mode_quick_start"
-        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@+id/home_app_mode_twitter"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/workout_mode_quick_start"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="480dp"
+        android:layout_height="200dp"
         android:src="@drawable/btn_home_quickstart_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_app_mode_avin"
-        app:layout_constraintVertical_weight="1" />
+        app:layout_constraintTop_toBottomOf="@+id/home_app_mode_avin" />
 
 </android.support.constraint.ConstraintLayout>

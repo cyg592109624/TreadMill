@@ -10,11 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <include
-        layout="@layout/activity_workout_setting_fitness_test_body"/>
+    <include layout="@layout/activity_workout_setting_fitness_test_body" />
 
-    <com.sunrise.treadmill.views.MainBottomTabView2
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/bottom_logo_tab2" />
 
 </LinearLayout>

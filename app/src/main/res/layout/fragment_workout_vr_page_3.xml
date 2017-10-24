@@ -48,13 +48,9 @@
 
     <TextView
         android:id="@+id/workout_mode_vr_name_9_1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|left"
-        android:gravity="center|left"
+        style="@style/vr_item_text_1"
         android:text="@string/vr_i_1"
         android:textColor="@color/workout_mode_white"
-        android:textSize="36px"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/workout_mode_vr_name_10_1"
@@ -63,14 +59,9 @@
 
     <TextView
         android:id="@+id/workout_mode_vr_name_10_1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|left"
-        android:layout_marginLeft="5dp"
-        android:gravity="center|left"
+        style="@style/vr_item_text_2"
         android:text="@string/vr_j_1"
         android:textColor="@color/workout_mode_white"
-        android:textSize="36px"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@+id/workout_mode_vr_name_9_1"
         app:layout_constraintRight_toLeftOf="@+id/view3"
@@ -88,13 +79,9 @@
 
     <TextView
         android:id="@+id/workout_mode_vr_name_9_2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|left"
-        android:gravity="center|left"
+        style="@style/vr_item_text_1"
         android:text="@string/vr_i_2"
         android:textColor="@color/workout_mode_white"
-        android:textSize="36px"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/workout_mode_vr_name_10_2"
@@ -103,14 +90,9 @@
 
     <TextView
         android:id="@+id/workout_mode_vr_name_10_2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|left"
-        android:layout_marginLeft="5dp"
-        android:gravity="center|left"
+        style="@style/vr_item_text_2"
         android:text="@string/vr_j_2"
         android:textColor="@color/workout_mode_white"
-        android:textSize="36px"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@+id/workout_mode_vr_name_9_2"
         app:layout_constraintRight_toLeftOf="@+id/view4"

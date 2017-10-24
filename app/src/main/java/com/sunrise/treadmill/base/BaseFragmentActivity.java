@@ -24,6 +24,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     public FragmentManager fragmentManager = getSupportFragmentManager();
     public Context activityContext= BaseFragmentActivity.this;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         changeSystemUiState();
