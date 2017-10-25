@@ -7,23 +7,20 @@
 
     <include layout="@layout/fragment_settings_lock_card_2_1" />
 
+
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="4dp"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:src="@mipmap/img_factory_line" />
 
-    <LinearLayout
+    <com.sunrise.treadmill.views.workout.setting.MyKeyBoardView
+        android:id="@+id/settings_card4_2_right"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center">
-
-        <com.sunrise.treadmill.views.workout.setting.MyKeyBoardView
-            android:id="@+id/settings_card4_2_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible" />
-    </LinearLayout>
+        android:gravity="center"
+        android:visibility="invisible"  />
 
 </LinearLayout>

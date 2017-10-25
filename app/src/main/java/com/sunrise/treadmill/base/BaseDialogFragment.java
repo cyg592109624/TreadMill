@@ -40,7 +40,6 @@ public abstract class BaseDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         parentView = inflater.inflate(getLayoutId(), container, false);
         changeSystemUiState();
-        parentView.setMinimumWidth(DIALOG_WIDTH);
         fragmentContext = ((BaseFragmentActivity) getActivity()).activityContext;
         return parentView;
     }
@@ -60,7 +59,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         WindowManager windowManager = getActivity().getWindowManager();
         DisplayMetrics dm = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(dm);
-        window.setLayout(dm.widthPixels + 200, window.getAttributes().height);
+        window.setLayout(dm.widthPixels, dm.heightPixels+50);
     }
 
     @Override

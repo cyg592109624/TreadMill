@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_pop"
@@ -7,34 +9,98 @@
 
     <TextView
         android:id="@+id/settings_title"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="70dp"
         android:gravity="center"
         android:text="@string/setting"
         android:textColor="@color/settings_title"
-        android:textSize="16pt" />
+        android:textSize="18pt"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <ImageView
         android:id="@+id/settings_view_bg"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"
-        android:layout_weight="1"
-        android:background="@mipmap/img_factory_3_1"
-        android:orientation="vertical">
+        android:src="@mipmap/img_factory_3_1"
+        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_title"
+        app:layout_constraintVertical_bias="1.0" />
 
-        <include layout="@layout/activity_settings_tabs" />
 
-        <FrameLayout
-            android:id="@+id/settings_views"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="10dp"
-            android:paddingLeft="55dp"
-            android:paddingRight="55dp"
-            android:paddingTop="10dp" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/settings_card_system"
+        style="@style/settings_tabs_on"
+        android:text="@string/system"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/settings_view_bg"
+        app:layout_constraintVertical_bias="0.042" />
 
-    <include layout="@layout/bottom_logo_tab2" />
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/settings_card_bluetooth"
+        style="@style/settings_tabs_off"
+        android:text="@string/bluetooth"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/settings_card_system"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/settings_view_bg"
+        app:layout_constraintVertical_bias="0.042" />
+
+    <TextView
+        android:id="@+id/settings_card_wifi"
+        style="@style/settings_tabs_off"
+        android:text="@string/wireless"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/settings_card_bluetooth"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/settings_view_bg"
+        app:layout_constraintVertical_bias="0.041" />
+
+    <TextView
+        android:id="@+id/settings_card_lock"
+        style="@style/settings_tabs_off"
+        android:text="@string/lock"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/settings_card_wifi"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/settings_view_bg"
+        app:layout_constraintVertical_bias="0.041" />
+
+    <FrameLayout
+        android:id="@+id/settings_views"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="80dp"
+        android:paddingRight="80dp"
+        android:paddingTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_card_system" />
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/bottom_logo_tab2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

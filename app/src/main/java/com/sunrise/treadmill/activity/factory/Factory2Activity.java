@@ -3,6 +3,7 @@ package com.sunrise.treadmill.activity.factory;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.sunrise.treadmill.fragments.factory.Factory2FragmentCard1;
 import com.sunrise.treadmill.fragments.factory.Factory2FragmentCard2;
 import com.sunrise.treadmill.fragments.factory.Factory2FragmentCard3;
 import com.sunrise.treadmill.fragments.factory.Factory2FragmentCard4;
+import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
@@ -29,7 +31,7 @@ import butterknife.OnClick;
 public class Factory2Activity extends BaseFragmentActivity {
 
     @BindView(R.id.factory_2_view_bg)
-    LinearLayout bgView;
+    ImageView bgView;
 
     @BindViews({R.id.factory_2_card_setting, R.id.factory_2_card_info, R.id.factory_2_card_update, R.id.factory_2_card_logo, R.id.factory_2_title})
     List<TextView> txtList;
@@ -125,7 +127,7 @@ public class Factory2Activity extends BaseFragmentActivity {
                 tgFragment = card4;
                 break;
         }
-        bgView.setBackgroundResource(bgResource);
+        ImageUtils.changeImageView(bgView,bgResource);
         if (bgResource != -1 && tgFragment != null) {
             for (int i = 0; i < txtList.size() - 1; i++) {
                 if (i == tgCard) {

@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.fragments.settings.SettingsLockFragmentCard1;
 import com.sunrise.treadmill.fragments.settings.SettingsLockFragmentCard2;
+import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
@@ -27,7 +29,7 @@ import butterknife.OnClick;
 
 public class SettingsLockActivity extends BaseFragmentActivity {
     @BindView(R.id.settings_view_bg)
-    LinearLayout bgView;
+    ImageView bgView;
 
     @BindViews({R.id.settings_card_lock, R.id.settings_card_psw, R.id.settings_title})
     List<TextView> txtList;
@@ -84,7 +86,7 @@ public class SettingsLockActivity extends BaseFragmentActivity {
                 break;
         }
         if (bgResource != -1 && tgCard != -1) {
-            bgView.setBackgroundResource(bgResource);
+            ImageUtils.changeImageView(bgView,bgResource);
             for (int i = 0; i < txtList.size() - 1; i++) {
                 if (i == tgCard) {
                     TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext,R.color.settings_tabs_on));

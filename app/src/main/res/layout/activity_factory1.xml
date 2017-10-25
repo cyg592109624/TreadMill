@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_pop"
@@ -7,36 +9,145 @@
 
     <TextView
         android:id="@+id/factory_1_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
         android:gravity="center"
         android:text="@string/factory_mode_f1"
         android:textColor="@color/factory_title"
-        android:textSize="12pt" />
+        android:textSize="18pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@mipmap/img_factory_1"
-        android:orientation="vertical">
+        android:src="@mipmap/img_factory_1"
+        app:layout_constraintBottom_toTopOf="@+id/include2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/factory_1_title"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/factory_1_card_setting"
-            android:layout_width="170dp"
-            android:layout_height="26dp"
-            android:layout_marginLeft="52dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/setting"
-            android:textColor="@color/factory_tabs_on"
-            android:textSize="30px" />
-
-        <include layout="@layout/fragment_factory1_card" />
+    <TextView
+        android:id="@+id/factory_1_card_setting"
+        style="@style/factory_tabs_on"
+        android:text="@string/setting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.042" />
 
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/factory1_unit"
+        android:layout_width="160dp"
+        android:layout_height="56dp"
+        android:gravity="center|left"
+        android:text="@string/unit"
+        android:textColor="@color/factory_white"
+        android:textSize="10pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
 
-    <include layout="@layout/bottom_logo_tab2" />
+    <RadioGroup
+        android:id="@+id/factory1_unit_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_gravity="center|left"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/factory1_unit"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.30">
 
-</LinearLayout>
+        <RadioButton
+            android:layout_width="175dp"
+            android:layout_height="56dp"
+            android:background="@drawable/btn_factory_1_imperial"
+            android:button="@null" />
+
+        <RadioButton
+            android:layout_width="175dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_factory_1_metrial"
+            android:button="@null" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/factory1_type"
+        android:layout_width="160dp"
+        android:layout_height="56dp"
+        android:gravity="center|left"
+        android:text="@string/type"
+        android:textColor="@color/factory_white"
+        android:textSize="10pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/factory1_unit"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <RadioGroup
+        android:id="@+id/factory1_type_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_gravity="center|left"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/factory1_type"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/factory1_unit_radio"
+        app:layout_constraintVertical_bias="0.1">
+
+        <RadioButton
+            android:layout_width="175dp"
+            android:layout_height="56dp"
+            android:background="@drawable/btn_factory_1_bike"
+            android:button="@null" />
+
+        <RadioButton
+            android:layout_width="175dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_factory_1_recumbent"
+            android:button="@null" />
+
+        <RadioButton
+            android:layout_width="175dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_factory_1_elliptical"
+            android:button="@null" />
+
+    </RadioGroup>
+
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/bottom_logo_tab2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+</android.support.constraint.ConstraintLayout>

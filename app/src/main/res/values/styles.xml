@@ -31,50 +31,37 @@
     </style>
 
     <style name="settings_tabs">
-        <item name="android:layout_width">125dp</item>
-        <item name="android:layout_height">28dp</item>
-        <item name="android:lineSpacingExtra">28dp</item>
+        <item name="android:layout_width">260dp</item>
+        <item name="android:layout_height">45dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="settings_tabs_on" >
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
+    <style name="settings_tabs_on"  parent="settings_tabs">
         <item name="android:textColor">@color/settings_tabs_on</item>
-        <item name="android:textSize">10pt</item>
+        <item name="android:textSize">14pt</item>
     </style>
 
-    <style name="settings_tabs_off">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
+    <style name="settings_tabs_off" parent="settings_tabs">
         <item name="android:textColor">@color/settings_tabs_off</item>
-        <item name="android:textSize">8pt</item>
+        <item name="android:textSize">12pt</item>
     </style>
-
 
     <style name="factory_tabs">
-        <item name="android:layout_width">125dp</item>
-        <item name="android:layout_height">28dp</item>
-        <item name="android:lineSpacingExtra">28dp</item>
+        <item name="android:layout_width">260dp</item>
+        <item name="android:layout_height">45dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="factory_tabs_on" parent="factory_tabs">
         <item name="android:textColor">@color/factory_tabs_on</item>
-        <item name="android:textSize">35px</item>
+        <item name="android:textSize">14pt</item>
     </style>
 
     <style name="factory_tabs_off" parent="factory_tabs">
         <item name="android:textColor">@color/factory_tabs_off</item>
-        <item name="android:textSize">30px</item>
+        <item name="android:textSize">12pt</item>
     </style>
 
     <style name="vr_item_text_1">

@@ -22,10 +22,6 @@ import butterknife.OnClick;
 
 public class Factory2FragmentCard3 extends BaseFragment {
 
-    @BindView(R.id.factory2_card3_1_btn)
-    ImageView card3UpData;
-    @BindView(R.id.factory2_card3_3_btn)
-    ImageView card3Back;
 
     @Override
     public int getLayoutId() {
@@ -34,8 +30,6 @@ public class Factory2FragmentCard3 extends BaseFragment {
 
     @Override
     public void recycleObject() {
-        card3UpData = null;
-        card3Back = null;
     }
 
     @Override
@@ -58,13 +52,18 @@ public class Factory2FragmentCard3 extends BaseFragment {
 
     @Override
     protected void init() {
-        card3UpData.setEnabled(false);
 
-        card3Back.setEnabled(false);
     }
 
     @OnClick({R.id.factory2_card3_1_btn, R.id.factory2_card3_3_btn})
     public void card3Click(View view) {
-
+        switch (view.getId()) {
+            default:
+                break;
+            case R.id.factory2_card3_1_btn:
+                break;
+            case R.id.factory2_card3_3_btn:
+                break;
+        }
     }
 }

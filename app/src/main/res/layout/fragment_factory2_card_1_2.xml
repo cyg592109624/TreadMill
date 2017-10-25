@@ -9,23 +9,23 @@
 
     <TextView
         android:id="@+id/factory2_card1_2_ctrl_page"
-        android:layout_width="120dp"
-        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
         android:gravity="center|left"
         android:text="@string/login_ctrl_page"
         android:textColor="@color/factory_white"
-        android:textSize="42px"
+        android:textSize="12pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.150" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <ToggleButton
         android:id="@+id/factory2_card1_2_ctrl_page_toggle"
-        android:layout_width="113dp"
-        android:layout_height="28dp"
+        android:layout_width="226dp"
+        android:layout_height="56dp"
         android:layout_gravity="center|right"
         android:background="@drawable/btn_factory_2_togg"
         android:gravity="center|right"
@@ -33,16 +33,16 @@
         android:textOff=""
         android:textOn=""
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.701"
-        app:layout_constraintLeft_toRightOf="@+id/factory2_card1_2_ctrl_page"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.150" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <TextView
         android:id="@+id/factory2_card1_2_key_test"
-        android:layout_width="120dp"
-        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
         android:layout_gravity="center|left"
         android:gravity="center|left"
         android:text="@string/key_test"
@@ -53,96 +53,96 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.34" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <ImageView
         android:id="@+id/factory2_card1_2_key_test_start"
-        android:layout_width="70dp"
-        android:layout_height="28dp"
+        android:layout_width="171dp"
+        android:layout_height="70dp"
         android:scaleType="fitXY"
         android:src="@drawable/btn_start"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.815"
-        app:layout_constraintLeft_toRightOf="@+id/factory2_card1_2_key_test"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.34" />
+        app:layout_constraintVertical_bias="0.29" />
 
     <TextView
         android:id="@+id/factory2_card1_2_brake_test"
-        android:layout_width="120dp"
-        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
         android:layout_gravity="center|left"
         android:gravity="center|left"
         android:text="@string/brake_test"
         android:textColor="@color/factory_brake_test"
-        android:textSize="42px"
+        android:textSize="12pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.51" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/factory2_card1_2_level"
-        android:layout_width="120dp"
-        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
         android:layout_gravity="center|left"
         android:gravity="center|left"
         android:text="@string/level"
         android:textColor="@color/factory_white"
-        android:textSize="42px"
+        android:textSize="12pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <TextView
         android:id="@+id/factory2_card1_2_level_value"
-        android:layout_width="77dp"
-        android:layout_height="28dp"
+        android:layout_width="144dp"
+        android:layout_height="56dp"
         android:layout_gravity="center"
         android:background="@mipmap/img_number_frame_1"
         android:gravity="center"
-        android:textSize="42px"
+        android:textSize="12pt"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.803"
-        app:layout_constraintLeft_toRightOf="@+id/factory2_card1_2_level"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <TextView
         android:id="@+id/factory2_card1_2_pwm"
-        android:layout_width="120dp"
-        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
         android:layout_gravity="center|left"
         android:gravity="center|left"
         android:text="@string/pwm"
         android:textColor="@color/factory_white"
-        android:textSize="42px"
+        android:textSize="12pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85" />
+        app:layout_constraintVertical_bias="0.9" />
 
     <TextView
         android:id="@+id/factory2_card1_2_pwm_value"
-        android:layout_width="77dp"
-        android:layout_height="28dp"
+        android:layout_width="144dp"
+        android:layout_height="56dp"
         android:layout_gravity="center"
         android:background="@mipmap/img_number_frame_1"
         android:gravity="center"
-        android:textSize="42px"
+        android:textSize="12pt"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.803"
-        app:layout_constraintLeft_toRightOf="@+id/factory2_card1_2_pwm"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85" />
+        app:layout_constraintVertical_bias="0.9" />
 </android.support.constraint.ConstraintLayout>

@@ -30,10 +30,6 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
     @BindView(R.id.settings_card4_2_right)
     MyKeyBoardView keyBoard;
 
-    @BindView(R.id.settings_card4_2_reset)
-    ImageView reSet;
-
-
     @Override
     public int getLayoutId() {
         return R.layout.fragment_settings_lock_card_2;
@@ -45,8 +41,6 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
 
         keyBoard.recycle();
         keyBoard = null;
-
-        reSet = null;
     }
 
     @Override
@@ -71,7 +65,7 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
         keyBoard.setTitleImage(R.mipmap.tv_keybord_password);
     }
 
-    @OnClick(R.id.settings_card4_2_reset)
+    @OnClick(R.id.settings_card4_2_reset_1)
     public void reSet(View view) {
         keyBoard.setVisibility(View.VISIBLE);
         TextUtils.changeTextColor(psw, ContextCompat.getColor(getContext(), R.color.settings_tabs_on));
