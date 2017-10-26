@@ -3,8 +3,6 @@ package com.sunrise.treadmill.dialog.workoutsetting;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +12,7 @@ import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutsetting.VirtualRealityActivity;
 import com.sunrise.treadmill.base.BaseDialogFragment;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
+import com.sunrise.treadmill.interfaces.workout.setting.OnVrDialogClick;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
@@ -35,17 +34,22 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
     @BindView(R.id.dialog_workout_vr_img)
     ImageView vrImage;
 
-    @BindView(R.id.dialog_workout_vr_edit_time)
-    TextView editValue;
-
     @BindView(R.id.dialog_workout_vr_keyboard)
     MyKeyBoardView keyBoardView;
 
-    @BindView(R.id.workout_mode_start_4)
+    @BindView(R.id.dialog_workout_vr_edit_time)
+    TextView editValue;
+
+
+    @BindView(R.id.workout_setting_start)
     ImageView startBtn;
 
-    @BindView(R.id.workout_mode_back_4)
+    @BindView(R.id.workout_setting_back)
     ImageView backBtn;
+
+    OnVrDialogClick vrDialogClick;
+
+    private int vrNum;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -60,12 +64,15 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
 
     @Override
     public void recycleObject() {
+        vrNum=-1;
+
         vrImage = null;
         editValue = null;
 
         keyBoardView.recycle();
         keyBoardView = null;
 
+        vrDialogClick=null;
         startBtn = null;
         backBtn = null;
 
@@ -73,33 +80,21 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
 
     @Override
     protected void init() {
+        vrDialogClick = (VirtualRealityActivity) getActivity();
+
         keyBoardView.setKeyBoardReturn(this);
         keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
+
         Bundle bundle = getArguments();
-        int vrNum = bundle.getInt(VirtualRealityActivity.SELECT_VRNUM, VirtualRealityActivity.SELECT_NOTHING);
-        changeVRImage(vrNum);
-        ((TextView) keyBoardView.findViewById(R.id.key_board_edit_value)).addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                editValue.setText(editable.toString());
-            }
-        });
+        vrNum = bundle.getInt(VirtualRealityActivity.SELECT_VR_NUM, VirtualRealityActivity.SELECT_NOTHING);
+        int imgID = bundle.getInt(VirtualRealityActivity.SELECT_VR_IMG, VirtualRealityActivity.SELECT_NOTHING);
+        ImageUtils.changeImageView(vrImage, imgID);
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) parentView.findViewById(R.id.workout_edit_start_hint_4));
+        txtList.add((TextView) parentView.findViewById(R.id.workout_setting_hint));
         txtList.add(editValue);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(getContext()));
@@ -137,47 +132,16 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
         TextUtils.changeTextBackground(editValue, R.mipmap.btn_virtual_time_2);
     }
 
-    @OnClick(R.id.workout_mode_back_4)
-    public void back() {
+
+    @OnClick({R.id.workout_setting_start})
+    public void beginWorkOut() {
+        vrDialogClick.onStartClick(vrNum,editValue.getText().toString());
         dismiss();
-        VirtualRealityActivity activity = (VirtualRealityActivity) getActivity();
     }
 
-    private void changeVRImage(int vrNum) {
-        switch (vrNum) {
-            default:
-                break;
-            case VirtualRealityActivity.TG_VALUE_1:
-                ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_01_4);
-                break;
-            case VirtualRealityActivity.TG_VALUE_2:
-                ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_02_4);
-                break;
-            case VirtualRealityActivity.TG_VALUE_3:
-                ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_03_4);
-                break;
-            case VirtualRealityActivity.TG_VALUE_4:
-                ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_04_4);
-                break;
-            case VirtualRealityActivity.TG_VALUE_5:
-                ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_05_4);
-                break;
-            case VirtualRealityActivity.TG_VALUE_6:
-                ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_06_4);
-                break;
-            case VirtualRealityActivity.TG_VALUE_7:
-                ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_07_4);
-                break;
-            case VirtualRealityActivity.TG_VALUE_8:
-                ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_08_4);
-                break;
-            case VirtualRealityActivity.TG_VALUE_9:
-                ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_09_4);
-                break;
-            case VirtualRealityActivity.TG_VALUE_10:
-                ImageUtils.changeImageView(vrImage, R.mipmap.img_program_virtual_10_4);
-                break;
-        }
+    @OnClick(R.id.workout_setting_back)
+    public void back() {
+        vrDialogClick.onBackClick();
+        dismiss();
     }
-
 }

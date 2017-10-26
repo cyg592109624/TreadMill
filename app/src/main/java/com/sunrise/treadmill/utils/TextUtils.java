@@ -126,6 +126,6 @@ public class TextUtils {
         for (TextView t : textViews) {
             changeTextBackground(t, bgId);
         }
-
     }
+
 }

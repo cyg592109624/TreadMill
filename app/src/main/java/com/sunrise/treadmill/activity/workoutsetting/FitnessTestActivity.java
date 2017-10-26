@@ -2,6 +2,7 @@ package com.sunrise.treadmill.activity.workoutsetting;
 
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
@@ -27,8 +28,6 @@ import butterknife.OnClick;
  */
 
 public class FitnessTestActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
-    @BindView(R.id.workout_mode_head)
-    WorkOutSettingHead headView;
 
     @BindView(R.id.workout_mode_gender_select)
     MyGenderView genderView;
@@ -42,6 +41,9 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
     @BindView(R.id.workout_edit_weight_value)
     TextView weightValue;
 
+    @BindView(R.id.workout_setting_start)
+    ImageView startBtn;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_workout_setting_fitness_test;
@@ -49,8 +51,6 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
 
     @Override
     public void recycleObject() {
-        headView.recycle();
-        headView = null;
 
         genderView.recycle();
         genderView = null;
@@ -60,16 +60,21 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
 
         ageValue = null;
         weightValue = null;
+        startBtn = null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
 
+        txtList.add((TextView) findViewById(R.id.workout_setting_head_name));
+        txtList.add((TextView) findViewById(R.id.workout_setting_head_hint));
+        txtList.add((TextView) findViewById(R.id.workout_setting_hint));
+
         txtList.add((TextView) findViewById(R.id.workout_edit_age));
+
         txtList.add((TextView) findViewById(R.id.workout_edit_weight));
         txtList.add((TextView) findViewById(R.id.workout_edit_weight_unit));
-        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_1));
 
         txtList.add(ageValue);
         txtList.add(weightValue);
@@ -84,7 +89,6 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
 
     @Override
     protected void init() {
-        headView.setHeadMsg(getResources().getString(R.string.workout_mode_fitness), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_fitness_test_icon);
         genderView.setOnGenderReturn(FitnessTestActivity.this);
         keyBoardView.setKeyBoardReturn(FitnessTestActivity.this);
     }
@@ -156,7 +160,7 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
         genderView.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.workout_mode_start_1})
+    @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
 
     }

@@ -2,6 +2,7 @@ package com.sunrise.treadmill.activity.workoutsetting;
 
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
@@ -26,8 +27,6 @@ import butterknife.OnClick;
  */
 
 public class IntervalActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
-    @BindView(R.id.workout_mode_head)
-    WorkOutSettingHead headView;
 
     @BindView(R.id.workout_mode_gender_select)
     MyGenderView genderView;
@@ -37,10 +36,16 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
 
     @BindView(R.id.workout_edit_age_value)
     TextView ageValue;
+
     @BindView(R.id.workout_edit_weight_value)
     TextView weightValue;
+
     @BindView(R.id.workout_edit_time_value)
     TextView timeValue;
+
+    @BindView(R.id.workout_setting_start)
+    ImageView startBtn;
+
 
     @Override
     public int getLayoutId() {
@@ -49,9 +54,6 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
 
     @Override
     public void recycleObject() {
-        headView.recycle();
-        headView = null;
-
         genderView.recycle();
         genderView = null;
 
@@ -61,13 +63,16 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
         ageValue = null;
         weightValue = null;
         timeValue = null;
+        startBtn=null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
-        txtList.add((TextView) headView.findViewById(R.id.workout_head_mode));
-        txtList.add((TextView) headView.findViewById(R.id.workout_head_hint));
+
+        txtList.add((TextView) findViewById(R.id.workout_setting_head_name));
+        txtList.add((TextView) findViewById(R.id.workout_setting_head_hint));
+        txtList.add((TextView) findViewById(R.id.workout_setting_hint));
 
         txtList.add((TextView) findViewById(R.id.workout_edit_age));
         txtList.add((TextView) findViewById(R.id.workout_edit_weight));
@@ -76,7 +81,6 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
         txtList.add((TextView) findViewById(R.id.workout_edit_time));
         txtList.add((TextView) findViewById(R.id.workout_edit_time_unit));
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_1));
 
         txtList.add(ageValue);
         txtList.add(weightValue);
@@ -89,6 +93,13 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
         txtList.clear();
         txtList = null;
     }
+
+    @Override
+    protected void init() {
+        genderView.setOnGenderReturn(this);
+        keyBoardView.setKeyBoardReturn(this);
+    }
+
 
     @Override
     public void genderReturn(int gender) {
@@ -136,14 +147,6 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
         genderView.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    protected void init() {
-        headView.setHeadMsg(getResources().getString(R.string.workout_mode_interval), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_interval_icon);
-        genderView.setOnGenderReturn(this);
-        keyBoardView.setKeyBoardReturn(this);
-    }
-
-
     private boolean isShowingKeyBoard = false;
 
     @OnClick({R.id.workout_edit_age_value, R.id.workout_edit_weight_value, R.id.workout_edit_time_value})
@@ -178,7 +181,8 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
         }
     }
 
-    @OnClick({R.id.workout_mode_start_1})
+
+    @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
 
     }

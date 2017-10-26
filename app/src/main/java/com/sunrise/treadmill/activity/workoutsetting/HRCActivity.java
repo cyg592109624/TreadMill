@@ -28,8 +28,6 @@ import butterknife.OnClick;
  */
 
 public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
-    @BindView(R.id.workout_mode_head)
-    WorkOutSettingHead headView;
 
     @BindView(R.id.workout_mode_gender_select)
     MyGenderView genderView;
@@ -52,19 +50,27 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
     @BindView(R.id.workout_edit_target_hr_value)
     TextView hrcTgValue;
 
+    @BindView(R.id.workout_setting_hint)
+    TextView settingHint;
 
-    @BindView(R.id.workout_edit_info_1)
+
+    @BindView(R.id.include2)
     ConstraintLayout infoType1;
-    @BindView(R.id.workout_edit_info_3)
+
+    @BindView(R.id.include3)
     ConstraintLayout infoType3;
 
 
-    @BindView(R.id.workout_mode_next_2)
-    ImageView nextImage;
-    @BindView(R.id.workout_mode_back_2)
-    ImageView backImage;
-    @BindView(R.id.workout_mode_start_2)
-    ImageView startImage;
+    @BindView(R.id.workout_setting_next)
+    ImageView nextBtn;
+
+    @BindView(R.id.workout_setting_back)
+    ImageView backBtn;
+
+
+    @BindView(R.id.workout_setting_start)
+    ImageView startBtn;
+
 
     @Override
     public int getLayoutId() {
@@ -73,9 +79,6 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
 
     @Override
     public void recycleObject() {
-        headView.recycle();
-        headView = null;
-
         genderView.recycle();
         genderView = null;
 
@@ -88,17 +91,24 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         hrc60Value = null;
         hrc80Value = null;
         hrcTgValue = null;
+        settingHint = null;
+
         infoType1 = null;
         infoType3 = null;
 
-        nextImage = null;
-        backImage = null;
-        startImage = null;
+        nextBtn = null;
+        backBtn = null;
+        startBtn = null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
+
+        txtList.add((TextView) findViewById(R.id.workout_setting_head_name));
+        txtList.add((TextView) findViewById(R.id.workout_setting_head_hint));
+        txtList.add(settingHint);
+
         txtList.add((TextView) findViewById(R.id.workout_edit_age));
 
         txtList.add((TextView) findViewById(R.id.workout_edit_weight));
@@ -116,8 +126,6 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         txtList.add((TextView) findViewById(R.id.workout_edit_target_hr));
         txtList.add((TextView) findViewById(R.id.workout_edit_target_hr_unit));
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_2));
-
         txtList.add(ageValue);
         txtList.add(weightValue);
         txtList.add(timeValue);
@@ -125,6 +133,9 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         txtList.add(hrc60Value);
         txtList.add(hrc80Value);
         txtList.add(hrcTgValue);
+
+
+
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(activityContext));
         } else {
@@ -136,7 +147,6 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
 
     @Override
     protected void init() {
-        headView.setHeadMsg(getResources().getString(R.string.workout_mode_hrc), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_hrc_icon);
         genderView.setOnGenderReturn(this);
         keyBoardView.setKeyBoardReturn(this);
         infoType1.setVisibility(View.VISIBLE);
@@ -209,10 +219,10 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         isShowingKeyBoard = false;
         keyBoardView.setVisibility(View.GONE);
         genderView.setVisibility(View.VISIBLE);
-        nextImage.setEnabled(true);
-        backImage.setEnabled(true);
+        nextBtn.setEnabled(true);
+        backBtn.setEnabled(true);
         //这个按钮还需要进行判断 这里暂时不做处理
-        startImage.setEnabled(true);
+        startBtn.setEnabled(true);
 
     }
 
@@ -228,9 +238,9 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         keyBoardView.setVisibility(View.VISIBLE);
         genderView.setVisibility(View.GONE);
 
-        nextImage.setEnabled(false);
-        backImage.setEnabled(false);
-        startImage.setEnabled(false);
+        nextBtn.setEnabled(false);
+        backBtn.setEnabled(false);
+        startBtn.setEnabled(false);
         switch (view.getId()) {
             default:
                 break;
@@ -273,32 +283,38 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         }
     }
 
-    @OnClick({R.id.workout_mode_next_2})
+    @OnClick({R.id.workout_setting_next})
     public void onNextEdit() {
         if (isShowingKeyBoard) {
             return;
         }
+        settingHint.setText(R.string.workout_mode_hint_c);
+
         infoType1.setVisibility(View.GONE);
         infoType3.setVisibility(View.VISIBLE);
-        nextImage.setVisibility(View.GONE);
-        backImage.setVisibility(View.VISIBLE);
+
+        nextBtn.setVisibility(View.GONE);
+        backBtn.setVisibility(View.VISIBLE);
 
     }
 
-    @OnClick({R.id.workout_mode_back_2})
+    @OnClick({R.id.workout_setting_back})
     public void onBackEdit() {
         if (isShowingKeyBoard) {
             return;
         }
+        settingHint.setText(R.string.workout_mode_hint_b);
+
         infoType1.setVisibility(View.VISIBLE);
         infoType3.setVisibility(View.GONE);
-        nextImage.setVisibility(View.VISIBLE);
-        backImage.setVisibility(View.GONE);
+
+        nextBtn.setVisibility(View.VISIBLE);
+        backBtn.setVisibility(View.GONE);
 
     }
 
 
-    @OnClick({R.id.workout_mode_start_2})
+    @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
 
     }

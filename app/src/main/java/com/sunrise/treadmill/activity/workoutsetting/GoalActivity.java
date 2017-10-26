@@ -1,7 +1,9 @@
 package com.sunrise.treadmill.activity.workoutsetting;
 
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
@@ -27,9 +29,6 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
     public static final String CHANGE_TG = "CHANGE_TG";
     public static final String CHANGE_TG_VALUE = "CHANGE_TG_VALUE";
 
-    @BindView(R.id.workout_mode_head)
-    WorkOutSettingHead headView;
-
     @BindView(R.id.workout_mode_goal_time)
     TextView timeValue;
 
@@ -38,6 +37,12 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
 
     @BindView(R.id.workout_mode_goal_calories)
     TextView calValue;
+
+    @BindView(R.id.include2)
+    ConstraintLayout optionBody;
+
+    @BindView(R.id.workout_setting_start)
+    ImageView startBtn;
 
     private GoalSetValueDialog dialog;
 
@@ -48,27 +53,22 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
 
     @Override
     public void recycleObject() {
-        headView.recycle();
-        headView = null;
-
         timeValue = null;
         distanceValue = null;
         calValue = null;
 
-//        dialog.onDestroyView();
         dialog = null;
-    }
-
-    @Override
-    protected void init() {
-        headView.setHeadMsg(getResources().getString(R.string.workout_mode_goal), getResources().getString(R.string.workout_mode_hint_g), R.mipmap.img_program_goal_icon);
+        startBtn=null;
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
 
-        txtList.add((TextView) findViewById(R.id.workout_mode_goal_hint));
+        txtList.add((TextView) findViewById(R.id.workout_setting_head_name));
+        txtList.add((TextView) findViewById(R.id.workout_setting_head_hint));
+        txtList.add((TextView) findViewById(R.id.workout_setting_hint));
+
 
         txtList.add(timeValue);
         txtList.add(distanceValue);
@@ -80,6 +80,10 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
         }
         txtList.clear();
         txtList = null;
+    }
+
+    @Override
+    protected void init() {
     }
 
 
@@ -108,6 +112,7 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
                 break;
         }
         if (hasSelect) {
+            optionBody.setVisibility(View.GONE);
             if (dialog == null) {
                 dialog = new GoalSetValueDialog();
             }
@@ -118,23 +123,27 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
 
     @Override
     public void onGoalSetValueResult(String result) {
-        switch (WorkOutSettingCommon.changeTg) {
-            default:
-                break;
-            case WorkOutSettingCommon.CHANGE_TIME:
-                timeValue.setText(result);
-                break;
-            case WorkOutSettingCommon.CHANGE_DISTANCE:
-                distanceValue.setText(result);
-                break;
-            case WorkOutSettingCommon.CHANGE_CALORIES:
-                calValue.setText(result);
-                break;
+        if (!"".equals(result)) {
+            switch (WorkOutSettingCommon.changeTg) {
+                default:
+                    break;
+                case WorkOutSettingCommon.CHANGE_TIME:
+                    timeValue.setText(result);
+                    break;
+                case WorkOutSettingCommon.CHANGE_DISTANCE:
+                    distanceValue.setText(result);
+                    break;
+                case WorkOutSettingCommon.CHANGE_CALORIES:
+                    calValue.setText(result);
+                    break;
+            }
         }
         WorkOutSettingCommon.changeTg = WorkOutSettingCommon.RE_SET;
+        optionBody.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.workout_mode_goal_start})
+
+    @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
 
     }

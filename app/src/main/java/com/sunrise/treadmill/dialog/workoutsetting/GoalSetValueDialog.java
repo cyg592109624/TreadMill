@@ -123,5 +123,6 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
     @Override
     public void onKeyBoardClose() {
         dismiss();
+        onGoalSetValueReturn.onGoalSetValueResult("");
     }
 }

@@ -30,8 +30,6 @@ import butterknife.OnClick;
  */
 
 public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
-    @BindView(R.id.workout_mode_head)
-    WorkOutSettingHead headView;
 
     @BindView(R.id.workout_mode_gender_select)
     MyGenderView genderView;
@@ -46,7 +44,7 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     @BindView(R.id.workout_edit_time_value)
     TextView timeValue;
 
-    @BindView(R.id.workout_mode_start_1)
+    @BindView(R.id.workout_setting_start)
     ImageView startBtn;
 
 
@@ -57,9 +55,6 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
 
     @Override
     public void recycleObject() {
-        headView.recycle();
-        headView = null;
-
         genderView.recycle();
         genderView = null;
 
@@ -67,7 +62,6 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         keyBoardView = null;
 
         ageValue = null;
-        headView = null;
         weightValue = null;
         timeValue = null;
         startBtn = null;
@@ -76,18 +70,24 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
+
+        txtList.add((TextView) findViewById(R.id.workout_setting_head_name));
+        txtList.add((TextView) findViewById(R.id.workout_setting_head_hint));
+        txtList.add((TextView) findViewById(R.id.workout_setting_hint));
+
         txtList.add((TextView) findViewById(R.id.workout_edit_age));
+
         txtList.add((TextView) findViewById(R.id.workout_edit_weight));
         txtList.add((TextView) findViewById(R.id.workout_edit_weight_unit));
 
         txtList.add((TextView) findViewById(R.id.workout_edit_time));
         txtList.add((TextView) findViewById(R.id.workout_edit_time_unit));
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_1));
 
         txtList.add(ageValue);
         txtList.add(weightValue);
         txtList.add(timeValue);
+
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(activityContext));
         } else {
@@ -99,7 +99,6 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
 
     @Override
     protected void init() {
-        headView.setHeadMsg(getResources().getString(R.string.workout_mode_hill), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_hill_icon);
         genderView.setOnGenderReturn(HillActivity.this);
         keyBoardView.setKeyBoardReturn(HillActivity.this);
     }
@@ -186,7 +185,7 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         }
     }
 
-    @OnClick({R.id.workout_mode_start_1})
+    @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
         Intent intent = new Intent();
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
