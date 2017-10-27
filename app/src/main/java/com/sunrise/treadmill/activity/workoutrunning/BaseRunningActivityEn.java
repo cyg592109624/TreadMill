@@ -56,6 +56,6 @@ public class BaseRunningActivityEn extends BaseRunningActivity {
             default:
                 break;
         }
-        media2Pop();
+        mediaPop();
     }
 }

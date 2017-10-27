@@ -30,6 +30,7 @@ import com.sunrise.treadmill.interfaces.workout.running.DialogCoolDownClick;
 import com.sunrise.treadmill.interfaces.workout.running.DialogPauseClick;
 import com.sunrise.treadmill.services.workoutrunning.FloatWindowService;
 import com.sunrise.treadmill.utils.AnimationsContainer;
+import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.ThreadPoolUtils;
 import com.sunrise.treadmill.views.workout.running.FloatWindowBottom;
@@ -46,20 +47,21 @@ import butterknife.OnClick;
 public class BaseRunningActivity extends BaseFragmentActivity implements FloatServiceBinder, AnimationsContainer.OnAnimationStoppedListener,
         DialogPauseClick, DialogCoolDownClick, FloatWindowBottomCallBack {
 
-    @BindView(R.id.workout_running_body_1)
-    LinearLayout leftView;
+    @BindView(R.id.include2)
+    ConstraintLayout leftView;
 
-    @BindView(R.id.workout_running_body_2)
-    FrameLayout rightLayout;
+    @BindView(R.id.include3)
+    ConstraintLayout rightLayout;
+
+    @BindView(R.id.workout_running_media_bg)
+    ImageView rightLayoutBg;
+
+    @BindView(R.id.workout_running_media_ctr)
+    ImageView mediaCtrlImage;
+
 
     @BindView(R.id.workout_running_level_view)
     LevelView levelView;
-
-    @BindView(R.id.workout_running_media_1)
-    ConstraintLayout mediaView;
-
-    @BindView(R.id.workout_running_media_ctrl_1)
-    ImageView mediaCtrlImage;
 
     @BindView(R.id.workout_running_head)
     FloatWindowHead headView;
@@ -100,10 +102,12 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     @Override
     public void recycleObject() {
         leftView = null;
-        rightLayout = null;
         levelView = null;
-        mediaView = null;
+
+        rightLayout = null;
+        rightLayoutBg = null;
         mediaCtrlImage = null;
+
         headView = null;
         bottomView = null;
 
@@ -129,7 +133,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         getWindowManager().getDefaultDisplay().getRealMetrics(dm);
         parentWidth = dm.widthPixels;
         parentHeight = dm.heightPixels;
-        dm=null;
+        dm = null;
 
         bottomView.setWindowBottomCallBack(this);
     }
@@ -209,12 +213,11 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     }
 
-
     private boolean isShowView = false;
     private boolean isAnimLeftView = false;
     private boolean isAnimRightView = false;
 
-    @OnClick(R.id.workout_running_body_1)
+    @OnClick(R.id.include2)
     public void showLeftView() {
         if (isShowView) {
             if (isAnimLeftView) {
@@ -231,24 +234,19 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         }
     }
 
-    @OnClick(R.id.workout_running_media_ctrl_1)
-    public void media1Pop() {
-        if (!isShowView) {
-            if (!isAnimLeftView) {
-                isShowView = true;
-                isAnimRightView = true;
-                animRightView(true);
-            }
-        }
-    }
-
-    @OnClick(R.id.workout_running_media_ctrl_2)
-    public void media2Pop() {
+    @OnClick(R.id.workout_running_media_ctr)
+    public void mediaPop() {
         if (isShowView) {
             if (isAnimRightView) {
                 isShowView = false;
                 isAnimRightView = false;
                 animRightView(false);
+            }
+        } else {
+            if (!isAnimLeftView) {
+                isShowView = true;
+                isAnimRightView = true;
+                animRightView(true);
             }
         }
     }
@@ -259,13 +257,13 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         PropertyValuesHolder translationX = null;
         PropertyValuesHolder translationY = null;
         if (isScale) {
-            scaleX = PropertyValuesHolder.ofFloat("scaleX", 1f, 1.4f);
-            scaleY = PropertyValuesHolder.ofFloat("scaleY", 1f, 1.4f);
+            scaleX = PropertyValuesHolder.ofFloat("scaleX", 1f, 1.7f);
+            scaleY = PropertyValuesHolder.ofFloat("scaleY", 1f, 1.7f);
             translationX = PropertyValuesHolder.ofFloat("translationX", 0, (parentWidth - leftView.getWidth()) / 2);
             translationY = PropertyValuesHolder.ofFloat("translationY", 0, -(parentHeight - leftView.getHeight()) / 5);
         } else {
-            scaleX = PropertyValuesHolder.ofFloat("scaleX", 1.4f, 1f);
-            scaleY = PropertyValuesHolder.ofFloat("scaleY", 1.4f, 1f);
+            scaleX = PropertyValuesHolder.ofFloat("scaleX", 1.7f, 1f);
+            scaleY = PropertyValuesHolder.ofFloat("scaleY", 1.7f, 1f);
             translationX = PropertyValuesHolder.ofFloat("translationX", (parentWidth - leftView.getWidth()) / 2, 0);
             translationY = PropertyValuesHolder.ofFloat("translationY", -(parentHeight - leftView.getHeight()) / 5, 0);
         }
@@ -288,16 +286,16 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
             @Override
             public void onAnimationStart(Animator animator) {
                 if (translation) {
-                    mediaView.setVisibility(View.VISIBLE);
-                    mediaCtrlImage.setVisibility(View.GONE);
+                    rightLayoutBg.setVisibility(View.VISIBLE);
+                    ImageUtils.changeImageView(mediaCtrlImage, R.drawable.bg_dialog_3);
                 }
             }
 
             @Override
             public void onAnimationEnd(Animator animator) {
                 if (!translation) {
-                    mediaView.setVisibility(View.INVISIBLE);
-                    mediaCtrlImage.setVisibility(View.VISIBLE);
+                    rightLayoutBg.setVisibility(View.INVISIBLE);
+                    ImageUtils.changeImageView(mediaCtrlImage, R.mipmap.btn_sportmode_media_1);
                 }
             }
 

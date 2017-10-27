@@ -7,4 +7,7 @@
         <attr name="buoyBitmapWidth" format="integer"/>
         <attr name="buoyBitmapHeight" format="integer"/>
     </declare-styleable>
+    <declare-styleable name="lineChat">
+        <attr name="rankCount" format="integer"/>
+    </declare-styleable>
 </resources>

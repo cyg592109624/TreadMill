@@ -1,6 +1,7 @@
 package com.sunrise.treadmill.views.summary;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -44,6 +45,11 @@ public class LineChat extends View {
         mGesturePaint.setStyle(Paint.Style.STROKE);
         mGesturePaint.setStrokeWidth(5);
         mGesturePaint.setColor(ContextCompat.getColor(context, R.color.factory_tabs_on));
+
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.lineChat);
+        rankCount = ta.getInt(R.styleable.levelView_buoyBitmapWidth, rankCount);
+        ta.recycle();
+        ta = null;
         data = createData(dataSize);
     }
 

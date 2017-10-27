@@ -40,7 +40,6 @@ public class BaseRunningActivityZh extends BaseRunningActivity {
                 startActivity(intent);
                 floatWindowServer.toggleFloatWindow();
                 floatWindowServer.onLevelChange(headView.curLevel);
-                media2Pop();
             }
         }
     };
@@ -96,6 +95,7 @@ public class BaseRunningActivityZh extends BaseRunningActivity {
                 msg.setData(bundle);
                 break;
         }
+        mediaPop();
         if (intent != null) {
             ThreadPoolUtils.runTaskOnThread(new Runnable() {
                 @Override

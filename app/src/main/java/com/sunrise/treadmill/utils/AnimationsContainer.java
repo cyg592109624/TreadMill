@@ -196,6 +196,10 @@ public class AnimationsContainer {
      * 停止播放监听
      */
     public interface OnAnimationStoppedListener {
+
+        /**
+         * 停止播放监听
+         */
         void animationStopped();
     }
 

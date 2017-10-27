@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.activity.workoutsetting;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,14 +31,11 @@ import butterknife.OnClick;
 
 public class UserProgramActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
 
-    @BindView(R.id.workout_mode_head)
-    WorkOutSettingHead headView;
+    @BindView(R.id.include2)
+    ConstraintLayout optionBody;
 
-    @BindView(R.id.workout_option_body)
-    LinearLayout optionBody;
-
-    @BindView(R.id.workout_option_body2)
-    LinearLayout optionBody2;
+    @BindView(R.id.include3)
+    ConstraintLayout optionBody2;
 
     @BindView(R.id.workout_mode_gender_select)
     MyGenderView genderView;
@@ -49,6 +47,9 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
     LevelView levelView;
 
 
+    @BindView(R.id.workout_setting_head_hint)
+    TextView headHint;
+
     @BindView(R.id.workout_edit_age_value)
     TextView ageValue;
     @BindView(R.id.workout_edit_weight_value)
@@ -57,11 +58,11 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
     TextView timeValue;
 
 
-    @BindView(R.id.workout_mode_next_2)
+    @BindView(R.id.workout_setting_next)
     ImageView nextImage;
-    @BindView(R.id.workout_mode_back_2)
+    @BindView(R.id.workout_setting_back)
     ImageView backImage;
-    @BindView(R.id.workout_mode_start_2)
+    @BindView(R.id.workout_setting_start)
     ImageView startImage;
 
     @Override
@@ -71,9 +72,7 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
 
     @Override
     public void recycleObject() {
-        headView.recycle();
-        headView = null;
-
+        headHint=null;
         genderView.recycle();
         genderView = null;
 
@@ -97,16 +96,18 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
 
     @Override
     protected void init() {
-        headView.setHeadMsg(getResources().getString(R.string.workout_mode_user), getResources().getString(R.string.workout_mode_hint_f), R.mipmap.img_program_user_program_icon);
         genderView.setOnGenderReturn(UserProgramActivity.this);
         keyBoardView.setKeyBoardReturn(UserProgramActivity.this);
-//        levelView.setColumnMargin(5f);
-//        levelView.setHintText(getResources().getString(R.string.workout_mode_hint_e));
     }
 
     @Override
     protected void setTextStyle() {
         List<TextView> txtList = new ArrayList<TextView>();
+
+        txtList.add((TextView) findViewById(R.id.workout_setting_head_name));
+        txtList.add((TextView) findViewById(R.id.workout_setting_head_hint));
+        txtList.add(headHint);
+        txtList.add((TextView) findViewById(R.id.workout_setting_hint_2));
 
         txtList.add((TextView) findViewById(R.id.workout_edit_age));
 
@@ -115,10 +116,6 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
 
         txtList.add((TextView) findViewById(R.id.workout_edit_time));
         txtList.add((TextView) findViewById(R.id.workout_edit_time_unit));
-
-        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_2));
-
-        txtList.add((TextView) findViewById(R.id.workout_edit_start_hint_3));
 
         txtList.add(ageValue);
         txtList.add(weightValue);
@@ -223,30 +220,30 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
         }
     }
 
-    @OnClick({R.id.workout_mode_next_2})
+    @OnClick({R.id.workout_setting_next})
     public void onNextEdit() {
         if (isShowingKeyBoard) {
             return;
         }
-        headView.setWorkOutHint(getResources().getString(R.string.workout_mode_hint_e));
+        headHint.setText(getResources().getString(R.string.workout_mode_hint_e));
 
         optionBody.setVisibility(View.GONE);
         optionBody2.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.workout_mode_back_3})
+    @OnClick({R.id.workout_setting_back})
     public void onBackEdit() {
         if (isShowingKeyBoard) {
             return;
         }
-        headView.setWorkOutHint(getResources().getString(R.string.workout_mode_hint_f));
+        headHint.setText(getResources().getString(R.string.workout_mode_hint_f));
 
         optionBody.setVisibility(View.VISIBLE);
         optionBody2.setVisibility(View.GONE);
     }
 
 
-    @OnClick({R.id.workout_mode_start_2, R.id.workout_mode_start_3})
+    @OnClick({R.id.workout_setting_start, R.id.workout_setting_start_2})
     public void beginWorkOut() {
 
     }

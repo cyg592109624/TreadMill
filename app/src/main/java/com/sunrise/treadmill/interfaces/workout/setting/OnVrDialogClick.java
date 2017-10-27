@@ -11,6 +11,8 @@ public interface OnVrDialogClick {
      * @param time 时间
      */
     void onStartClick(int vrNum,String time);
-
+    /**
+     * 返回
+     */
     void onBackClick();
 }

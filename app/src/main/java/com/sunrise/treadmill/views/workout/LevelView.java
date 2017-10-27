@@ -133,7 +133,7 @@ public class LevelView extends View {
     public void calcLength() {
         topSpace = viewHeight * 0.191f;
         bottomSpace = viewHeight * 0.095f;
-        leftSpace = viewWidth * 0.008f;
+        leftSpace = viewWidth * 0.007f;
         rightSpace = viewWidth * 0.008f;
 
         columnWidth = (viewWidth - ((columnMargin * 29) + leftSpace + rightSpace)) / 30;
