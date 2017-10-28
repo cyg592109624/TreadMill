@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseActivity;
@@ -41,6 +42,9 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
     @BindView(R.id.workout_edit_weight_value)
     TextView weightValue;
 
+    @BindView(R.id.workout_edit_weight_unit)
+    TextView weightUnit;
+
     @BindView(R.id.workout_setting_start)
     ImageView startBtn;
 
@@ -60,6 +64,7 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
 
         ageValue = null;
         weightValue = null;
+        weightUnit = null;
         startBtn = null;
     }
 
@@ -91,6 +96,11 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
     protected void init() {
         genderView.setOnGenderReturn(FitnessTestActivity.this);
         keyBoardView.setKeyBoardReturn(FitnessTestActivity.this);
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            weightUnit.setText(R.string.unit_kg);
+        } else {
+            weightUnit.setText(R.string.unit_lb);
+        }
     }
 
     private boolean isShowingKeyBoard = false;

@@ -20,12 +20,24 @@
         android:layout_height="350dp"
         android:background="@mipmap/img_sportmode_profile_level_1"
         app:columnMargin="3"
-        app:hintText="@string/workout_mode_hint_e"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:slideEnable="true" />
+
+    <TextView
+        android:id="@+id/workout_edit_level_view_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/workout_mode_hint_e"
+        android:textColor="@color/factory_tabs_on"
+        android:textSize="10pt"
+        app:layout_constraintBottom_toBottomOf="@+id/workout_edit_level_view"
+        app:layout_constraintLeft_toLeftOf="@+id/workout_edit_level_view"
+        app:layout_constraintRight_toRightOf="@+id/workout_edit_level_view"
+        app:layout_constraintTop_toTopOf="@+id/workout_edit_level_view"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/workout_setting_hint_2"
@@ -38,10 +50,10 @@
         android:textColor="@color/workout_mode_white"
         android:textSize="14pt"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/workout_setting_back"
         app:layout_constraintRight_toLeftOf="@+id/workout_setting_start_2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintVertical_bias="0.95" />
 
     <ImageView

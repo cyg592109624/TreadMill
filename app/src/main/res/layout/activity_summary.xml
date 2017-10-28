@@ -9,9 +9,8 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/summary_viewPage"
-        android:layout_width="330dp"
-        android:layout_height="0dp"
-        android:foregroundGravity="center"
+        android:layout_width="854dp"
+        android:layout_height="715dp"
         app:layout_constraintBottom_toTopOf="@+id/myBottomTabView1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -21,10 +20,10 @@
 
     <ImageView
         android:id="@+id/summary_fragment_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="2dp"
-        android:paddingTop="2dp"
+        android:layout_width="134dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="40dp"
         android:src="@mipmap/img_virtual_reality_page_1"
         app:layout_constraintBottom_toTopOf="@+id/myBottomTabView1"
         app:layout_constraintLeft_toLeftOf="parent"

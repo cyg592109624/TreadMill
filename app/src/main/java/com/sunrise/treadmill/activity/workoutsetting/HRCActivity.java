@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseActivity;
@@ -39,6 +40,10 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
     TextView ageValue;
     @BindView(R.id.workout_edit_weight_value)
     TextView weightValue;
+
+    @BindView(R.id.workout_edit_weight_unit)
+    TextView weightUnit;
+
     @BindView(R.id.workout_edit_time_value)
     TextView timeValue;
 
@@ -86,11 +91,16 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         keyBoardView = null;
 
         ageValue = null;
+
         weightValue = null;
+        weightUnit = null;
+
         timeValue = null;
+
         hrc60Value = null;
         hrc80Value = null;
         hrcTgValue = null;
+
         settingHint = null;
 
         infoType1 = null;
@@ -135,7 +145,6 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         txtList.add(hrcTgValue);
 
 
-
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(activityContext));
         } else {
@@ -151,6 +160,12 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         keyBoardView.setKeyBoardReturn(this);
         infoType1.setVisibility(View.VISIBLE);
         infoType3.setVisibility(View.GONE);
+
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            weightUnit.setText(R.string.unit_kg);
+        } else {
+            weightUnit.setText(R.string.unit_lb);
+        }
     }
 
 

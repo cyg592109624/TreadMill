@@ -2,18 +2,16 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="854dp"
-    android:layout_height="715dp"
-    android:background="@mipmap/img_sportmode_summary_2">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <com.sunrise.treadmill.views.summary.LineChat
-        android:layout_width="725dp"
-        android:layout_height="452dp"
+    <com.sunrise.treadmill.views.workout.setting.MyKeyBoardView
+        android:id="@+id/dialog_settings_lock_key_board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.682"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:rankCount="36" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

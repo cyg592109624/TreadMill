@@ -1,11 +1,14 @@
 package com.sunrise.treadmill.activity.workoutsetting;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
@@ -58,7 +61,7 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
         calValue = null;
 
         dialog = null;
-        startBtn=null;
+        startBtn = null;
     }
 
     @Override
@@ -84,6 +87,13 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
 
     @Override
     protected void init() {
+        Drawable drawable = null;
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            drawable = ContextCompat.getDrawable(activityContext, R.drawable.btn_workout_goal_distance_km);
+        } else {
+            drawable = ContextCompat.getDrawable(activityContext, R.drawable.btn_workout_goal_distance_mile);
+        }
+        distanceValue.setBackground(drawable);
     }
 
 

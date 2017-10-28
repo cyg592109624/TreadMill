@@ -81,8 +81,10 @@ public class LevelView extends View {
 
     private boolean slideEnable = true;
 
-    private String hintText;
 
+    /**
+     * 浮标
+     */
     private Bitmap buoyBitmap;
 
     private float buoyBitmapWidth, buoyBitmapHeight;
@@ -111,7 +113,6 @@ public class LevelView extends View {
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.levelView);
         columnMargin = ta.getFloat(R.styleable.levelView_columnMargin, 2f);
-        hintText = ta.getString(R.styleable.levelView_hintText);
         slideEnable = ta.getBoolean(R.styleable.levelView_slideEnable, true);
         int opWidth = ta.getInt(R.styleable.levelView_buoyBitmapWidth, -1);
         int opHeight = ta.getInt(R.styleable.levelView_buoyBitmapHeight, -1);
@@ -149,9 +150,6 @@ public class LevelView extends View {
         this.columnMargin = columnMargin;
     }
 
-    public void setHintText(String text) {
-        hintText = text;
-    }
 
     public void setBuoyBitmap(int optionsWidth, int optionsHeight) {
         if (optionsWidth < 0 | optionsHeight < 0) {
@@ -291,9 +289,6 @@ public class LevelView extends View {
         }
         if (buoyBitmap != null) {
             canvas.drawBitmap(buoyBitmap, buoyLeft + buoyBitmapWidth, topSpace - buoyBitmapHeight, null);
-        }
-        if (!"".equals(hintText)) {
-            canvas.drawText(hintText, (viewWidth - hintText.length() * (bottomSpace * 0.8f)) / 2, viewHeight - bottomSpace * 0.18f, mPaint);
         }
     }
 

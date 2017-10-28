@@ -11,8 +11,10 @@ import android.widget.TextView;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
+import com.sunrise.treadmill.dialog.settings.SettingsLockPswDialog;
 import com.sunrise.treadmill.fragments.settings.SettingsLockFragmentCard1;
 import com.sunrise.treadmill.fragments.settings.SettingsLockFragmentCard2;
+import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
@@ -27,7 +29,7 @@ import butterknife.OnClick;
  * Created by ChuHui on 2017/9/15.
  */
 
-public class SettingsLockActivity extends BaseFragmentActivity {
+public class SettingsLockActivity extends BaseFragmentActivity implements OnKeyBoardReturn {
     @BindView(R.id.settings_view_bg)
     ImageView bgView;
 
@@ -37,6 +39,10 @@ public class SettingsLockActivity extends BaseFragmentActivity {
     private Fragment nowFragment;
     private SettingsLockFragmentCard1 card1;
     private SettingsLockFragmentCard2 card2;
+
+    private SettingsLockPswDialog pswDialog;
+
+    private int editState = -1;
 
     @Override
     public int getLayoutId() {
@@ -50,6 +56,7 @@ public class SettingsLockActivity extends BaseFragmentActivity {
         nowFragment = null;
         card1 = null;
         card2 = null;
+        pswDialog = null;
     }
 
     @Override
@@ -59,6 +66,11 @@ public class SettingsLockActivity extends BaseFragmentActivity {
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(activityContext));
         }
+    }
+
+    @Override
+    protected void init() {
+        showLockDialog();
     }
 
     @OnClick({R.id.settings_card_lock, R.id.settings_card_psw})
@@ -86,13 +98,13 @@ public class SettingsLockActivity extends BaseFragmentActivity {
                 break;
         }
         if (bgResource != -1 && tgCard != -1) {
-            ImageUtils.changeImageView(bgView,bgResource);
+            ImageUtils.changeImageView(bgView, bgResource);
             for (int i = 0; i < txtList.size() - 1; i++) {
                 if (i == tgCard) {
-                    TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext,R.color.settings_tabs_on));
+                    TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext, R.color.settings_tabs_on));
                     TextUtils.changeTextSize(txtList.get(i), 35f);
                 } else {
-                    TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext,R.color.settings_tabs_off));
+                    TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext, R.color.settings_tabs_off));
                     TextUtils.changeTextSize(txtList.get(i), 30f);
                 }
             }
@@ -112,7 +124,30 @@ public class SettingsLockActivity extends BaseFragmentActivity {
     }
 
     @Override
-    protected void init() {
+    public void onKeyBoardEnter(String result) {
+        if (result.equals(GlobalSetting.CustomerPassWord)) {
+            editState = 1;
+            editView();
+        } else {
+            editState = 0;
+        }
+    }
+
+    @Override
+    public void onKeyBoardClose() {
+        if (editState == 1) {
+            pswDialog.dismiss();
+        }else if (editState == -1) {
+            finishActivity();
+        }
+    }
+
+    private void showLockDialog() {
+        pswDialog = new SettingsLockPswDialog();
+        pswDialog.show(fragmentManager, SettingsLockPswDialog.TAG);
+    }
+
+    private void editView() {
         card1 = new SettingsLockFragmentCard1();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.add(R.id.settings_lock_views, card1).commit();

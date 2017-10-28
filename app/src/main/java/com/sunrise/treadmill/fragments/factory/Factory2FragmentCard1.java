@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
+import com.sunrise.treadmill.utils.SharedPreferencesUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
 
@@ -28,8 +30,24 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
     @BindView(R.id.factory2_card1_1)
     ConstraintLayout leftLayout;
 
+    @BindView(R.id.factory2_card1_1_display_mode_toggle)
+    ToggleButton toggle_Display;
+
+    @BindView(R.id.factory2_card1_1_pause_mode_toggle)
+    ToggleButton toggle_Pause;
+
+    @BindView(R.id.factory2_card1_1_key_tone_toggle)
+    ToggleButton toggle_KeyTone;
+
+    @BindView(R.id.factory2_card1_1_buzzer_toggle)
+    ToggleButton toggle_Buzzer;
+
+    @BindView(R.id.factory2_card1_1_child_lock_toggle)
+    ToggleButton toggle_ChildLock;
+
+
     @BindView(R.id.factory2_card1_2_ctrl_page_toggle)
-    ToggleButton ctrlPageToggle;
+    ToggleButton toggle_CtrlPage;
 
     @BindView(R.id.factory2_card1_2_level_value)
     TextView levelValue;
@@ -48,7 +66,15 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
     @Override
     public void recycleObject() {
         leftLayout = null;
-        ctrlPageToggle = null;
+
+        toggle_Display = null;
+        toggle_Pause = null;
+        toggle_KeyTone = null;
+        toggle_Buzzer = null;
+        toggle_ChildLock = null;
+
+        toggle_CtrlPage = null;
+
         levelValue = null;
         pwmValue = null;
         keyBoardView.recycle();
@@ -80,29 +106,44 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(getContext()));
         }
         txtList.clear();
-        txtList=null;
+        txtList = null;
     }
 
     @Override
     protected void init() {
-        ctrlPageToggle.setEnabled(false);
-        ctrlPageToggle.setChecked(false);
+        toggle_Display.setChecked(GlobalSetting.Factory2Mode_Display);
+        toggle_Pause.setChecked(GlobalSetting.Factory2Mode_Pause);
+        toggle_KeyTone.setChecked(GlobalSetting.Factory2Mode_KeyTone);
+        toggle_Buzzer.setChecked(GlobalSetting.Factory2Mode_Buzzer);
+        toggle_ChildLock.setChecked(GlobalSetting.Factory2Mode_ChildLock);
+
+        toggle_CtrlPage.setEnabled(false);
+        toggle_CtrlPage.setChecked(GlobalSetting.Factory2Mode_CtrlPage);
+
         keyBoardView.setKeyBoardReturn(this);
+        levelValue.setText(GlobalSetting.Factory2_Level);
+        pwmValue.setText(GlobalSetting.Factory2_PWM);
     }
 
     @Override
     public void onKeyBoardEnter(String result) {
+        if ("".equals(result)) {
+            return;
+        }
         switch (reSetTG) {
+            default:
+                break;
             case RE_SET_LEVEL:
                 levelValue.setText(result);
+                GlobalSetting.Factory2_Level = result;
+                SharedPreferencesUtils.put(getContext(), Constant.FACTORY2_LEVEL, GlobalSetting.Factory2_Level);
                 break;
             case RE_SET_PWM:
                 pwmValue.setText(result);
-                break;
-            default:
+                GlobalSetting.Factory2_PWM = result;
+                SharedPreferencesUtils.put(getContext(), Constant.FACTORY2_PWM, GlobalSetting.Factory2_PWM);
                 break;
         }
-
     }
 
     @Override
@@ -119,21 +160,40 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
                 TextUtils.changeTextBackground(pwmValue, R.mipmap.img_number_frame_1);
                 break;
         }
-        reSetTG = reSetTG;
+        reSetTG = -1;
         isShowingKeyBoard = false;
         keyBoardView.setVisibility(View.GONE);
         leftLayout.setVisibility(View.VISIBLE);
     }
 
 
-    @OnClick({R.id.factory2_card1_1_display_mode_toggle, R.id.factory2_card1_1_pause_mode_toggle, R.id.factory2_card1_1_key_tone_toggle,
-            R.id.factory2_card1_1_buzzer_toggle, R.id.factory2_card1_1_child_lock_toggle, R.id.factory2_card1_2_ctrl_page_toggle
-    })
+    @OnClick({R.id.factory2_card1_1_display_mode_toggle, R.id.factory2_card1_1_pause_mode_toggle,
+            R.id.factory2_card1_1_key_tone_toggle, R.id.factory2_card1_1_buzzer_toggle,
+            R.id.factory2_card1_1_child_lock_toggle})
     public void toggleButtonClick(View view) {
-        ToggleButton tb = (ToggleButton) view;
-        boolean isCheck = tb.isChecked();
+        ToggleButton toggleButton = (ToggleButton) view;
         switch (view.getId()) {
             default:
+                break;
+            case R.id.factory2_card1_1_display_mode_toggle:
+                GlobalSetting.Factory2Mode_Display = toggleButton.isChecked();
+                SharedPreferencesUtils.put(getContext(), Constant.FACTORY2_MODE_DISPLAY, GlobalSetting.Factory2Mode_Display);
+                break;
+            case R.id.factory2_card1_1_pause_mode_toggle:
+                GlobalSetting.Factory2Mode_Pause = toggleButton.isChecked();
+                SharedPreferencesUtils.put(getContext(), Constant.FACTORY2_MODE_PAUSE, GlobalSetting.Factory2Mode_Pause);
+                break;
+            case R.id.factory2_card1_1_key_tone_toggle:
+                GlobalSetting.Factory2Mode_KeyTone = toggleButton.isChecked();
+                SharedPreferencesUtils.put(getContext(), Constant.FACTORY2_MODE_KEY_TONE, GlobalSetting.Factory2Mode_KeyTone);
+                break;
+            case R.id.factory2_card1_1_buzzer_toggle:
+                GlobalSetting.Factory2Mode_Buzzer = toggleButton.isChecked();
+                SharedPreferencesUtils.put(getContext(), Constant.FACTORY2_MODE_BUZZER, GlobalSetting.Factory2Mode_Buzzer);
+                break;
+            case R.id.factory2_card1_1_child_lock_toggle:
+                GlobalSetting.Factory2Mode_ChildLock = toggleButton.isChecked();
+                SharedPreferencesUtils.put(getContext(), Constant.FACTORY2_MODE_CTRL_PAGE, GlobalSetting.Factory2Mode_ChildLock);
                 break;
         }
     }

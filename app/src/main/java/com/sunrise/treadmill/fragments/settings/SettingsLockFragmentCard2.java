@@ -5,11 +5,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
+import com.sunrise.treadmill.utils.SharedPreferencesUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
 
@@ -56,13 +58,14 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(getContext()));
         }
         txtList.clear();
-        txtList=null;
+        txtList = null;
     }
 
     @Override
     protected void init() {
         keyBoard.setKeyBoardReturn(this);
         keyBoard.setTitleImage(R.mipmap.tv_keybord_password);
+        psw.setText(GlobalSetting.CustomerPassWord);
     }
 
     @OnClick(R.id.settings_card4_2_reset_1)
@@ -73,7 +76,12 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
 
     @Override
     public void onKeyBoardEnter(String result) {
-        psw.setText(result);
+        if ("".equals(result)) {
+            return;
+        }
+        GlobalSetting.CustomerPassWord = result;
+        psw.setText(GlobalSetting.CustomerPassWord);
+        SharedPreferencesUtils.put(getContext(), Constant.CUSTOMER_PASS_WORD, GlobalSetting.CustomerPassWord);
     }
 
     @Override

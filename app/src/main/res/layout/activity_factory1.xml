@@ -39,12 +39,11 @@
         style="@style/factory_tabs_on"
         android:text="@string/setting"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="0.042" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142" />
 
     <TextView
         android:id="@+id/factory1_unit"
@@ -61,32 +60,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
 
-    <RadioGroup
-        android:id="@+id/factory1_unit_radio"
-        android:layout_width="wrap_content"
+    <RadioButton
+        android:id="@+id/factory1_unit_type_imperial"
+        android:layout_width="175dp"
         android:layout_height="56dp"
-        android:layout_gravity="center|left"
-        android:orientation="horizontal"
+        android:background="@drawable/btn_factory_1_imperial"
+        android:button="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/factory1_unit"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.30">
+        app:layout_constraintVertical_bias="0.3" />
 
-        <RadioButton
-            android:layout_width="175dp"
-            android:layout_height="56dp"
-            android:background="@drawable/btn_factory_1_imperial"
-            android:button="@null" />
-
-        <RadioButton
-            android:layout_width="175dp"
-            android:layout_height="56dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/btn_factory_1_metrial"
-            android:button="@null" />
-    </RadioGroup>
+    <RadioButton
+        android:id="@+id/factory1_unit_type_metrial"
+        android:layout_width="175dp"
+        android:layout_height="56dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/btn_factory_1_metrial"
+        android:button="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/factory1_unit_type_imperial"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/factory1_type"
@@ -100,44 +99,49 @@
         app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/factory1_unit"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
 
-    <RadioGroup
-        android:id="@+id/factory1_type_radio"
-        android:layout_width="wrap_content"
+    <RadioButton
+        android:id="@+id/factory1_machine_type_bike"
+        android:layout_width="175dp"
         android:layout_height="56dp"
-        android:layout_gravity="center|left"
-        android:orientation="horizontal"
+        android:background="@drawable/btn_factory_1_bike"
+        android:button="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/factory1_type"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/factory1_unit_radio"
-        app:layout_constraintVertical_bias="0.1">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
 
-        <RadioButton
-            android:layout_width="175dp"
-            android:layout_height="56dp"
-            android:background="@drawable/btn_factory_1_bike"
-            android:button="@null" />
+    <RadioButton
+        android:id="@+id/factory1_machine_type_recumbent"
+        android:layout_width="175dp"
+        android:layout_height="56dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/btn_factory_1_recumbent"
+        android:button="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/factory1_machine_type_bike"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
 
-        <RadioButton
-            android:layout_width="175dp"
-            android:layout_height="56dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/btn_factory_1_recumbent"
-            android:button="@null" />
-
-        <RadioButton
-            android:layout_width="175dp"
-            android:layout_height="56dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/btn_factory_1_elliptical"
-            android:button="@null" />
-
-    </RadioGroup>
-
+    <RadioButton
+        android:id="@+id/factory1_machine_type_elliptical"
+        android:layout_width="175dp"
+        android:layout_height="56dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/btn_factory_1_elliptical"
+        android:button="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/factory1_machine_type_recumbent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
 
     <include
         android:id="@+id/include2"

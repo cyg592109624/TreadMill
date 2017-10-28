@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseActivity;
@@ -40,6 +41,9 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
     @BindView(R.id.workout_edit_weight_value)
     TextView weightValue;
 
+    @BindView(R.id.workout_edit_weight_unit)
+    TextView weightUnit;
+
     @BindView(R.id.workout_edit_time_value)
     TextView timeValue;
 
@@ -62,8 +66,9 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
 
         ageValue = null;
         weightValue = null;
+        weightUnit = null;
         timeValue = null;
-        startBtn=null;
+        startBtn = null;
     }
 
     @Override
@@ -98,6 +103,11 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
     protected void init() {
         genderView.setOnGenderReturn(this);
         keyBoardView.setKeyBoardReturn(this);
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            weightUnit.setText(R.string.unit_kg);
+        } else {
+            weightUnit.setText(R.string.unit_lb);
+        }
     }
 
 

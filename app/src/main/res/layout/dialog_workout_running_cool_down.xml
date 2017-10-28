@@ -20,12 +20,14 @@
 
     <ImageView
         android:id="@+id/workout_running_cool_down_skip"
-        android:layout_width="145dp"
-        android:layout_height="54dp"
+        android:layout_width="290dp"
+        android:layout_height="108dp"
         android:src="@drawable/btn_dialog_cool_down_skip"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </android.support.constraint.ConstraintLayout>

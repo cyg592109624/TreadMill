@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity;
@@ -39,8 +40,13 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
 
     @BindView(R.id.workout_edit_age_value)
     TextView ageValue;
+
     @BindView(R.id.workout_edit_weight_value)
     TextView weightValue;
+
+    @BindView(R.id.workout_edit_weight_unit)
+    TextView weightUnit;
+
     @BindView(R.id.workout_edit_time_value)
     TextView timeValue;
 
@@ -62,7 +68,10 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         keyBoardView = null;
 
         ageValue = null;
+
         weightValue = null;
+        weightUnit = null;
+
         timeValue = null;
         startBtn = null;
     }
@@ -101,6 +110,11 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     protected void init() {
         genderView.setOnGenderReturn(HillActivity.this);
         keyBoardView.setKeyBoardReturn(HillActivity.this);
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            weightUnit.setText(R.string.unit_kg);
+        } else {
+            weightUnit.setText(R.string.unit_lb);
+        }
     }
 
     @Override

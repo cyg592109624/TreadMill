@@ -65,11 +65,24 @@
         app:buoyBitmapHeight="10"
         app:buoyBitmapWidth="10"
         app:columnMargin="0.8"
-        app:hintText="@string/workout_mode_hill"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workout_running_rpm_img"
         app:slideEnable="false" />
+
+
+    <TextView
+        android:id="@+id/workout_running_level_view_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/workout_mode_hill"
+        android:textColor="@color/factory_tabs_on"
+        android:textSize="4pt"
+        app:layout_constraintBottom_toBottomOf="@+id/workout_running_level_view"
+        app:layout_constraintLeft_toLeftOf="@+id/workout_running_level_view"
+        app:layout_constraintRight_toRightOf="@+id/workout_running_level_view"
+        app:layout_constraintTop_toTopOf="@+id/workout_running_level_view"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>

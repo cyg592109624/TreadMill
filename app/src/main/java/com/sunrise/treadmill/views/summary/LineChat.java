@@ -47,7 +47,7 @@ public class LineChat extends View {
         mGesturePaint.setColor(ContextCompat.getColor(context, R.color.factory_tabs_on));
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.lineChat);
-        rankCount = ta.getInt(R.styleable.levelView_buoyBitmapWidth, rankCount);
+        rankCount = ta.getInt(R.styleable.lineChat_rankCount, rankCount);
         ta.recycle();
         ta = null;
         data = createData(dataSize);
@@ -72,8 +72,8 @@ public class LineChat extends View {
 
     private List<Integer> createData(int size) {
         Random random = new Random();
-        int max = 36;
-        int min = 10;
+        int max = rankCount;
+        int min = 1;
         List<Integer> array = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             array.add(random.nextInt(max) % (max - min + 1) + min);

@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
@@ -32,6 +33,7 @@ import com.sunrise.treadmill.services.workoutrunning.FloatWindowService;
 import com.sunrise.treadmill.utils.AnimationsContainer;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
+import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.utils.ThreadPoolUtils;
 import com.sunrise.treadmill.views.workout.running.FloatWindowBottom;
 import com.sunrise.treadmill.views.workout.running.FloatWindowHead;
@@ -96,6 +98,16 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
             return R.layout.activity_workout_running_zh;
         } else {
             return R.layout.activity_workout_running;
+        }
+    }
+
+    @Override
+    protected void setTextStyle() {
+        TextView levelHint = findViewById(R.id.workout_running_level_view_hint);
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+            TextUtils.setTextTypeFace(levelHint, TextUtils.Microsoft(activityContext));
+        } else {
+            TextUtils.setTextTypeFace(levelHint, TextUtils.Arial(activityContext));
         }
     }
 

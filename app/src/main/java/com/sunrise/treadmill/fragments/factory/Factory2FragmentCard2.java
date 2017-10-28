@@ -9,6 +9,7 @@ import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 import com.sunrise.treadmill.dialog.factory.Factory2FragmentCard2Dialog;
 import com.sunrise.treadmill.utils.LanguageUtils;
+import com.sunrise.treadmill.utils.PackageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public class Factory2FragmentCard2 extends BaseFragment {
     @BindView(R.id.factory2_card2_1_total_distance_value)
     TextView totalDistance;
 
+    @BindView(R.id.factory2_card2_2_ver_soft_value)
+    TextView appVersionName;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_factory2_card_2;
@@ -45,6 +49,8 @@ public class Factory2FragmentCard2 extends BaseFragment {
         totalTimeHour = null;
         totalTimeMin = null;
         totalDistance = null;
+
+        appVersionName = null;
     }
 
     @Override
@@ -78,6 +84,17 @@ public class Factory2FragmentCard2 extends BaseFragment {
         }
         txtList.clear();
         txtList = null;
+    }
+
+    @Override
+    protected void init() {
+        int hour = (Integer.valueOf(GlobalSetting.Factory2_TotalTime)) / 60;
+        int minute = (Integer.valueOf(GlobalSetting.Factory2_TotalTime)) % 60;
+        totalTimeHour.setText("" + hour);
+        totalTimeMin.setText("" + minute);
+
+        totalDistance.setText(GlobalSetting.Factory2_TotalDistant);
+        appVersionName.setText(PackageUtils.getVersionName(getContext()));
     }
 
     @OnClick(R.id.factory2_card2_1_reset)

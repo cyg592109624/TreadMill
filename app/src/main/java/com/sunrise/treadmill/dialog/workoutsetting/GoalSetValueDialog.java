@@ -53,6 +53,7 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
         keyBoardView = null;
         onGoalSetValueReturn = null;
     }
+
     @Override
     protected void init() {
         keyBoardView.setKeyBoardReturn(GoalSetValueDialog.this);
@@ -73,15 +74,14 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
                 drawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_goal_time_3);
                 break;
             case WorkOutSettingCommon.CHANGE_DISTANCE:
-                drawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_goal_distance_mile_3);
+                if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+                    drawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_goal_distance_km_3);
+                } else {
+                    drawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_goal_distance_mile_3);
+                }
                 break;
             case WorkOutSettingCommon.CHANGE_CALORIES:
-                if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_MILE)) {
-                    drawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_goal_distance_mile_3);
-                } else if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_KM)) {
-
-                    drawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_goal_distance_km_3);
-                }
+                drawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_goal_calories_3);
                 break;
         }
         if (drawable != null) {
