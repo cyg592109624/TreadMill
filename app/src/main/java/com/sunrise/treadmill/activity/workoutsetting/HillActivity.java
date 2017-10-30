@@ -1,6 +1,7 @@
 package com.sunrise.treadmill.activity.workoutsetting;
 
 import android.content.Intent;
+import android.os.Parcel;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity;
 import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivityZh;
 import com.sunrise.treadmill.base.BaseActivity;
+import com.sunrise.treadmill.bean.WorkOut;
 import com.sunrise.treadmill.interfaces.workout.setting.OnGenderReturn;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
@@ -44,15 +46,11 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
     @BindView(R.id.workout_edit_weight_value)
     TextView weightValue;
 
-    @BindView(R.id.workout_edit_weight_unit)
-    TextView weightUnit;
-
     @BindView(R.id.workout_edit_time_value)
     TextView timeValue;
 
     @BindView(R.id.workout_setting_start)
     ImageView startBtn;
-
 
     @Override
     public int getLayoutId() {
@@ -70,8 +68,6 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         ageValue = null;
 
         weightValue = null;
-        weightUnit = null;
-
         timeValue = null;
         startBtn = null;
     }
@@ -92,7 +88,6 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         txtList.add((TextView) findViewById(R.id.workout_edit_time));
         txtList.add((TextView) findViewById(R.id.workout_edit_time_unit));
 
-
         txtList.add(ageValue);
         txtList.add(weightValue);
         txtList.add(timeValue);
@@ -102,28 +97,39 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(activityContext));
         }
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            txtList.get(5).setText(R.string.unit_kg);
+        } else {
+            txtList.get(5).setText(R.string.unit_lb);
+        }
         txtList.clear();
         txtList = null;
     }
 
     @Override
     protected void init() {
+        ageValue.setText("20");
+        if(GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)){
+            weightValue.setText("70");
+        }else {
+            weightValue.setText("150");
+        }
+        timeValue.setText("20");
+        workOutInfo = new WorkOut();
         genderView.setOnGenderReturn(HillActivity.this);
         keyBoardView.setKeyBoardReturn(HillActivity.this);
-        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
-            weightUnit.setText(R.string.unit_kg);
-        } else {
-            weightUnit.setText(R.string.unit_lb);
-        }
     }
 
     @Override
     public void genderReturn(int gender) {
-
+        workOutInfo.setGender(gender);
     }
 
     @Override
     public void onKeyBoardEnter(String result) {
+        if ("".equals(result)) {
+            return;
+        }
         switch (WorkOutSettingCommon.changeTg) {
             default:
                 break;
@@ -134,29 +140,19 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
                 weightValue.setText(result);
                 break;
             case WorkOutSettingCommon.CHANGE_TIME:
-                timeValue.setText(result);
+                int re = Integer.valueOf(result);
+                if (re < 5) {
+                    timeValue.setText("0");
+                } else {
+                    timeValue.setText(result);
+                }
                 break;
         }
     }
 
     @Override
     public void onKeyBoardClose() {
-        switch (WorkOutSettingCommon.changeTg) {
-            default:
-                break;
-            case WorkOutSettingCommon.CHANGE_AGE:
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_white));
-                TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_1);
-                break;
-            case WorkOutSettingCommon.CHANGE_WEIGHT:
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_white));
-                TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_1);
-                break;
-            case WorkOutSettingCommon.CHANGE_TIME:
-                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(activityContext, R.color.factory_white));
-                TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_1);
-                break;
-        }
+        clearChangeState();
         WorkOutSettingCommon.changeTg = WorkOutSettingCommon.RE_SET;
         isShowingKeyBoard = false;
         keyBoardView.setVisibility(View.GONE);
@@ -168,39 +164,63 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
 
     @OnClick({R.id.workout_edit_age_value, R.id.workout_edit_weight_value, R.id.workout_edit_time_value})
     public void changValue(View view) {
-        if (isShowingKeyBoard) {
-            return;
-        }
-        isShowingKeyBoard = true;
-        keyBoardView.setVisibility(View.VISIBLE);
-        genderView.setVisibility(View.GONE);
-        startBtn.setEnabled(false);
+        clearChangeState();
         switch (view.getId()) {
             default:
                 break;
             case R.id.workout_edit_age_value:
-                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_AGE;
-                keyBoardView.setTitleImage(R.mipmap.tv_keybord_age);
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
-                TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_2);
+                setChangeState(ageValue, R.mipmap.tv_keybord_age, WorkOutSettingCommon.CHANGE_AGE);
                 break;
             case R.id.workout_edit_weight_value:
-                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_WEIGHT;
-                keyBoardView.setTitleImage(R.mipmap.tv_keybord_weight);
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
-                TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_2);
+                setChangeState(weightValue, R.mipmap.tv_keybord_weight, WorkOutSettingCommon.CHANGE_WEIGHT);
                 break;
             case R.id.workout_edit_time_value:
-                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_TIME;
-                keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
-                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
-                TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_2);
+                setChangeState(timeValue, R.mipmap.tv_keybord_time, WorkOutSettingCommon.CHANGE_TIME);
                 break;
         }
+        if (!isShowingKeyBoard) {
+            keyBoardView.setVisibility(View.VISIBLE);
+            genderView.setVisibility(View.GONE);
+            isShowingKeyBoard = true;
+            startBtn.setEnabled(false);
+        }
+    }
+
+    /**
+     * 切换到选中状态
+     *
+     * @param textView
+     * @param keyBoardTitle
+     * @param changeType
+     */
+    private void setChangeState(TextView textView, int keyBoardTitle, int changeType) {
+        WorkOutSettingCommon.changeTg = changeType;
+        keyBoardView.setTitleImage(keyBoardTitle);
+        keyBoardView.setChangeType(WorkOutSettingCommon.changeTg);
+        TextUtils.changeTextColor(textView, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
+        TextUtils.changeTextBackground(textView, R.mipmap.img_number_frame_2);
+    }
+
+    /**
+     * 恢复默认状态
+     */
+    private void clearChangeState() {
+        TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_1);
+
+        TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_1);
+
+        TextUtils.changeTextColor(timeValue, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_1);
     }
 
     @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
+        workOutInfo.setAge(Integer.valueOf(ageValue.getText().toString()));
+        workOutInfo.setWeight(Integer.valueOf(weightValue.getText().toString()));
+        workOutInfo.setTime(Integer.valueOf(timeValue.getText().toString()));
+
         Intent intent = new Intent();
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             intent.setClass(activityContext, HillRunningActivityZh.class);

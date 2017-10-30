@@ -94,6 +94,9 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
             drawable = ContextCompat.getDrawable(activityContext, R.drawable.btn_workout_goal_distance_mile);
         }
         distanceValue.setBackground(drawable);
+        timeValue.setText("20");
+        distanceValue.setText("5");
+        calValue.setText("20");
     }
 
 

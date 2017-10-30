@@ -15,18 +15,25 @@ public class WorkOut implements Parcelable {
     /**
      * 0代表男；1代表女
      */
-    private int gender;
+    private int gender=0;
     private int age;
     private int weight;
-    private int time;
-    private int distance;
+    /**
+     * 这里以分钟为单位
+     */
+    private int time=20;
+    private int distance=1;
     private int hrc60;
     private int htc80;
     private int targetHR;
     private List<Level> levelList;
     private Level currentLevel;
 
-    protected WorkOut(Parcel in) {
+    public WorkOut() {
+
+    }
+
+    public WorkOut(Parcel in) {
         workOutMode = in.readInt();
         workOutModeName = in.readString();
         gender = in.readInt();

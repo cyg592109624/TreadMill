@@ -63,6 +63,7 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
         String oldValue = "";
         if (bundle != null) {
             changeTg = bundle.getInt(GoalActivity.CHANGE_TG, WorkOutSettingCommon.RE_SET);
+            keyBoardView.setChangeType(changeTg);
             oldValue = (String) bundle.get(GoalActivity.CHANGE_TG_VALUE);
         }
         editValue.setText(oldValue);

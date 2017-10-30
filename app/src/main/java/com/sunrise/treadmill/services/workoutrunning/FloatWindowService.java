@@ -10,6 +10,7 @@ import android.content.ServiceConnection;
 import android.graphics.PixelFormat;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
@@ -67,6 +68,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        //可以通过这里获取bind方法中传递数据
         return floatBinder;
     }
 
@@ -84,6 +86,13 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         initWindowParams();
         initFloatWindow();
         initDialog();
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        System.out.println("onStartCommand被调用");
+        return Service.START_STICKY;
     }
 
     @Override
@@ -223,8 +232,8 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
      * 创建悬浮窗口
      */
     private void initFloatWindow() {
-        floatWindowHead = new FloatWindowHead(getApplicationContext(),null);
-        floatWindowBottom = new FloatWindowBottom(getApplicationContext(),null);
+        floatWindowHead = new FloatWindowHead(getApplicationContext(), null);
+        floatWindowBottom = new FloatWindowBottom(getApplicationContext(), null);
 
         floatWindowHead.setLayoutParams(paramsHead);
 
@@ -245,6 +254,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         try {
             mWindowManager.removeView(view);
         } catch (Exception e) {
+
         }
     }
 

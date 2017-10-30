@@ -151,7 +151,9 @@
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape"></activity>
+            android:screenOrientation="sensorLandscape">
+
+        </activity>
 
         <activity
             android:name=".activity.settings.SettingsActivity"
@@ -194,7 +196,8 @@
         </activity>
 
 
-        <service android:name=".services.workoutrunning.FloatWindowService" />
+        <service
+            android:name=".services.workoutrunning.FloatWindowService"/>
     </application>
 
 </manifest>

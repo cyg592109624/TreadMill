@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.bean.WorkOut;
 import com.sunrise.treadmill.utils.ActivityManageUtils;
 
 import butterknife.ButterKnife;
@@ -22,6 +23,7 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends Activity {
     private Unbinder bind;
     public Context activityContext = BaseActivity.this;
+    public WorkOut workOutInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

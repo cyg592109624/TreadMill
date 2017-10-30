@@ -41,19 +41,31 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
     @BindView(R.id.workout_edit_weight_value)
     TextView weightValue;
 
-    @BindView(R.id.workout_edit_weight_unit)
-    TextView weightUnit;
-
     @BindView(R.id.workout_edit_time_value)
     TextView timeValue;
 
 
+    @BindView(R.id.workout_edit_hrc60)
+    TextView hrc60Name;
     @BindView(R.id.workout_edit_hrc60_value)
     TextView hrc60Value;
+    @BindView(R.id.workout_edit_hrc60_unit)
+    TextView hrc60Unit;
+
+
+    @BindView(R.id.workout_edit_hrc80)
+    TextView hrc80Name;
     @BindView(R.id.workout_edit_hrc80_value)
     TextView hrc80Value;
+    @BindView(R.id.workout_edit_hrc80_unit)
+    TextView hrc80Unit;
+
+    @BindView(R.id.workout_edit_target_hr)
+    TextView hrcTgName;
     @BindView(R.id.workout_edit_target_hr_value)
     TextView hrcTgValue;
+    @BindView(R.id.workout_edit_target_hr_unit)
+    TextView hrcTgUnit;
 
     @BindView(R.id.workout_setting_hint)
     TextView settingHint;
@@ -93,13 +105,20 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         ageValue = null;
 
         weightValue = null;
-        weightUnit = null;
 
         timeValue = null;
 
+        hrc60Name = null;
         hrc60Value = null;
+        hrc60Unit = null;
+
+        hrc80Name = null;
         hrc80Value = null;
+        hrc80Unit = null;
+
+        hrcTgName = null;
         hrcTgValue = null;
+        hrcTgUnit = null;
 
         settingHint = null;
 
@@ -127,14 +146,14 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         txtList.add((TextView) findViewById(R.id.workout_edit_time));
         txtList.add((TextView) findViewById(R.id.workout_edit_time_unit));
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_hrc60));
-        txtList.add((TextView) findViewById(R.id.workout_edit_hrc60_unit));
+        txtList.add(hrc60Name);
+        txtList.add(hrc60Unit);
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_hrc80));
-        txtList.add((TextView) findViewById(R.id.workout_edit_hrc80_unit));
+        txtList.add(hrc80Name);
+        txtList.add(hrc80Unit);
 
-        txtList.add((TextView) findViewById(R.id.workout_edit_target_hr));
-        txtList.add((TextView) findViewById(R.id.workout_edit_target_hr_unit));
+        txtList.add(hrcTgName);
+        txtList.add(hrcTgUnit);
 
         txtList.add(ageValue);
         txtList.add(weightValue);
@@ -144,11 +163,15 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         txtList.add(hrc80Value);
         txtList.add(hrcTgValue);
 
-
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(activityContext));
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(activityContext));
+        }
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            txtList.get(5).setText(R.string.unit_kg);
+        } else {
+            txtList.get(5).setText(R.string.unit_lb);
         }
         txtList.clear();
         txtList = null;
@@ -156,16 +179,22 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
 
     @Override
     protected void init() {
-        genderView.setOnGenderReturn(this);
-        keyBoardView.setKeyBoardReturn(this);
         infoType1.setVisibility(View.VISIBLE);
         infoType3.setVisibility(View.GONE);
+        genderView.setOnGenderReturn(this);
+        keyBoardView.setKeyBoardReturn(this);
 
+        ageValue.setText("20");
         if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
-            weightUnit.setText(R.string.unit_kg);
+            weightValue.setText("70");
         } else {
-            weightUnit.setText(R.string.unit_lb);
+            weightValue.setText("150");
         }
+        timeValue.setText("20");
+        //这里需要根据年龄计算hrc60 与hrc80的值
+
+
+        hrcTgValue.setText("80");
     }
 
 
@@ -176,23 +205,27 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
 
     @Override
     public void onKeyBoardEnter(String result) {
+        if ("".equals(result)) {
+            return;
+        }
         switch (WorkOutSettingCommon.changeTg) {
             default:
                 break;
             case WorkOutSettingCommon.CHANGE_AGE:
                 ageValue.setText(result);
+                hrc60Value.setText(calcHrcValue(result, WorkOutSettingCommon.CHANGE_HRC_60));
+                hrc80Value.setText(calcHrcValue(result, WorkOutSettingCommon.CHANGE_HRC_80));
                 break;
             case WorkOutSettingCommon.CHANGE_WEIGHT:
                 weightValue.setText(result);
                 break;
             case WorkOutSettingCommon.CHANGE_TIME:
-                timeValue.setText(result);
-                break;
-            case WorkOutSettingCommon.CHANGE_HRC_60:
-                hrc60Value.setText(result);
-                break;
-            case WorkOutSettingCommon.CHANGE_HRC_80:
-                hrc80Value.setText(result);
+                int re = Integer.valueOf(result);
+                if (re < 5) {
+                    timeValue.setText("0");
+                } else {
+                    timeValue.setText(result);
+                }
                 break;
             case WorkOutSettingCommon.CHANGE_TARGET_HR:
                 hrcTgValue.setText(result);
@@ -202,101 +235,157 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
 
     @Override
     public void onKeyBoardClose() {
-        switch (WorkOutSettingCommon.changeTg) {
-            default:
-                break;
-            case WorkOutSettingCommon.CHANGE_AGE:
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_white));
-                TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_1);
-                break;
-            case WorkOutSettingCommon.CHANGE_WEIGHT:
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_white));
-                TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_1);
-                break;
-            case WorkOutSettingCommon.CHANGE_TIME:
-                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(activityContext, R.color.factory_white));
-                TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_1);
-                break;
-            case WorkOutSettingCommon.CHANGE_HRC_60:
-                TextUtils.changeTextColor(hrc60Value, ContextCompat.getColor(getApplicationContext(), R.color.factory_white));
-                TextUtils.changeTextBackground(hrc60Value, R.mipmap.img_number_frame_1);
-                break;
-            case WorkOutSettingCommon.CHANGE_HRC_80:
-                TextUtils.changeTextColor(hrc80Value, ContextCompat.getColor(activityContext, R.color.factory_white));
-                TextUtils.changeTextBackground(hrc80Value, R.mipmap.img_number_frame_1);
-                break;
-            case WorkOutSettingCommon.CHANGE_TARGET_HR:
-                TextUtils.changeTextColor(hrcTgValue, ContextCompat.getColor(activityContext, R.color.factory_white));
-                TextUtils.changeTextBackground(hrcTgValue, R.mipmap.img_number_frame_1);
-                break;
-        }
+        clearChangeState();
         WorkOutSettingCommon.changeTg = WorkOutSettingCommon.RE_SET;
         isShowingKeyBoard = false;
         keyBoardView.setVisibility(View.GONE);
         genderView.setVisibility(View.VISIBLE);
-        nextBtn.setEnabled(true);
-        backBtn.setEnabled(true);
-        //这个按钮还需要进行判断 这里暂时不做处理
         startBtn.setEnabled(true);
-
+        nextBtn.setEnabled(true);
     }
 
     private boolean isShowingKeyBoard = false;
 
-    @OnClick({R.id.workout_edit_age_value, R.id.workout_edit_weight_value, R.id.workout_edit_time_value,
-            R.id.workout_edit_hrc60_value, R.id.workout_edit_hrc80_value, R.id.workout_edit_target_hr_value})
+    @OnClick({R.id.workout_edit_age_value, R.id.workout_edit_weight_value, R.id.workout_edit_time_value})
     public void changValue(View view) {
-        if (isShowingKeyBoard) {
-            return;
-        }
-        isShowingKeyBoard = true;
-        keyBoardView.setVisibility(View.VISIBLE);
-        genderView.setVisibility(View.GONE);
-
-        nextBtn.setEnabled(false);
-        backBtn.setEnabled(false);
-        startBtn.setEnabled(false);
+        clearChangeState();
         switch (view.getId()) {
             default:
                 break;
             case R.id.workout_edit_age_value:
-                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_AGE;
-                keyBoardView.setTitleImage(R.mipmap.tv_keybord_age);
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
-                TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_2);
+                setChangeState(ageValue, R.mipmap.tv_keybord_age, WorkOutSettingCommon.CHANGE_AGE);
                 break;
             case R.id.workout_edit_weight_value:
-                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_WEIGHT;
-                keyBoardView.setTitleImage(R.mipmap.tv_keybord_weight);
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
-                TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_2);
+                setChangeState(weightValue, R.mipmap.tv_keybord_weight, WorkOutSettingCommon.CHANGE_WEIGHT);
                 break;
             case R.id.workout_edit_time_value:
-                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_TIME;
-                keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
-                TextUtils.changeTextColor(timeValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
-                TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_2);
+                setChangeState(timeValue, R.mipmap.tv_keybord_time, WorkOutSettingCommon.CHANGE_TIME);
+                break;
+        }
+        if (!isShowingKeyBoard) {
+            keyBoardView.setVisibility(View.VISIBLE);
+            genderView.setVisibility(View.GONE);
+            isShowingKeyBoard = true;
+            startBtn.setEnabled(false);
+            nextBtn.setEnabled(false);
+        }
+    }
+
+    /**
+     * 切换到选中状态
+     *
+     * @param textView
+     * @param keyBoardTitle
+     * @param changeType
+     */
+    private void setChangeState(TextView textView, int keyBoardTitle, int changeType) {
+        WorkOutSettingCommon.changeTg = changeType;
+        keyBoardView.setTitleImage(keyBoardTitle);
+        keyBoardView.setChangeType(WorkOutSettingCommon.changeTg);
+        TextUtils.changeTextColor(textView, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
+        TextUtils.changeTextBackground(textView, R.mipmap.img_number_frame_2);
+    }
+
+    /**
+     * 恢复默认状态
+     */
+    private void clearChangeState() {
+        TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_1);
+
+        TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_1);
+
+        TextUtils.changeTextColor(timeValue, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextBackground(timeValue, R.mipmap.img_number_frame_1);
+
+    }
+
+
+    @OnClick({R.id.workout_edit_hrc60_value, R.id.workout_edit_hrc80_value, R.id.workout_edit_target_hr_value})
+    public void hrcTypeSelect(View view) {
+        if (isShowingKeyBoard) {
+            return;
+        }
+        clearHrcSelectState();
+        switch (view.getId()) {
+            default:
                 break;
             case R.id.workout_edit_hrc60_value:
-                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_HRC_60;
-                keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
-                TextUtils.changeTextColor(hrc60Value, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
-                TextUtils.changeTextBackground(hrc60Value, R.mipmap.img_number_frame_2);
+                setHrcSelectState(hrc60Name, hrc60Value, hrc60Unit);
                 break;
             case R.id.workout_edit_hrc80_value:
-                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_HRC_80;
-                keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
-                TextUtils.changeTextColor(hrc80Value, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
-                TextUtils.changeTextBackground(hrc80Value, R.mipmap.img_number_frame_2);
+                setHrcSelectState(hrc80Name, hrc80Value, hrc80Unit);
                 break;
             case R.id.workout_edit_target_hr_value:
-                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_TARGET_HR;
-                keyBoardView.setTitleImage(R.mipmap.tv_keybord_time);
-                TextUtils.changeTextColor(hrcTgValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
-                TextUtils.changeTextBackground(hrcTgValue, R.mipmap.img_number_frame_2);
+                if (!isShowingKeyBoard) {
+                    setHrcSelectState(hrcTgName, hrcTgValue, hrcTgUnit);
+                    WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_TARGET_HR;
+                    keyBoardView.setTitleImage(R.mipmap.tv_keybord_targethr);
+                    keyBoardView.setChangeType(WorkOutSettingCommon.changeTg);
+                    keyBoardView.setVisibility(View.VISIBLE);
+                    genderView.setVisibility(View.GONE);
+                    isShowingKeyBoard = true;
+                    startBtn.setEnabled(false);
+                    nextBtn.setEnabled(false);
+                }
                 break;
         }
     }
+
+
+    /**
+     * 切换到选中状态
+     *
+     * @param name
+     * @param value
+     * @param unit
+     */
+    private void setHrcSelectState(TextView name, TextView value, TextView unit) {
+        TextUtils.changeTextColor(name, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
+        TextUtils.changeTextColor(unit, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
+        TextUtils.changeTextColor(value, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
+        TextUtils.changeTextBackground(value, R.mipmap.img_number_frame_2);
+    }
+
+
+    /**
+     * 恢复默认状态
+     */
+    private void clearHrcSelectState() {
+        TextUtils.changeTextColor(hrc60Name, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextColor(hrc60Unit, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextColor(hrc60Value, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextBackground(hrc60Value, R.mipmap.img_number_frame_1);
+
+        TextUtils.changeTextColor(hrc80Name, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextColor(hrc80Unit, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextColor(hrc80Value, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextBackground(hrc80Value, R.mipmap.img_number_frame_1);
+
+        TextUtils.changeTextColor(hrcTgName, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextColor(hrcTgUnit, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextColor(hrcTgValue, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextBackground(hrcTgValue, R.mipmap.img_number_frame_1);
+    }
+
+
+    private String calcHrcValue(String age, int type) {
+        String result = "";
+        int curAge = Integer.valueOf(age);
+        float answer = 0f;
+        switch (type) {
+            case WorkOutSettingCommon.CHANGE_HRC_60:
+                answer = (220 - curAge) * 0.6f;
+                break;
+            case WorkOutSettingCommon.CHANGE_HRC_80:
+                answer = (220 - curAge) * 0.8f;
+                break;
+        }
+        result = Math.round(answer) + "";
+        return result;
+    }
+
 
     @OnClick({R.id.workout_setting_next})
     public void onNextEdit() {
@@ -325,7 +414,6 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
 
         nextBtn.setVisibility(View.VISIBLE);
         backBtn.setVisibility(View.GONE);
-
     }
 
 

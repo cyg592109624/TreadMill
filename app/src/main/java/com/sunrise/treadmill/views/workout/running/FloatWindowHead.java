@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.utils.LanguageUtils;
@@ -67,6 +68,13 @@ public class FloatWindowHead extends ConstraintLayout {
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(getContext()));
         }
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            txtList.get(2).setText(R.string.unit_km);
+        } else {
+            txtList.get(2).setText(R.string.unit_mile);
+        }
+
+
         txtList.clear();
         txtList = null;
     }

@@ -4,13 +4,17 @@ import android.support.v4.app.FragmentManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 import com.sunrise.treadmill.dialog.factory.Factory2FragmentCard2Dialog;
+import com.sunrise.treadmill.interfaces.factory.OnFactory2Fragment2Card2DialogReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.PackageUtils;
+import com.sunrise.treadmill.utils.SharedPreferencesUtils;
 import com.sunrise.treadmill.utils.TextUtils;
+import com.sunrise.treadmill.utils.UnitUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +86,12 @@ public class Factory2FragmentCard2 extends BaseFragment {
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(getContext()));
         }
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            txtList.get(6).setText(R.string.unit_km);
+        } else {
+            txtList.get(6).setText(R.string.unit_mile);
+        }
+
         txtList.clear();
         txtList = null;
     }
@@ -92,14 +102,35 @@ public class Factory2FragmentCard2 extends BaseFragment {
         int minute = (Integer.valueOf(GlobalSetting.Factory2_TotalTime)) % 60;
         totalTimeHour.setText("" + hour);
         totalTimeMin.setText("" + minute);
-
-        totalDistance.setText(GlobalSetting.Factory2_TotalDistant);
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            totalDistance.setText(GlobalSetting.Factory2_TotalDistant);
+        } else {
+            totalDistance.setText(UnitUtils.km2mile(GlobalSetting.Factory2_TotalDistant) + "");
+        }
         appVersionName.setText(PackageUtils.getVersionName(getContext()));
     }
 
     @OnClick(R.id.factory2_card2_1_reset)
     public void reSetValue() {
         Factory2FragmentCard2Dialog dialog = new Factory2FragmentCard2Dialog();
+        dialog.setDialogReturn(new OnFactory2Fragment2Card2DialogReturn() {
+            @Override
+            public void onYes() {
+                GlobalSetting.Factory2_TotalTime = "0";
+                totalTimeHour.setText(GlobalSetting.Factory2_TotalTime);
+                totalTimeMin.setText(GlobalSetting.Factory2_TotalTime);
+
+                GlobalSetting.Factory2_TotalDistant = "0";
+                totalDistance.setText(GlobalSetting.Factory2_TotalDistant);
+                SharedPreferencesUtils.put(getContext(), Constant.FACTORY2_TOTAL_TIME, GlobalSetting.Factory2_TotalTime);
+                SharedPreferencesUtils.put(getContext(), Constant.FACTORY2_TOTAL_DISTANT, GlobalSetting.Factory2_TotalDistant);
+            }
+
+            @Override
+            public void onNo() {
+
+            }
+        });
         dialog.show(fragmentManager, Factory2FragmentCard2Dialog.TAG);
     }
 }

@@ -10,7 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
+import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.workoutsetting.WorkOutSettingCommon;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.ImageUtils;
 
@@ -22,6 +25,11 @@ public class MyKeyBoardView extends LinearLayout {
     private ImageView title;
     private TextView showText;
     private OnKeyBoardReturn keyBoardReturn;
+    private int changeType = WorkOutSettingCommon.RE_SET;
+    private final int EDIT_MAX = 999;
+
+    private int changeTypeMax;
+    private int changeTypeMin;
 
     public MyKeyBoardView(Context context) {
         this(context, null);
@@ -49,58 +57,73 @@ public class MyKeyBoardView extends LinearLayout {
         findViewById(R.id.key_board_8).setOnClickListener(keyBoardClick);
         findViewById(R.id.key_board_9).setOnClickListener(keyBoardClick);
 
-        findViewById(R.id.key_board_del).setOnClickListener(keyBoardClick);
-        findViewById(R.id.key_board_enter).setOnClickListener(keyBoardClick);
-
-        findViewById(R.id.key_board_close).setOnClickListener(keyBoardClick);
+        findViewById(R.id.key_board_del).setOnClickListener(keyBoardClick2);
+        findViewById(R.id.key_board_enter).setOnClickListener(keyBoardClick2);
+        findViewById(R.id.key_board_close).setOnClickListener(keyBoardClick2);
     }
 
     private View.OnClickListener keyBoardClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             String oldText = showText.getText().toString();
+            int tg = -1;
+            if (!"".equals(oldText)) {
+                tg = Integer.valueOf(oldText);
+                if (changeType != WorkOutSettingCommon.RE_SET) {
+                    if (tg >= EDIT_MAX || oldText.length() >= 3) {
+                        showText.setText(EDIT_MAX + "");
+                        return;
+                    }
+                }
+            }
             switch (view.getId()) {
-                default:
-                    break;
                 case R.id.key_board_0:
-                    showText.setText(oldText + "0");
+                    oldText = oldText + "0";
                     break;
                 case R.id.key_board_1:
-                    showText.setText(oldText + "1");
+                    oldText = oldText + "1";
                     break;
                 case R.id.key_board_2:
-                    showText.setText(oldText + "2");
+                    oldText = oldText + "2";
                     break;
                 case R.id.key_board_3:
-                    showText.setText(oldText + "3");
+                    oldText = oldText + "3";
                     break;
                 case R.id.key_board_4:
-                    showText.setText(oldText + "4");
+                    oldText = oldText + "4";
                     break;
                 case R.id.key_board_5:
-                    showText.setText(oldText + "5");
+                    oldText = oldText + "5";
                     break;
                 case R.id.key_board_6:
-                    showText.setText(oldText + "6");
+                    oldText = oldText + "6";
                     break;
                 case R.id.key_board_7:
-                    showText.setText(oldText + "7");
+                    oldText = oldText + "7";
                     break;
                 case R.id.key_board_8:
-                    showText.setText(oldText + "8");
+                    oldText = oldText + "8";
                     break;
                 case R.id.key_board_9:
-                    showText.setText(oldText + "9");
+                    oldText = oldText + "9";
                     break;
-                case R.id.key_board_del:
-                    if (oldText.length() != 0) {
-                        showText.setText(oldText.subSequence(0, oldText.length() - 1));
-                    }
+            }
+            tg = Integer.valueOf(oldText);
+            showText.setText(tg + "");
+        }
+    };
+
+    private View.OnClickListener keyBoardClick2 = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            String value = showText.getText().toString();
+            switch (view.getId()) {
+                default:
                     break;
                 case R.id.key_board_enter:
                     if (keyBoardReturn != null) {
                         showText.setText("");
-                        keyBoardReturn.onKeyBoardEnter(oldText);
+                        keyBoardReturn.onKeyBoardEnter(reCalc(value));
                         keyBoardReturn.onKeyBoardClose();
                     }
                     break;
@@ -110,9 +133,36 @@ public class MyKeyBoardView extends LinearLayout {
                         keyBoardReturn.onKeyBoardClose();
                     }
                     break;
+                case R.id.key_board_del:
+                    if (value.length() != 0) {
+                        showText.setText(value.subSequence(0, value.length() - 1));
+                    }
+                    break;
             }
         }
     };
+
+    private String reCalc(String editText) {
+        if (changeType == WorkOutSettingCommon.RE_SET) {
+            return editText;
+        } else {
+            String result = "";
+            if (result.equals(editText)) {
+                return result;
+            }else {
+                int value = Integer.valueOf(editText);
+                if (value <= changeTypeMin) {
+                    result = changeTypeMin + "";
+                } else if (value >= changeTypeMax) {
+                    result = changeTypeMax + "";
+                } else {
+                    result = editText;
+                }
+                return result;
+            }
+        }
+    }
+
 
     public void setTitleImage(int imgResource) {
         ImageUtils.changeImageView(title, imgResource);
@@ -122,6 +172,42 @@ public class MyKeyBoardView extends LinearLayout {
         keyBoardReturn = onKeyBoardReturn;
     }
 
+    public void setChangeType(int type) {
+        changeType = type;
+        switch (changeType) {
+            default:
+                break;
+            case WorkOutSettingCommon.CHANGE_AGE:
+                changeTypeMin = WorkOutSettingCommon.MIN_AGE;
+                changeTypeMax = WorkOutSettingCommon.MAX_AGE;
+                break;
+            case WorkOutSettingCommon.CHANGE_WEIGHT:
+                if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+                    changeTypeMin = WorkOutSettingCommon.MIN_WEIGHT_KG;
+                    changeTypeMax = WorkOutSettingCommon.MAX_WEIGHT_KG;
+                } else {
+                    changeTypeMin = WorkOutSettingCommon.MIN_WEIGHT_LB;
+                    changeTypeMax = WorkOutSettingCommon.MAX_WEIGHT_LB;
+                }
+                break;
+            case WorkOutSettingCommon.CHANGE_TIME:
+                changeTypeMin = WorkOutSettingCommon.MIN_TIME;
+                changeTypeMax = WorkOutSettingCommon.MAX_TIME;
+                break;
+            case WorkOutSettingCommon.CHANGE_DISTANCE:
+                changeTypeMin = WorkOutSettingCommon.MIN_DISTANCE;
+                changeTypeMax = WorkOutSettingCommon.MAX_DISTANCE;
+                break;
+            case WorkOutSettingCommon.CHANGE_CALORIES:
+                changeTypeMin = WorkOutSettingCommon.MIN_CALORIES;
+                changeTypeMax = WorkOutSettingCommon.MAX_CALORIES;
+                break;
+            case WorkOutSettingCommon.CHANGE_TARGET_HR:
+                changeTypeMin = WorkOutSettingCommon.MIN_TARGET_HR;
+                changeTypeMax = WorkOutSettingCommon.MAX_TARGET_HR;
+                break;
+        }
+    }
 
     public void recycle() {
         title = null;
@@ -129,4 +215,6 @@ public class MyKeyBoardView extends LinearLayout {
         keyBoardReturn = null;
         keyBoardClick = null;
     }
+
+
 }

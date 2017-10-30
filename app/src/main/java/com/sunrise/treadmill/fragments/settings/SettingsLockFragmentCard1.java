@@ -14,6 +14,7 @@ import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.SharedPreferencesUtils;
 import com.sunrise.treadmill.utils.TextUtils;
+import com.sunrise.treadmill.utils.UnitUtils;
 import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
 
 import java.util.ArrayList;
@@ -53,11 +54,6 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
     @BindView(R.id.settings_card4_1_2_remaining_distance_value)
     TextView remainingDistanceValue;
 
-    @BindView(R.id.settings_card4_1_2_distance_unit)
-    TextView distanceUnit;
-    @BindView(R.id.settings_card4_1_2_remaining_distance_unit)
-    TextView remainingDistanceUnit;
-
 
     @BindView(R.id.settings_lock_fragment_card_1_2_keyboard)
     MyKeyBoardView rightKeyBoard;
@@ -84,10 +80,8 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
         rightLayout = null;
 
         distanceValue = null;
-        distanceUnit = null;
 
         remainingDistanceValue = null;
-        remainingDistanceUnit = null;
 
         rightKeyBoard.recycle();
         rightKeyBoard = null;
@@ -106,13 +100,14 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
         txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_1_remaining_time_unit));
 
         txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_2_distance));
-        txtList.add(distanceUnit);
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_2_distance_unit));
 
         txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_2_remaining_distance));
-        txtList.add(remainingDistanceUnit);
+        txtList.add((TextView) parentView.findViewById(R.id.settings_card4_1_2_remaining_distance_unit));
 
         txtList.add(timeValue);
         txtList.add(remainingTimeValue);
+
         txtList.add(distanceValue);
         txtList.add(remainingDistanceValue);
 
@@ -121,6 +116,16 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(getContext()));
         }
+
+        //所以数据保存都是以国际标准保存的 再进行转换
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            txtList.get(5).setText(R.string.unit_km);
+            txtList.get(7).setText(R.string.unit_km);
+        } else {
+            txtList.get(5).setText(R.string.unit_mile);
+            txtList.get(7).setText(R.string.unit_mile);
+        }
+
         txtList.clear();
         txtList = null;
     }
@@ -140,18 +145,11 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
 
 
         if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
-            //所以数据保存都是以国际标准保存的
-            distanceUnit.setText(R.string.unit_km);
-            remainingDistanceUnit.setText(R.string.unit_km);
             distanceValue.setText(GlobalSetting.Setting_Distance);
             remainingDistanceValue.setText(GlobalSetting.Setting_RemainingDistance);
         } else {
-            distanceUnit.setText(R.string.unit_mile);
-            remainingDistanceUnit.setText(R.string.unit_mile);
-            float mile1 = (Float.valueOf(GlobalSetting.Setting_Distance) * 1.000f) * 0.621f;
-            distanceValue.setText("" + mile1);
-            float mile2 = (Float.valueOf(GlobalSetting.Setting_RemainingDistance) * 1.000f) * 0.621f;
-            remainingDistanceValue.setText("" + mile2);
+            distanceValue.setText(UnitUtils.km2mile(GlobalSetting.Setting_Distance) + "");
+            remainingDistanceValue.setText(UnitUtils.km2mile(GlobalSetting.Setting_RemainingDistance) + "");
         }
     }
 
@@ -201,11 +199,10 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
                     GlobalSetting.Setting_RemainingDistance = result;
                     SharedPreferencesUtils.put(getContext(), Constant.SETTING_REMAINING_DISTANCE, GlobalSetting.Setting_RemainingDistance);
                 } else {
-                    float km = (Float.valueOf(result) * 1.000f) * 1.609f;
-                    GlobalSetting.Setting_Distance = "" + km;
+                    GlobalSetting.Setting_Distance = "" + UnitUtils.mile2km(result);
                     SharedPreferencesUtils.put(getContext(), Constant.SETTING_DISTANCE, GlobalSetting.Setting_Distance);
 
-                    GlobalSetting.Setting_RemainingDistance = "" + km;
+                    GlobalSetting.Setting_RemainingDistance = "" + UnitUtils.mile2km(result);
                     SharedPreferencesUtils.put(getContext(), Constant.SETTING_REMAINING_DISTANCE, GlobalSetting.Setting_RemainingDistance);
                 }
                 break;

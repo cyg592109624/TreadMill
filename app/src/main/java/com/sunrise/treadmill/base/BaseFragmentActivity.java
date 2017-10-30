@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.bean.WorkOut;
 import com.sunrise.treadmill.utils.ActivityManageUtils;
 
 import butterknife.ButterKnife;
@@ -23,6 +24,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 
     public FragmentManager fragmentManager = getSupportFragmentManager();
     public Context activityContext= BaseFragmentActivity.this;
+    public WorkOut workOutInfo;
 
 
     @Override

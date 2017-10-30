@@ -30,8 +30,8 @@ public class TreadApplication extends Application {
                 GlobalSetting.Setting_Distance = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.SETTING_DISTANCE, GlobalSetting.Setting_Distance);
                 GlobalSetting.Setting_RemainingDistance = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.SETTING_REMAINING_DISTANCE, GlobalSetting.Setting_RemainingDistance);
 
-                GlobalSetting.MachineType = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.MACHINE_TYPE, Constant.MACHINE_BIKE);
-                GlobalSetting.UnitType = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.UNIT_TYPE, Constant.UNIT_TYPE_METRIC);
+                GlobalSetting.MachineType = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.MACHINE_TYPE, GlobalSetting.MachineType);
+                GlobalSetting.UnitType = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.UNIT_TYPE, GlobalSetting.UnitType);
 
                 GlobalSetting.Factory2Mode_Display = (boolean) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_MODE_DISPLAY, true);
                 GlobalSetting.Factory2Mode_Pause = (boolean) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_MODE_PAUSE, true);
@@ -40,11 +40,11 @@ public class TreadApplication extends Application {
                 GlobalSetting.Factory2Mode_ChildLock = (boolean) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_MODE_CHILD_LOCK, true);
                 GlobalSetting.Factory2Mode_CtrlPage = (boolean) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_MODE_CTRL_PAGE, false);
 
-                GlobalSetting.Factory2_Level = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_LEVEL, "6");
-                GlobalSetting.Factory2_PWM = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_PWM, "9");
+                GlobalSetting.Factory2_Level = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_LEVEL, GlobalSetting.Factory2_Level);
+                GlobalSetting.Factory2_PWM = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_PWM, GlobalSetting.Factory2_PWM);
 
-                GlobalSetting.Factory2_TotalTime = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_TOTAL_TIME, "0");
-                GlobalSetting.Factory2_TotalDistant = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_TOTAL_DISTANT, "0");
+                GlobalSetting.Factory2_TotalTime = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_TOTAL_TIME, GlobalSetting.Factory2_TotalTime);
+                GlobalSetting.Factory2_TotalDistant = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_TOTAL_DISTANT, GlobalSetting.Factory2_TotalDistant);
             }
         });
     }

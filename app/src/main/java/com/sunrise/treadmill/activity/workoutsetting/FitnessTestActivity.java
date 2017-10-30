@@ -42,9 +42,6 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
     @BindView(R.id.workout_edit_weight_value)
     TextView weightValue;
 
-    @BindView(R.id.workout_edit_weight_unit)
-    TextView weightUnit;
-
     @BindView(R.id.workout_setting_start)
     ImageView startBtn;
 
@@ -64,7 +61,6 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
 
         ageValue = null;
         weightValue = null;
-        weightUnit = null;
         startBtn = null;
     }
 
@@ -88,48 +84,27 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(activityContext));
         }
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            txtList.get(5).setText(R.string.unit_kg);
+        } else {
+            txtList.get(5).setText(R.string.unit_lb);
+        }
         txtList.clear();
         txtList = null;
     }
 
     @Override
     protected void init() {
+        ageValue.setText("20");
+        if(GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)){
+            weightValue.setText("70");
+        }else {
+            weightValue.setText("150");
+        }
         genderView.setOnGenderReturn(FitnessTestActivity.this);
         keyBoardView.setKeyBoardReturn(FitnessTestActivity.this);
-        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
-            weightUnit.setText(R.string.unit_kg);
-        } else {
-            weightUnit.setText(R.string.unit_lb);
-        }
     }
 
-    private boolean isShowingKeyBoard = false;
-
-    @OnClick({R.id.workout_edit_age_value, R.id.workout_edit_weight_value})
-    public void changValue(View view) {
-        if (isShowingKeyBoard) {
-            return;
-        }
-        isShowingKeyBoard = true;
-        keyBoardView.setVisibility(View.VISIBLE);
-        genderView.setVisibility(View.GONE);
-        switch (view.getId()) {
-            default:
-                break;
-            case R.id.workout_edit_age_value:
-                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_AGE;
-                keyBoardView.setTitleImage(R.mipmap.tv_keybord_age);
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
-                TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_2);
-                break;
-            case R.id.workout_edit_weight_value:
-                WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_WEIGHT;
-                keyBoardView.setTitleImage(R.mipmap.tv_keybord_weight);
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
-                TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_2);
-                break;
-        }
-    }
 
     @Override
     public void genderReturn(int gender) {
@@ -152,22 +127,61 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
 
     @Override
     public void onKeyBoardClose() {
-        switch (WorkOutSettingCommon.changeTg) {
-            default:
-                break;
-            case WorkOutSettingCommon.CHANGE_AGE:
-                TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_white));
-                TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_1);
-                break;
-            case WorkOutSettingCommon.CHANGE_WEIGHT:
-                TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_white));
-                TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_1);
-                break;
-        }
+        clearChangeState();
         WorkOutSettingCommon.changeTg = WorkOutSettingCommon.RE_SET;
         isShowingKeyBoard = false;
         keyBoardView.setVisibility(View.GONE);
         genderView.setVisibility(View.VISIBLE);
+        startBtn.setEnabled(true);
+    }
+
+    private boolean isShowingKeyBoard = false;
+
+    @OnClick({R.id.workout_edit_age_value, R.id.workout_edit_weight_value})
+    public void changValue(View view) {
+        clearChangeState();
+        switch (view.getId()) {
+            default:
+                break;
+            case R.id.workout_edit_age_value:
+                setChangeState(ageValue, R.mipmap.tv_keybord_age, WorkOutSettingCommon.CHANGE_AGE);
+                break;
+            case R.id.workout_edit_weight_value:
+                setChangeState(weightValue, R.mipmap.tv_keybord_weight, WorkOutSettingCommon.CHANGE_WEIGHT);
+                break;
+        }
+        if (!isShowingKeyBoard) {
+            keyBoardView.setVisibility(View.VISIBLE);
+            genderView.setVisibility(View.GONE);
+            isShowingKeyBoard = true;
+            startBtn.setEnabled(false);
+        }
+    }
+
+    /**
+     * 切换到选中状态
+     *
+     * @param textView
+     * @param keyBoardTitle
+     * @param changeType
+     */
+    private void setChangeState(TextView textView, int keyBoardTitle, int changeType) {
+        WorkOutSettingCommon.changeTg = changeType;
+        keyBoardView.setTitleImage(keyBoardTitle);
+        keyBoardView.setChangeType(WorkOutSettingCommon.changeTg);
+        TextUtils.changeTextColor(textView, ContextCompat.getColor(activityContext, R.color.factory_tabs_on));
+        TextUtils.changeTextBackground(textView, R.mipmap.img_number_frame_2);
+    }
+
+    /**
+     * 恢复默认状态
+     */
+    private void clearChangeState() {
+        TextUtils.changeTextColor(ageValue, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextBackground(ageValue, R.mipmap.img_number_frame_1);
+
+        TextUtils.changeTextColor(weightValue, ContextCompat.getColor(activityContext, R.color.factory_white));
+        TextUtils.changeTextBackground(weightValue, R.mipmap.img_number_frame_1);
     }
 
     @OnClick({R.id.workout_setting_start})
