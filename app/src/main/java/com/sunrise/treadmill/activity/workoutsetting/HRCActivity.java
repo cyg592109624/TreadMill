@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.activity.workoutsetting;
 
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -16,7 +17,6 @@ import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.views.workout.setting.MyGenderView;
 import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
-import com.sunrise.treadmill.views.workout.setting.WorkOutSettingHead;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +88,7 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
     @BindView(R.id.workout_setting_start)
     ImageView startBtn;
 
+    private int selectHrcType = -1;
 
     @Override
     public int getLayoutId() {
@@ -183,6 +184,7 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         infoType3.setVisibility(View.GONE);
         genderView.setOnGenderReturn(this);
         keyBoardView.setKeyBoardReturn(this);
+        startBtn.setEnabled(false);
 
         ageValue.setText("20");
         if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
@@ -191,16 +193,19 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
             weightValue.setText("150");
         }
         timeValue.setText("20");
-        //这里需要根据年龄计算hrc60 与hrc80的值
 
-
+        hrc60Value.setText("120");
+        hrc80Value.setText("160");
         hrcTgValue.setText("80");
+        setHrcSelectState(hrc60Name, hrc60Value, hrc60Unit);
+        selectHrcType = Constant.MODE_HRC_TYPE_TG;
     }
 
 
     @Override
     public void genderReturn(int gender) {
-
+        workOutInfo.setGender(gender);
+        startBtn.setEnabled(true);
     }
 
     @Override
@@ -313,13 +318,16 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
                 break;
             case R.id.workout_edit_hrc60_value:
                 setHrcSelectState(hrc60Name, hrc60Value, hrc60Unit);
+                selectHrcType = Constant.MODE_HRC_TYPE_60;
                 break;
             case R.id.workout_edit_hrc80_value:
                 setHrcSelectState(hrc80Name, hrc80Value, hrc80Unit);
+                selectHrcType = Constant.MODE_HRC_TYPE_80;
                 break;
             case R.id.workout_edit_target_hr_value:
                 if (!isShowingKeyBoard) {
                     setHrcSelectState(hrcTgName, hrcTgValue, hrcTgUnit);
+                    selectHrcType = Constant.MODE_HRC_TYPE_TG;
                     WorkOutSettingCommon.changeTg = WorkOutSettingCommon.CHANGE_TARGET_HR;
                     keyBoardView.setTitleImage(R.mipmap.tv_keybord_targethr);
                     keyBoardView.setChangeType(WorkOutSettingCommon.changeTg);
@@ -419,7 +427,35 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
 
     @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
+        workOutInfo.setWorkOutMode(Constant.MODE_HRC);
+        workOutInfo.setWorkOutModeName(Constant.WORK_OUT_MODE_HRC);
 
+        workOutInfo.setAge(ageValue.getText().toString());
+        workOutInfo.setWeight(weightValue.getText().toString());
+        workOutInfo.setTime(timeValue.getText().toString());
+
+        workOutInfo.setHrcType(selectHrcType);
+        String hrc = "";
+        switch (selectHrcType) {
+            default:
+                hrc = hrcTgValue.getText().toString();
+                break;
+            case Constant.MODE_HRC_TYPE_60:
+                hrc = hrc60Value.getText().toString();
+                break;
+            case Constant.MODE_HRC_TYPE_80:
+                hrc = hrc80Value.getText().toString();
+                break;
+            case Constant.MODE_HRC_TYPE_TG:
+                hrc = hrcTgValue.getText().toString();
+                break;
+        }
+        workOutInfo.setHrc(hrc);
+
+        Intent intent = new Intent();
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+        } else {
+        }
     }
 
     @OnClick(R.id.bottom_logo_tab_home)

@@ -30,6 +30,7 @@ public abstract class BaseActivity extends Activity {
         super.onCreate(savedInstanceState);
         changeSystemUiState();
         setContentView(getLayoutId());
+        workOutInfo=new WorkOut();
         bind = ButterKnife.bind(this);
         setTextStyle();
         init();

@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.activity.workoutsetting;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
@@ -95,20 +96,22 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
 
     @Override
     protected void init() {
-        ageValue.setText("20");
-        if(GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)){
-            weightValue.setText("70");
-        }else {
-            weightValue.setText("150");
-        }
         genderView.setOnGenderReturn(FitnessTestActivity.this);
         keyBoardView.setKeyBoardReturn(FitnessTestActivity.this);
+        startBtn.setEnabled(false);
+        ageValue.setText("20");
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            weightValue.setText("70");
+        } else {
+            weightValue.setText("150");
+        }
     }
 
 
     @Override
     public void genderReturn(int gender) {
-
+        workOutInfo.setGender(gender);
+        startBtn.setEnabled(true);
     }
 
     @Override
@@ -186,7 +189,15 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
 
     @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
+        workOutInfo.setWorkOutMode(Constant.MODE_FITNESS_TEST);
+        workOutInfo.setWorkOutModeName(Constant.WORK_OUT_MODE_FITNESS_TEST);
 
+        workOutInfo.setAge(ageValue.getText().toString());
+        workOutInfo.setWeight(weightValue.getText().toString());
+        Intent intent = new Intent();
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+        } else {
+        }
     }
 
     @OnClick(R.id.bottom_logo_tab_home)

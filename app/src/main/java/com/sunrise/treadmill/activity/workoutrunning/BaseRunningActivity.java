@@ -198,11 +198,27 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @Override
     public void onWindyClick() {
+        floatWindowServer.toggleFloatWindow();
     }
 
     @Override
     public void onStopClick() {
         ShowPauseDialog();
+    }
+
+    @Override
+    public void onStartClick() {
+
+    }
+
+    @Override
+    public void onHomeClick() {
+
+    }
+
+    @Override
+    public void onBackClick() {
+
     }
 
     @Override

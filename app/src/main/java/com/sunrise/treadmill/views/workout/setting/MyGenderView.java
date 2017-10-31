@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.interfaces.workout.setting.OnGenderReturn;
 import com.sunrise.treadmill.utils.ImageUtils;
@@ -23,8 +24,6 @@ public class MyGenderView extends ConstraintLayout {
     private ImageView genderImg;
     private ConstraintLayout bg;
 
-    private final int MALE = 0;
-    private final int FEMALE = 1;
     private int hasClick = 0;
 
     public MyGenderView(Context context) {
@@ -71,7 +70,7 @@ public class MyGenderView extends ConstraintLayout {
                 case R.id.gender_male:
                     male.setChecked(true);
                     female.setChecked(false);
-                    onGenderReturn.genderReturn(MALE);
+                    onGenderReturn.genderReturn(Constant.GENDER_MALE);
                     ImageUtils.changeImageView(genderImg, R.mipmap.img_gender_draw_1);
                     if (hasClick == 0) {
                         hasClick = 1;
@@ -80,7 +79,7 @@ public class MyGenderView extends ConstraintLayout {
                 case R.id.gender_female:
                     male.setChecked(false);
                     female.setChecked(true);
-                    onGenderReturn.genderReturn(FEMALE);
+                    onGenderReturn.genderReturn(Constant.GENDER_FEMALE);
                     ImageUtils.changeImageView(genderImg, R.mipmap.img_gender_draw_2);
                     if (hasClick == 0) {
                         hasClick = 1;

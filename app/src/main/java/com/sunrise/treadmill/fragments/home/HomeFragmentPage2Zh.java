@@ -1,10 +1,15 @@
 package com.sunrise.treadmill.fragments.home;
 
+import android.view.View;
+
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 import com.sunrise.treadmill.interfaces.home.OnModeSelectReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
+
+import butterknife.OnClick;
 
 /**
  * Created by ChuHui on 2017/9/12.
@@ -13,18 +18,51 @@ import com.sunrise.treadmill.utils.LanguageUtils;
 public class HomeFragmentPage2Zh extends BaseFragment {
 
     private OnModeSelectReturn selectReturn;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_home_page_2_zh;
     }
+
     @Override
     protected void init() {
         selectReturn = (OnModeSelectReturn) getActivity();
     }
+
     @Override
     public void recycleObject() {
     }
-    public void setSelectReturn(OnModeSelectReturn selectReturn){
-        this.selectReturn=selectReturn;
+
+    public void setSelectReturn(OnModeSelectReturn selectReturn) {
+        this.selectReturn = selectReturn;
     }
+
+    @OnClick({R.id.home_app_mode_baidu, R.id.home_app_mode_weibo, R.id.home_app_mode_i71,
+            R.id.home_app_mode_avin, R.id.home_app_mode_mp3, R.id.workout_mode_quick_start})
+    public void onMediaClick(View view) {
+        switch (view.getId()) {
+            default:
+                break;
+            case R.id.home_app_mode_baidu:
+                selectReturn.onMediaStart(Constant.MEDIA_TYPE_BAI_DU);
+                break;
+            case R.id.home_app_mode_weibo:
+                selectReturn.onMediaStart(Constant.MEDIA_TYPE_WEI_BO);
+                break;
+            case R.id.home_app_mode_i71:
+                selectReturn.onMediaStart(Constant.MEDIA_TYPE_I71);
+                break;
+            case R.id.home_app_mode_avin:
+                selectReturn.onMediaStart(Constant.MEDIA_TYPE_AVIN);
+                break;
+            case R.id.home_app_mode_mp3:
+                selectReturn.onMediaStart(Constant.MEDIA_TYPE_MP_3);
+                break;
+            case R.id.workout_mode_quick_start:
+                selectReturn.onWorkOutSetting(Constant.MODE_QUICK_START);
+                break;
+        }
+    }
+
+
 }

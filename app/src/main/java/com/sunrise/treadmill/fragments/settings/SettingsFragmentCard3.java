@@ -1,5 +1,8 @@
 package com.sunrise.treadmill.fragments.settings;
 
+import android.content.Intent;
+import android.provider.Settings;
+
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 
@@ -16,5 +19,21 @@ public class SettingsFragmentCard3 extends BaseFragment {
 
     @Override
     public void recycleObject() {
+    }
+
+    @Override
+    protected void init() {
+        openWiFi();
+    }
+
+    private void openWiFi() {
+        try {
+            Thread.sleep(200);
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_WIFI_SETTINGS);
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

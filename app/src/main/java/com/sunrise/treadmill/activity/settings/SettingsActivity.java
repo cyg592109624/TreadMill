@@ -76,6 +76,7 @@ public class SettingsActivity extends BaseFragmentActivity {
         ft.add(R.id.settings_views, card1).commit();
         nowFragment = card1;
     }
+
     @Override
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
@@ -99,17 +100,13 @@ public class SettingsActivity extends BaseFragmentActivity {
             case R.id.settings_card_bluetooth:
                 tgCard = CARD_2;
                 bgResource = R.mipmap.img_factory_3_2;
-                if (card2 == null) {
-                    card2 = new SettingsFragmentCard2();
-                }
+                card2 = new SettingsFragmentCard2();
                 tgFragment = card2;
                 break;
             case R.id.settings_card_wifi:
                 tgCard = CARD_3;
                 bgResource = R.mipmap.img_factory_3_3;
-                if (card3 == null) {
-                    card3 = new SettingsFragmentCard3();
-                }
+                card3 = new SettingsFragmentCard3();
                 tgFragment = card3;
                 break;
             case R.id.settings_card_lock:
@@ -127,13 +124,13 @@ public class SettingsActivity extends BaseFragmentActivity {
                 break;
         }
         if (bgResource != -1 && tgFragment != null) {
-            ImageUtils.changeImageView(bgView,bgResource);
+            ImageUtils.changeImageView(bgView, bgResource);
             for (int i = 0; i < txtList.size() - 1; i++) {
                 if (i == tgCard) {
-                    TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext,R.color.settings_tabs_on));
+                    TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext, R.color.settings_tabs_on));
                     TextUtils.changeTextSize(txtList.get(i), SELECT_TEXT_SIZE);
                 } else {
-                    TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext,R.color.settings_tabs_off));
+                    TextUtils.changeTextColor(txtList.get(i), ContextCompat.getColor(activityContext, R.color.settings_tabs_off));
                     TextUtils.changeTextSize(txtList.get(i), UN_SELECT_TEXT_SIZE);
                 }
             }

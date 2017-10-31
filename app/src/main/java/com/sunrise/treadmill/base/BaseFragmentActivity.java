@@ -33,6 +33,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
+        workOutInfo=new WorkOut();
         setTextStyle();
         init();
     }

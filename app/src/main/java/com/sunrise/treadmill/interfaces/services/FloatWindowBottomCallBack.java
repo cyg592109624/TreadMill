@@ -24,4 +24,16 @@ public interface FloatWindowBottomCallBack {
      * 按下停止按钮
      */
     void onStopClick();
+    /**
+     * 按下开始按钮
+     */
+    void onStartClick();
+    /**
+     * 按下开始按钮
+     */
+    void onHomeClick();
+    /**
+     * 按下开始按钮
+     */
+    void onBackClick();
 }

@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.activity.workoutsetting;
 
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -65,7 +66,7 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
     @BindView(R.id.workout_setting_back)
     ImageView backImage;
     @BindView(R.id.workout_setting_start)
-    ImageView startImage;
+    ImageView startBtn;
 
     @Override
     public int getLayoutId() {
@@ -94,7 +95,7 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
 
         nextImage = null;
         backImage = null;
-        startImage = null;
+        startBtn = null;
     }
 
     @Override
@@ -137,6 +138,7 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
     protected void init() {
         genderView.setOnGenderReturn(UserProgramActivity.this);
         keyBoardView.setKeyBoardReturn(UserProgramActivity.this);
+        startBtn.setEnabled(false);
 
         ageValue.setText("20");
         if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
@@ -149,6 +151,8 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
 
     @Override
     public void genderReturn(int gender) {
+        workOutInfo.setGender(gender);
+        startBtn.setEnabled(true);
 
     }
 
@@ -189,7 +193,7 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
         nextImage.setEnabled(true);
         backImage.setEnabled(true);
         //这个按钮还需要进行判断 这里暂时不做处理
-        startImage.setEnabled(true);
+        startBtn.setEnabled(true);
     }
 
 
@@ -218,7 +222,7 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
 
             nextImage.setEnabled(false);
             backImage.setEnabled(false);
-            startImage.setEnabled(false);
+            startBtn.setEnabled(false);
         }
     }
 
@@ -278,6 +282,18 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
     @OnClick({R.id.workout_setting_start, R.id.workout_setting_start_2})
     public void beginWorkOut() {
 
+        workOutInfo.setWorkOutMode(Constant.MODE_USER_PROGRAM);
+        workOutInfo.setWorkOutModeName(Constant.WORK_OUT_MODE_USER_PROGRAM);
+
+        workOutInfo.setAge(ageValue.getText().toString());
+        workOutInfo.setWeight(weightValue.getText().toString());
+        workOutInfo.setTime(timeValue.getText().toString());
+        workOutInfo.setLevelList(levelView.getLevelList());
+
+        Intent intent = new Intent();
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+        } else {
+        }
     }
 
     @OnClick(R.id.bottom_logo_tab_home)

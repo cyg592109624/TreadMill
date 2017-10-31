@@ -32,6 +32,7 @@ import com.sunrise.treadmill.views.workout.running.FloatWindowHead;
  */
 
 public class FloatWindowService extends Service implements FloatWindowBottomCallBack {
+
     private final int FloatWindowNotification = 62111;
     private String runningActivityName = "";
 
@@ -53,6 +54,17 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     private ConstraintLayout dialogPause;
     private ConstraintLayout dialogCoolDown;
+
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mWindowManager = (WindowManager) getApplication().getSystemService(Context.WINDOW_SERVICE);
+        stageService();
+        initWindowParams();
+        initFloatWindow();
+        initDialog();
+    }
 
     private final IBinder floatBinder = new FloatBinder();
 
@@ -79,19 +91,8 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        mWindowManager = (WindowManager) getApplication().getSystemService(Context.WINDOW_SERVICE);
-        stageService();
-        initWindowParams();
-        initFloatWindow();
-        initDialog();
-    }
-
-    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-        System.out.println("onStartCommand被调用");
+        String ss = intent.getStringExtra("123");
         return Service.START_STICKY;
     }
 
@@ -139,19 +140,26 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     @Override
     public void onWindyClick() {
-        activity.onLevelChange(floatWindowHead.curLevel);
-        Intent intent = new Intent();
-        ComponentName componentName = new ComponentName("com.sunrise.treadmill", runningActivityName);
-        intent.setAction(runningActivityName);
-        intent.setComponent(componentName);
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
     }
 
     @Override
     public void onStopClick() {
         mWindowManager.addView(dialogPause, paramsBottom);
+    }
+
+    @Override
+    public void onStartClick() {
+
+    }
+
+    @Override
+    public void onHomeClick() {
+
+    }
+
+    @Override
+    public void onBackClick() {
+
     }
 
     private boolean isShowView = false;

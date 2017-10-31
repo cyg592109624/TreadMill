@@ -14,9 +14,13 @@ import android.view.View;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.bean.Level;
 import com.sunrise.treadmill.bean.LevelColumn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 使用该view时必须与背景图等比例缩放
@@ -184,6 +188,18 @@ public class LevelView extends View {
             return;
         }
         this.rectList = columns;
+    }
+
+    public List<Level> getLevelList() {
+        List<Level> list = new ArrayList<>();
+        for (LevelColumn column : rectList) {
+            if(column!=null){
+                Level level=new Level();
+                level.setLevel(column.getLevel());
+                list.add(level);
+            }
+        }
+        return list;
     }
 
 

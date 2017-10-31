@@ -136,7 +136,6 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
     @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
         vrDialogClick.onStartClick(vrNum,editValue.getText().toString());
-        dismiss();
     }
 
     @OnClick(R.id.workout_setting_back)

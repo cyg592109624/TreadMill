@@ -9,12 +9,10 @@ public class Constant {
 
     public static final String APP_LANGUAGE = "APP_LANGUAGE";
 
-
     public static final String CUSTOMER_PASS_WORD = "CUSTOMER_PASS_WORD";
 
     public static final String SETTING_TIME = "SETTING_TIME";
     public static final String SETTING_REMAINING_TIME = "SETTING_REMAINING_TIME";
-
 
     public static final String SETTING_DISTANCE = "0";
     public static final String SETTING_REMAINING_DISTANCE = "0";
@@ -35,6 +33,7 @@ public class Constant {
      */
     public static final String UNIT_TYPE_IMPERIAL = "Imperial";
 
+
     public static final String WORK_OUT_MODE_HILL = "Hill";
     public static final String WORK_OUT_MODE_INTERVAL = "Interval";
     public static final String WORK_OUT_MODE_GOAL = "Goal";
@@ -45,15 +44,43 @@ public class Constant {
     public static final String WORK_OUT_MODE_QUICK_START = "Quick Start";
 
 
-    public static final int MODE_HILL = 20001;
-    public static final int MODE_INTERVAL = 20002;
-    public static final int MODE_GOAL = 20003;
-    public static final int MODE_FITNESS_TEST = 20004;
-    public static final int MODE_HRC = 20005;
-    public static final int MODE_VR = 20006;
-    public static final int MODE_USER_PROGRAM = 20007;
-    public static final int MODE_QUICK_START = 20008;
+    public static final int MODE_HILL = 21000;
 
+    public static final int MODE_INTERVAL = 22000;
+
+    public static final int MODE_GOAL = 23000;
+    public static final int MODE_GOAL_TIME = 23001;
+    public static final int MODE_GOAL_DISTANCE = 23002;
+    public static final int MODE_GOAL_CALORIES = 23003;
+
+    public static final int MODE_FITNESS_TEST = 24000;
+
+    public static final int MODE_HRC = 25000;
+    public static final int MODE_HRC_TYPE_60 = 25001;
+    public static final int MODE_HRC_TYPE_80 = 25002;
+    public static final int MODE_HRC_TYPE_TG = 25003;
+
+
+    public static final int MODE_VR = 26000;
+    public static final int MODE_VR_TYPE_VR1 = 26001;
+    public static final int MODE_VR_TYPE_VR2 = 26002;
+    public static final int MODE_VR_TYPE_VR3 = 26003;
+    public static final int MODE_VR_TYPE_VR4 = 26004;
+    public static final int MODE_VR_TYPE_VR5 = 26005;
+    public static final int MODE_VR_TYPE_VR6 = 26006;
+    public static final int MODE_VR_TYPE_VR7 = 26007;
+    public static final int MODE_VR_TYPE_VR8 = 26008;
+    public static final int MODE_VR_TYPE_VR9 = 26009;
+    public static final int MODE_VR_TYPE_VR10 = 26010;
+    public static final int MODE_VR_TYPE_VR11 = 26011;
+
+
+    public static final int MODE_USER_PROGRAM = 27000;
+
+    public static final int MODE_QUICK_START = 28000;
+
+    public static final int GENDER_MALE = 0;
+    public static final int GENDER_FEMALE = 1;
 
     public static final String FACTORY2_MODE_DISPLAY = "FACTORY2_MODE_DISPLAY";
     public static final String FACTORY2_MODE_PAUSE = "FACTORY2_MODE_PAUSE";
@@ -69,5 +96,20 @@ public class Constant {
     public static final String FACTORY2_TOTAL_TIME = "FACTORY2_TOTAL_TIME";
     public static final String FACTORY2_TOTAL_DISTANT = "FACTORY2_TOTAL_DISTANT";
 
+
+    public static final int MEDIA_TYPE_YOUTUBE = 40001;
+    public static final int MEDIA_TYPE_CHROME = 40002;
+    public static final int MEDIA_TYPE_FACEBOOK = 40003;
+    public static final int MEDIA_TYPE_FLIKR = 40004;
+    public static final int MEDIA_TYPE_INSTAGRAM = 40005;
+    public static final int MEDIA_TYPE_MP_3 = 40006;
+    public static final int MEDIA_TYPE_MP_4 = 40007;
+    public static final int MEDIA_TYPE_AVIN = 40008;
+    public static final int MEDIA_TYPE_TWITTER = 40009;
+    public static final int MEDIA_TYPE_SCREEN_MIRROR = 40010;
+
+    public static final int MEDIA_TYPE_BAI_DU = 40011;
+    public static final int MEDIA_TYPE_WEI_BO = 40012;
+    public static final int MEDIA_TYPE_I71 = 40013;
 
 }

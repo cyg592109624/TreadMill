@@ -108,6 +108,10 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
 
     @Override
     protected void init() {
+        genderView.setOnGenderReturn(HillActivity.this);
+        keyBoardView.setKeyBoardReturn(HillActivity.this);
+        startBtn.setEnabled(false);
+
         ageValue.setText("20");
         if(GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)){
             weightValue.setText("70");
@@ -115,14 +119,12 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
             weightValue.setText("150");
         }
         timeValue.setText("20");
-        workOutInfo = new WorkOut();
-        genderView.setOnGenderReturn(HillActivity.this);
-        keyBoardView.setKeyBoardReturn(HillActivity.this);
     }
 
     @Override
     public void genderReturn(int gender) {
         workOutInfo.setGender(gender);
+        startBtn.setEnabled(true);
     }
 
     @Override
@@ -217,17 +219,24 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
 
     @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
-        workOutInfo.setAge(Integer.valueOf(ageValue.getText().toString()));
-        workOutInfo.setWeight(Integer.valueOf(weightValue.getText().toString()));
-        workOutInfo.setTime(Integer.valueOf(timeValue.getText().toString()));
+        workOutInfo.setWorkOutMode(Constant.MODE_HILL);
+        workOutInfo.setWorkOutModeName(Constant.WORK_OUT_MODE_HILL);
+
+        workOutInfo.setAge(ageValue.getText().toString());
+        workOutInfo.setWeight(weightValue.getText().toString());
+        workOutInfo.setTime(timeValue.getText().toString());
 
         Intent intent = new Intent();
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            intent.setClass(activityContext, HillRunningActivityZh.class);
         } else {
-            intent.setClass(activityContext, HillRunningActivity.class);
         }
-        startActivity(intent);
+//        Intent intent = new Intent();
+//        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+//            intent.setClass(activityContext, HillRunningActivityZh.class);
+//        } else {
+//            intent.setClass(activityContext, HillRunningActivity.class);
+//        }
+//        startActivity(intent);
     }
 
     @OnClick(R.id.bottom_logo_tab_home)

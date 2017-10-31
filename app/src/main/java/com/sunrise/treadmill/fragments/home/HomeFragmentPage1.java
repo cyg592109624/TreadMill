@@ -53,28 +53,28 @@ public class HomeFragmentPage1 extends BaseFragment {
             default:
                 break;
             case R.id.workout_mode_hill:
-                selectReturn.onSelectResult(Constant.MODE_HILL);
+                selectReturn.onWorkOutSetting(Constant.MODE_HILL);
                 break;
             case R.id.workout_mode_interval:
-                selectReturn.onSelectResult(Constant.MODE_INTERVAL);
+                selectReturn.onWorkOutSetting(Constant.MODE_INTERVAL);
                 break;
             case R.id.workout_mode_goal:
-                selectReturn.onSelectResult(Constant.MODE_GOAL);
+                selectReturn.onWorkOutSetting(Constant.MODE_GOAL);
                 break;
             case R.id.workout_mode_fitness_test:
-                selectReturn.onSelectResult(Constant.MODE_FITNESS_TEST);
+                selectReturn.onWorkOutSetting(Constant.MODE_FITNESS_TEST);
                 break;
             case R.id.workout_mode_hrc:
-                selectReturn.onSelectResult(Constant.MODE_HRC);
+                selectReturn.onWorkOutSetting(Constant.MODE_HRC);
                 break;
             case R.id.workout_mode_user_program:
-                selectReturn.onSelectResult(Constant.MODE_USER_PROGRAM);
+                selectReturn.onWorkOutSetting(Constant.MODE_USER_PROGRAM);
                 break;
             case R.id.workout_mode_vr:
-                selectReturn.onSelectResult(Constant.MODE_VR);
+                selectReturn.onWorkOutSetting(Constant.MODE_VR);
                 break;
             case R.id.workout_mode_quick_start:
-                selectReturn.onSelectResult(Constant.MODE_QUICK_START);
+                selectReturn.onWorkOutSetting(Constant.MODE_QUICK_START);
                 break;
         }
     }

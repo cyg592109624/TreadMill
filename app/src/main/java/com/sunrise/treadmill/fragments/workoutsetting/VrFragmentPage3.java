@@ -3,6 +3,7 @@ package com.sunrise.treadmill.fragments.workoutsetting;
 import android.view.View;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutsetting.VirtualRealityActivity;
@@ -63,10 +64,10 @@ public class VrFragmentPage3 extends BaseFragment {
                 selectVR = VirtualRealityActivity.SELECT_NOTHING;
                 break;
             case R.id.workout_mode_vr_img_9:
-                selectVR = VirtualRealityActivity.TG_VALUE_9;
+                selectVR = Constant.MODE_VR_TYPE_VR9;
                 break;
             case R.id.workout_mode_vr_img_10:
-                selectVR = VirtualRealityActivity.TG_VALUE_10;
+                selectVR = Constant.MODE_VR_TYPE_VR10;
                 break;
         }
         if (selectVR != VirtualRealityActivity.SELECT_NOTHING) {

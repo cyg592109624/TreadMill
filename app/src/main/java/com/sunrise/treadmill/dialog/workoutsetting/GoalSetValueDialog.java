@@ -88,23 +88,6 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
         if (drawable != null) {
             editValue.setBackground(drawable);
         }
-
-        ((TextView) keyBoardView.findViewById(R.id.key_board_edit_value)).addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                editValue.setText(editable.toString());
-            }
-        });
     }
 
     @Override
@@ -118,7 +101,11 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
 
     @Override
     public void onKeyBoardEnter(String result) {
-        onGoalSetValueReturn.onGoalSetValueResult(result);
+        if ("".equals(result)) {
+            onGoalSetValueReturn.onGoalSetValueResult(editValue.getText().toString());
+        } else {
+            onGoalSetValueReturn.onGoalSetValueResult(result);
+        }
     }
 
     @Override

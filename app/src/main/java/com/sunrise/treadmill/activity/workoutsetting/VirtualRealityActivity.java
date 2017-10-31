@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.adapter.workoutsetting.VrViewPageAdapter;
@@ -38,17 +39,6 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
     public static final String SELECT_VR_NUM = "SELECT_VR_NUM";
     public static final String SELECT_VR_IMG = "SELECT_VR_IMG";
     public static final int SELECT_NOTHING = -1;
-    public static final int TG_VALUE_1 = 10001;
-    public static final int TG_VALUE_2 = 10002;
-    public static final int TG_VALUE_3 = 10003;
-    public static final int TG_VALUE_4 = 10004;
-    public static final int TG_VALUE_5 = 10005;
-    public static final int TG_VALUE_6 = 10006;
-    public static final int TG_VALUE_7 = 10007;
-    public static final int TG_VALUE_8 = 10008;
-    public static final int TG_VALUE_9 = 10009;
-    public static final int TG_VALUE_10 = 10010;
-    public static final int TG_VALUE_11 = 10011;
 
     @BindView(R.id.workout_setting_head_hint)
     TextView settingHeadHint;
@@ -159,10 +149,12 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
     @Override
     public void onStartClick(int vrNum, String time) {
         if (vrNum != SELECT_NOTHING) {
-            isShowOptionBody(true);
+            workOutInfo.setWorkOutMode(Constant.MODE_VR);
+            workOutInfo.setWorkOutModeName(Constant.WORK_OUT_MODE_VR);
 
+            workOutInfo.setVrType(vrNum);
+            workOutInfo.setTime(time);
         }
-
     }
 
     @Override
@@ -190,34 +182,34 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
         switch (vrNum) {
             default:
                 break;
-            case VirtualRealityActivity.TG_VALUE_1:
+            case Constant.MODE_VR_TYPE_VR1:
                 img = R.mipmap.img_program_virtual_01_4;
                 break;
-            case VirtualRealityActivity.TG_VALUE_2:
+            case Constant.MODE_VR_TYPE_VR2:
                 img = R.mipmap.img_program_virtual_02_4;
                 break;
-            case VirtualRealityActivity.TG_VALUE_3:
+            case Constant.MODE_VR_TYPE_VR3:
                 img = R.mipmap.img_program_virtual_03_4;
                 break;
-            case VirtualRealityActivity.TG_VALUE_4:
+            case Constant.MODE_VR_TYPE_VR4:
                 img = R.mipmap.img_program_virtual_04_4;
                 break;
-            case VirtualRealityActivity.TG_VALUE_5:
+            case Constant.MODE_VR_TYPE_VR5:
                 img = R.mipmap.img_program_virtual_05_4;
                 break;
-            case VirtualRealityActivity.TG_VALUE_6:
+            case Constant.MODE_VR_TYPE_VR6:
                 img = R.mipmap.img_program_virtual_06_4;
                 break;
-            case VirtualRealityActivity.TG_VALUE_7:
+            case Constant.MODE_VR_TYPE_VR7:
                 img = R.mipmap.img_program_virtual_07_4;
                 break;
-            case VirtualRealityActivity.TG_VALUE_8:
+            case Constant.MODE_VR_TYPE_VR8:
                 img = R.mipmap.img_program_virtual_08_4;
                 break;
-            case VirtualRealityActivity.TG_VALUE_9:
+            case Constant.MODE_VR_TYPE_VR9:
                 img = R.mipmap.img_program_virtual_09_4;
                 break;
-            case VirtualRealityActivity.TG_VALUE_10:
+            case Constant.MODE_VR_TYPE_VR10:
                 img = R.mipmap.img_program_virtual_10_4;
                 break;
         }

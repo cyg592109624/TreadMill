@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.activity.workoutsetting;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -97,6 +98,7 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
         timeValue.setText("20");
         distanceValue.setText("5");
         calValue.setText("20");
+        startBtn.setEnabled(false);
     }
 
 
@@ -136,29 +138,57 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
 
     @Override
     public void onGoalSetValueResult(String result) {
-        if (!"".equals(result)) {
-            switch (WorkOutSettingCommon.changeTg) {
-                default:
-                    break;
-                case WorkOutSettingCommon.CHANGE_TIME:
-                    timeValue.setText(result);
-                    break;
-                case WorkOutSettingCommon.CHANGE_DISTANCE:
-                    distanceValue.setText(result);
-                    break;
-                case WorkOutSettingCommon.CHANGE_CALORIES:
-                    calValue.setText(result);
-                    break;
-            }
+        if ("".equals(result)) {
+            return;
         }
+        clearState();
+        startBtn.setEnabled(true);
+        switch (WorkOutSettingCommon.changeTg) {
+            default:
+                break;
+            case WorkOutSettingCommon.CHANGE_TIME:
+
+                int re = Integer.valueOf(result);
+                if (re < 5) {
+                    timeValue.setText("0");
+                    workOutInfo.setTime("0");
+                } else {
+                    timeValue.setText(result);
+                    workOutInfo.setTime(result);
+                }
+                workOutInfo.setGoalType(Constant.MODE_GOAL_TIME);
+                break;
+            case WorkOutSettingCommon.CHANGE_DISTANCE:
+                distanceValue.setText(result);
+                workOutInfo.setDistance(result);
+                workOutInfo.setGoalType(Constant.MODE_GOAL_DISTANCE);
+                break;
+            case WorkOutSettingCommon.CHANGE_CALORIES:
+                calValue.setText(result);
+                workOutInfo.setCalories(result);
+                workOutInfo.setGoalType(Constant.MODE_GOAL_CALORIES);
+                break;
+        }
+
         WorkOutSettingCommon.changeTg = WorkOutSettingCommon.RE_SET;
         optionBody.setVisibility(View.VISIBLE);
+    }
+
+    private void clearState() {
+        timeValue.setText("—");
+        distanceValue.setText("—");
+        calValue.setText("—");
     }
 
 
     @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
-
+        workOutInfo.setWorkOutMode(Constant.MODE_GOAL);
+        workOutInfo.setWorkOutModeName(Constant.WORK_OUT_MODE_GOAL);
+        Intent intent = new Intent();
+        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
+        } else {
+        }
     }
 
     @OnClick(R.id.bottom_logo_tab_home)

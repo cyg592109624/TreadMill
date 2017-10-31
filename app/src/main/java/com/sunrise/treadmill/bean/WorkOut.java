@@ -3,6 +3,8 @@ package com.sunrise.treadmill.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.sunrise.treadmill.Constant;
+
 import java.util.List;
 
 /**
@@ -10,23 +12,39 @@ import java.util.List;
  */
 
 public class WorkOut implements Parcelable {
-    private int workOutMode;
-    private String workOutModeName;
+    private int workOutMode = Constant.MODE_QUICK_START;
+    private String workOutModeName = Constant.WORK_OUT_MODE_QUICK_START;
     /**
      * 0代表男；1代表女
      */
-    private int gender=0;
-    private int age;
-    private int weight;
+    private int gender = Constant.GENDER_MALE;
+    private String age = "20";
+
     /**
-     * 这里以分钟为单位
+     * 以选择单位制度来决定单位
      */
-    private int time=20;
-    private int distance=1;
-    private int hrc60;
-    private int htc80;
-    private int targetHR;
+    private String weight = "70";
+    /**
+     * 这里以min为单位
+     */
+    private String time = "20";
+
+    /**
+     * 以选择单位制度来决定单位
+     */
+    private String distance = "1";
+
+    private String calories = "";
+
+    private int goalType = Constant.MODE_GOAL_TIME;
+
+    private String hrc = "80";
+    private int hrcType = Constant.MODE_HRC_TYPE_TG;
+
+    private int vrType;
+
     private List<Level> levelList;
+    //当前Level
     private Level currentLevel;
 
     public WorkOut() {
@@ -37,13 +55,15 @@ public class WorkOut implements Parcelable {
         workOutMode = in.readInt();
         workOutModeName = in.readString();
         gender = in.readInt();
-        age = in.readInt();
-        weight = in.readInt();
-        time = in.readInt();
-        distance = in.readInt();
-        hrc60 = in.readInt();
-        htc80 = in.readInt();
-        targetHR = in.readInt();
+        age = in.readString();
+        weight = in.readString();
+        time = in.readString();
+        distance = in.readString();
+        calories = in.readString();
+        hrc = in.readString();
+        goalType = in.readInt();
+        hrcType = in.readInt();
+        vrType = in.readInt();
     }
 
     public static final Creator<WorkOut> CREATOR = new Creator<WorkOut>() {
@@ -74,6 +94,22 @@ public class WorkOut implements Parcelable {
         this.workOutModeName = workOutModeName;
     }
 
+    public String getHrc() {
+        return hrc;
+    }
+
+    public void setHrc(String hrc) {
+        this.hrc = hrc;
+    }
+
+    public int getGoalType() {
+        return goalType;
+    }
+
+    public void setGoalType(int goalType) {
+        this.goalType = goalType;
+    }
+
     public int getGender() {
         return gender;
     }
@@ -86,60 +122,60 @@ public class WorkOut implements Parcelable {
         }
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public int getDistance() {
+    public String getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(String distance) {
         this.distance = distance;
     }
 
-    public int getHrc60() {
-        return hrc60;
+    public String getCalories() {
+        return calories;
     }
 
-    public void setHrc60(int hrc60) {
-        this.hrc60 = hrc60;
+    public void setCalories(String calories) {
+        this.calories = calories;
     }
 
-    public int getHtc80() {
-        return htc80;
+    public int getHrcType() {
+        return hrcType;
     }
 
-    public void setHtc80(int htc80) {
-        this.htc80 = htc80;
+    public void setHrcType(int hrcType) {
+        this.hrcType = hrcType;
     }
 
-    public int getTargetHR() {
-        return targetHR;
+    public int getVrType() {
+        return vrType;
     }
 
-    public void setTargetHR(int targetHR) {
-        this.targetHR = targetHR;
+    public void setVrType(int vrType) {
+        this.vrType = vrType;
     }
 
     public List<Level> getLevelList() {
@@ -158,7 +194,6 @@ public class WorkOut implements Parcelable {
         this.currentLevel = currentLevel;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -169,13 +204,15 @@ public class WorkOut implements Parcelable {
         parcel.writeInt(workOutMode);
         parcel.writeString(workOutModeName);
         parcel.writeInt(gender);
-        parcel.writeInt(age);
-        parcel.writeInt(weight);
-        parcel.writeInt(time);
-        parcel.writeInt(distance);
-        parcel.writeInt(hrc60);
-        parcel.writeInt(htc80);
-        parcel.writeInt(targetHR);
+        parcel.writeString(age);
+        parcel.writeString(weight);
+        parcel.writeString(time);
+        parcel.writeString(distance);
+        parcel.writeString(calories);
+        parcel.writeString(hrc);
+        parcel.writeInt(goalType);
+        parcel.writeInt(hrcType);
+        parcel.writeInt(vrType);
         //34651321
     }
 }

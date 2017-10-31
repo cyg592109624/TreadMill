@@ -1,5 +1,8 @@
 package com.sunrise.treadmill.fragments.settings;
 
+import android.content.Intent;
+import android.provider.Settings;
+
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 
@@ -18,4 +21,19 @@ public class SettingsFragmentCard2 extends BaseFragment {
     public void recycleObject() {
     }
 
+    @Override
+    protected void init() {
+        openBle();
+    }
+
+    private void openBle() {
+        try {
+            Thread.sleep(200);
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_BLUETOOTH_SETTINGS);
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

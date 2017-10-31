@@ -9,6 +9,8 @@ public interface OnModeSelectReturn {
      * 告诉activity 选择什么返回
      * @param result 返回内容
      */
-    void onSelectResult(int result);
+    void onWorkOutSetting(int result);
+
+    void onMediaStart(int mediaType);
 
 }

@@ -102,6 +102,9 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
 
     @Override
     protected void init() {
+        genderView.setOnGenderReturn(this);
+        keyBoardView.setKeyBoardReturn(this);
+        startBtn.setEnabled(false);
         ageValue.setText("20");
         if(GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)){
             weightValue.setText("70");
@@ -109,14 +112,13 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
             weightValue.setText("150");
         }
         timeValue.setText("20");
-        genderView.setOnGenderReturn(this);
-        keyBoardView.setKeyBoardReturn(this);
     }
 
 
     @Override
     public void genderReturn(int gender) {
-
+        workOutInfo.setGender(gender);
+        startBtn.setEnabled(true);
     }
 
     @Override
@@ -213,6 +215,12 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
     @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
 
+        workOutInfo.setWorkOutMode(Constant.MODE_INTERVAL);
+        workOutInfo.setWorkOutModeName(Constant.WORK_OUT_MODE_INTERVAL);
+
+        workOutInfo.setAge(ageValue.getText().toString());
+        workOutInfo.setWeight(weightValue.getText().toString());
+        workOutInfo.setTime(timeValue.getText().toString());
     }
 
     @OnClick(R.id.bottom_logo_tab_home)
