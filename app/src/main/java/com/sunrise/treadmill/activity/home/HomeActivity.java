@@ -1,9 +1,6 @@
 package com.sunrise.treadmill.activity.home;
 
-import android.app.Service;
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
@@ -11,12 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.sunrise.treadmill.Constant;
-import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.factory.FactoriesActivity;
 import com.sunrise.treadmill.activity.settings.SettingsActivity;
 import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity;
-import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivityZh;
 import com.sunrise.treadmill.activity.workoutsetting.FitnessTestActivity;
 import com.sunrise.treadmill.activity.workoutsetting.GoalActivity;
 import com.sunrise.treadmill.activity.workoutsetting.HRCActivity;
@@ -30,16 +25,13 @@ import com.sunrise.treadmill.dialog.home.InitialiteDialog;
 import com.sunrise.treadmill.dialog.home.LanguageDialog;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage1;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage2;
-import com.sunrise.treadmill.fragments.home.HomeFragmentPage2Zh;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage3;
-import com.sunrise.treadmill.fragments.home.HomeFragmentPage3Zh;
 import com.sunrise.treadmill.interfaces.home.HomeLanguageDialogReturn;
 import com.sunrise.treadmill.interfaces.home.OnInitialReturn;
 import com.sunrise.treadmill.interfaces.home.OnModeSelectReturn;
 import com.sunrise.treadmill.services.workoutrunning.FloatWindowService;
 import com.sunrise.treadmill.utils.BitMapUtils;
 import com.sunrise.treadmill.utils.ImageUtils;
-import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.ThreadPoolUtils;
 import com.sunrise.treadmill.views.LogoImageView;
 
@@ -62,7 +54,10 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     private HomeViewPageAdapter fragmentAdapter;
 
     private Bitmap selectTgBitmap;
+
     private Intent serviceIntent;
+
+    private final String mediaMode="MEDIA_MODE";
 
     @Override
     public int getLayoutId() {
@@ -98,21 +93,12 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
         HomeFragmentPage1 page1 = new HomeFragmentPage1();
         page1.setSelectReturn(HomeActivity.this);
         list.add(page1);
-        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            HomeFragmentPage2Zh page2 = new HomeFragmentPage2Zh();
-            HomeFragmentPage3Zh page3 = new HomeFragmentPage3Zh();
-            page2.setSelectReturn(HomeActivity.this);
-            page3.setSelectReturn(HomeActivity.this);
-            list.add(page2);
-            list.add(page3);
-        } else {
-            HomeFragmentPage2 page2 = new HomeFragmentPage2();
-            HomeFragmentPage3 page3 = new HomeFragmentPage3();
-            page2.setSelectReturn(HomeActivity.this);
-            page3.setSelectReturn(HomeActivity.this);
-            list.add(page2);
-            list.add(page3);
-        }
+        HomeFragmentPage2 page2 = new HomeFragmentPage2();
+        HomeFragmentPage3 page3 = new HomeFragmentPage3();
+        page2.setSelectReturn(HomeActivity.this);
+        page3.setSelectReturn(HomeActivity.this);
+        list.add(page2);
+        list.add(page3);
         fragmentAdapter = new HomeViewPageAdapter(fragmentManager, list);
         viewPager.setAdapter(fragmentAdapter);
         viewPager.setCurrentItem(0);
@@ -215,11 +201,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
                 intent = new Intent(HomeActivity.this, UserProgramActivity.class);
                 break;
             case Constant.MODE_QUICK_START:
-                if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-                    intent = new Intent(HomeActivity.this, QuickStartRunningActivityZh.class);
-                } else {
-                    intent = new Intent(HomeActivity.this, QuickStartRunningActivity.class);
-                }
+                intent = new Intent(HomeActivity.this, QuickStartRunningActivity.class);
                 break;
         }
         if (serviceIntent != null) {
@@ -262,10 +244,10 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
             case Constant.MEDIA_TYPE_I71:
                 break;
         }
-        moveTaskToBack(true);
-        serviceIntent = new Intent(HomeActivity.this, FloatWindowService.class);
-        serviceIntent.putExtra("123", "123");
-        startService(serviceIntent);
+            serviceIntent = new Intent(HomeActivity.this, FloatWindowService.class);
+            serviceIntent.putExtra(Constant.MEDIA_SERVICE, Constant.MEDIA_SERVICE);
+            startService(serviceIntent);
+            moveTaskToBack(true);
     }
 
     @OnClick(R.id.home_btn_language)

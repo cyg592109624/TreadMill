@@ -16,13 +16,17 @@ import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 
+import com.sunrise.treadmill.Constant;
+import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.home.HomeActivity;
 import com.sunrise.treadmill.activity.workoutrunning.BaseRunningActivity;
-import com.sunrise.treadmill.base.BaseActivity;
-import com.sunrise.treadmill.base.BaseFragmentActivity;
+import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity;
 import com.sunrise.treadmill.interfaces.services.FloatWindowBottomCallBack;
 import com.sunrise.treadmill.utils.DensityUtils;
+import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.views.workout.running.FloatWindowBottom;
 import com.sunrise.treadmill.views.workout.running.FloatWindowHead;
 
@@ -52,6 +56,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     private FloatWindowHead floatWindowHead;
     private FloatWindowBottom floatWindowBottom;
 
+    private RelativeLayout dialogCountDown;
     private ConstraintLayout dialogPause;
     private ConstraintLayout dialogCoolDown;
 
@@ -92,7 +97,16 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        String ss = intent.getStringExtra("123");
+        String ss = intent.getStringExtra(Constant.MEDIA_SERVICE);
+        if (ss.equals(Constant.MEDIA_SERVICE)) {
+            floatWindowBottom.showHomeBtn();
+            floatWindowBottom.showStartBtn();
+
+            floatWindowBottom.hideBackBtn();
+            floatWindowBottom.hideStopBtn();
+
+            toggleFloatWindow();
+        }
         return Service.START_STICKY;
     }
 
@@ -140,6 +154,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     @Override
     public void onWindyClick() {
+
     }
 
     @Override
@@ -147,19 +162,37 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         mWindowManager.addView(dialogPause, paramsBottom);
     }
 
+
     @Override
     public void onStartClick() {
+        floatWindowBottom.hideHomeBtn();
+        floatWindowBottom.showBackBtn();
 
+        floatWindowBottom.hideStartBtn();
+        floatWindowBottom.showStopBtn();
     }
 
     @Override
     public void onHomeClick() {
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
+        startActivity(intent);
+        Intent serverIntent = new Intent(getApplicationContext(), FloatWindowService.class);
+        stopService(serverIntent);
     }
 
     @Override
     public void onBackClick() {
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), QuickStartRunningActivity.class);
+        intent.putExtra(Constant.SHOW_COUNT_DOWN, Constant.SHOW_COUNT_DOWN_FALSE);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
 
+        Intent serverIntent = new Intent(getApplicationContext(), FloatWindowService.class);
+        stopService(serverIntent);
     }
 
     private boolean isShowView = false;
@@ -253,9 +286,33 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
         dialogPause = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_workout_running_pause, null);
         dialogCoolDown = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_workout_running_cool_down, null);
+        dialogCountDown = (RelativeLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_workout_running_count_down, null);
 
         dialogPause.setLayoutParams(dialogParams);
         dialogCoolDown.setLayoutParams(dialogParams);
+        dialogClick();
+    }
+
+    private void dialogClick() {
+        View.OnClickListener pauseClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    default:
+                        break;
+                    case R.id.workout_running_pause_quit:
+                        mWindowManager.removeView(dialogPause);
+                        break;
+                    case R.id.workout_running_pause_continue:
+                        mWindowManager.removeView(dialogPause);
+                        break;
+                }
+            }
+        };
+        dialogPause.findViewById(R.id.workout_running_pause_quit).setOnClickListener(pauseClick);
+        dialogPause.findViewById(R.id.workout_running_pause_continue).setOnClickListener(pauseClick);
+
+
     }
 
     private void reMoveView(View view) {

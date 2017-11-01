@@ -97,6 +97,7 @@ public class Constant {
     public static final String FACTORY2_TOTAL_DISTANT = "FACTORY2_TOTAL_DISTANT";
 
 
+    public static final String MEDIA_SERVICE = "MEDIA_SERVICE";
     public static final int MEDIA_TYPE_YOUTUBE = 40001;
     public static final int MEDIA_TYPE_CHROME = 40002;
     public static final int MEDIA_TYPE_FACEBOOK = 40003;
@@ -111,5 +112,10 @@ public class Constant {
     public static final int MEDIA_TYPE_BAI_DU = 40011;
     public static final int MEDIA_TYPE_WEI_BO = 40012;
     public static final int MEDIA_TYPE_I71 = 40013;
+
+    public static final String SHOW_COUNT_DOWN = "SHOW_COUNT_DOWN";
+    public static final int SHOW_COUNT_DOWN_TRUE = 1;
+    public static final int SHOW_COUNT_DOWN_FALSE = 2;
+
 
 }

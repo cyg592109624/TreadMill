@@ -13,11 +13,10 @@ import android.os.IBinder;
 import android.support.constraint.ConstraintLayout;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.summary.SummaryActivity;
@@ -74,6 +73,8 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     private int parentWidth;
     private int parentHeight;
 
+    public static int showCountDown = 1;
+
     public PackageManager packageManager;
 
     public FloatWindowService floatWindowServer;
@@ -94,11 +95,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @Override
     public int getLayoutId() {
-        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            return R.layout.activity_workout_running_zh;
-        } else {
-            return R.layout.activity_workout_running;
-        }
+        return R.layout.activity_workout_running;
     }
 
     @Override
@@ -138,7 +135,10 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @Override
     protected void init() {
+        showCountDown = getIntent().getIntExtra(Constant.SHOW_COUNT_DOWN, Constant.SHOW_COUNT_DOWN_TRUE);
         serviceBinder = BaseRunningActivity.this;
+        bottomView.setWindowBottomCallBack(BaseRunningActivity.this);
+
         packageManager = getApplicationContext().getPackageManager();
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -147,17 +147,15 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         parentHeight = dm.heightPixels;
         dm = null;
 
-        bottomView.setWindowBottomCallBack(this);
     }
 
-    private int loadAtOnce = 1;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (loadAtOnce == 1) {
+        if (showCountDown == 1) {
             showCountDownDialog();
-            loadAtOnce += 1;
+            showCountDown = 2;
         }
     }
 

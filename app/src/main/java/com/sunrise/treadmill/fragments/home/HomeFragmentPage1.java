@@ -4,21 +4,9 @@ import android.content.Intent;
 import android.view.View;
 
 import com.sunrise.treadmill.Constant;
-import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.activity.home.HomeActivity;
-import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity;
-import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivityZh;
-import com.sunrise.treadmill.activity.workoutsetting.FitnessTestActivity;
-import com.sunrise.treadmill.activity.workoutsetting.GoalActivity;
-import com.sunrise.treadmill.activity.workoutsetting.HRCActivity;
-import com.sunrise.treadmill.activity.workoutsetting.HillActivity;
-import com.sunrise.treadmill.activity.workoutsetting.IntervalActivity;
-import com.sunrise.treadmill.activity.workoutsetting.UserProgramActivity;
-import com.sunrise.treadmill.activity.workoutsetting.VirtualRealityActivity;
 import com.sunrise.treadmill.base.BaseFragment;
 import com.sunrise.treadmill.interfaces.home.OnModeSelectReturn;
-import com.sunrise.treadmill.utils.LanguageUtils;
 
 import butterknife.OnClick;
 

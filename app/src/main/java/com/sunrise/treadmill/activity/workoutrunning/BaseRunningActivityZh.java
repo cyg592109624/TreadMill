@@ -39,7 +39,6 @@ public class BaseRunningActivityZh extends BaseRunningActivity {
             if (intent != null) {
                 startActivity(intent);
                 floatWindowServer.toggleFloatWindow();
-                floatWindowServer.onLevelChange(headView.curLevel);
             }
         }
     };

@@ -1,7 +1,11 @@
 package com.sunrise.treadmill.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 
@@ -21,41 +25,46 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class LogoActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
 
     private int permissionRequestCode = 1001;
-    private int permissionRequestCode2 = 1002;
-    private String[] lackOfPerms = {"android.permission.CHANGE_CONFIGURATION", "android.permission.READ_EXTERNAL_STORAGE",
-            "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.WRITE_SETTINGS",
-            "android.permission.SYSTEM_ALERT_WINDOW", "android.permission.GET_TASKS",
-            "android.permission.REORDER_TASKS"};
-    private int permissionSize = lackOfPerms.length;
-    private int size;
+
+    private final int permissionRequestCode2 = 1002;
+    private final int permissionRequestCode3 = 1003;
+
+    private String[] lackOfPerms = {"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE",
+            "android.permission.GET_TASKS", "android.permission.REORDER_TASKS"};
+    /**
+     * 权限申请结果
+     */
+    private final int easyPermissionResult = 2001;
+    private final int allowWindowPermission = 2002;
+    private final int writeSettingPermission = 2003;
+    private final int permissionFinish = 2004;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                default:
+                    break;
+                case easyPermissionResult:
+                    mHandler.sendEmptyMessage(allowWindowPermission);
+                    break;
+                case allowWindowPermission:
+                    requestAllowWindowPermission();
+                    break;
+                case writeSettingPermission:
+                    requestWriteSettingPermission();
+                    break;
+                case permissionFinish:
+                    syncLanguage();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EasyPermissions.requestPermissions(this, "必要的权限", permissionRequestCode, lackOfPerms);
-        ThreadPoolUtils.runTaskOnThread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (true){
-                        Thread.sleep(200);
-                        System.out.println("size   -----》" + size);
-                        if (size == permissionSize) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    syncLanguage();
-                                }
-                            });
-                            return;
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
+        EasyPermissions.requestPermissions(this, "权限请求", permissionRequestCode, lackOfPerms);
     }
 
     @Override
@@ -73,31 +82,80 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == permissionRequestCode) {
             EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, activityContext);
-        }else {
-
         }
     }
 
     @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {//没有获取的权限
-        String[] args = new String[perms.size()];
-        for (int i = 0; i < perms.size(); i++) {
-            args[i] = perms.get(i);
-            System.out.println("被允许的权限 --> " + perms.get(i));
-            size++;
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        if (perms.size() != 0) {
+            String[] args = new String[perms.size()];
+            for (int i = 0; i < perms.size(); i++) {
+                args[i] = perms.get(i);
+                System.out.println("被允许的权限     -->" + perms.get(i));
+            }
+            mHandler.sendEmptyMessage(easyPermissionResult);
         }
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        //没有获取的权限
-        String[] args = new String[perms.size()];
-        for (int i = 0; i < perms.size(); i++) {
-            args[i] = perms.get(i);
-            System.out.println("没有被允许的权限 --> " + perms.get(i));
-            size++;
+        if (perms.size() != 0) {
+            String[] args = new String[perms.size()];
+            for (int i = 0; i < perms.size(); i++) {
+                args[i] = perms.get(i);
+                System.out.println("没有被允许的权限   -->" + perms.get(i));
+            }
         }
-        lackOfPerms = args;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            default:
+                break;
+            case permissionRequestCode2:
+                if (!Settings.canDrawOverlays(LogoActivity.this)) {
+                    System.out.println("permissionRequestCode2");
+                    finishActivity();
+                } else {
+                    mHandler.sendEmptyMessage(writeSettingPermission);
+                }
+                break;
+            case permissionRequestCode3:
+                if (!Settings.System.canWrite(activityContext)) {
+                    System.out.println("permissionRequestCode3");
+                    finishActivity();
+                } else {
+                    mHandler.sendEmptyMessage(permissionFinish);
+                }
+                break;
+        }
+    }
+
+    /**
+     * 悬浮窗权限申请
+     */
+    private void requestAllowWindowPermission() {
+        if (!Settings.canDrawOverlays(activityContext)) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + getPackageName()));
+            startActivityForResult(intent, permissionRequestCode2);
+        } else {
+            mHandler.sendEmptyMessage(writeSettingPermission);
+        }
+    }
+
+    /**
+     * 设置写入权限
+     */
+    private void requestWriteSettingPermission() {
+        if (!Settings.System.canWrite(activityContext)) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS,
+                    Uri.parse("package:" + getPackageName()));
+            startActivityForResult(intent, permissionRequestCode3);
+        } else {
+            mHandler.sendEmptyMessage(permissionFinish);
+        }
     }
 
     /**

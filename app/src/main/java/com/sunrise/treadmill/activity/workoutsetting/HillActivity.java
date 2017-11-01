@@ -10,17 +10,13 @@ import android.widget.TextView;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity;
-import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivityZh;
 import com.sunrise.treadmill.base.BaseActivity;
-import com.sunrise.treadmill.bean.WorkOut;
 import com.sunrise.treadmill.interfaces.workout.setting.OnGenderReturn;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.views.workout.setting.MyGenderView;
 import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
-import com.sunrise.treadmill.views.workout.setting.WorkOutSettingHead;
 
 import java.util.ArrayList;
 import java.util.List;
