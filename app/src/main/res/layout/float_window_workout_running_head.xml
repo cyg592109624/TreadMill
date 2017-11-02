@@ -146,7 +146,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/view"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_level" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_level"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/workout_running_head_time_value"
@@ -160,7 +161,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_level_value"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_time" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_time"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/workout_running_head_distance_value"
@@ -173,7 +175,8 @@
         android:textSize="16pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_time_value"
-        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_distance" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_distance"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/workout_running_head_distance_unit"
@@ -187,7 +190,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_distance_value"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_distance" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_distance"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/workout_running_head_calories_value"
@@ -202,7 +206,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_distance_unit"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_calories" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_calories"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/workout_running_head_calories_unit"
@@ -216,7 +221,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_calories_value"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_calories" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_calories"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/workout_running_head_pulse_value"
@@ -231,7 +237,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_calories_unit"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_pulse" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_pulse"
+        app:layout_constraintVertical_bias="0.3" />
 
     <ImageView
         android:id="@+id/workout_running_head_pulse_unit"
@@ -243,7 +250,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_pulse_value"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_pulse" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_pulse"
+        app:layout_constraintVertical_bias="0.35" />
 
     <TextView
         android:id="@+id/workout_running_head_watt_value"
@@ -257,7 +265,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_pulse_unit"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_watt" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_watt"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/workout_running_head_speed_value"
@@ -272,7 +281,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_watt_value"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_speed" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_speed"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/workout_running_head_speed_unit"
@@ -286,6 +296,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/workout_running_head_speed_value"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_speed" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_running_head_speed"
+        app:layout_constraintVertical_bias="0.3" />
 
 </android.support.constraint.ConstraintLayout>

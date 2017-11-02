@@ -115,7 +115,6 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
                 break;
             case permissionRequestCode2:
                 if (!Settings.canDrawOverlays(LogoActivity.this)) {
-                    System.out.println("permissionRequestCode2");
                     finishActivity();
                 } else {
                     mHandler.sendEmptyMessage(writeSettingPermission);
@@ -123,7 +122,6 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
                 break;
             case permissionRequestCode3:
                 if (!Settings.System.canWrite(activityContext)) {
-                    System.out.println("permissionRequestCode3");
                     finishActivity();
                 } else {
                     mHandler.sendEmptyMessage(permissionFinish);

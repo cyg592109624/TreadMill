@@ -120,10 +120,10 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (Constant.initialFinish == -1) {
-            showInitialDialog();
-            Constant.initialFinish = 1;
-        }
+//        if (Constant.initialFinish == -1) {
+//            showInitialDialog();
+//            Constant.initialFinish = 1;
+//        }
     }
 
     @Override

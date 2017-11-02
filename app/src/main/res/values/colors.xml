@@ -37,5 +37,7 @@
     <color name="workout_mode_running_head_value">#3C3C3C</color>
 
 
+    <color name="summary_white">#FFFFFF</color>
+    <color name="summary_value">#DC6400</color>
 
 </resources>

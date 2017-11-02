@@ -60,11 +60,9 @@ public class FloatWindowBottom extends ConstraintLayout {
 
         bottomLevelUp = findViewById(R.id.workout_running_level_up);
         bottomLevelUp.setOnTouchListener(touchListener);
-        bottomLevelUp.setOnClickListener(bottomClick);
 
         bottomLevelDown = findViewById(R.id.workout_running_level_down);
         bottomLevelDown.setOnTouchListener(touchListener);
-        bottomLevelDown.setOnClickListener(bottomClick);
 
 
         bottomWindy = findViewById(R.id.workout_running_windy);
@@ -92,9 +90,19 @@ public class FloatWindowBottom extends ConstraintLayout {
                 default:
                     break;
                 case MotionEvent.ACTION_DOWN:
+                    if (view.getId() == R.id.workout_running_level_up) {
+                        ImageUtils.changeImageView(bottomLevelUp, R.drawable.btn_sportmode_up_2);
+                    } else if (view.getId() == R.id.workout_running_level_down) {
+                        ImageUtils.changeImageView(bottomLevelDown, R.drawable.btn_sportmode_down_2);
+                    }
                     updateAddOrSubtract(view.getId());
                     break;
                 case MotionEvent.ACTION_UP:
+                    if (view.getId() == R.id.workout_running_level_up) {
+                        ImageUtils.changeImageView(bottomLevelUp, R.drawable.btn_sportmode_up_1);
+                    } else if (view.getId() == R.id.workout_running_level_down) {
+                        ImageUtils.changeImageView(bottomLevelDown, R.drawable.btn_sportmode_down_1);
+                    }
                     stopAddOrSubtract();
                     break;
             }

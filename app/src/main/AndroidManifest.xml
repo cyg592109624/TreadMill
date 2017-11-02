@@ -112,16 +112,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activity.workoutrunning.HillRunningActivityZh"
-            android:configChanges="screenSize|keyboardHidden|orientation"
-            android:exported="false"
-            android:screenOrientation="sensorLandscape">
-            <intent-filter>
-                <action android:name="com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity_zh" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".activity.workoutrunning.QuickStartRunningActivity"
@@ -133,17 +123,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.workoutrunning.QuickStartRunningActivityZh"
-            android:configChanges="screenSize|keyboardHidden|orientation"
-            android:exported="false"
-            android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape">
-            <intent-filter>
-                <action android:name="com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity_zh" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
 
         <activity
@@ -152,7 +131,6 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape">
-
         </activity>
 
         <activity
