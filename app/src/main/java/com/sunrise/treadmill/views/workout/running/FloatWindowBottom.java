@@ -119,6 +119,8 @@ public class FloatWindowBottom extends ConstraintLayout {
                         break;
                     case R.id.workout_running_windy:
                         switch (windy) {
+                            default:
+                                break;
                             case 0:
                                 windy = 1;
                                 ImageUtils.changeImageView(bottomWindy, R.mipmap.btn_fan_2_1);
@@ -155,21 +157,6 @@ public class FloatWindowBottom extends ConstraintLayout {
         }
     };
 
-    private void setLevelEnable() {
-        if (FloatWindowHead.curLevel == FloatWindowHead.MAX_LEVEL) {
-            bottomLevelUp.setEnabled(false);
-            bottomLevelDown.setEnabled(true);
-            stopAddOrSubtract();
-        } else if (FloatWindowHead.curLevel == FloatWindowHead.MIN_LEVEL) {
-            bottomLevelUp.setEnabled(true);
-            bottomLevelDown.setEnabled(false);
-            stopAddOrSubtract();
-        } else {
-            bottomLevelUp.setEnabled(true);
-            bottomLevelDown.setEnabled(true);
-        }
-    }
-
     private void updateAddOrSubtract(int viewId) {
         final int vid = viewId;
         scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
@@ -180,7 +167,7 @@ public class FloatWindowBottom extends ConstraintLayout {
                 msg.what = vid;
                 handler.sendMessage(msg);
             }
-        }, 0, 100, TimeUnit.MILLISECONDS);    //每间隔100ms发送Message
+        }, 0, 200, TimeUnit.MILLISECONDS);    //每间隔100ms发送Message
     }
 
     private void stopAddOrSubtract() {

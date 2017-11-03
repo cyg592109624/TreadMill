@@ -42,7 +42,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        System.out.println(getClass().getName()+"  ----  > onDestroyView()被调用");
         recycleObject();
         bind.unbind();
         bind = null;

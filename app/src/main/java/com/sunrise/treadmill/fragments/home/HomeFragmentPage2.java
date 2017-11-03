@@ -3,11 +3,9 @@ package com.sunrise.treadmill.fragments.home;
 import android.view.View;
 
 import com.sunrise.treadmill.Constant;
-import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 import com.sunrise.treadmill.interfaces.home.OnModeSelectReturn;
-import com.sunrise.treadmill.utils.LanguageUtils;
 
 import butterknife.OnClick;
 
@@ -43,19 +41,19 @@ public class HomeFragmentPage2 extends BaseFragment {
             default:
                 break;
             case R.id.home_app_mode_youtube:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_YOUTUBE);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_YOUTUBE);
                 break;
             case R.id.home_app_mode_chrome:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_CHROME);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_CHROME);
                 break;
             case R.id.home_app_mode_facebook:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_FACEBOOK);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_FACEBOOK);
                 break;
             case R.id.home_app_mode_flikr:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_FLIKR);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_FLIKR);
                 break;
             case R.id.home_app_mode_instagram:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_INSTAGRAM);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_INSTAGRAM);
                 break;
             case R.id.workout_mode_quick_start:
                 selectReturn.onWorkOutSetting(Constant.MODE_QUICK_START);

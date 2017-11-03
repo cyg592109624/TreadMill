@@ -1,16 +1,12 @@
 package com.sunrise.treadmill.fragments.home;
 
 import android.view.View;
-import android.widget.ImageView;
 
 import com.sunrise.treadmill.Constant;
-import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 import com.sunrise.treadmill.interfaces.home.OnModeSelectReturn;
-import com.sunrise.treadmill.utils.LanguageUtils;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -43,19 +39,19 @@ public class HomeFragmentPage3 extends BaseFragment {
             default:
                 break;
             case R.id.home_app_mode_mp3:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_MP_3);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_MP3);
                 break;
             case R.id.home_app_mode_mp4:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_MP_4);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_MP4);
                 break;
             case R.id.home_app_mode_avin:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_AVIN);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_AVIN);
                 break;
             case R.id.home_app_mode_twitter:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_TWITTER);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_TWITTER);
                 break;
             case R.id.home_app_mode_screen_mirror:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_SCREEN_MIRROR);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_SCREEN_MIRROR);
                 break;
             case R.id.workout_mode_quick_start:
                 selectReturn.onWorkOutSetting(Constant.MODE_QUICK_START);

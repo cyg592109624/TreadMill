@@ -104,14 +104,15 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
 
     @Override
     protected void init() {
+        workOutInfo = getIntent().getParcelableExtra(Constant.WORK_OUT_INFO);
         genderView.setOnGenderReturn(HillActivity.this);
         keyBoardView.setKeyBoardReturn(HillActivity.this);
         startBtn.setEnabled(false);
 
         ageValue.setText("20");
-        if(GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)){
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
             weightValue.setText("70");
-        }else {
+        } else {
             weightValue.setText("150");
         }
         timeValue.setText("20");

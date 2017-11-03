@@ -33,7 +33,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
-        workOutInfo=new WorkOut();
         setTextStyle();
         init();
     }
@@ -84,7 +83,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        System.out.println(getClass().getName() + "  ----  > onDestroy()被调用");
     }
 
     /**

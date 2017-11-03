@@ -65,7 +65,6 @@ public abstract class BaseDialogFragment extends DialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        System.out.println(getClass().getName() + "  ----  > onDestroyView()被调用");
         recycleObject();
         bind.unbind();
         bind = null;

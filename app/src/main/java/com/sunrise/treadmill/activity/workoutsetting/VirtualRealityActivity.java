@@ -92,6 +92,7 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
 
     @Override
     protected void setTextStyle() {
+        workOutInfo = getIntent().getParcelableExtra(Constant.WORK_OUT_INFO);
         List<TextView> txtList = new ArrayList<TextView>();
         txtList.add((TextView) findViewById(R.id.workout_setting_head_name));
         txtList.add(settingHeadHint);

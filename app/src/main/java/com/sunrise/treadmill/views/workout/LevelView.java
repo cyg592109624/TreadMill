@@ -94,7 +94,14 @@ public class LevelView extends View {
     private float buoyBitmapWidth, buoyBitmapHeight;
 
 
+    /**
+     * 浮标所在Level
+     */
     private int tgLevel = 0;
+
+    /**
+     * 浮标位置
+     */
     private float buoyLeft;
 
     public LevelView(Context context, @Nullable AttributeSet attrs) {
@@ -167,6 +174,11 @@ public class LevelView extends View {
         buoyBitmap = Bitmap.createScaledBitmap(buoyBitmap, optionsWidth, optionsHeight, false);
     }
 
+    /**
+     * 设置浮标位置
+     *
+     * @param tgLevel
+     */
     public void setTgLevel(int tgLevel) {
         if (tgLevel > -1 && tgLevel < columnCount) {
             this.tgLevel = tgLevel;
@@ -182,19 +194,11 @@ public class LevelView extends View {
         invalidate();
     }
 
-
-    public void setRectList(LevelColumn[] columns) {
-        if (columns.length != columnCount) {
-            return;
-        }
-        this.rectList = columns;
-    }
-
     public List<Level> getLevelList() {
         List<Level> list = new ArrayList<>();
         for (LevelColumn column : rectList) {
-            if(column!=null){
-                Level level=new Level();
+            if (column != null) {
+                Level level = new Level();
                 level.setLevel(column.getLevel());
                 list.add(level);
             }
@@ -203,6 +207,12 @@ public class LevelView extends View {
     }
 
 
+    /**
+     * 设置某一段位的段数
+     *
+     * @param level 段位 0-30
+     * @param rank  段数 0-36;
+     */
     public void setColumn(int level, int rank) {
         if ((level > columnCount | level < -1) | (rank > levelCount | rank < -1)) {
             return;
@@ -304,7 +314,7 @@ public class LevelView extends View {
             }
         }
         if (buoyBitmap != null) {
-            canvas.drawBitmap(buoyBitmap, buoyLeft + buoyBitmapWidth, topSpace - buoyBitmapHeight, null);
+            canvas.drawBitmap(buoyBitmap, buoyLeft + buoyBitmapWidth, topSpace - buoyBitmapHeight * 2, null);
         }
     }
 

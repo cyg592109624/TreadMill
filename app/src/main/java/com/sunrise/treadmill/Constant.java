@@ -42,6 +42,7 @@ public class Constant {
     public static final String WORK_OUT_MODE_VR = "Virtual Reality";
     public static final String WORK_OUT_MODE_USER_PROGRAM = "User Program";
     public static final String WORK_OUT_MODE_QUICK_START = "Quick Start";
+    public static final String WORK_OUT_MODE_MEDIA = "Media";
 
 
     public static final int MODE_HILL = 21000;
@@ -79,6 +80,22 @@ public class Constant {
 
     public static final int MODE_QUICK_START = 28000;
 
+    public static final int MODE_MEDIA = 29000;
+    public static final int MODE_MEDIA_YOUTUBE = 40001;
+    public static final int MODE_MEDIA_CHROME = 40002;
+    public static final int MODE_MEDIA_FACEBOOK = 40003;
+    public static final int MODE_MEDIA_FLIKR = 40004;
+    public static final int MODE_MEDIA_INSTAGRAM = 40005;
+    public static final int MODE_MEDIA_MP3 = 40006;
+    public static final int MODE_MEDIA_MP4 = 40007;
+    public static final int MODE_MEDIA_AVIN = 40008;
+    public static final int MODE_MEDIA_TWITTER = 40009;
+    public static final int MODE_MEDIA_SCREEN_MIRROR = 40010;
+
+    public static final int MODE_MEDIA_BAI_DU = 40011;
+    public static final int MODE_MEDIA_WEI_BO = 40012;
+    public static final int MODE_MEDIA_I71 = 40013;
+
     public static final int GENDER_MALE = 0;
     public static final int GENDER_FEMALE = 1;
 
@@ -97,25 +114,12 @@ public class Constant {
     public static final String FACTORY2_TOTAL_DISTANT = "FACTORY2_TOTAL_DISTANT";
 
 
-    public static final String MEDIA_SERVICE = "MEDIA_SERVICE";
-    public static final int MEDIA_TYPE_YOUTUBE = 40001;
-    public static final int MEDIA_TYPE_CHROME = 40002;
-    public static final int MEDIA_TYPE_FACEBOOK = 40003;
-    public static final int MEDIA_TYPE_FLIKR = 40004;
-    public static final int MEDIA_TYPE_INSTAGRAM = 40005;
-    public static final int MEDIA_TYPE_MP_3 = 40006;
-    public static final int MEDIA_TYPE_MP_4 = 40007;
-    public static final int MEDIA_TYPE_AVIN = 40008;
-    public static final int MEDIA_TYPE_TWITTER = 40009;
-    public static final int MEDIA_TYPE_SCREEN_MIRROR = 40010;
-
-    public static final int MEDIA_TYPE_BAI_DU = 40011;
-    public static final int MEDIA_TYPE_WEI_BO = 40012;
-    public static final int MEDIA_TYPE_I71 = 40013;
-
     public static final String SHOW_COUNT_DOWN = "SHOW_COUNT_DOWN";
     public static final int SHOW_COUNT_DOWN_TRUE = 1;
     public static final int SHOW_COUNT_DOWN_FALSE = 2;
+
+
+    public static final String WORK_OUT_INFO = "WORK_OUT_INFO";
 
 
 }

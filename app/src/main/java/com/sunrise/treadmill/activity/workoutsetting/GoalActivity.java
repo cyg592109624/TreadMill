@@ -88,6 +88,7 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
 
     @Override
     protected void init() {
+        workOutInfo = getIntent().getParcelableExtra(Constant.WORK_OUT_INFO);
         Drawable drawable = null;
         if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
             drawable = ContextCompat.getDrawable(activityContext, R.drawable.btn_workout_goal_distance_km);

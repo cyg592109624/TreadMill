@@ -96,6 +96,7 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
 
     @Override
     protected void init() {
+        workOutInfo = getIntent().getParcelableExtra(Constant.WORK_OUT_INFO);
         genderView.setOnGenderReturn(FitnessTestActivity.this);
         keyBoardView.setKeyBoardReturn(FitnessTestActivity.this);
         startBtn.setEnabled(false);

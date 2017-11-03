@@ -21,6 +21,7 @@ import com.sunrise.treadmill.activity.workoutsetting.UserProgramActivity;
 import com.sunrise.treadmill.activity.workoutsetting.VirtualRealityActivity;
 import com.sunrise.treadmill.adapter.home.HomeViewPageAdapter;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
+import com.sunrise.treadmill.bean.WorkOut;
 import com.sunrise.treadmill.dialog.home.InitialiteDialog;
 import com.sunrise.treadmill.dialog.home.LanguageDialog;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage1;
@@ -57,7 +58,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     private Intent serviceIntent;
 
-    private final String mediaMode="MEDIA_MODE";
+    private final String mediaMode = "MEDIA_MODE";
 
     @Override
     public int getLayoutId() {
@@ -89,6 +90,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     @Override
     protected void init() {
+        workOutInfo = new WorkOut();
         List<Fragment> list = new ArrayList<Fragment>();
         HomeFragmentPage1 page1 = new HomeFragmentPage1();
         page1.setSelectReturn(HomeActivity.this);
@@ -120,10 +122,10 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-//        if (Constant.initialFinish == -1) {
-//            showInitialDialog();
-//            Constant.initialFinish = 1;
-//        }
+        if (Constant.initialFinish == -1) {
+            showInitialDialog();
+            Constant.initialFinish = 1;
+        }
     }
 
     @Override
@@ -206,48 +208,65 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
         }
         if (serviceIntent != null) {
             stopService(serviceIntent);
+            serviceIntent=null;
         }
         if (intent != null) {
+            intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
             startActivity(intent);
         }
     }
 
     @Override
     public void onMediaStart(int mediaType) {
+        serviceIntent = new Intent(HomeActivity.this, FloatWindowService.class);
+        workOutInfo.setWorkOutModeName(Constant.WORK_OUT_MODE_MEDIA);
         switch (mediaType) {
             default:
                 break;
-            case Constant.MEDIA_TYPE_YOUTUBE:
+            case Constant.MODE_MEDIA_YOUTUBE:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_YOUTUBE);
                 break;
-            case Constant.MEDIA_TYPE_CHROME:
+            case Constant.MODE_MEDIA_CHROME:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_CHROME);
                 break;
-            case Constant.MEDIA_TYPE_FACEBOOK:
+            case Constant.MODE_MEDIA_FACEBOOK:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_FACEBOOK);
                 break;
-            case Constant.MEDIA_TYPE_FLIKR:
+            case Constant.MODE_MEDIA_FLIKR:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_FLIKR);
                 break;
-            case Constant.MEDIA_TYPE_INSTAGRAM:
+            case Constant.MODE_MEDIA_INSTAGRAM:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_INSTAGRAM);
                 break;
-            case Constant.MEDIA_TYPE_MP_3:
+            case Constant.MODE_MEDIA_MP3:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_MP3);
                 break;
-            case Constant.MEDIA_TYPE_MP_4:
+            case Constant.MODE_MEDIA_MP4:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_MP4);
                 break;
-            case Constant.MEDIA_TYPE_AVIN:
+            case Constant.MODE_MEDIA_AVIN:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_AVIN);
                 break;
-            case Constant.MEDIA_TYPE_TWITTER:
+            case Constant.MODE_MEDIA_TWITTER:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_TWITTER);
                 break;
-            case Constant.MEDIA_TYPE_SCREEN_MIRROR:
+            case Constant.MODE_MEDIA_SCREEN_MIRROR:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_SCREEN_MIRROR);
                 break;
-            case Constant.MEDIA_TYPE_BAI_DU:
+            case Constant.MODE_MEDIA_BAI_DU:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_BAI_DU);
                 break;
-            case Constant.MEDIA_TYPE_WEI_BO:
+            case Constant.MODE_MEDIA_WEI_BO:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_WEI_BO);
                 break;
-            case Constant.MEDIA_TYPE_I71:
+            case Constant.MODE_MEDIA_I71:
+                workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_I71);
                 break;
         }
-            serviceIntent = new Intent(HomeActivity.this, FloatWindowService.class);
-            serviceIntent.putExtra(Constant.MEDIA_SERVICE, Constant.MEDIA_SERVICE);
-            startService(serviceIntent);
-            moveTaskToBack(true);
+        serviceIntent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
+
+        startService(serviceIntent);
+        moveTaskToBack(true);
     }
 
     @OnClick(R.id.home_btn_language)

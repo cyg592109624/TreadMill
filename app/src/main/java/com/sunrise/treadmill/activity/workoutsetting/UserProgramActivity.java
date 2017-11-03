@@ -136,6 +136,7 @@ public class UserProgramActivity extends BaseActivity implements OnGenderReturn,
 
     @Override
     protected void init() {
+        workOutInfo = getIntent().getParcelableExtra(Constant.WORK_OUT_INFO);
         genderView.setOnGenderReturn(UserProgramActivity.this);
         keyBoardView.setKeyBoardReturn(UserProgramActivity.this);
         startBtn.setEnabled(false);

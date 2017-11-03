@@ -30,6 +30,11 @@ public class WorkOut implements Parcelable {
     private String time = "20";
 
     /**
+     * 已经运动时间 以秒为单位
+     */
+    private String runningTime = "0";
+
+    /**
      * 以选择单位制度来决定单位
      */
     private String distance = "1";
@@ -48,22 +53,25 @@ public class WorkOut implements Parcelable {
     private Level currentLevel;
 
     public WorkOut() {
-
+        new WorkOut(Parcel.obtain());
     }
 
-    public WorkOut(Parcel in) {
+    protected WorkOut(Parcel in) {
         workOutMode = in.readInt();
         workOutModeName = in.readString();
         gender = in.readInt();
         age = in.readString();
         weight = in.readString();
         time = in.readString();
+        runningTime = in.readString();
         distance = in.readString();
         calories = in.readString();
-        hrc = in.readString();
         goalType = in.readInt();
+        hrc = in.readString();
         hrcType = in.readInt();
         vrType = in.readInt();
+        levelList = in.createTypedArrayList(Level.CREATOR);
+        currentLevel = in.readParcelable(Level.class.getClassLoader());
     }
 
     public static final Creator<WorkOut> CREATOR = new Creator<WorkOut>() {
@@ -146,6 +154,14 @@ public class WorkOut implements Parcelable {
         this.time = time;
     }
 
+    public String getRunningTime() {
+        return runningTime;
+    }
+
+    public void setRunningTime(String runningTime) {
+        this.runningTime = runningTime;
+    }
+
     public String getDistance() {
         return distance;
     }
@@ -207,12 +223,14 @@ public class WorkOut implements Parcelable {
         parcel.writeString(age);
         parcel.writeString(weight);
         parcel.writeString(time);
+        parcel.writeString(runningTime);
         parcel.writeString(distance);
         parcel.writeString(calories);
         parcel.writeString(hrc);
         parcel.writeInt(goalType);
         parcel.writeInt(hrcType);
         parcel.writeInt(vrType);
-        //34651321
+        parcel.writeTypedList(levelList);
+        parcel.writeParcelable(currentLevel, 0);
     }
 }

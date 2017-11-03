@@ -102,6 +102,7 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
 
     @Override
     protected void init() {
+        workOutInfo = getIntent().getParcelableExtra(Constant.WORK_OUT_INFO);
         genderView.setOnGenderReturn(this);
         keyBoardView.setKeyBoardReturn(this);
         startBtn.setEnabled(false);

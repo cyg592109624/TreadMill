@@ -3,11 +3,9 @@ package com.sunrise.treadmill.fragments.home;
 import android.view.View;
 
 import com.sunrise.treadmill.Constant;
-import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 import com.sunrise.treadmill.interfaces.home.OnModeSelectReturn;
-import com.sunrise.treadmill.utils.LanguageUtils;
 
 import butterknife.OnClick;
 
@@ -44,19 +42,19 @@ public class HomeFragmentPage2Zh extends BaseFragment {
             default:
                 break;
             case R.id.home_app_mode_baidu:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_BAI_DU);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_BAI_DU);
                 break;
             case R.id.home_app_mode_weibo:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_WEI_BO);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_WEI_BO);
                 break;
             case R.id.home_app_mode_i71:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_I71);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_I71);
                 break;
             case R.id.home_app_mode_avin:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_AVIN);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_AVIN);
                 break;
             case R.id.home_app_mode_mp3:
-                selectReturn.onMediaStart(Constant.MEDIA_TYPE_MP_3);
+                selectReturn.onMediaStart(Constant.MODE_MEDIA_MP3);
                 break;
             case R.id.workout_mode_quick_start:
                 selectReturn.onWorkOutSetting(Constant.MODE_QUICK_START);

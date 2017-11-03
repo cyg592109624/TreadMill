@@ -30,7 +30,6 @@ public abstract class BaseActivity extends Activity {
         super.onCreate(savedInstanceState);
         changeSystemUiState();
         setContentView(getLayoutId());
-        workOutInfo=new WorkOut();
         bind = ButterKnife.bind(this);
         setTextStyle();
         init();
@@ -82,7 +81,6 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        System.out.println(getClass().getName() + "  ----  > onDestroy()被调用");
     }
 
     /**

@@ -180,6 +180,7 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
 
     @Override
     protected void init() {
+        workOutInfo = getIntent().getParcelableExtra(Constant.WORK_OUT_INFO);
         infoType1.setVisibility(View.VISIBLE);
         infoType3.setVisibility(View.GONE);
         genderView.setOnGenderReturn(this);

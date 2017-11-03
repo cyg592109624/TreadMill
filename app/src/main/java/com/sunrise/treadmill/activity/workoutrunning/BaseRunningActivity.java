@@ -48,6 +48,9 @@ import butterknife.OnClick;
 public class BaseRunningActivity extends BaseFragmentActivity implements FloatServiceBinder, AnimationsContainer.OnAnimationStoppedListener,
         DialogPauseClick, DialogCoolDownClick, FloatWindowBottomCallBack {
 
+    private int parentWidth;
+    private int parentHeight;
+
     @BindView(R.id.include2)
     ConstraintLayout leftView;
 
@@ -70,8 +73,10 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     @BindView(R.id.workout_running_bottom)
     FloatWindowBottom bottomView;
 
-    private int parentWidth;
-    private int parentHeight;
+    /**
+     * 当前Level 应该由计时器进行更新
+     */
+    private int tgLevel = 10;
 
     public static int showCountDown = 1;
 
@@ -186,12 +191,20 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @Override
     public void onLevelUp() {
+        if (headView.getLevel() >= FloatWindowHead.MAX_LEVEL) {
+            return;
+        }
         headView.levelChange(1);
+        reFlashLevelView();
     }
 
     @Override
     public void onLevelDown() {
+        if (headView.getLevel() <= FloatWindowHead.MIN_LEVEL) {
+            return;
+        }
         headView.levelChange(-1);
+        reFlashLevelView();
     }
 
     @Override
@@ -346,6 +359,18 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
                 bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
             }
         });
+    }
+
+    /**
+     * 更新LevelView
+     */
+    private void reFlashLevelView() {
+        //将浮标移动到指定段位位
+        levelView.setTgLevel(tgLevel);
+        //指定段位的段数
+        levelView.setColumn(tgLevel, headView.getLevel());
+        //刷新(重新绘制onDraw())
+        levelView.reFlashView();
     }
 
     private void showCountDownDialog() {

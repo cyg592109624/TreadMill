@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 public class FloatWindowHead extends ConstraintLayout {
-    public static int curLevel = 0;
+    private int curLevel = 0;
     public static final int MAX_LEVEL = 36;
     public static final int MIN_LEVEL = 0;
 
@@ -90,6 +90,10 @@ public class FloatWindowHead extends ConstraintLayout {
             return;
         }
         levelValue.setText(curLevel + "");
+    }
+
+    public int getLevel() {
+        return curLevel;
     }
 
     public void setLevelValue(int i) {
