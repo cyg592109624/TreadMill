@@ -143,7 +143,7 @@ public class VirtualRealityActivity extends BaseFragmentActivity implements View
                 setValueDialog = new VirtualSetValueDialog();
             }
             setValueDialog.setArguments(bundle);
-            setValueDialog.show(fragmentManager, VirtualSetValueDialog.TAG);
+            setValueDialog.show(fragmentManager, Constant.TAG);
         }
     }
 

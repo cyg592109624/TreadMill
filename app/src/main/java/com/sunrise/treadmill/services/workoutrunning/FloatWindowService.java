@@ -200,7 +200,6 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     @Override
     public void onStartClick() {
-        sportTimer.start();
         floatWindowBottom.hideHomeBtn();
         floatWindowBottom.showBackBtn();
 
@@ -268,8 +267,12 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         this.activity = act;
     }
 
-    public void onLevelChange(int value) {
-        floatWindowHead.setLevelValue(value);
+    public void setWorkOutInfo(WorkOut workOut) {
+        workOutInfo = workOut;
+    }
+
+    public WorkOut getWorkOutInfo() {
+        return workOutInfo;
     }
 
     /**
@@ -371,10 +374,11 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
                     default:
                         break;
                     case R.id.workout_running_pause_quit:
-                        mWindowManager.removeView(dialogPause);
-                        mWindowManager.addView(dialogCoolDown,dialogParams);
-                        //这里需要插入一个计时器 3分钟自动跳转到summary界面
                         sportTimer.cancel();
+
+                        mWindowManager.removeView(dialogPause);
+                        mWindowManager.addView(dialogCoolDown, dialogParams);
+                        //这里需要插入一个计时器 3分钟自动跳转到summary界面
                         break;
                     case R.id.workout_running_pause_continue:
                         mWindowManager.removeView(dialogPause);

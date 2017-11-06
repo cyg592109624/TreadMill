@@ -16,7 +16,6 @@ import butterknife.BindView;
  */
 
 public class InitialiteDialog extends BaseDialogFragment {
-    public static final String TAG = "InitialiteDialog";
 
     private OnInitialReturn onInitialReturn;
     private boolean isShowing = false;

@@ -27,7 +27,6 @@ import butterknife.BindView;
  */
 
 public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoardReturn {
-    public static final String TAG = "GoalSetValueDialog";
     @BindView(R.id.dialog_workout_goal_value)
     TextView editValue;
     @BindView(R.id.dialog_workout_goal_keyboard)

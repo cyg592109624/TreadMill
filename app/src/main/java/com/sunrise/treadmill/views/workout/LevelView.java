@@ -77,9 +77,15 @@ public class LevelView extends View {
      */
     private float levelHeight = 0;
 
-    private int levelCount = 36;
+    /**
+     * 一共36阶
+     */
+    public static final int levelCount = 36;
 
-    private int columnCount = 30;
+    /**
+     * 时间将分为30份
+     */
+    public static final int columnCount = 30;
 
     private LevelColumn[] rectList;
 
@@ -125,8 +131,15 @@ public class LevelView extends View {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.levelView);
         columnMargin = ta.getFloat(R.styleable.levelView_columnMargin, 2f);
         slideEnable = ta.getBoolean(R.styleable.levelView_slideEnable, true);
+
+        topSpace = ta.getFloat(R.styleable.levelView_topSpace, 2f);
+        rightSpace = ta.getFloat(R.styleable.levelView_rightSpace, 2f);
+        bottomSpace = ta.getFloat(R.styleable.levelView_bottomSpace, 2f);
+        leftSpace = ta.getFloat(R.styleable.levelView_leftSpace, 2f);
+
         int opWidth = ta.getInt(R.styleable.levelView_buoyBitmapWidth, -1);
         int opHeight = ta.getInt(R.styleable.levelView_buoyBitmapHeight, -1);
+
         ta.recycle();
         ta = null;
         if (opWidth > 1 && opHeight > 1) {
@@ -143,16 +156,10 @@ public class LevelView extends View {
     }
 
     public void calcLength() {
-        topSpace = viewHeight * 0.191f;
-        bottomSpace = viewHeight * 0.095f;
-        leftSpace = viewWidth * 0.007f;
-        rightSpace = viewWidth * 0.008f;
-
-        columnWidth = (viewWidth - ((columnMargin * 29) + leftSpace + rightSpace)) / 30;
-
-        columnStartArea = viewHeight - bottomSpace;
-        maxTall = columnStartArea - topSpace;
-        levelHeight = maxTall / levelCount;
+        columnWidth = Math.round(((viewWidth - ((columnMargin * 29) + leftSpace + rightSpace)) / 30) * 1000f) / 1000f;
+        columnStartArea = Math.round((viewHeight - bottomSpace) * 1000f) / 1000f;
+        maxTall = Math.round((columnStartArea - topSpace) * 1000f) / 1000f;
+        levelHeight = Math.round((maxTall / levelCount) * 1000f) / 1000f;
 
         mPaint.setTextSize(bottomSpace * 0.8f);
     }
@@ -186,8 +193,11 @@ public class LevelView extends View {
         calcBuoyLeft();
     }
 
+    /**
+     * 将浮标移动到指定位置
+     */
     private void calcBuoyLeft() {
-        buoyLeft = leftSpace + (columnMargin + columnWidth) * tgLevel;
+        buoyLeft =(columnMargin + columnWidth) * tgLevel;
     }
 
     public void reFlashView() {

@@ -19,15 +19,14 @@ import butterknife.OnClick;
  */
 
 public class CoolDownDialog extends BaseDialogFragment {
-    public static final String TAG = "CoolDownDialog";
     private DialogCoolDownClick dialogClick;
     private int delayTime = 60000 * 3;
     private ScheduledExecutorService pool;
     private TimerTask task = new TimerTask() {
         @Override
         public void run() {
-            dismiss();
             dialogClick.onCoolDownSkip();
+            dismiss();
         }
     };
 
@@ -49,13 +48,12 @@ public class CoolDownDialog extends BaseDialogFragment {
         dialogClick = (BaseRunningActivity) getActivity();
         pool = Executors.newScheduledThreadPool(1);
         pool.schedule(task, delayTime, TimeUnit.MILLISECONDS);
-
     }
 
     @OnClick({R.id.workout_running_cool_down_skip})
     public void onSkip() {
         pool.shutdownNow();
-        dismiss();
         dialogClick.onCoolDownSkip();
+        dismiss();
     }
 }

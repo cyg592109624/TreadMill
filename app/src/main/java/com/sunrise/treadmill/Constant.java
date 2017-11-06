@@ -5,7 +5,12 @@ package com.sunrise.treadmill;
  */
 
 public class Constant {
+    /**
+     * 第一次启动时的校正动作
+     */
     public static int initialFinish = -1;
+
+    public static String TAG="";
 
     public static final String APP_LANGUAGE = "APP_LANGUAGE";
 
@@ -98,6 +103,10 @@ public class Constant {
 
     public static final int GENDER_MALE = 0;
     public static final int GENDER_FEMALE = 1;
+
+
+    public static final int MAX_LEVEL = 36;
+    public static final int MIN_LEVEL = 0;
 
     public static final String FACTORY2_MODE_DISPLAY = "FACTORY2_MODE_DISPLAY";
     public static final String FACTORY2_MODE_PAUSE = "FACTORY2_MODE_PAUSE";

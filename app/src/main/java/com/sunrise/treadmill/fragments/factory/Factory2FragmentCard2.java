@@ -131,6 +131,6 @@ public class Factory2FragmentCard2 extends BaseFragment {
 
             }
         });
-        dialog.show(fragmentManager, Factory2FragmentCard2Dialog.TAG);
+        dialog.show(fragmentManager, Constant.TAG);
     }
 }

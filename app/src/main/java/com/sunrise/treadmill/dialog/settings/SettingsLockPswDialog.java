@@ -14,7 +14,6 @@ import butterknife.BindView;
  */
 
 public class SettingsLockPswDialog extends BaseDialogFragment {
-    public static final String TAG = "SettingsLockPswDialog";
 
     @BindView(R.id.dialog_settings_lock_key_board)
     MyKeyBoardView keyBoardView;

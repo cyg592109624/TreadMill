@@ -29,7 +29,6 @@ import butterknife.OnClick;
  */
 
 public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBoardReturn {
-    public static final String TAG = "VirtualSetValueDialog";
 
     @BindView(R.id.dialog_workout_vr_img)
     ImageView vrImage;

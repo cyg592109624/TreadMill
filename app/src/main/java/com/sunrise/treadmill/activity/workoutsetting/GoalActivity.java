@@ -133,7 +133,7 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
                 dialog = new GoalSetValueDialog();
             }
             dialog.setArguments(bundle);
-            dialog.show(fragmentManager, GoalSetValueDialog.TAG);
+            dialog.show(fragmentManager, Constant.TAG);
         }
     }
 

@@ -272,7 +272,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @OnClick(R.id.home_btn_language)
     public void changeLanguage() {
         LanguageDialog languageDialog = new LanguageDialog();
-        languageDialog.show(fragmentManager, LanguageDialog.TAG);
+        languageDialog.show(fragmentManager, Constant.TAG);
     }
 
     @OnClick(R.id.home_btn_setting)
@@ -286,7 +286,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
             @Override
             public void run() {
                 InitialiteDialog initialiteDialog = new InitialiteDialog();
-                initialiteDialog.show(fragmentManager, InitialiteDialog.TAG);
+                initialiteDialog.show(fragmentManager, Constant.TAG);
             }
         });
     }

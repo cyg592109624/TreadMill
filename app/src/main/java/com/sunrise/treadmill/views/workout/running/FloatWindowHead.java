@@ -21,8 +21,6 @@ import java.util.List;
 
 public class FloatWindowHead extends ConstraintLayout {
     private int curLevel = 0;
-    public static final int MAX_LEVEL = 36;
-    public static final int MIN_LEVEL = 0;
 
     TextView levelValue, timeValue, distanceValue, caloriesValue, pulseValue, wattValue, speedValue;
 
@@ -81,12 +79,12 @@ public class FloatWindowHead extends ConstraintLayout {
 
     public void levelChange(int i) {
         curLevel += i;
-        if (curLevel > MAX_LEVEL) {
-            curLevel = MAX_LEVEL;
+        if (curLevel > Constant.MAX_LEVEL) {
+            curLevel = Constant.MAX_LEVEL;
             return;
         }
-        if (curLevel < MIN_LEVEL) {
-            curLevel = MIN_LEVEL;
+        if (curLevel < Constant.MIN_LEVEL) {
+            curLevel = Constant.MIN_LEVEL;
             return;
         }
         levelValue.setText(curLevel + "");

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
@@ -144,7 +145,7 @@ public class SettingsLockActivity extends BaseFragmentActivity implements OnKeyB
 
     private void showLockDialog() {
         pswDialog = new SettingsLockPswDialog();
-        pswDialog.show(fragmentManager, SettingsLockPswDialog.TAG);
+        pswDialog.show(fragmentManager, Constant.TAG);
     }
 
     private void editView() {

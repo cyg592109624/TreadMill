@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
 
 import butterknife.ButterKnife;
@@ -24,7 +25,7 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseDialogFragment extends DialogFragment {
-    public static final int DIALOG_WIDTH = 10000;
+
     private Unbinder bind;
     public View parentView;
     public Context fragmentContext;
@@ -41,6 +42,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         parentView = inflater.inflate(getLayoutId(), container, false);
         changeSystemUiState();
         fragmentContext = ((BaseFragmentActivity) getActivity()).activityContext;
+        Constant.TAG=getClass().getSimpleName();
         return parentView;
     }
 

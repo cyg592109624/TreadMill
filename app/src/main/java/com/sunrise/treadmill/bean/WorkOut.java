@@ -27,7 +27,7 @@ public class WorkOut implements Parcelable {
     /**
      * 这里以min为单位
      */
-    private String time = "20";
+    private String time = "6";
 
     /**
      * 已经运动时间 以秒为单位

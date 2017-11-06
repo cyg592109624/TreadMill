@@ -13,7 +13,6 @@ import butterknife.OnClick;
  */
 
 public class Factory2FragmentCard2Dialog extends BaseDialogFragment {
-    public static final String TAG = "Factory2FragmentCard2Dialog";
     private OnFactory2Fragment2Card2DialogReturn dialogReturn;
 
     @Override

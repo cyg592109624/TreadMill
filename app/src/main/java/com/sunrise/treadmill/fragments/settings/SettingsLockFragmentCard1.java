@@ -148,8 +148,10 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
             distanceValue.setText(GlobalSetting.Setting_Distance);
             remainingDistanceValue.setText(GlobalSetting.Setting_RemainingDistance);
         } else {
-            distanceValue.setText(UnitUtils.km2mile(GlobalSetting.Setting_Distance) + "");
-            remainingDistanceValue.setText(UnitUtils.km2mile(GlobalSetting.Setting_RemainingDistance) + "");
+            String dis = UnitUtils.km2mile(GlobalSetting.Setting_Distance) + "";
+            distanceValue.setText(dis);
+            dis = UnitUtils.km2mile(GlobalSetting.Setting_RemainingDistance) + "";
+            remainingDistanceValue.setText(dis);
         }
     }
 
@@ -179,12 +181,14 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
             return;
         }
         switch (reSetTG) {
+            default:
+                break;
             case RE_SET_TIME:
                 timeValue.setText(result);
                 GlobalSetting.Setting_Time = result;
                 SharedPreferencesUtils.put(getContext(), Constant.SETTING_TIME, GlobalSetting.Setting_Time);
 
-                int min = Integer.valueOf(result) * 60;
+                Long min = Long.valueOf(result) * 60L;
                 GlobalSetting.Setting_RemainingTime = "" + min;
                 SharedPreferencesUtils.put(getContext(), Constant.SETTING_REMAINING_TIME, GlobalSetting.Setting_RemainingTime);
                 remainingTimeValue.setText("" + min);
@@ -205,8 +209,6 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
                     GlobalSetting.Setting_RemainingDistance = "" + UnitUtils.mile2km(result);
                     SharedPreferencesUtils.put(getContext(), Constant.SETTING_REMAINING_DISTANCE, GlobalSetting.Setting_RemainingDistance);
                 }
-                break;
-            default:
                 break;
         }
     }

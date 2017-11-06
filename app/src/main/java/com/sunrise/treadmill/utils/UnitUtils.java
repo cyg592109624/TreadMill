@@ -5,10 +5,17 @@ package com.sunrise.treadmill.utils;
  */
 
 public class UnitUtils {
-    private static final float A1 = 0.6213f;
-    private static final float A2 = 1.6093f;
-    private static final float A3 = 2.2046f;
-    private static final float A4 = 0.4535f;
+    /**
+     * 公里转英里
+     */
+    private static final float A1 = 0.6f;
+
+
+    /**
+     * 千克转磅
+     */
+    private static final float A2 = 2.2f;
+
 
     /**
      * 公里转英里
@@ -16,7 +23,7 @@ public class UnitUtils {
      * @return
      */
     public static float km2mile(float km) {
-        return km * A1;
+        return (float) Math.round(km / A1 * 10) / 10;
     }
 
     /**
@@ -39,7 +46,7 @@ public class UnitUtils {
      * @return
      */
     public static float mile2km(float mile) {
-        return mile * A2;
+        return (float) Math.round(mile * A1 * 10) / 10;
     }
 
     /**
@@ -62,7 +69,7 @@ public class UnitUtils {
      * @return
      */
     public static float kg2lb(float kg) {
-        return kg * A3;
+        return (float) Math.round(kg * A2 * 10) / 10;
     }
 
     /**
@@ -85,7 +92,7 @@ public class UnitUtils {
      * @return
      */
     public static float lb2kg(float lb) {
-        return lb * A4;
+        return (float) Math.round(lb / A2 * 10) / 10;
     }
 
     /**

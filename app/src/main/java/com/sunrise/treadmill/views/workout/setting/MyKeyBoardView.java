@@ -26,7 +26,7 @@ public class MyKeyBoardView extends LinearLayout {
     private TextView showText;
     private OnKeyBoardReturn keyBoardReturn;
     private int changeType = WorkOutSettingCommon.RE_SET;
-    private final int EDIT_MAX = 999;
+    private final int EDIT_MAX = 10;
 
     private int changeTypeMax;
     private int changeTypeMin;
@@ -66,15 +66,8 @@ public class MyKeyBoardView extends LinearLayout {
         @Override
         public void onClick(View view) {
             String oldText = showText.getText().toString();
-            int tg = -1;
-            if (!"".equals(oldText)) {
-                tg = Integer.valueOf(oldText);
-                if (changeType != WorkOutSettingCommon.RE_SET) {
-                    if (tg >= EDIT_MAX || oldText.length() >= 3) {
-                        showText.setText(EDIT_MAX + "");
-                        return;
-                    }
-                }
+            if (oldText.length() >= EDIT_MAX) {
+                return;
             }
             switch (view.getId()) {
                 case R.id.key_board_0:
@@ -108,8 +101,7 @@ public class MyKeyBoardView extends LinearLayout {
                     oldText = oldText + "9";
                     break;
             }
-            tg = Integer.valueOf(oldText);
-            showText.setText(tg + "");
+            showText.setText(oldText);
         }
     };
 
@@ -143,14 +135,10 @@ public class MyKeyBoardView extends LinearLayout {
     };
 
     private String reCalc(String editText) {
-        if (changeType == WorkOutSettingCommon.RE_SET) {
-            return editText;
-        } else {
+        if (changeType != WorkOutSettingCommon.RE_SET) {
             String result = "";
-            if (result.equals(editText)) {
-                return result;
-            }else {
-                int value = Integer.valueOf(editText);
+            if(!result.equals(editText)){
+                long value = Long.valueOf(editText);
                 if (value <= changeTypeMin) {
                     result = changeTypeMin + "";
                 } else if (value >= changeTypeMax) {
@@ -160,7 +148,9 @@ public class MyKeyBoardView extends LinearLayout {
                 }
                 return result;
             }
+            return result;
         }
+        return editText;
     }
 
 

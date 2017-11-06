@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.widget.ImageView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.dialog.home.NfcDialog;
@@ -69,7 +70,7 @@ public class NfcActivity extends BaseFragmentActivity {
                 case SHOW_ERROR:
                     stopChange = true;
                     nfcDialog = new NfcDialog();
-                    nfcDialog.show(fragmentManager, NfcDialog.TAG);
+                    nfcDialog.show(fragmentManager, Constant.TAG);
                     break;
             }
         }

@@ -20,7 +20,6 @@ import butterknife.OnClick;
  */
 
 public class PauseDialog extends BaseDialogFragment {
-    public static final String TAG = "PauseDialog";
     private DialogPauseClick pauseDialogClick;
     private ScheduledExecutorService pool;
     private int delayTime=60000*3;

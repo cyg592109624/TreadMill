@@ -5,4 +5,5 @@ package com.sunrise.treadmill.activity.workoutrunning;
  */
 
 public class QuickStartRunningActivity extends BaseRunningActivityEn {
+
 }
