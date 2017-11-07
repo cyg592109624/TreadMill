@@ -87,7 +87,10 @@ public class LevelView extends View {
      */
     public static final int columnCount = 30;
 
-    private LevelColumn[] rectList;
+    /**
+     * 柱状数组
+     */
+    private LevelColumn[] levelColumns;
 
     private boolean slideEnable = true;
 
@@ -126,7 +129,7 @@ public class LevelView extends View {
             mPaint.setTypeface(TextUtils.Arial(context));
         }
 
-        rectList = new LevelColumn[columnCount];
+        levelColumns = new LevelColumn[columnCount];
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.levelView);
         columnMargin = ta.getFloat(R.styleable.levelView_columnMargin, 2f);
@@ -155,6 +158,9 @@ public class LevelView extends View {
         calcLength();
     }
 
+    /**
+     * 重新测量布局数据
+     */
     public void calcLength() {
         columnWidth = Math.round(((viewWidth - ((columnMargin * 29) + leftSpace + rightSpace)) / 30) * 1000f) / 1000f;
         columnStartArea = Math.round((viewHeight - bottomSpace) * 1000f) / 1000f;
@@ -163,11 +169,6 @@ public class LevelView extends View {
 
         mPaint.setTextSize(bottomSpace * 0.8f);
     }
-
-    public void setColumnMargin(float columnMargin) {
-        this.columnMargin = columnMargin;
-    }
-
 
     public void setBuoyBitmap(int optionsWidth, int optionsHeight) {
         if (optionsWidth < 0 | optionsHeight < 0) {
@@ -197,46 +198,65 @@ public class LevelView extends View {
      * 将浮标移动到指定位置
      */
     private void calcBuoyLeft() {
-        buoyLeft =(columnMargin + columnWidth) * tgLevel;
+        buoyLeft = (columnMargin + columnWidth) * tgLevel;
     }
 
     public void reFlashView() {
         invalidate();
     }
 
+    /**
+     * 获取每阶段的段数
+     *
+     * @return
+     */
     public List<Level> getLevelList() {
         List<Level> list = new ArrayList<>();
-        for (LevelColumn column : rectList) {
+        for (LevelColumn column : levelColumns) {
+            Level level = new Level();
             if (column != null) {
-                Level level = new Level();
                 level.setLevel(column.getLevel());
-                list.add(level);
+            } else {
+                level.setLevel(0);
             }
+            list.add(level);
         }
         return list;
+    }
+
+    /**
+     * 将段数写入数组
+     *
+     * @param levelList
+     */
+    public void setLevelList(List<Level> levelList) {
+        for (int i = 0; i < columnCount; i++) {
+            Level level = levelList.get(i);
+            setColumn(i, level.getLevel());
+        }
     }
 
 
     /**
      * 设置某一段位的段数
      *
-     * @param level 段位 0-30
-     * @param rank  段数 0-36;
+     * @param rank  段位 0-29
+     * @param level 段数 0-36;
      */
-    public void setColumn(int level, int rank) {
-        if ((level > columnCount | level < -1) | (rank > levelCount | rank < -1)) {
+    public void setColumn(int rank, int level) {
+        if ((rank >= columnCount | rank < -1) | (level > levelCount | level < -1)) {
             return;
         }
-        LevelColumn cell = rectList[level];
+        LevelColumn cell = levelColumns[rank];
         if (cell == null) {
             cell = new LevelColumn();
         }
-        cell.setToX1(leftSpace + columnWidth * level + columnMargin * level);
-        cell.setToX2(leftSpace + columnWidth * (level + 1) + columnMargin * level);
-        cell.setToY1(topSpace + levelHeight * (levelCount - rank));
+        cell.setToX1(leftSpace + columnWidth * rank + columnMargin * rank);
+        cell.setToX2(leftSpace + columnWidth * (rank + 1) + columnMargin * rank);
+        cell.setToY1(topSpace + levelHeight * (levelCount - level));
         cell.setToY2(columnStartArea);
-        cell.setLevel(rank);
-        rectList[level] = cell;
+        cell.setLevel(level);
+        levelColumns[rank] = cell;
     }
 
     @Override
@@ -275,10 +295,6 @@ public class LevelView extends View {
         return true;
     }
 
-    public void setSlideEnable(boolean slideEnable) {
-        this.slideEnable = slideEnable;
-    }
-
     private void calcPoint() {
         float left = 0, right = 0, top = 0, bottom = 0;
         top = toY;
@@ -299,10 +315,10 @@ public class LevelView extends View {
             }
         }
         if (tg != -1) {
-            LevelColumn cell = rectList[tg];
+            LevelColumn cell = levelColumns[tg];
             if (cell == null) {
                 cell = new LevelColumn();
-                rectList[tg] = cell;
+                levelColumns[tg] = cell;
             }
             for (int i = 0; i < levelCount; i++) {
                 if (toY > (columnStartArea - levelHeight * (i + 1)) && toY < (columnStartArea - levelHeight * i)) {
@@ -318,7 +334,7 @@ public class LevelView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        for (LevelColumn cell : rectList) {
+        for (LevelColumn cell : levelColumns) {
             if (cell != null) {
                 canvas.drawRect(cell.getToX1(), cell.getToY1(), cell.getToX2(), cell.getToY2(), mPaint);
             }
@@ -335,6 +351,6 @@ public class LevelView extends View {
             buoyBitmap.recycle();
         }
         buoyBitmap = null;
-        rectList = null;
+        levelColumns = null;
     }
 }

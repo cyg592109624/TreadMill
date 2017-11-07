@@ -32,7 +32,7 @@ public class LineChat extends View {
     private Paint mGesturePaint = new Paint();
     private Path mPath = new Path();
     private List<Integer> data;
-    private int dataSize = 31;
+    private int dataSize = 30;
     private int rankCount = 36;
 
     public LineChat(Context context, @Nullable AttributeSet attrs) {

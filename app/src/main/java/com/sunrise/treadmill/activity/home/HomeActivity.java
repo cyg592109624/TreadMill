@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.LogoActivity;
 import com.sunrise.treadmill.activity.factory.FactoriesActivity;
 import com.sunrise.treadmill.activity.settings.SettingsActivity;
 import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity;
@@ -21,6 +22,7 @@ import com.sunrise.treadmill.activity.workoutsetting.UserProgramActivity;
 import com.sunrise.treadmill.activity.workoutsetting.VirtualRealityActivity;
 import com.sunrise.treadmill.adapter.home.HomeViewPageAdapter;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
+import com.sunrise.treadmill.bean.Level;
 import com.sunrise.treadmill.bean.WorkOut;
 import com.sunrise.treadmill.dialog.home.InitialiteDialog;
 import com.sunrise.treadmill.dialog.home.LanguageDialog;
@@ -38,6 +40,7 @@ import com.sunrise.treadmill.views.LogoImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -169,7 +172,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @Override
     public void onLanguageReturn(boolean isChange) {
         if (isChange) {
-            Intent intent = new Intent(activityContext, HomeActivity.class);
+            Intent intent = new Intent(activityContext, LogoActivity.class);
             finishActivity();
             startActivity(intent);
         }
@@ -204,11 +207,22 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
                 break;
             case Constant.MODE_QUICK_START:
                 intent = new Intent(HomeActivity.this, QuickStartRunningActivity.class);
+                Random random = new Random();
+                int max = 36;
+                int min = 1;
+                List<Level> array = new ArrayList<>();
+                for (int i = 0; i < 30; i++) {
+                    Level level = new Level();
+                    level.setLevel(random.nextInt(max) % (max - min + 1) + min);
+                    array.add(level);
+                }
+                workOutInfo.setLevelList(array);
+
                 break;
         }
         if (serviceIntent != null) {
             stopService(serviceIntent);
-            serviceIntent=null;
+            serviceIntent = null;
         }
         if (intent != null) {
             intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);

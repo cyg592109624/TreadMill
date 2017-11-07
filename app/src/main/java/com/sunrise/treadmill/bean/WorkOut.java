@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.sunrise.treadmill.Constant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public class WorkOut implements Parcelable {
     /**
      * 这里以min为单位
      */
-    private String time = "6";
+    private String time = "2";
 
     /**
      * 已经运动时间 以秒为单位
@@ -48,9 +49,7 @@ public class WorkOut implements Parcelable {
 
     private int vrType;
 
-    private List<Level> levelList;
-    //当前Level
-    private Level currentLevel;
+    private List<Level> levelList = new ArrayList<>();
 
     public WorkOut() {
         new WorkOut(Parcel.obtain());
@@ -70,8 +69,7 @@ public class WorkOut implements Parcelable {
         hrc = in.readString();
         hrcType = in.readInt();
         vrType = in.readInt();
-        levelList = in.createTypedArrayList(Level.CREATOR);
-        currentLevel = in.readParcelable(Level.class.getClassLoader());
+        in.readTypedList(levelList, Level.CREATOR);
     }
 
     public static final Creator<WorkOut> CREATOR = new Creator<WorkOut>() {
@@ -202,14 +200,6 @@ public class WorkOut implements Parcelable {
         this.levelList = levelList;
     }
 
-    public Level getCurrentLevel() {
-        return currentLevel;
-    }
-
-    public void setCurrentLevel(Level currentLevel) {
-        this.currentLevel = currentLevel;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -226,11 +216,10 @@ public class WorkOut implements Parcelable {
         parcel.writeString(runningTime);
         parcel.writeString(distance);
         parcel.writeString(calories);
-        parcel.writeString(hrc);
         parcel.writeInt(goalType);
+        parcel.writeString(hrc);
         parcel.writeInt(hrcType);
         parcel.writeInt(vrType);
         parcel.writeTypedList(levelList);
-        parcel.writeParcelable(currentLevel, 0);
     }
 }

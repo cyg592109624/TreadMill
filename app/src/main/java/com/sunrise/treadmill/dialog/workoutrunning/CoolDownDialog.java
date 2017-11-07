@@ -1,6 +1,7 @@
 package com.sunrise.treadmill.dialog.workoutrunning;
 
-import android.content.DialogInterface;
+import android.app.Dialog;
+import android.os.Bundle;
 
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutrunning.BaseRunningActivity;
@@ -35,6 +36,12 @@ public class CoolDownDialog extends BaseDialogFragment {
         return R.layout.dialog_workout_running_cool_down;
     }
 
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = new Dialog(getContext(), R.style.Dialog_No_BG);
+        return dialog;
+    }
     @Override
     public void recycleObject() {
         dialogClick = null;
