@@ -32,13 +32,13 @@ public class FloatWindowHead extends ConstraintLayout {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.float_window_workout_running_head, this, true);
 
-        levelValue = (TextView) findViewById(R.id.workout_running_head_level_value);
-        timeValue = (TextView) findViewById(R.id.workout_running_head_time_value);
-        distanceValue = (TextView) findViewById(R.id.workout_running_head_distance_value);
-        caloriesValue = (TextView) findViewById(R.id.workout_running_head_calories_value);
-        pulseValue = (TextView) findViewById(R.id.workout_running_head_pulse_value);
-        wattValue = (TextView) findViewById(R.id.workout_running_head_watt_value);
-        speedValue = (TextView) findViewById(R.id.workout_running_head_speed_value);
+        levelValue = (TextView) this.findViewById(R.id.workout_running_head_level_value);
+        timeValue = (TextView) this.findViewById(R.id.workout_running_head_time_value);
+        distanceValue = (TextView) this.findViewById(R.id.workout_running_head_distance_value);
+        caloriesValue = (TextView) this.findViewById(R.id.workout_running_head_calories_value);
+        pulseValue = (TextView) this.findViewById(R.id.workout_running_head_pulse_value);
+        wattValue = (TextView) this.findViewById(R.id.workout_running_head_watt_value);
+        speedValue = (TextView) this.findViewById(R.id.workout_running_head_speed_value);
         levelValue.setText("" + curLevel);
         setTextStyle();
     }
@@ -46,13 +46,13 @@ public class FloatWindowHead extends ConstraintLayout {
 
     private void setTextStyle() {
         List<TextView> txtList = new ArrayList<>();
-        txtList.add((TextView) findViewById(R.id.workout_running_head_level));
-        txtList.add((TextView) findViewById(R.id.workout_running_head_time));
-        txtList.add((TextView) findViewById(R.id.workout_running_head_distance));
-        txtList.add((TextView) findViewById(R.id.workout_running_head_calories));
-        txtList.add((TextView) findViewById(R.id.workout_running_head_pulse));
-        txtList.add((TextView) findViewById(R.id.workout_running_head_watt));
-        txtList.add((TextView) findViewById(R.id.workout_running_head_speed));
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_level));
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_time));
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_distance));
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_calories));
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_pulse));
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_watt));
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_speed));
 
         txtList.add(levelValue);
         txtList.add(timeValue);

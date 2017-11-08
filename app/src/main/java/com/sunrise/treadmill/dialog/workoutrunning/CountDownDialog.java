@@ -43,6 +43,6 @@ public class CountDownDialog extends BaseDialogFragment {
                 animation.stop();
                 dismiss();
             }
-        }, 4100);
+        }, 3900);
     }
 }

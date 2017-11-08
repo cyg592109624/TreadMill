@@ -230,9 +230,14 @@ public class LevelView extends View {
      * @param levelList
      */
     public void setLevelList(List<Level> levelList) {
-        for (int i = 0; i < columnCount; i++) {
+        if (levelList.size() < columnCount) {
+            return;
+        }
+        int start = (levelList.size() / columnCount) - 1;
+        start = start * 30;
+        for (int i = start; i < levelList.size(); i++) {
             Level level = levelList.get(i);
-            setColumn(i, level.getLevel());
+            setColumn(i - start, level.getLevel());
         }
     }
 

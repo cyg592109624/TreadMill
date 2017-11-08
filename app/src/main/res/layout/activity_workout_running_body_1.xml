@@ -64,7 +64,7 @@
         android:background="@mipmap/img_sportmode_profile_level_1"
         app:buoyBitmapHeight="9"
         app:buoyBitmapWidth="9"
-        app:columnMargin="0.9"
+        app:columnMargin="1"
         app:topSpace="23.8"
         app:rightSpace="1.2"
         app:bottomSpace="12.3"

@@ -277,6 +277,16 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_I71);
                 break;
         }
+        Random random = new Random();
+        int max = 36;
+        int min = 1;
+        List<Level> array = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            Level level = new Level();
+            level.setLevel(random.nextInt(max) % (max - min + 1) + min);
+            array.add(level);
+        }
+        workOutInfo.setLevelList(array);
         serviceIntent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
 
         startService(serviceIntent);

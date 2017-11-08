@@ -10,7 +10,7 @@ public class Constant {
      */
     public static int initialFinish = -1;
 
-    public static String TAG="";
+    public static String TAG = "";
 
     public static final String APP_LANGUAGE = "APP_LANGUAGE";
 
@@ -124,11 +124,18 @@ public class Constant {
 
 
     public static final String SHOW_COUNT_DOWN = "SHOW_COUNT_DOWN";
-    public static final int SHOW_COUNT_DOWN_TRUE = 1;
-    public static final int SHOW_COUNT_DOWN_FALSE = 2;
+
+    public static final int SHOW_COUNT_DOWN_TYPE_1 = 1;
+    public static final int SHOW_COUNT_DOWN_TYPE_2 = 2;
+    public static final int SHOW_COUNT_DOWN_TYPE_3 = 3;
 
 
     public static final String WORK_OUT_INFO = "WORK_OUT_INFO";
+    public static final int COUNTDOWN_FLAG = 5;
 
+    /**
+     * 暂停,冷却对话框等待时间
+     */
+    public static final long DIALOG_WAIT_TIME = 60 * 3 * 1000L;
 
 }

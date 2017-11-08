@@ -6,6 +6,8 @@ import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
+import com.sunrise.treadmill.bean.WorkOut;
+import com.sunrise.treadmill.utils.DateUtil;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 
@@ -28,10 +30,11 @@ public class SummaryFragmentPage1 extends BaseFragment {
     TextView caloriesValue;
 
     @BindView(R.id.summary_fragment1_avg_heart_rate_value)
-    TextView heartRateValue;
+    TextView heartRateAvgValue;
     @BindView(R.id.summary_fragment1_avg_speed_value)
     TextView speedValue;
 
+    private WorkOut workOutInfo;
 
     @Override
     public int getLayoutId() {
@@ -43,7 +46,7 @@ public class SummaryFragmentPage1 extends BaseFragment {
         timeValue = null;
         distanceValue = null;
         caloriesValue = null;
-        heartRateValue = null;
+        heartRateAvgValue = null;
         speedValue = null;
     }
 
@@ -66,7 +69,7 @@ public class SummaryFragmentPage1 extends BaseFragment {
         txtList.add((TextView) parentView.findViewById(R.id.summary_fragment1_calories_value));
 
         txtList.add((TextView) parentView.findViewById(R.id.summary_fragment1_avg_heart_rate));
-        txtList.add(heartRateValue);
+        txtList.add(heartRateAvgValue);
         txtList.add((TextView) parentView.findViewById(R.id.summary_fragment1_avg_heart_rate_unit));
 
         txtList.add((TextView) parentView.findViewById(R.id.summary_fragment1_avg_speed));
@@ -91,4 +94,13 @@ public class SummaryFragmentPage1 extends BaseFragment {
         txtList = null;
     }
 
+    @Override
+    protected void init() {
+        workOutInfo = getActivity().getIntent().getParcelableExtra(Constant.WORK_OUT_INFO);
+        if (workOutInfo != null) {
+            timeValue.setText(DateUtil.getFormatMMSS(Long.valueOf(workOutInfo.getRunningTime())));
+            distanceValue.setText(workOutInfo.getDistance());
+            caloriesValue.setText(workOutInfo.getCalories());
+        }
+    }
 }

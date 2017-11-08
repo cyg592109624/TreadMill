@@ -3,6 +3,7 @@ package com.sunrise.treadmill.dialog.workoutrunning;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.workoutrunning.BaseRunningActivity;
 import com.sunrise.treadmill.base.BaseDialogFragment;
@@ -22,7 +23,6 @@ import butterknife.OnClick;
 public class PauseDialog extends BaseDialogFragment {
     private DialogPauseClick pauseDialogClick;
     private ScheduledExecutorService pool;
-    private int delayTime=60000*3;
     private TimerTask task=new TimerTask() {
         @Override
         public void run() {
@@ -53,7 +53,7 @@ public class PauseDialog extends BaseDialogFragment {
     protected void init() {
         pauseDialogClick=(BaseRunningActivity)getActivity();
         pool = Executors.newScheduledThreadPool(1);
-        pool.schedule(task, delayTime, TimeUnit.MILLISECONDS);
+        pool.schedule(task, Constant.DIALOG_WAIT_TIME, TimeUnit.MILLISECONDS);
     }
 
     @OnClick(R.id.workout_running_pause_quit)

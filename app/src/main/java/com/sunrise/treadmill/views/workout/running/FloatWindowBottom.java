@@ -167,7 +167,7 @@ public class FloatWindowBottom extends ConstraintLayout {
                 msg.what = vid;
                 handler.sendMessage(msg);
             }
-        }, 0, 200, TimeUnit.MILLISECONDS);    //每间隔100ms发送Message
+        }, 0, 150, TimeUnit.MILLISECONDS);    //每间隔100ms发送Message
     }
 
     private void stopAddOrSubtract() {

@@ -23,7 +23,6 @@ import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.summary.SummaryActivity;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.bean.Level;
-import com.sunrise.treadmill.bean.WorkOut;
 import com.sunrise.treadmill.dialog.workoutrunning.CoolDownDialog;
 import com.sunrise.treadmill.dialog.workoutrunning.CountDownDialog;
 import com.sunrise.treadmill.dialog.workoutrunning.PauseDialog;
@@ -42,6 +41,9 @@ import com.sunrise.treadmill.views.workout.running.FloatWindowBottom;
 import com.sunrise.treadmill.views.workout.running.FloatWindowHead;
 import com.sunrise.treadmill.views.workout.LevelView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -56,6 +58,19 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     private int parentHeight;
 
 
+    /**
+     * 是否正在展示左右2则的控件
+     */
+    private boolean isShowView = false;
+    /**
+     * 左边控件动画 收放判断
+     */
+    private boolean isAnimLeftView = false;
+    /**
+     * 右边控件动画 收放判断
+     */
+    private boolean isAnimRightView = false;
+
     @BindView(R.id.include2)
     ConstraintLayout leftView;
 
@@ -67,7 +82,6 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @BindView(R.id.workout_running_media_ctr)
     ImageView mediaCtrlImage;
-
 
     @BindView(R.id.workout_running_level_view)
     LevelView levelView;
@@ -96,7 +110,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     private int tgLevel = 0;
 
     /**
-     * 计时器运行次数 当累加时间的时候可以算出 经历了多少次Level(就是说可以突然30这个数值)
+     * 计时器运行次数 当累加时间的时候可以得出 经历了多少次Level迭代(就是说可以突然30这个数值)
      */
     private int timerMissionTimes = 0;
 
@@ -118,22 +132,22 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     /**
      * LevelView中每阶持续时间 根据目前情况决定 以秒为单位
      */
-    private long avgLevelTime = 0;
+    private long avgLevelTime = 0L;
 
     /**
      * 目标运动时间 以秒为单位
      */
-    private long runningTimeTarget = 0;
+    private long runningTimeTarget = 0L;
 
     /**
      * 一共运行多长时间  以秒为单位
      */
-    private long runningTimeTotal = 0;
+    private long runningTimeTotal = 0L;
 
     /**
      * 剩余运动时间  以秒为单位
      */
-    private long runningTimeSurplus = 0;
+    private long runningTimeSurplus = 0L;
 
 
     private ServiceConnection floatWindowConnection = new ServiceConnection() {
@@ -155,11 +169,19 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @Override
     protected void setTextStyle() {
-        TextView levelHint = findViewById(R.id.workout_running_level_view_hint);
+        List<TextView> txtList = new ArrayList<TextView>();
+        txtList.add((TextView) findViewById(R.id.workout_running_level_view_hint));
+        txtList.add((TextView) findViewById(R.id.workout_running_level_view_hint));
+
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(levelHint, TextUtils.Microsoft(activityContext));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(activityContext));
         } else {
-            TextUtils.setTextTypeFace(levelHint, TextUtils.Arial(activityContext));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(activityContext));
+        }
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            txtList.get(5).setText(getResources().getString(R.string.unit_kg));
+        } else {
+            txtList.get(5).setText(getResources().getString(R.string.unit_lb));
         }
     }
 
@@ -185,17 +207,12 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        bindServer();
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     protected void init() {
-        showCountDown = getIntent().getIntExtra(Constant.SHOW_COUNT_DOWN, Constant.SHOW_COUNT_DOWN_TRUE);
+        showCountDown = getIntent().getIntExtra(Constant.SHOW_COUNT_DOWN, Constant.SHOW_COUNT_DOWN_TYPE_1);
         workOutInfo = getIntent().getParcelableExtra(Constant.WORK_OUT_INFO);
 
-        setUpInfo(workOutInfo);
+        setUpInfo();
+        createRunningTimer();
 
         bottomView.setWindowBottomCallBack(BaseRunningActivity.this);
 
@@ -206,27 +223,20 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         parentWidth = dm.widthPixels;
         parentHeight = dm.heightPixels;
         dm = null;
-
     }
 
     /**
      * 将workout信息写入界面 并重调整各个部位的实例对象
-     *
-     * @param workOut
      */
-    protected void setUpInfo(WorkOut workOut) {
-        if (workOut == null) {
-            return;
-        }
+    protected void setUpInfo() {
         //这里获取到的是目标运行分钟数
-        runningTimeTarget = Integer.valueOf(workOut.getTime());
+        runningTimeTarget = Integer.valueOf(workOutInfo.getTime());
         //这里获取已经运行的时间 以秒为单位
-        runningTimeTotal = Integer.valueOf(workOut.getRunningTime());
-
-
-        if (runningTimeTarget > 5) {
+        runningTimeTotal = Integer.valueOf(workOutInfo.getRunningTime());
+        if (runningTimeTarget > Constant.COUNTDOWN_FLAG) {
             //累减形式 计算时间
             isCountDownTime = true;
+
             //在这里转换成秒数
             runningTimeTarget = runningTimeTarget * 60;
 
@@ -234,37 +244,52 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
             headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeSurplus));
             avgLevelTime = runningTimeTarget / LevelView.columnCount;
             tgLevel = (int) runningTimeTotal / (int) avgLevelTime;
-            //获取段数信息
             headView.setLevelValue(workOutInfo.getLevelList().get(tgLevel).getLevel());
-
 
         } else {
             //累加形式 计算时间
             isCountDownTime = false;
             headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeTotal));
-            avgLevelTime = 60;
-            tgLevel = (int) runningTimeTotal / (int) avgLevelTime;
-            //获取段数信息
-            //因为时累加时间 (workOutInfo.getLevelList()的数量可能突破30；这里需要另类的计算
-            //暂时不做处理
-            headView.setLevelValue(workOutInfo.getLevelList().get(tgLevel).getLevel());
-
+            avgLevelTime = 5;
+            timerMissionTimes = (int) runningTimeTotal / (int) avgLevelTime;
+            tgLevel = timerMissionTimes % LevelView.columnCount;
+            headView.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());
         }
-        createRunningTimer();
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (showCountDown == Constant.SHOW_COUNT_DOWN_TRUE) {
-            levelView.calcLength();
-            levelView.setLevelList(workOutInfo.getLevelList());
-            moveBuoy();
-            showCountDownDialog();
-            showCountDown = Constant.SHOW_COUNT_DOWN_FALSE;
+        System.out.println("onWindowFocusChanged(boolean hasFocus) ------------>" + hasFocus);
+        switch (showCountDown) {
+            default:
+                break;
+            case Constant.SHOW_COUNT_DOWN_TYPE_1:
+                showCountDown = Constant.SHOW_COUNT_DOWN_TYPE_3;
+                drawLevelView();
+                bindServer();
+                showCountDownDialog();
+                break;
+            case Constant.SHOW_COUNT_DOWN_TYPE_2:
+                showCountDown = Constant.SHOW_COUNT_DOWN_TYPE_3;
+                bindServer();
+                drawLevelView();
+                runningTimer.start();
+                break;
+            case Constant.SHOW_COUNT_DOWN_TYPE_3:
+                break;
         }
+
     }
 
+    /**
+     * 重新绘制LevelView
+     */
+    private void drawLevelView() {
+        levelView.calcLength();
+        levelView.setLevelList(workOutInfo.getLevelList());
+        moveBuoy();
+    }
 
     @Override
     public void onBindSucceed(ComponentName componentName, IBinder iBinder) {
@@ -345,6 +370,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
     @Override
     public void onPauseTimeOut() {
+        saveWorkOutInfo();
         goToSummary();
     }
 
@@ -354,13 +380,9 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
             runningTimer.cancel();
             runningTimer = null;
         }
+        saveWorkOutInfo();
         goToSummary();
     }
-
-
-    private boolean isShowView = false;
-    private boolean isAnimLeftView = false;
-    private boolean isAnimRightView = false;
 
     @OnClick(R.id.include2)
     public void showLeftView() {
@@ -463,6 +485,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
             @Override
             public void run() {
                 Intent intent = new Intent(activityContext, FloatWindowService.class);
+                intent.putExtra(Constant.WORK_OUT_INFO,workOutInfo);
                 bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
             }
         });
@@ -536,10 +559,17 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
             @Override
             public void run() {
                 Intent intent = new Intent(BaseRunningActivity.this, SummaryActivity.class);
+                intent.putExtra(Constant.WORK_OUT_INFO,workOutInfo);
                 finishActivity();
                 startActivity(intent);
             }
         });
+    }
+    /**
+     * 记录当前运动信息
+     */
+    private void saveWorkOutInfo() {
+        workOutInfo.setRunningTime(runningTimeTotal + "");
     }
 
     /**
@@ -559,7 +589,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
                 @Override
                 public void onFinish() {
-                    runningTimeTotal++;
+                    runningTimeTotal = runningTimeTarget;
                     //倒计时结束时的动作
                     headView.setTimeValue(DateUtil.getFormatMMSS(0));
                     showCoolDownDialog();
@@ -575,7 +605,7 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
 
                 @Override
                 public void onFinish() {
-                    //超出倒计时范围时
+                    //超出累加时间范围
                 }
             };
         }
@@ -591,19 +621,23 @@ public class BaseRunningActivity extends BaseFragmentActivity implements FloatSe
         }
         //切换到下一阶段的Level
         if (runningTimeTotal % avgLevelTime == 0) {
-            timerMissionTimes = timerMissionTimes + 1;
-            tgLevel = tgLevel + 1;
-            headView.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());
-            if (timerMissionTimes % LevelView.columnCount == 0) {
-                tgLevel = 0;
-                for (int i = 0; i < LevelView.columnCount; i++) {
-                    Level level = new Level();
-                    level.setLevel(headView.getLevel());
-                    workOutInfo.getLevelList().add(level);
+            timerMissionTimes++;
+            tgLevel++;
+            if (!isCountDownTime) {
+                //累加时间时才触发
+                if (timerMissionTimes % LevelView.columnCount == 0) {
+                    tgLevel = 0;
+                    List<Level> arr = workOutInfo.getLevelList();
+                    for (int i = 0; i < LevelView.columnCount; i++) {
+                        Level level = new Level();
+                        level.setLevel(headView.getLevel());
+                        arr.add(level);
+                    }
+                    workOutInfo.setLevelList(arr);
                     levelView.setLevelList(workOutInfo.getLevelList());
                 }
+                headView.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());
             }
-            //将浮标移动到指定段位位
             moveBuoy();
         }
     }
