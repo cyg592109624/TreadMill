@@ -5,9 +5,8 @@ import android.os.Bundle;
 
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.activity.workoutrunning.BaseRunningActivity;
+import com.sunrise.treadmill.activity.workoutrunning.FitnessTestRunningActivity;
 import com.sunrise.treadmill.base.BaseDialogFragment;
-import com.sunrise.treadmill.interfaces.workout.running.DialogCoolDownClick;
 import com.sunrise.treadmill.interfaces.workout.running.DialogWarmUpClick;
 
 import java.util.TimerTask;
@@ -35,7 +34,7 @@ public class WarmUpDialog extends BaseDialogFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.dialog_workout_running_cool_down;
+        return R.layout.dialog_workout_running_warm_up;
     }
 
 
@@ -55,12 +54,12 @@ public class WarmUpDialog extends BaseDialogFragment {
 
     @Override
     protected void init() {
-//        dialogClick = (BaseRunningActivity) getActivity();
+        dialogClick = (FitnessTestRunningActivity) getActivity();
         pool = Executors.newScheduledThreadPool(1);
         pool.schedule(task, Constant.DIALOG_WAIT_TIME, TimeUnit.MILLISECONDS);
     }
 
-    @OnClick({R.id.workout_running_cool_down_skip})
+    @OnClick({R.id.workout_running_warm_up_skip})
     public void onSkip() {
         pool.shutdownNow();
         dialogClick.onWarmUpSkip();

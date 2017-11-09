@@ -123,11 +123,12 @@ public class Constant {
     public static final String FACTORY2_TOTAL_DISTANT = "FACTORY2_TOTAL_DISTANT";
 
 
-    public static final String SHOW_COUNT_DOWN = "SHOW_COUNT_DOWN";
+    public static final String RUNNING_START_TYPE = "RUNNING_START_TYPE";
 
-    public static final int SHOW_COUNT_DOWN_TYPE_1 = 1;
-    public static final int SHOW_COUNT_DOWN_TYPE_2 = 2;
-    public static final int SHOW_COUNT_DOWN_TYPE_3 = 3;
+    public static final int RUNNING_START_TYPE_1 = 1;
+    public static final int RUNNING_START_TYPE_2 = 2;
+    public static final int RUNNING_START_TYPE_3 = 3;
+    public static final int RUNNING_START_TYPE_FINISH = -1;
 
 
     public static final String WORK_OUT_INFO = "WORK_OUT_INFO";
@@ -137,5 +138,7 @@ public class Constant {
      * 暂停,冷却对话框等待时间
      */
     public static final long DIALOG_WAIT_TIME = 60 * 3 * 1000L;
+
+
 
 }

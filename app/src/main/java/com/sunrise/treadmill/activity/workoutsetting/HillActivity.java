@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity;
 import com.sunrise.treadmill.base.BaseActivity;
+import com.sunrise.treadmill.bean.Level;
 import com.sunrise.treadmill.interfaces.workout.setting.OnGenderReturn;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
@@ -20,6 +22,7 @@ import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -222,18 +225,21 @@ public class HillActivity extends BaseActivity implements OnGenderReturn, OnKeyB
         workOutInfo.setAge(ageValue.getText().toString());
         workOutInfo.setWeight(weightValue.getText().toString());
         workOutInfo.setTime(timeValue.getText().toString());
-
-        Intent intent = new Intent();
-        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-        } else {
+        Random random = new Random();
+        int max = 36;
+        int min = 1;
+        List<Level> array = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            Level level = new Level();
+            level.setLevel(random.nextInt(max) % (max - min + 1) + min);
+            array.add(level);
         }
-//        Intent intent = new Intent();
-//        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-//            intent.setClass(activityContext, HillRunningActivityZh.class);
-//        } else {
-//            intent.setClass(activityContext, HillRunningActivity.class);
-//        }
-//        startActivity(intent);
+        workOutInfo.setLevelList(array);
+        Intent intent = new Intent();
+        intent.setClass(activityContext, HillRunningActivity.class);
+        intent.putExtra(Constant.RUNNING_START_TYPE, Constant.RUNNING_START_TYPE_1);
+        intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
+        startActivity(intent);
     }
 
     @OnClick(R.id.bottom_logo_tab_home)

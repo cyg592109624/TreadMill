@@ -102,30 +102,6 @@
         </activity>
 
         <activity
-            android:name=".activity.workoutrunning.HillRunningActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"
-            android:exported="false"
-            android:screenOrientation="sensorLandscape">
-            <intent-filter>
-                <action android:name="com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-
-        <activity
-            android:name=".activity.workoutrunning.QuickStartRunningActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"
-            android:exported="false"
-            android:screenOrientation="sensorLandscape">
-            <intent-filter>
-                <action android:name="com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-
-        <activity
             android:name=".activity.summary.SummaryActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
@@ -172,6 +148,75 @@
             android:screenOrientation="sensorLandscape">
 
         </activity>
+
+
+        <activity
+            android:name=".activity.workoutrunning.HillRunningActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+            <intent-filter>
+                <action android:name="com.sunrise.treadmill.activity.workoutrunning.HillRunningActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".activity.workoutrunning.IntervalRunningActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+            <intent-filter>
+                <action android:name="com.sunrise.treadmill.activity.workoutrunning.IntervalRunningActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.workoutrunning.GoalRunningActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+            <intent-filter>
+                <action android:name="com.sunrise.treadmill.activity.workoutrunning.GoalRunningActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.workoutrunning.FitnessTestRunningActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+            <intent-filter>
+                <action android:name="com.sunrise.treadmill.activity.workoutrunning.FitnessTestRunningActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.workoutrunning.HRCRunningActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+            <intent-filter>
+                <action android:name="com.sunrise.treadmill.activity.workoutrunning.HRCRunningActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.workoutrunning.QuickStartRunningActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape">
+            <intent-filter>
+                <action android:name="com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
 
 
         <service

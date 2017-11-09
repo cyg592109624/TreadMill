@@ -182,6 +182,7 @@ public class FloatWindowBottom extends ConstraintLayout {
         this.windowBottomCallBack = callBack;
     }
 
+
     public void recycle() {
         bottomLevelUp = null;
         bottomLevelDown = null;
@@ -196,35 +197,20 @@ public class FloatWindowBottom extends ConstraintLayout {
         bottomBack = null;
     }
 
-    public void showStartBtn() {
-        bottomStart.setVisibility(View.VISIBLE);
+    public void startBtnVisibility(int visibility) {
+        bottomStart.setVisibility(visibility);
     }
 
-    public void hideStartBtn() {
-        bottomStart.setVisibility(View.GONE);
+    public void stopBtnVisibility(int visibility) {
+        bottomStop.setVisibility(visibility);
     }
 
-    public void showStopBtn() {
-        bottomStop.setVisibility(View.VISIBLE);
+    public void homeBtnVisibility(int visibility) {
+        bottomHome.setVisibility(visibility);
     }
 
-    public void hideStopBtn() {
-        bottomStop.setVisibility(View.GONE);
+    public void backBtnVisibility(int visibility) {
+        bottomBack.setVisibility(visibility);
     }
 
-    public void showHomeBtn() {
-        bottomHome.setVisibility(View.VISIBLE);
-    }
-
-    public void hideHomeBtn() {
-        bottomHome.setVisibility(View.GONE);
-    }
-
-    public void showBackBtn() {
-        bottomBack.setVisibility(View.VISIBLE);
-    }
-
-    public void hideBackBtn() {
-        bottomBack.setVisibility(View.GONE);
-    }
 }

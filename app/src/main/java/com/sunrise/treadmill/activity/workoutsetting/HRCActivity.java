@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.workoutrunning.HRCRunningActivity;
 import com.sunrise.treadmill.base.BaseActivity;
+import com.sunrise.treadmill.bean.Level;
 import com.sunrise.treadmill.interfaces.workout.setting.OnGenderReturn;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
@@ -20,6 +22,7 @@ import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -436,6 +439,7 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
         workOutInfo.setTime(timeValue.getText().toString());
 
         workOutInfo.setHrcType(selectHrcType);
+
         String hrc = "";
         switch (selectHrcType) {
             default:
@@ -452,11 +456,20 @@ public class HRCActivity extends BaseActivity implements OnGenderReturn, OnKeyBo
                 break;
         }
         workOutInfo.setHrc(hrc);
+        List<Level> array = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            Level level = new Level();
+            level.setLevel(1);
+            array.add(level);
+        }
+        workOutInfo.setLevelList(array);
 
         Intent intent = new Intent();
-        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-        } else {
-        }
+        intent.setClass(HRCActivity.this, HRCRunningActivity.class);
+        intent.putExtra(Constant.RUNNING_START_TYPE, Constant.RUNNING_START_TYPE_1);
+        intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
+        startActivity(intent);
+
     }
 
     @OnClick(R.id.bottom_logo_tab_home)

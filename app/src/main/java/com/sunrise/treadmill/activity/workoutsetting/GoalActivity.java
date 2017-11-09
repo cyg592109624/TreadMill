@@ -12,7 +12,9 @@ import android.widget.TextView;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.workoutrunning.GoalRunningActivity;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
+import com.sunrise.treadmill.bean.Level;
 import com.sunrise.treadmill.dialog.workoutsetting.GoalSetValueDialog;
 import com.sunrise.treadmill.interfaces.workout.setting.OnGoalSetValueReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
@@ -21,6 +23,7 @@ import com.sunrise.treadmill.views.workout.setting.WorkOutSettingHead;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,6 +35,7 @@ import butterknife.OnClick;
 public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValueReturn {
     public static final String CHANGE_TG = "CHANGE_TG";
     public static final String CHANGE_TG_VALUE = "CHANGE_TG_VALUE";
+    private final int MIN_TIME = 20;
 
     @BindView(R.id.workout_mode_goal_time)
     TextView timeValue;
@@ -139,38 +143,33 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
 
     @Override
     public void onGoalSetValueResult(String result) {
-        if ("".equals(result)) {
-            return;
+        if (!"".equals(result)) {
+            clearState();
+            startBtn.setEnabled(true);
+            switch (WorkOutSettingCommon.changeTg) {
+                default:
+                    break;
+                case WorkOutSettingCommon.CHANGE_TIME:
+                    int re = Integer.valueOf(result);
+                    if (re <= MIN_TIME) {
+                        re = MIN_TIME;
+                    }
+                    timeValue.setText(re + "");
+                    workOutInfo.setTime(re + "");
+                    workOutInfo.setGoalType(Constant.MODE_GOAL_TIME);
+                    break;
+                case WorkOutSettingCommon.CHANGE_DISTANCE:
+                    distanceValue.setText(result);
+                    workOutInfo.setDistance(result);
+                    workOutInfo.setGoalType(Constant.MODE_GOAL_DISTANCE);
+                    break;
+                case WorkOutSettingCommon.CHANGE_CALORIES:
+                    calValue.setText(result);
+                    workOutInfo.setCalories(result);
+                    workOutInfo.setGoalType(Constant.MODE_GOAL_CALORIES);
+                    break;
+            }
         }
-        clearState();
-        startBtn.setEnabled(true);
-        switch (WorkOutSettingCommon.changeTg) {
-            default:
-                break;
-            case WorkOutSettingCommon.CHANGE_TIME:
-
-                int re = Integer.valueOf(result);
-                if (re < 5) {
-                    timeValue.setText("0");
-                    workOutInfo.setTime("0");
-                } else {
-                    timeValue.setText(result);
-                    workOutInfo.setTime(result);
-                }
-                workOutInfo.setGoalType(Constant.MODE_GOAL_TIME);
-                break;
-            case WorkOutSettingCommon.CHANGE_DISTANCE:
-                distanceValue.setText(result);
-                workOutInfo.setDistance(result);
-                workOutInfo.setGoalType(Constant.MODE_GOAL_DISTANCE);
-                break;
-            case WorkOutSettingCommon.CHANGE_CALORIES:
-                calValue.setText(result);
-                workOutInfo.setCalories(result);
-                workOutInfo.setGoalType(Constant.MODE_GOAL_CALORIES);
-                break;
-        }
-
         WorkOutSettingCommon.changeTg = WorkOutSettingCommon.RE_SET;
         optionBody.setVisibility(View.VISIBLE);
     }
@@ -186,10 +185,23 @@ public class GoalActivity extends BaseFragmentActivity implements OnGoalSetValue
     public void beginWorkOut() {
         workOutInfo.setWorkOutMode(Constant.MODE_GOAL);
         workOutInfo.setWorkOutModeName(Constant.WORK_OUT_MODE_GOAL);
-        Intent intent = new Intent();
-        if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-        } else {
+
+        Random random = new Random();
+        int max = 36;
+        int min = 1;
+        List<Level> array = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            Level level = new Level();
+            level.setLevel(random.nextInt(max) % (max - min + 1) + min);
+            array.add(level);
         }
+        workOutInfo.setLevelList(array);
+        Intent intent = new Intent();
+        intent.setClass(activityContext, GoalRunningActivity.class);
+        intent.putExtra(Constant.RUNNING_START_TYPE, Constant.RUNNING_START_TYPE_1);
+
+        intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
+        startActivity(intent);
     }
 
     @OnClick(R.id.bottom_logo_tab_home)

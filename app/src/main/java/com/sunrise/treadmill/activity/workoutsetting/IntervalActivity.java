@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.activity.workoutsetting;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,17 +9,19 @@ import android.widget.TextView;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.workoutrunning.IntervalRunningActivity;
 import com.sunrise.treadmill.base.BaseActivity;
+import com.sunrise.treadmill.bean.Level;
 import com.sunrise.treadmill.interfaces.workout.setting.OnGenderReturn;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.views.workout.setting.MyGenderView;
 import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
-import com.sunrise.treadmill.views.workout.setting.WorkOutSettingHead;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -215,13 +218,27 @@ public class IntervalActivity extends BaseActivity implements OnGenderReturn, On
 
     @OnClick({R.id.workout_setting_start})
     public void beginWorkOut() {
-
         workOutInfo.setWorkOutMode(Constant.MODE_INTERVAL);
         workOutInfo.setWorkOutModeName(Constant.WORK_OUT_MODE_INTERVAL);
 
         workOutInfo.setAge(ageValue.getText().toString());
         workOutInfo.setWeight(weightValue.getText().toString());
         workOutInfo.setTime(timeValue.getText().toString());
+        Random random = new Random();
+        int max = 36;
+        int min = 1;
+        List<Level> array = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            Level level = new Level();
+            level.setLevel(random.nextInt(max) % (max - min + 1) + min);
+            array.add(level);
+        }
+        workOutInfo.setLevelList(array);
+        Intent intent = new Intent();
+        intent.setClass(activityContext, IntervalRunningActivity.class);
+        intent.putExtra(Constant.RUNNING_START_TYPE, Constant.RUNNING_START_TYPE_1);
+        intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
+        startActivity(intent);
     }
 
     @OnClick(R.id.bottom_logo_tab_home)

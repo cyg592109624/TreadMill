@@ -100,11 +100,7 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
 
     @Override
     public void onKeyBoardEnter(String result) {
-        if ("".equals(result)) {
-            onGoalSetValueReturn.onGoalSetValueResult(editValue.getText().toString());
-        } else {
-            onGoalSetValueReturn.onGoalSetValueResult(result);
-        }
+        onGoalSetValueReturn.onGoalSetValueResult(result);
     }
 
     @Override

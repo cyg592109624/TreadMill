@@ -18,7 +18,7 @@
 
 
     <ImageView
-        android:id="@+id/workout_running_cool_down_skip"
+        android:id="@+id/workout_running_warm_up_skip"
         android:layout_width="290dp"
         android:layout_height="108dp"
         android:src="@drawable/btn_dialog_warm_up_skip"

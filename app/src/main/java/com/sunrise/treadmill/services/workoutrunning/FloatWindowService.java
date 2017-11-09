@@ -9,7 +9,6 @@ import android.graphics.PixelFormat;
 import android.os.Binder;
 import android.os.CountDownTimer;
 import android.os.IBinder;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.util.DisplayMetrics;
@@ -162,11 +161,11 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     public int onStartCommand(Intent intent, int flags, int startId) {
         workOutInfo = intent.getParcelableExtra(Constant.WORK_OUT_INFO);
         if (workOutInfo.getWorkOutModeName().equals(Constant.WORK_OUT_MODE_MEDIA)) {
-            floatWindowBottom.showHomeBtn();
-            floatWindowBottom.showStartBtn();
+            floatWindowBottom.homeBtnVisibility(View.VISIBLE);
+            floatWindowBottom.startBtnVisibility(View.VISIBLE);
 
-            floatWindowBottom.hideBackBtn();
-            floatWindowBottom.hideStopBtn();
+            floatWindowBottom.backBtnVisibility(View.INVISIBLE);
+            floatWindowBottom.stopBtnVisibility(View.INVISIBLE);
 
             toggleFloatWindow();
         }
@@ -238,11 +237,12 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     @Override
     public void onStartClick() {
-        floatWindowBottom.hideHomeBtn();
-        floatWindowBottom.showBackBtn();
 
-        floatWindowBottom.hideStartBtn();
-        floatWindowBottom.showStopBtn();
+        floatWindowBottom.homeBtnVisibility(View.INVISIBLE);
+        floatWindowBottom.backBtnVisibility(View.VISIBLE);
+
+        floatWindowBottom.startBtnVisibility(View.INVISIBLE);
+        floatWindowBottom.stopBtnVisibility(View.VISIBLE);
         showCountDown();
     }
 
@@ -274,7 +274,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         saveWorkOutInfo();
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), QuickStartRunningActivity.class);
-        intent.putExtra(Constant.SHOW_COUNT_DOWN, Constant.SHOW_COUNT_DOWN_TYPE_2);
+        intent.putExtra(Constant.RUNNING_START_TYPE, Constant.RUNNING_START_TYPE_2);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
 

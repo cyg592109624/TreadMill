@@ -39,7 +39,6 @@ public class FloatWindowHead extends ConstraintLayout {
         pulseValue = (TextView) this.findViewById(R.id.workout_running_head_pulse_value);
         wattValue = (TextView) this.findViewById(R.id.workout_running_head_watt_value);
         speedValue = (TextView) this.findViewById(R.id.workout_running_head_speed_value);
-        levelValue.setText("" + curLevel);
         setTextStyle();
     }
 
@@ -47,32 +46,40 @@ public class FloatWindowHead extends ConstraintLayout {
     private void setTextStyle() {
         List<TextView> txtList = new ArrayList<>();
         txtList.add((TextView) this.findViewById(R.id.workout_running_head_level));
-        txtList.add((TextView) this.findViewById(R.id.workout_running_head_time));
-        txtList.add((TextView) this.findViewById(R.id.workout_running_head_distance));
-        txtList.add((TextView) this.findViewById(R.id.workout_running_head_calories));
-        txtList.add((TextView) this.findViewById(R.id.workout_running_head_pulse));
-        txtList.add((TextView) this.findViewById(R.id.workout_running_head_watt));
-        txtList.add((TextView) this.findViewById(R.id.workout_running_head_speed));
-
         txtList.add(levelValue);
+
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_time));
         txtList.add(timeValue);
+
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_distance));
         txtList.add(distanceValue);
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_distance_unit));
+
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_calories));
         txtList.add(caloriesValue);
+
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_pulse));
         txtList.add(pulseValue);
+
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_watt));
         txtList.add(wattValue);
+
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_speed));
         txtList.add(speedValue);
+        txtList.add((TextView) this.findViewById(R.id.workout_running_head_speed_unit));
+
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
             TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(getContext()));
         } else {
             TextUtils.setTextTypeFace(txtList, TextUtils.Arial(getContext()));
         }
         if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
-            txtList.get(2).setText(R.string.unit_km);
+            txtList.get(6).setText(R.string.unit_km);
+            txtList.get(15).setText(R.string.unit_kph);
         } else {
-            txtList.get(2).setText(R.string.unit_mile);
+            txtList.get(6).setText(R.string.unit_mile);
+            txtList.get(15).setText(R.string.unit_mph);
         }
-
-
         txtList.clear();
         txtList = null;
     }
@@ -101,6 +108,26 @@ public class FloatWindowHead extends ConstraintLayout {
 
     public void setTimeValue(String time) {
         timeValue.setText(time);
+    }
+
+    public void setCaloriesValue(String calories) {
+        caloriesValue.setText(calories);
+    }
+
+    public void setDistanceValue(String distance) {
+        distanceValue.setText(distance);
+    }
+
+    public void setPulseValue(String pulse) {
+        pulseValue.setText(pulse);
+    }
+
+    public void setWattValue(String watt) {
+        wattValue.setText(watt);
+    }
+
+    public void setSpeedValue(String speed) {
+        speedValue.setText(speed);
     }
 
     public void recycle() {

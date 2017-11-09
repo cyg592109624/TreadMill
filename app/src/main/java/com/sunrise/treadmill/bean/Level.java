@@ -11,7 +11,6 @@ public class Level implements Parcelable {
     private int level;
 
     public Level(){
-        new Level(Parcel.obtain());
     }
 
     protected Level(Parcel in) {

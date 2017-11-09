@@ -28,7 +28,7 @@ public class WorkOut implements Parcelable {
     /**
      * 这里以min为单位
      */
-    private String time = "2";
+    private String time = "20";
 
     /**
      * 已经运动时间 以秒为单位
@@ -36,23 +36,36 @@ public class WorkOut implements Parcelable {
     private String runningTime = "0";
 
     /**
-     * 以选择单位制度来决定单位
+     * 目标距离 以选择单位制度来决定单位
      */
-    private String distance = "1";
+    private String distance = "0";
 
-    private String calories = "";
+    /**
+     * 已经运行距离
+     */
+    private String runningDistance = "0";
+
+    /**
+     * 目标消耗calories
+     */
+    private String calories = "0";
+
+    /**
+     * 已经消耗calories
+     */
+    private String runningCalories = "0";
 
     private int goalType = Constant.MODE_GOAL_TIME;
 
     private String hrc = "80";
     private int hrcType = Constant.MODE_HRC_TYPE_TG;
 
-    private int vrType;
+    private int vrType = Constant.MODE_VR_TYPE_VR1;
 
     private List<Level> levelList = new ArrayList<>();
 
     public WorkOut() {
-        new WorkOut(Parcel.obtain());
+
     }
 
     protected WorkOut(Parcel in) {
@@ -64,7 +77,9 @@ public class WorkOut implements Parcelable {
         time = in.readString();
         runningTime = in.readString();
         distance = in.readString();
+        runningDistance = in.readString();
         calories = in.readString();
+        runningCalories = in.readString();
         goalType = in.readInt();
         hrc = in.readString();
         hrcType = in.readInt();
@@ -84,6 +99,31 @@ public class WorkOut implements Parcelable {
         }
     };
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(workOutMode);
+        parcel.writeString(workOutModeName);
+        parcel.writeInt(gender);
+        parcel.writeString(age);
+        parcel.writeString(weight);
+        parcel.writeString(time);
+        parcel.writeString(runningTime);
+        parcel.writeString(distance);
+        parcel.writeString(runningDistance);
+        parcel.writeString(calories);
+        parcel.writeString(runningCalories);
+        parcel.writeInt(goalType);
+        parcel.writeString(hrc);
+        parcel.writeInt(hrcType);
+        parcel.writeInt(vrType);
+        parcel.writeTypedList(levelList);
+    }
+
     public int getWorkOutMode() {
         return workOutMode;
     }
@@ -100,21 +140,6 @@ public class WorkOut implements Parcelable {
         this.workOutModeName = workOutModeName;
     }
 
-    public String getHrc() {
-        return hrc;
-    }
-
-    public void setHrc(String hrc) {
-        this.hrc = hrc;
-    }
-
-    public int getGoalType() {
-        return goalType;
-    }
-
-    public void setGoalType(int goalType) {
-        this.goalType = goalType;
-    }
 
     public int getGender() {
         return gender;
@@ -127,6 +152,7 @@ public class WorkOut implements Parcelable {
             this.gender = 1;
         }
     }
+
 
     public String getAge() {
         return age;
@@ -168,12 +194,44 @@ public class WorkOut implements Parcelable {
         this.distance = distance;
     }
 
+    public String getRunningDistance() {
+        return runningDistance;
+    }
+
+    public void setRunningDistance(String runningDistance) {
+        this.runningDistance = runningDistance;
+    }
+
     public String getCalories() {
         return calories;
     }
 
     public void setCalories(String calories) {
         this.calories = calories;
+    }
+
+    public String getRunningCalories() {
+        return runningCalories;
+    }
+
+    public void setRunningCalories(String runningCalories) {
+        this.runningCalories = runningCalories;
+    }
+
+    public int getGoalType() {
+        return goalType;
+    }
+
+    public void setGoalType(int goalType) {
+        this.goalType = goalType;
+    }
+
+    public String getHrc() {
+        return hrc;
+    }
+
+    public void setHrc(String hrc) {
+        this.hrc = hrc;
     }
 
     public int getHrcType() {
@@ -198,28 +256,5 @@ public class WorkOut implements Parcelable {
 
     public void setLevelList(List<Level> levelList) {
         this.levelList = levelList;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(workOutMode);
-        parcel.writeString(workOutModeName);
-        parcel.writeInt(gender);
-        parcel.writeString(age);
-        parcel.writeString(weight);
-        parcel.writeString(time);
-        parcel.writeString(runningTime);
-        parcel.writeString(distance);
-        parcel.writeString(calories);
-        parcel.writeInt(goalType);
-        parcel.writeString(hrc);
-        parcel.writeInt(hrcType);
-        parcel.writeInt(vrType);
-        parcel.writeTypedList(levelList);
     }
 }

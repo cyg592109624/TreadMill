@@ -1,12 +1,10 @@
 package com.sunrise.treadmill.activity.workoutrunning;
 
-import com.sunrise.treadmill.Constant;
-
 /**
  * Created by ChuHui on 2017/9/27.
  */
 
-public class QuickStartRunningActivity extends BaseRunningActivity {
+public class IntervalRunningActivity extends BaseRunningActivity {
 
     @Override
     protected void setUpInfo() {
