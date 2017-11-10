@@ -14,7 +14,7 @@ import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.SharedPreferencesUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
     TextView pwmValue;
 
     @BindView(R.id.factory2_card1_1_keyboard)
-    MyKeyBoardView keyBoardView;
+    NumberKeyBoardView keyBoardView;
 
     @Override
     public int getLayoutId() {

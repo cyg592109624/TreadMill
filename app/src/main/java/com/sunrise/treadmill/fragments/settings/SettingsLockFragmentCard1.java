@@ -15,7 +15,7 @@ import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.SharedPreferencesUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.utils.UnitUtils;
-import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +56,10 @@ public class SettingsLockFragmentCard1 extends BaseFragment implements OnKeyBoar
 
 
     @BindView(R.id.settings_lock_fragment_card_1_2_keyboard)
-    MyKeyBoardView rightKeyBoard;
+    NumberKeyBoardView rightKeyBoard;
 
     @BindView(R.id.settings_lock_fragment_card_1_1_keyboard)
-    MyKeyBoardView leftKeyBoard;
+    NumberKeyBoardView leftKeyBoard;
 
     private static int reSetTG = -1;
     private static final int RE_SET_TIME = 1001;

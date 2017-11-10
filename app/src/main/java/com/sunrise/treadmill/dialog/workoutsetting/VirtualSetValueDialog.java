@@ -16,7 +16,7 @@ import com.sunrise.treadmill.interfaces.workout.setting.OnVrDialogClick;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
     ImageView vrImage;
 
     @BindView(R.id.dialog_workout_vr_keyboard)
-    MyKeyBoardView keyBoardView;
+    NumberKeyBoardView keyBoardView;
 
     @BindView(R.id.dialog_workout_vr_edit_time)
     TextView editValue;

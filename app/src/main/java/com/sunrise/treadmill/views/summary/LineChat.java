@@ -50,7 +50,7 @@ public class LineChat extends View {
         rankCount = ta.getInt(R.styleable.lineChat_rankCount, rankCount);
         ta.recycle();
         ta = null;
-        data = createData(dataSize);
+        data = new ArrayList<>();
     }
 
     @Override
@@ -65,23 +65,13 @@ public class LineChat extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        drawData();
         canvas.drawPath(mPath, mGesturePaint);
     }
 
-
-    private List<Integer> createData(int size) {
-        Random random = new Random();
-        int max = rankCount;
-        int min = 1;
-        List<Integer> array = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            array.add(random.nextInt(max) % (max - min + 1) + min);
-        }
-        return array;
-    }
-
     private void drawData() {
+        if (data.size() <= 0) {
+            return;
+        }
         mX = 0;
         mY = viewHeight - data.get(0) * avgHeight;
         mPath.moveTo(mX, mY);
@@ -106,6 +96,15 @@ public class LineChat extends View {
             mX = x;
             mY = y;
         }
+    }
+
+    public void setData(List<Integer> datas) {
+        data = datas;
+    }
+
+    public void reFlashView() {
+        drawData();
+        invalidate();
     }
 
     public void recycle() {

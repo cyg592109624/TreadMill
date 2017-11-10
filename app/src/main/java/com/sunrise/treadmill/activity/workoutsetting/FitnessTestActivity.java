@@ -17,12 +17,11 @@ import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.views.workout.LevelView;
-import com.sunrise.treadmill.views.workout.setting.MyGenderView;
-import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.GenderView;
+import com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,10 +33,10 @@ import butterknife.OnClick;
 public class FitnessTestActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
 
     @BindView(R.id.workout_mode_gender_select)
-    MyGenderView genderView;
+    GenderView genderView;
 
     @BindView(R.id.workout_mode_keyboard)
-    MyKeyBoardView keyBoardView;
+    NumberKeyBoardView keyBoardView;
 
     @BindView(R.id.workout_edit_age_value)
     TextView ageValue;
@@ -198,6 +197,9 @@ public class FitnessTestActivity extends BaseActivity implements OnGenderReturn,
         workOutInfo.setAge(ageValue.getText().toString());
         workOutInfo.setWeight(weightValue.getText().toString());
         workOutInfo.setTime("0");
+
+        float hrc = (220 - Integer.valueOf(ageValue.getText().toString())) * 0.85f;
+        workOutInfo.setHrc(Math.round(hrc) + "");
 
         List<Level> array = new ArrayList<>();
         for (int i = 0; i < LevelView.columnCount; i++) {

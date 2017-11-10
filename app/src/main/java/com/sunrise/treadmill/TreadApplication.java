@@ -21,7 +21,7 @@ public class TreadApplication extends Application {
             @Override
             public void run() {
 
-                //所以数据保存都是以国际标准保存的 使用时 按实际情况转换
+                //所以数据保存都是以公制保存的 使用时 按实际情况转换
                 GlobalSetting.CustomerPassWord = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.CUSTOMER_PASS_WORD, GlobalSetting.CustomerPassWord);
 
                 GlobalSetting.Setting_Time = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.SETTING_TIME, GlobalSetting.Setting_Time);
@@ -45,6 +45,7 @@ public class TreadApplication extends Application {
 
                 GlobalSetting.Factory2_TotalTime = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_TOTAL_TIME, GlobalSetting.Factory2_TotalTime);
                 GlobalSetting.Factory2_TotalDistant = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_TOTAL_DISTANT, GlobalSetting.Factory2_TotalDistant);
+
             }
         });
     }

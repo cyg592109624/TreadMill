@@ -44,50 +44,50 @@ import java.util.concurrent.TimeUnit;
  * Created by ChuHui on 2017/10/14.
  */
 
-public class FloatWindowService extends Service implements FloatWindowBottomCallBack, AnimationsContainer.OnAnimationStoppedListener {
+public abstract class BaseFloatWindowService extends Service implements FloatWindowBottomCallBack, AnimationsContainer.OnAnimationStoppedListener {
+    public String runningActivityName = "";
 
-    private final int FloatWindowNotification = 62111;
-    private String runningActivityName = "";
+    public final int FloatWindowNotification = 62111;
 
-    private static final int LEVEL_UP = 1;
+    public static final int LEVEL_UP = 1;
 
-    private static final int LEVEL_DOWN = -1;
+    public static final int LEVEL_DOWN = -1;
 
-    private BaseRunningActivity activity;
+    public BaseRunningActivity activity;
 
-    private WindowManager mWindowManager;
+    public WindowManager mWindowManager;
 
-    private WindowManager.LayoutParams paramsHead;
-    private WindowManager.LayoutParams paramsBottom;
+    public WindowManager.LayoutParams paramsHead;
+    public WindowManager.LayoutParams paramsBottom;
 
-    private WindowManager.LayoutParams dialogParams;
+    public WindowManager.LayoutParams dialogParams;
 
-    private FloatWindowHead floatWindowHead;
-    private FloatWindowBottom floatWindowBottom;
+    public FloatWindowHead floatWindowHead;
+    public FloatWindowBottom floatWindowBottom;
 
-    private ConstraintLayout dialogCountDown;
-    private ConstraintLayout dialogPause;
-    private ConstraintLayout dialogCoolDown;
+    public ConstraintLayout dialogCountDown;
+    public ConstraintLayout dialogPause;
+    public ConstraintLayout dialogCoolDown;
 
     /**
      * 运行时间为一年
      */
-    private final long timeCountDown = 365 * 24 * 60 * 60 * 1000;
+    public final long timeCountDown = 365 * 24 * 60 * 60 * 1000;
 
 
     /**
      * 当前Level 同时也是浮标位置 应该由计时器进行更新
      */
-    private int tgLevel = 0;
+    public int tgLevel = 0;
 
     /**
      * 计时器运行次数 当累加时间的时候可以得出 经历了多少次Level迭代(就是说可以突然30这个数值)
      */
-    private int timerMissionTimes = 0;
+    public int timerMissionTimes = 0;
 
-    private final long timeSpace = 1000;
+    public final long timeSpace = 1000;
 
-    private WorkOut workOutInfo;
+    public WorkOut workOutInfo;
 
     /**
      * 是否以倒计时形式显示时间
@@ -97,29 +97,85 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     /**
      * LevelView中每阶持续时间 根据目前情况决定 以秒为单位
      */
-    private long avgLevelTime = 0L;
+    public long avgLevelTime = 0L;
 
     /**
      * 目标运动时间 以秒为单位
      */
-    private long runningTimeTarget = 0L;
+    public long runningTimeTarget = 0L;
 
     /**
      * 一共运行多长时间  以秒为单位
      */
-    private long runningTimeTotal = 0L;
+    public long runningTimeTotal = 0L;
 
     /**
      * 剩余运动时间  以秒为单位
      */
-    private long runningTimeSurplus = 0L;
+    public long runningTimeSurplus = 0L;
 
     /**
      * 运动时间 计时器
      */
-    private CountDownTimer runningTimer;
+    public CountDownTimer runningTimer;
 
-    private ScheduledExecutorService waitTask;
+    /**
+     * 暂停,冷却等待计时器
+     */
+    public ScheduledExecutorService waitTask;
+
+    /**
+     * 目标奔跑距离 单位根据设定进行改变 km或者mile
+     */
+    public int runningDistanceTarget = 0;
+
+    /**
+     * 已经奔跑距离
+     */
+    public int runningDistanceTotal = 0;
+
+    /**
+     * 剩余奔跑距离
+     */
+    public int runningDistanceSurplus = 0;
+
+    /**
+     * 目标calories
+     */
+    public int runningCaloriesTarget = 0;
+    /**
+     * 已经消耗calories
+     */
+    public int runningCaloriesTotal = 0;
+    /**
+     * 剩余calories
+     */
+    public int runningCaloriesSurplus = 0;
+
+    /**
+     * 目前脉搏速率
+     */
+    public int runningPulseTarget = 0;
+
+    /**
+     * 当前脉搏速率
+     */
+    public int runningPulseNow = 0;
+
+    /**
+     * 当前功率
+     */
+    public int valueWatt = 0;
+
+    /**
+     * 当前速度
+     */
+    public float valueSpeed = 0.0f;
+
+    /**
+     * 当前BMP值
+     */
+    public int valueBMP = 0;
 
     @Override
     public void onCreate() {
@@ -129,6 +185,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         initWindowParams();
         initFloatWindow();
         initDialog();
+        init();
     }
 
     private final IBinder floatBinder = new FloatBinder();
@@ -137,8 +194,8 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         /**
          * @return 主要为了获取该服务的实例对象
          */
-        public FloatWindowService getService() {
-            return FloatWindowService.this;
+        public BaseFloatWindowService getService() {
+            return BaseFloatWindowService.this;
         }
     }
 
@@ -146,6 +203,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     @Override
     public IBinder onBind(Intent intent) {
         //可以通过这里获取bind方法中传递数据
+        workOutInfo = intent.getParcelableExtra(Constant.WORK_OUT_INFO);
         setUpInfo();
         initCountDownTimer();
         return floatBinder;
@@ -237,7 +295,6 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     @Override
     public void onStartClick() {
-
         floatWindowBottom.homeBtnVisibility(View.INVISIBLE);
         floatWindowBottom.backBtnVisibility(View.VISIBLE);
 
@@ -263,7 +320,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         startActivity(intent);
-        Intent serverIntent = new Intent(getApplicationContext(), FloatWindowService.class);
+        Intent serverIntent = new Intent(getApplicationContext(), BaseFloatWindowService.class);
         toggleFloatWindow();
         stopService(serverIntent);
     }
@@ -280,44 +337,10 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
         startActivity(intent);
 
-        Intent serverIntent = new Intent(getApplicationContext(), FloatWindowService.class);
+        Intent serverIntent = new Intent(getApplicationContext(), BaseFloatWindowService.class);
         toggleFloatWindow();
 
         stopService(serverIntent);
-    }
-
-    private boolean isShowView = false;
-
-    /**
-     * 自动判断当前应该添加还是删除悬浮窗口
-     */
-    public void toggleFloatWindow() {
-        if (floatWindowHead != null && floatWindowBottom != null) {
-            if (!isShowView) {
-                mWindowManager.addView(floatWindowHead, paramsHead);
-                mWindowManager.addView(floatWindowBottom, paramsBottom);
-            } else {
-                mWindowManager.removeView(floatWindowHead);
-                mWindowManager.removeView(floatWindowBottom);
-            }
-            isShowView = !isShowView;
-        }
-    }
-
-    public void setRunningActivityName(String activityName) {
-        this.runningActivityName = activityName;
-    }
-
-    public void setActivity(BaseRunningActivity act) {
-        this.activity = act;
-    }
-
-    public void setWorkOutInfo(WorkOut workOut) {
-        workOutInfo = workOut;
-    }
-
-    public WorkOut getWorkOutInfo() {
-        return workOutInfo;
     }
 
     /**
@@ -414,7 +437,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         floatWindowHead.setLayoutParams(paramsHead);
 
         floatWindowBottom.setLayoutParams(paramsBottom);
-        floatWindowBottom.setWindowBottomCallBack(FloatWindowService.this);
+        floatWindowBottom.setWindowBottomCallBack(BaseFloatWindowService.this);
     }
 
     /**
@@ -447,7 +470,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         dialogClick();
         ImageView countDownImage = dialogCountDown.findViewById(R.id.workout_running_dialog_count_down_img);
         animation = countDownAnimation(countDownImage);
-        animation.setOnAnimStopListener(FloatWindowService.this);
+        animation.setOnAnimStopListener(BaseFloatWindowService.this);
     }
 
     /**
@@ -489,14 +512,55 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
     }
 
-    private AnimationsContainer.FramesSequenceAnimation animation;
+    public AnimationsContainer.FramesSequenceAnimation animation;
 
     private AnimationsContainer.FramesSequenceAnimation countDownAnimation(ImageView countDownImage) {
         AnimationsContainer.FramesSequenceAnimation animation = AnimationsContainer.getInstance(getApplicationContext(), R.array.count_down, 1000).createProgressDialogAnim(countDownImage);
         return animation;
     }
 
-    private void showCountDown() {
+    /**
+     * 调整悬浮内容
+     */
+    public abstract void init();
+
+
+    public void setRunningActivityName(String activityName) {
+        this.runningActivityName = activityName;
+    }
+
+    public void setActivity(BaseRunningActivity act) {
+        this.activity = act;
+    }
+
+    public void setWorkOutInfo(WorkOut workOut) {
+        workOutInfo = workOut;
+    }
+
+    public WorkOut getWorkOutInfo() {
+        return workOutInfo;
+    }
+
+
+    private boolean isShowView = false;
+
+    /**
+     * 自动判断当前应该添加还是删除悬浮窗口
+     */
+    public void toggleFloatWindow() {
+        if (floatWindowHead != null && floatWindowBottom != null) {
+            if (!isShowView) {
+                mWindowManager.addView(floatWindowHead, paramsHead);
+                mWindowManager.addView(floatWindowBottom, paramsBottom);
+            } else {
+                mWindowManager.removeView(floatWindowHead);
+                mWindowManager.removeView(floatWindowBottom);
+            }
+            isShowView = !isShowView;
+        }
+    }
+
+    public void showCountDown() {
         mWindowManager.addView(dialogCountDown, dialogParams);
         animation.start();
         new Timer().schedule(new TimerTask() {
@@ -507,7 +571,10 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         }, 3900);
     }
 
-    private void initCountDownTimer() {
+    /**
+     * 计时任务 同时操作level移动
+     */
+    public void initCountDownTimer() {
         if (runningTimer != null) {
             runningTimer.cancel();
             runningTimer = null;
@@ -541,7 +608,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         }
     }
 
-    private synchronized void timerTick() {
+    public synchronized void timerTick() {
         runningTimeTotal++;
         if (isCountDownTime) {
             runningTimeSurplus = runningTimeTarget - runningTimeTotal;
@@ -570,7 +637,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         }
     }
 
-    private void reMoveView(View view) {
+    public void reMoveView(View view) {
         try {
             mWindowManager.removeView(view);
         } catch (Exception e) {
@@ -578,7 +645,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         }
     }
 
-    private void startWaiteTimerTask() {
+    public void startWaiteTimerTask() {
         if (waitTask != null) {
             waitTask.shutdownNow();
             waitTask = null;
@@ -594,7 +661,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
         }, Constant.DIALOG_WAIT_TIME, TimeUnit.MILLISECONDS);
     }
 
-    private void stopTimerTask() {
+    public void stopTimerTask() {
         if (waitTask != null) {
             waitTask.shutdownNow();
             waitTask = null;
@@ -604,14 +671,14 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
     /**
      * 记录当前运动信息
      */
-    private void saveWorkOutInfo() {
+    public void saveWorkOutInfo() {
         workOutInfo.setRunningTime(runningTimeTotal + "");
     }
 
     /**
      * 前往统计页面
      */
-    private void goToSummary() {
+    public void goToSummary() {
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), SummaryActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -619,7 +686,7 @@ public class FloatWindowService extends Service implements FloatWindowBottomCall
 
         startActivity(intent);
 
-        Intent serverIntent = new Intent(getApplicationContext(), FloatWindowService.class);
+        Intent serverIntent = new Intent(getApplicationContext(), BaseFloatWindowService.class);
         toggleFloatWindow();
         stopService(serverIntent);
     }

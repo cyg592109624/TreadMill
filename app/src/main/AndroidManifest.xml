@@ -107,6 +107,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape">
+
         </activity>
 
         <activity
@@ -218,9 +219,10 @@
         </activity>
 
 
+        <service android:name=".services.workoutrunning.HillServer" />
+        <service android:name=".services.workoutrunning.IntervalServer" />
+        <service android:name=".services.workoutrunning.QuickStartServer" />
 
-        <service
-            android:name=".services.workoutrunning.FloatWindowService"/>
     </application>
 
 </manifest>

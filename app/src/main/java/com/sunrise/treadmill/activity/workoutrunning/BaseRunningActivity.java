@@ -25,13 +25,11 @@ import com.sunrise.treadmill.bean.Level;
 import com.sunrise.treadmill.dialog.workoutrunning.CoolDownDialog;
 import com.sunrise.treadmill.dialog.workoutrunning.CountDownDialog;
 import com.sunrise.treadmill.dialog.workoutrunning.PauseDialog;
-import com.sunrise.treadmill.dialog.workoutrunning.WarmUpDialog;
 import com.sunrise.treadmill.interfaces.services.FloatServiceBinder;
 import com.sunrise.treadmill.interfaces.services.FloatWindowBottomCallBack;
 import com.sunrise.treadmill.interfaces.workout.running.DialogCoolDownClick;
 import com.sunrise.treadmill.interfaces.workout.running.DialogPauseClick;
-import com.sunrise.treadmill.interfaces.workout.running.DialogWarmUpClick;
-import com.sunrise.treadmill.services.workoutrunning.FloatWindowService;
+import com.sunrise.treadmill.services.workoutrunning.BaseFloatWindowService;
 import com.sunrise.treadmill.utils.AnimationsContainer;
 import com.sunrise.treadmill.utils.DateUtil;
 import com.sunrise.treadmill.utils.ImageUtils;
@@ -99,9 +97,22 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
 
     public PackageManager packageManager;
 
-    public FloatWindowService floatWindowServer;
+    public BaseFloatWindowService floatWindowServer;
 
     public FloatServiceBinder serviceBinder;
+
+    public ServiceConnection floatWindowConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            serviceBinder.onBindSucceed(componentName, iBinder);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            serviceBinder.onServiceDisconnected(componentName);
+        }
+    };
+
     public CountDownTimer coolDownTimer;
 
     /**
@@ -203,19 +214,6 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
      */
     public int valueBMP = 0;
 
-
-    public ServiceConnection floatWindowConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            serviceBinder.onBindSucceed(componentName, iBinder);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            serviceBinder.onServiceDisconnected(componentName);
-        }
-    };
-
     @Override
     public int getLayoutId() {
         return R.layout.activity_workout_running;
@@ -267,6 +265,7 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
 
     @Override
     public void init() {
+        serviceBinder = BaseRunningActivity.this;
         showCountDown = getIntent().getIntExtra(Constant.RUNNING_START_TYPE, Constant.RUNNING_START_TYPE_1);
         workOutInfo = getIntent().getParcelableExtra(Constant.WORK_OUT_INFO);
 
@@ -310,7 +309,7 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
     @Override
     public void onBindSucceed(ComponentName componentName, IBinder iBinder) {
         if (iBinder != null) {
-            floatWindowServer = ((FloatWindowService.FloatBinder) iBinder).getService();
+            floatWindowServer = ((BaseFloatWindowService.FloatBinder) iBinder).getService();
             floatWindowServer.setRunningActivityName(getPackageName() + "." + getLocalClassName());
             floatWindowServer.setActivity(BaseRunningActivity.this);
         }
@@ -659,11 +658,10 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
 
 
     public void bindServer() {
-        serviceBinder = BaseRunningActivity.this;
         ThreadPoolUtils.runTaskOnThread(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(activityContext, FloatWindowService.class);
+                Intent intent = new Intent(activityContext, BaseFloatWindowService.class);
                 intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
                 bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
             }

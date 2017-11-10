@@ -2,11 +2,12 @@ package com.sunrise.treadmill.activity.summary;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 
+import com.sunrise.treadmill.Constant;
+import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.home.HomeActivity;
 import com.sunrise.treadmill.adapter.summary.SummaryViewPageAdapter;
@@ -14,8 +15,11 @@ import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.fragments.summary.SummaryFragmentPage1;
 import com.sunrise.treadmill.fragments.summary.SummaryFragmentPage2;
 import com.sunrise.treadmill.fragments.summary.SummaryFragmentPage3;
+import com.sunrise.treadmill.fragments.summary.SummaryFragmentPage4;
 import com.sunrise.treadmill.utils.BitMapUtils;
 import com.sunrise.treadmill.utils.ImageUtils;
+import com.sunrise.treadmill.utils.SharedPreferencesUtils;
+import com.sunrise.treadmill.utils.UnitUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +60,13 @@ public class SummaryActivity extends BaseFragmentActivity implements ViewPager.O
 
     @Override
     protected void init() {
+        workOutInfo = getIntent().getParcelableExtra(Constant.WORK_OUT_INFO);
         List<Fragment> list = new ArrayList<Fragment>();
-        list.add(new SummaryFragmentPage1());
+        if (workOutInfo.getWorkOutModeName().equals(Constant.WORK_OUT_MODE_FITNESS_TEST)) {
+            list.add(new SummaryFragmentPage4());
+        } else {
+            list.add(new SummaryFragmentPage1());
+        }
         list.add(new SummaryFragmentPage2());
         list.add(new SummaryFragmentPage3());
         viewPageAdapter = new SummaryViewPageAdapter(fragmentManager, list);
@@ -65,6 +74,7 @@ public class SummaryActivity extends BaseFragmentActivity implements ViewPager.O
         viewPager.setCurrentItem(0);
         viewPager.addOnPageChangeListener(SummaryActivity.this);
         viewPager.setOffscreenPageLimit(3);
+        upDataInof();
     }
 
     @Override
@@ -104,5 +114,52 @@ public class SummaryActivity extends BaseFragmentActivity implements ViewPager.O
         Intent intent = new Intent(activityContext, HomeActivity.class);
         finishActivity();
         startActivity(intent);
+    }
+
+    /**
+     * 更新数据(目标界面是SettingLongc与Factory2)
+     */
+    private void upDataInof() {
+        //针对用户计算
+        //计算剩下时间
+        long remainingTime = Long.valueOf(GlobalSetting.Setting_RemainingTime) * 60 - Long.valueOf(workOutInfo.getRunningTime());
+
+        long resultTime = remainingTime / 60;
+        GlobalSetting.Setting_RemainingTime = resultTime + "";
+        SharedPreferencesUtils.put(activityContext, Constant.SETTING_REMAINING_TIME, GlobalSetting.Setting_RemainingTime);
+
+        float remainingDistance;
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            //公制单位
+            remainingDistance = Float.valueOf(GlobalSetting.Setting_RemainingDistance) - Float.valueOf(workOutInfo.getRunningDistance());
+        } else {
+            //英制单位 但是数据是以公制保存的
+            remainingDistance = Float.valueOf(GlobalSetting.Setting_RemainingDistance) - UnitUtils.mile2km(workOutInfo.getRunningDistance());
+        }
+        GlobalSetting.Setting_RemainingDistance = remainingDistance + "";
+        SharedPreferencesUtils.put(activityContext, Constant.SETTING_REMAINING_DISTANCE, GlobalSetting.Setting_RemainingDistance);
+
+        //针对机器运行总数计算
+        //分钟数
+        long totalTime = Long.valueOf(workOutInfo.getRunningTime()) % 60;
+        if (totalTime == 0) {
+            totalTime = Long.valueOf(workOutInfo.getRunningTime()) / 60;
+        } else {
+            totalTime = 1 + Long.valueOf(workOutInfo.getRunningTime()) / 60;
+        }
+        GlobalSetting.Factory2_TotalTime = GlobalSetting.Factory2_TotalTime + totalTime;
+        SharedPreferencesUtils.put(activityContext, Constant.FACTORY2_TOTAL_TIME, GlobalSetting.Factory2_TotalTime);
+
+        float totalDistance;
+        if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
+            //公制单位
+            totalDistance = Float.valueOf(GlobalSetting.Factory2_TotalDistant) + Float.valueOf(workOutInfo.getRunningDistance());
+        } else {
+            //英制单位 但是数据是以公制保存的
+            totalDistance = Float.valueOf(GlobalSetting.Factory2_TotalDistant) + UnitUtils.mile2km(workOutInfo.getRunningDistance());
+        }
+        GlobalSetting.Factory2_TotalDistant = totalDistance + "";
+        SharedPreferencesUtils.put(activityContext, Constant.FACTORY2_TOTAL_DISTANT, GlobalSetting.Factory2_TotalDistant);
+
     }
 }

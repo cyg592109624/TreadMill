@@ -18,7 +18,7 @@ import com.sunrise.treadmill.utils.ImageUtils;
  * Created by ChuHui on 2017/9/20.
  */
 
-public class MyGenderView extends ConstraintLayout {
+public class GenderView extends ConstraintLayout {
     private RadioButton male, female;
     private OnGenderReturn onGenderReturn;
     private ImageView genderImg;
@@ -26,15 +26,15 @@ public class MyGenderView extends ConstraintLayout {
 
     private int hasClick = 0;
 
-    public MyGenderView(Context context) {
+    public GenderView(Context context) {
         this(context, null);
     }
 
-    public MyGenderView(Context context, @Nullable AttributeSet attrs) {
+    public GenderView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MyGenderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public GenderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.workout_gender, this, true);
 

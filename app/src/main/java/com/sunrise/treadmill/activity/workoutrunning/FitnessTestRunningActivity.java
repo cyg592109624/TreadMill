@@ -17,10 +17,13 @@ import java.util.List;
 /**
  * Created by ChuHui on 2017/9/27.
  */
-
 public class FitnessTestRunningActivity extends BaseRunningActivity implements DialogWarmUpClick {
+    //残留问题:
+    //如何界定这个模式的自动跳出;
 
     private int showWarmTimes = -1;
+
+    private int tgHRC = 0;
 
     @Override
     public void init() {
@@ -31,14 +34,17 @@ public class FitnessTestRunningActivity extends BaseRunningActivity implements D
 
     @Override
     protected void setUpInfo() {
-        //这里获取到的是目标运行分钟数
-        runningTimeTarget = Integer.valueOf(workOutInfo.getTime());
+        //特殊 这里只运行495秒
+        runningTimeTarget = 60 + 15 * 29;
         //这里获取已经运行的时间 以秒为单位
         runningTimeTotal = Integer.valueOf(workOutInfo.getRunningTime());
 
-        //累加形式 计算时间
-        isCountDownTime = false;
-        headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeTotal));
+        runningTimeSurplus = runningTimeTarget - runningTimeTotal;
+
+        //累减 计算时间
+        isCountDownTime = true;
+
+        headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeSurplus));
 
         avgLevelTime = 60;
         timerMissionTimes = (int) runningTimeTotal / (int) avgLevelTime;
@@ -57,7 +63,9 @@ public class FitnessTestRunningActivity extends BaseRunningActivity implements D
         runningCaloriesSurplus = runningCaloriesTarget - runningCaloriesTotal;
         headView.setCaloriesValue(runningCaloriesTotal + "");
 
-        headView.setPulseValue(runningPulseTarget + "");
+        tgHRC = Integer.valueOf(workOutInfo.getHrc());
+
+        headView.setPulseValue(runningPulseNow + "");
 
         headView.setWattValue(valueWatt + "");
 
@@ -114,7 +122,8 @@ public class FitnessTestRunningActivity extends BaseRunningActivity implements D
     @Override
     public void timerTick() {
         runningTimeTotal++;
-        headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeTotal));
+        runningTimeSurplus = runningTimeTarget - runningTimeTotal;
+        headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeSurplus));
         //切换到下一阶段的Level
         if (runningTimeTotal % avgLevelTime == 0) {
             //特殊地方将阶段时间间隔由60秒缩减到15秒

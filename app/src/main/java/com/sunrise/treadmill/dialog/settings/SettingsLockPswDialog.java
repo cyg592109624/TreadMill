@@ -1,11 +1,9 @@
 package com.sunrise.treadmill.dialog.settings;
 
-import android.view.View;
-
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.settings.SettingsLockActivity;
 import com.sunrise.treadmill.base.BaseDialogFragment;
-import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView;
 
 import butterknife.BindView;
 
@@ -16,7 +14,7 @@ import butterknife.BindView;
 public class SettingsLockPswDialog extends BaseDialogFragment {
 
     @BindView(R.id.dialog_settings_lock_key_board)
-    MyKeyBoardView keyBoardView;
+    NumberKeyBoardView keyBoardView;
 
     @Override
     public int getLayoutId() {

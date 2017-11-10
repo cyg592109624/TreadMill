@@ -4,8 +4,6 @@ import android.app.Dialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.Constant;
@@ -18,7 +16,7 @@ import com.sunrise.treadmill.interfaces.workout.setting.OnGoalSetValueReturn;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView;
 
 import butterknife.BindView;
 
@@ -30,7 +28,7 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
     @BindView(R.id.dialog_workout_goal_value)
     TextView editValue;
     @BindView(R.id.dialog_workout_goal_keyboard)
-    MyKeyBoardView keyBoardView;
+    NumberKeyBoardView keyBoardView;
 
     private OnGoalSetValueReturn onGoalSetValueReturn;
 

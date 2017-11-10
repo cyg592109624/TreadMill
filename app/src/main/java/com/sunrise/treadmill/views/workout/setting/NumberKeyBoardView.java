@@ -21,7 +21,7 @@ import com.sunrise.treadmill.utils.ImageUtils;
  * Created by ChuHui on 2017/9/20.
  */
 
-public class MyKeyBoardView extends LinearLayout {
+public class NumberKeyBoardView extends LinearLayout {
     private ImageView title;
     private TextView showText;
     private OnKeyBoardReturn keyBoardReturn;
@@ -31,15 +31,15 @@ public class MyKeyBoardView extends LinearLayout {
     private int changeTypeMax;
     private int changeTypeMin;
 
-    public MyKeyBoardView(Context context) {
+    public NumberKeyBoardView(Context context) {
         this(context, null);
     }
 
-    public MyKeyBoardView(Context context, @Nullable AttributeSet attrs) {
+    public NumberKeyBoardView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MyKeyBoardView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public NumberKeyBoardView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.key_board, this, true);
 

@@ -1,5 +1,12 @@
 package com.sunrise.treadmill.activity.workoutrunning;
 
+import android.content.Context;
+import android.content.Intent;
+
+import com.sunrise.treadmill.Constant;
+import com.sunrise.treadmill.services.workoutrunning.IntervalServer;
+import com.sunrise.treadmill.utils.ThreadPoolUtils;
+
 /**
  * Created by ChuHui on 2017/9/27.
  */
@@ -46,4 +53,15 @@ public class IntervalRunningActivity extends BaseRunningActivity {
 
     }
 
+    @Override
+    public void bindServer() {
+        ThreadPoolUtils.runTaskOnThread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(activityContext, IntervalServer.class);
+                intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
+                bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
+            }
+        });
+    }
 }

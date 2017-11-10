@@ -1,6 +1,11 @@
 package com.sunrise.treadmill.activity.workoutrunning;
 
+import android.content.Context;
+import android.content.Intent;
+
 import com.sunrise.treadmill.Constant;
+import com.sunrise.treadmill.services.workoutrunning.QuickStartServer;
+import com.sunrise.treadmill.utils.ThreadPoolUtils;
 
 /**
  * Created by ChuHui on 2017/9/27.
@@ -11,7 +16,6 @@ public class QuickStartRunningActivity extends BaseRunningActivity {
     @Override
     protected void setUpInfo() {
         super.setUpInfo();
-
         runningDistanceTarget = Integer.valueOf(workOutInfo.getDistance());
         runningDistanceTotal = Integer.valueOf(workOutInfo.getRunningDistance());
         runningDistanceSurplus = runningDistanceTarget - runningDistanceTotal;
@@ -48,4 +52,15 @@ public class QuickStartRunningActivity extends BaseRunningActivity {
 
     }
 
+    @Override
+    public void bindServer() {
+        ThreadPoolUtils.runTaskOnThread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(activityContext, QuickStartServer.class);
+                intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
+                bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
+            }
+        });
+    }
 }

@@ -55,4 +55,15 @@ public class SummaryFragmentPage3 extends BaseFragment {
         txtList.clear();
         txtList = null;
     }
+
+    private int loadTimes = -1;
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (getUserVisibleHint()) {
+            if (loadTimes == -1) {
+
+            }
+        }
+    }
 }

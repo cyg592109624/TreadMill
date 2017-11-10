@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.sunrise.treadmill.views.workout.setting.MyKeyBoardView
+    <com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView
         android:id="@+id/dialog_workout_vr_keyboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

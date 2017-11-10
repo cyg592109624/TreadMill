@@ -16,8 +16,8 @@ import com.sunrise.treadmill.interfaces.workout.setting.OnGenderReturn;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.workout.setting.MyGenderView;
-import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.GenderView;
+import com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +33,10 @@ import butterknife.OnClick;
 public class IntervalActivity extends BaseActivity implements OnGenderReturn, OnKeyBoardReturn {
 
     @BindView(R.id.workout_mode_gender_select)
-    MyGenderView genderView;
+    GenderView genderView;
 
     @BindView(R.id.workout_mode_keyboard)
-    MyKeyBoardView keyBoardView;
+    NumberKeyBoardView keyBoardView;
 
     @BindView(R.id.workout_edit_age_value)
     TextView ageValue;

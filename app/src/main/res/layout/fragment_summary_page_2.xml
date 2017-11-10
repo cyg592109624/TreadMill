@@ -42,7 +42,7 @@
         android:layout_width="80dp"
         android:layout_height="95dp"
         android:gravity="center"
-        android:text="99"
+        android:text="0"
         android:textColor="@color/summary_value"
         android:textSize="18pt"
         app:layout_constraintBottom_toBottomOf="parent"

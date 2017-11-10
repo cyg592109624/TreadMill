@@ -2,7 +2,6 @@ package com.sunrise.treadmill.fragments.settings;
 
 import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunrise.treadmill.Constant;
@@ -13,7 +12,7 @@ import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.SharedPreferencesUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.workout.setting.MyKeyBoardView;
+import com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,7 @@ public class SettingsLockFragmentCard2 extends BaseFragment implements OnKeyBoar
     TextView psw;
 
     @BindView(R.id.settings_card4_2_right)
-    MyKeyBoardView keyBoard;
+    NumberKeyBoardView keyBoard;
 
     @Override
     public int getLayoutId() {
