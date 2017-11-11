@@ -774,6 +774,7 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
         workOutInfo.setRunningTime(runningTimeTotal + "");
         workOutInfo.setDistance(runningDistanceTotal + "");
         workOutInfo.setCalories(runningCaloriesTotal + "");
+        workOutInfo.setRunningLevelCount(timerMissionTimes);
     }
 
 }

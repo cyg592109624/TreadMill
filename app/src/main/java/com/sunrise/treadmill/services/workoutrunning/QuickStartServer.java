@@ -7,7 +7,7 @@ package com.sunrise.treadmill.services.workoutrunning;
 public class QuickStartServer extends BaseFloatWindowService {
 
     @Override
-    public void init() {
+    public void initBottomView() {
 
     }
 

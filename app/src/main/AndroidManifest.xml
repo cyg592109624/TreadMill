@@ -11,6 +11,13 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.REORDER_TASKS" />
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+    <uses-permission
+        android:name="android.hardware.usb.host"
+        android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.usb.host"
+        android:required="true" />
 
     <application
         android:name=".TreadApplication"
@@ -218,10 +225,12 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".services.settings.BackPressServer" />
 
         <service android:name=".services.workoutrunning.HillServer" />
         <service android:name=".services.workoutrunning.IntervalServer" />
         <service android:name=".services.workoutrunning.QuickStartServer" />
+        <service android:name=".services.settings.BackPressServer" />
 
     </application>
 

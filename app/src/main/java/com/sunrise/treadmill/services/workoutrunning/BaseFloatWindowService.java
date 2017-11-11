@@ -92,7 +92,7 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
     /**
      * 是否以倒计时形式显示时间
      */
-    private boolean isCountDownTime = false;
+    public boolean isCountDownTime = false;
 
     /**
      * LevelView中每阶持续时间 根据目前情况决定 以秒为单位
@@ -177,15 +177,23 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
      */
     public int valueBMP = 0;
 
+    public int screenWidth=0;
+    public int screenHeight=0;
+
     @Override
     public void onCreate() {
         super.onCreate();
         mWindowManager = (WindowManager) getApplication().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        mWindowManager.getDefaultDisplay().getMetrics(dm);
+        screenWidth = dm.widthPixels;
+        screenHeight = dm.heightPixels;
+        dm=null;
         stageService();
         initWindowParams();
         initFloatWindow();
         initDialog();
-        init();
+        initBottomView();
     }
 
     private final IBinder floatBinder = new FloatBinder();
@@ -444,11 +452,6 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
      * 创建弹窗
      */
     private void initDialog() {
-        DisplayMetrics dm = new DisplayMetrics();
-        mWindowManager.getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-        dm = null;
         dialogPause = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_workout_running_pause, null);
 
         dialogCoolDown = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_workout_running_cool_down, null);
@@ -456,16 +459,16 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
         dialogCountDown = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_workout_running_count_down, null);
 
         dialogPause.setLayoutParams(dialogParams);
-        dialogPause.setMinHeight(height);
-        dialogPause.setMinWidth(width);
+        dialogPause.setMinWidth(screenWidth);
+        dialogPause.setMinHeight(screenHeight);
 
         dialogCoolDown.setLayoutParams(dialogParams);
-        dialogCoolDown.setMinHeight(height);
-        dialogCoolDown.setMinWidth(width);
+        dialogCoolDown.setMinWidth(screenWidth);
+        dialogCoolDown.setMinHeight(screenHeight);
 
         dialogCountDown.setLayoutParams(dialogParams);
-        dialogCountDown.setMinHeight(height);
-        dialogCountDown.setMinWidth(width);
+        dialogCountDown.setMinWidth(screenWidth);
+        dialogCountDown.setMinHeight(screenHeight);
 
         dialogClick();
         ImageView countDownImage = dialogCountDown.findViewById(R.id.workout_running_dialog_count_down_img);
@@ -522,7 +525,7 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
     /**
      * 调整悬浮内容
      */
-    public abstract void init();
+    public abstract void initBottomView();
 
 
     public void setRunningActivityName(String activityName) {

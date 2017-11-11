@@ -64,6 +64,8 @@ public class WorkOut implements Parcelable {
 
     private List<Level> levelList = new ArrayList<>();
 
+    private int runningLevelCount=0;
+
     public WorkOut() {
 
     }
@@ -85,6 +87,7 @@ public class WorkOut implements Parcelable {
         hrcType = in.readInt();
         vrType = in.readInt();
         in.readTypedList(levelList, Level.CREATOR);
+        runningLevelCount= in.readInt();
     }
 
     public static final Creator<WorkOut> CREATOR = new Creator<WorkOut>() {
@@ -122,6 +125,7 @@ public class WorkOut implements Parcelable {
         parcel.writeInt(hrcType);
         parcel.writeInt(vrType);
         parcel.writeTypedList(levelList);
+        parcel.writeInt(runningLevelCount);
     }
 
     public int getWorkOutMode() {
@@ -256,5 +260,13 @@ public class WorkOut implements Parcelable {
 
     public void setLevelList(List<Level> levelList) {
         this.levelList = levelList;
+    }
+
+    public int getRunningLevelCount() {
+        return runningLevelCount;
+    }
+
+    public void setRunningLevelCount(int runningLevelCount) {
+        this.runningLevelCount = runningLevelCount;
     }
 }

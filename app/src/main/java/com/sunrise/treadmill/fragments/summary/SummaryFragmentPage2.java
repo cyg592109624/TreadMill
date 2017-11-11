@@ -72,10 +72,17 @@ public class SummaryFragmentPage2 extends BaseFragment {
             avgLevel = avgLevel + level.getLevel();
         }
         avgLevel = avgLevel / levels.size();
-        //有可能超越30个数据 这里锁死用前面的30个
-        for (int i = 0; i < LevelView.columnCount; i++) {
-            list.add(levels.get(i).getLevel());
+        //有可能超越30个数据 这里锁死用前面的30个 但也有可能不足30个
+        if(workOutInfo.getRunningLevelCount()<=30){
+            for (int i = 0; i < workOutInfo.getRunningLevelCount(); i++) {
+                list.add(levels.get(i).getLevel());
+            }
+        }else {
+            for (int i = 0; i < LevelView.columnCount; i++) {
+                list.add(levels.get(i).getLevel());
+            }
         }
+
         lineChat.setData(list);
     }
 

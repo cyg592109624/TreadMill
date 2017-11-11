@@ -19,6 +19,9 @@ public class Constant {
     public static final String SETTING_TIME = "SETTING_TIME";
     public static final String SETTING_REMAINING_TIME = "SETTING_REMAINING_TIME";
 
+
+    public static final String BACK_PRESS_SERVER_ACTION = "BACK_PRESS_SERVER_ACTION";
+
     public static final String SETTING_DISTANCE = "0";
     public static final String SETTING_REMAINING_DISTANCE = "0";
 

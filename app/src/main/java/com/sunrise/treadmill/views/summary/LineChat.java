@@ -79,8 +79,7 @@ public class LineChat extends View {
         float y = 1.00f;
         float previousX = 1.00f;
         float previousY = 1.00f;
-        for (int i = 1; i < dataSize; i++) {
-
+        for (int i = 1; i < data.size(); i++) {
             x = avgWidth * i;
             y = viewHeight - data.get(i) * avgHeight;
             previousX = mX;

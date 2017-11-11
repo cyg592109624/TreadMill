@@ -1,14 +1,20 @@
 package com.sunrise.treadmill.activity.settings;
 
 
+import android.app.Instrumentation;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
@@ -16,9 +22,11 @@ import com.sunrise.treadmill.fragments.settings.SettingsFragmentCard1;
 import com.sunrise.treadmill.fragments.settings.SettingsFragmentCard2;
 import com.sunrise.treadmill.fragments.settings.SettingsFragmentCard3;
 import com.sunrise.treadmill.fragments.settings.SettingsFragmentCard4;
+import com.sunrise.treadmill.services.settings.BackPressServer;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
+import com.sunrise.treadmill.utils.ThreadPoolUtils;
 
 import java.util.List;
 
@@ -74,6 +82,9 @@ public class SettingsActivity extends BaseFragmentActivity {
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.add(R.id.settings_views, card1).commit();
         nowFragment = card1;
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Constant.BACK_PRESS_SERVER_ACTION);
+        registerReceiver(backPressReceiver, intentFilter);
     }
 
     @Override
@@ -149,7 +160,36 @@ public class SettingsActivity extends BaseFragmentActivity {
 
     @OnClick(R.id.bottom_logo_tab_home)
     public void onBackHome() {
+        unregisterReceiver(backPressReceiver);
+        stopBackPressServer();
         finishActivity();
     }
 
+
+    private BroadcastReceiver backPressReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Constant.BACK_PRESS_SERVER_ACTION)) {
+                stopBackPressServer();
+                ThreadPoolUtils.runTaskOnThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            //需要一个系统级别权限INJECT_EVENTS
+                            Instrumentation backPressIntent = new Instrumentation();
+                            backPressIntent.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        }
+    };
+
+    private void stopBackPressServer() {
+        Intent intent = new Intent(activityContext, BackPressServer.class);
+        stopService(intent);
+    }
 }

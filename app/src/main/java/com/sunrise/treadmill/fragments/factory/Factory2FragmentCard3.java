@@ -1,5 +1,9 @@
 package com.sunrise.treadmill.fragments.factory;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,7 +56,9 @@ public class Factory2FragmentCard3 extends BaseFragment {
 
     @Override
     protected void init() {
+        IntentFilter usbIntent=new IntentFilter();
 
+        getActivity().registerReceiver(usbReceiver,usbIntent);
     }
 
     @OnClick({R.id.factory2_card3_1_btn, R.id.factory2_card3_3_btn})
@@ -66,4 +72,10 @@ public class Factory2FragmentCard3 extends BaseFragment {
                 break;
         }
     }
+    private BroadcastReceiver usbReceiver=new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+        }
+    };
 }

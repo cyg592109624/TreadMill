@@ -1,7 +1,12 @@
 package com.sunrise.treadmill.activity.workoutrunning;
 
+import android.content.Context;
+import android.content.Intent;
+
 import com.sunrise.treadmill.Constant;
+import com.sunrise.treadmill.services.workoutrunning.GoalServer;
 import com.sunrise.treadmill.utils.DateUtil;
+import com.sunrise.treadmill.utils.ThreadPoolUtils;
 import com.sunrise.treadmill.views.workout.LevelView;
 
 /**
@@ -9,10 +14,12 @@ import com.sunrise.treadmill.views.workout.LevelView;
  */
 
 public class GoalRunningActivity extends BaseRunningActivity {
-
+    //残留问题
+    //数据返回间隔 如何计算
 
     @Override
     protected void setUpInfo() {
+        //获取分钟数 转为秒数
         runningTimeTarget = Integer.valueOf(workOutInfo.getTime()) * 60;
         runningTimeTotal = Integer.valueOf(workOutInfo.getRunningTime());
         runningTimeSurplus = runningTimeTarget - runningTimeTotal;
@@ -99,4 +106,15 @@ public class GoalRunningActivity extends BaseRunningActivity {
 
     }
 
+    @Override
+    public void bindServer() {
+        ThreadPoolUtils.runTaskOnThread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(activityContext, GoalServer.class);
+                intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
+                bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
+            }
+        });
+    }
 }

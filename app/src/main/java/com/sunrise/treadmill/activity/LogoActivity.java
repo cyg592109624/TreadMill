@@ -91,7 +91,7 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
             String[] args = new String[perms.size()];
             for (int i = 0; i < perms.size(); i++) {
                 args[i] = perms.get(i);
-                System.out.println("被允许的权限     -->" + perms.get(i));
+                System.out.println("允许的权限     -->" + perms.get(i));
             }
             mHandler.sendEmptyMessage(easyPermissionResult);
         }
@@ -103,7 +103,7 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
             String[] args = new String[perms.size()];
             for (int i = 0; i < perms.size(); i++) {
                 args[i] = perms.get(i);
-                System.out.println("没有被允许的权限   -->" + perms.get(i));
+                System.out.println("拒接的权限     -->" + perms.get(i));
             }
         }
     }
