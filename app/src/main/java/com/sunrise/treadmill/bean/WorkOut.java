@@ -28,7 +28,7 @@ public class WorkOut implements Parcelable {
     /**
      * 这里以min为单位
      */
-    private String time = "20";
+    private String time = "0";
 
     /**
      * 已经运动时间 以秒为单位
@@ -58,12 +58,16 @@ public class WorkOut implements Parcelable {
     private int goalType = Constant.MODE_GOAL_TIME;
 
     private String hrc = "80";
+
     private int hrcType = Constant.MODE_HRC_TYPE_TG;
 
     private int vrType = Constant.MODE_VR_TYPE_VR1;
 
     private List<Level> levelList = new ArrayList<>();
 
+    /**
+     * 段数移动次数
+     */
     private int runningLevelCount=0;
 
     public WorkOut() {

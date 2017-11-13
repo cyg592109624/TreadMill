@@ -26,13 +26,14 @@ public class LineChat extends View {
 
     private int viewWidth;
     private int viewHeight;
+
     private float avgWidth;
     private float avgHeight;
 
     private Paint mGesturePaint = new Paint();
     private Path mPath = new Path();
     private List<Integer> data;
-    private int dataSize = 30;
+    private final int MIN_SIZE = 30;
     private int rankCount = 36;
 
     public LineChat(Context context, @Nullable AttributeSet attrs) {
@@ -58,8 +59,8 @@ public class LineChat extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         viewWidth = MeasureSpec.getSize(widthMeasureSpec);
         viewHeight = MeasureSpec.getSize(heightMeasureSpec);
-        avgWidth = (viewWidth * 1.00f / (dataSize - 1));
-        avgHeight = (viewHeight * 1.00f / rankCount);
+        avgHeight = (viewHeight * 0.01f * 100f / rankCount);
+        calcWidth();
     }
 
     @Override
@@ -68,11 +69,22 @@ public class LineChat extends View {
         canvas.drawPath(mPath, mGesturePaint);
     }
 
-    private void drawData() {
-        if (data.size() <= 0) {
-            return;
+    /**
+     * 重新测量宽度
+     */
+    private void calcWidth() {
+        if (data.size() <= MIN_SIZE) {
+            avgWidth = (viewWidth * 0.01f * 100f / (MIN_SIZE - 1));
+        } else {
+            avgWidth = (viewWidth * 0.01f * 100f / (data.size() - 1));
         }
+        System.out.println("data.size()  ---->" + data.size());
+        System.out.println("avgWidth     ---->" + avgWidth);
+    }
+
+    private void drawData() {
         mX = 0;
+
         mY = viewHeight - data.get(0) * avgHeight;
         mPath.moveTo(mX, mY);
         float x = 1.00f;
@@ -82,6 +94,7 @@ public class LineChat extends View {
         for (int i = 1; i < data.size(); i++) {
             x = avgWidth * i;
             y = viewHeight - data.get(i) * avgHeight;
+
             previousX = mX;
             previousY = mY;
 
@@ -102,6 +115,7 @@ public class LineChat extends View {
     }
 
     public void reFlashView() {
+        calcWidth();
         drawData();
         invalidate();
     }

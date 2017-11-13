@@ -2,10 +2,14 @@ package com.sunrise.treadmill.activity.settings;
 
 
 import android.app.Instrumentation;
+import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -59,6 +63,21 @@ public class SettingsActivity extends BaseFragmentActivity {
     private static final float SELECT_TEXT_SIZE = 35f;
     private static final float UN_SELECT_TEXT_SIZE = 30f;
 
+    private BackPressServer backPressServer;
+    private ServiceConnection backConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            if(iBinder!=null){
+                backPressServer = ((BackPressServer.BackPressBinder) iBinder).getService();
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+
+        }
+    };
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_settings;
@@ -85,6 +104,9 @@ public class SettingsActivity extends BaseFragmentActivity {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Constant.BACK_PRESS_SERVER_ACTION);
         registerReceiver(backPressReceiver, intentFilter);
+
+        Intent serverIntent = new Intent(activityContext, BackPressServer.class);
+        bindService(serverIntent, backConnection, Service.BIND_AUTO_CREATE);
     }
 
     @Override
@@ -111,12 +133,14 @@ public class SettingsActivity extends BaseFragmentActivity {
                 tgCard = CARD_2;
                 bgResource = R.mipmap.img_factory_3_2;
                 card2 = new SettingsFragmentCard2();
+                backPressServer.addBackView();
                 tgFragment = card2;
                 break;
             case R.id.settings_card_wifi:
                 tgCard = CARD_3;
                 bgResource = R.mipmap.img_factory_3_3;
                 card3 = new SettingsFragmentCard3();
+                backPressServer.addBackView();
                 tgFragment = card3;
                 break;
             case R.id.settings_card_lock:
@@ -161,7 +185,7 @@ public class SettingsActivity extends BaseFragmentActivity {
     @OnClick(R.id.bottom_logo_tab_home)
     public void onBackHome() {
         unregisterReceiver(backPressReceiver);
-        stopBackPressServer();
+        unbindService(backConnection);
         finishActivity();
     }
 
@@ -171,25 +195,20 @@ public class SettingsActivity extends BaseFragmentActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(Constant.BACK_PRESS_SERVER_ACTION)) {
-                stopBackPressServer();
-                ThreadPoolUtils.runTaskOnThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            //需要一个系统级别权限INJECT_EVENTS
-                            Instrumentation backPressIntent = new Instrumentation();
-                            backPressIntent.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
+                backPressServer.moveBackView();
+//                ThreadPoolUtils.runTaskOnThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            //需要一个系统级别权限INJECT_EVENTS
+//                            Instrumentation backPressIntent = new Instrumentation();
+//                            backPressIntent.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                });
             }
         }
     };
-
-    private void stopBackPressServer() {
-        Intent intent = new Intent(activityContext, BackPressServer.class);
-        stopService(intent);
-    }
 }

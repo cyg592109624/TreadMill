@@ -5,7 +5,9 @@ import android.content.Intent;
 
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.services.workoutrunning.QuickStartServer;
+import com.sunrise.treadmill.utils.DateUtil;
 import com.sunrise.treadmill.utils.ThreadPoolUtils;
+import com.sunrise.treadmill.views.workout.LevelView;
 
 /**
  * Created by ChuHui on 2017/9/27.
@@ -15,7 +17,39 @@ public class QuickStartRunningActivity extends BaseRunningActivity {
 
     @Override
     protected void setUpInfo() {
-        super.setUpInfo();
+//        super.setUpInfo();
+        //这里获取到的是目标运行分钟数
+        runningTimeTarget = Integer.valueOf(workOutInfo.getTime());
+        //这里获取已经运行的时间 以秒为单位
+        runningTimeTotal = Integer.valueOf(workOutInfo.getRunningTime());
+
+        if (runningTimeTarget > Constant.COUNTDOWN_FLAG) {
+            //累减形式 计算时间
+            isCountDownTime = true;
+
+            //在这里转换成秒数
+            runningTimeTarget = runningTimeTarget * 60;
+
+            runningTimeSurplus = runningTimeTarget - runningTimeTotal;
+            headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeSurplus));
+
+            avgLevelTime = runningTimeTarget / LevelView.columnCount;
+
+            tgLevel = workOutInfo.getRunningLevelCount();
+
+            headView.setLevelValue(workOutInfo.getLevelList().get(tgLevel).getLevel());
+
+        } else {
+            //累加形式 计算时间
+            isCountDownTime = false;
+            headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeTotal));
+            avgLevelTime = 2;
+            timerMissionTimes = workOutInfo.getRunningLevelCount();
+            tgLevel = timerMissionTimes % LevelView.columnCount;
+            headView.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());
+        }
+
+
         runningDistanceTarget = Integer.valueOf(workOutInfo.getDistance());
         runningDistanceTotal = Integer.valueOf(workOutInfo.getRunningDistance());
         runningDistanceSurplus = runningDistanceTarget - runningDistanceTotal;
@@ -26,6 +60,7 @@ public class QuickStartRunningActivity extends BaseRunningActivity {
         runningCaloriesSurplus = runningCaloriesTarget - runningCaloriesTotal;
         headView.setCaloriesValue(runningCaloriesTotal + "");
 
+        //当前脉搏速率
         headView.setPulseValue(runningPulseTarget + "");
 
         headView.setWattValue(valueWatt + "");

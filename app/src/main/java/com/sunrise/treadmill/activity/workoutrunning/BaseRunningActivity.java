@@ -132,7 +132,7 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
 
     /**
      * 计时器运行次数 当累加时间的时候可以得出 经历了多少次Level迭代(就是说可以突然30这个数值)
-     * 更新workOutInfo时 应该使用这个值，
+     * 更新workOutInfo时 应该使用这个值，也就是实际需要计算值
      */
     public int timerMissionTimes = 0;
 
@@ -544,8 +544,10 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
 
             runningTimeSurplus = runningTimeTarget - runningTimeTotal;
             headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeSurplus));
+
             avgLevelTime = runningTimeTarget / LevelView.columnCount;
-            tgLevel = (int) runningTimeTotal / (int) avgLevelTime;
+            tgLevel = workOutInfo.getRunningLevelCount();
+
             headView.setLevelValue(workOutInfo.getLevelList().get(tgLevel).getLevel());
 
         } else {
@@ -553,7 +555,7 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
             isCountDownTime = false;
             headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeTotal));
             avgLevelTime = 60;
-            timerMissionTimes = (int) runningTimeTotal / (int) avgLevelTime;
+            timerMissionTimes = workOutInfo.getRunningLevelCount();
             tgLevel = timerMissionTimes % LevelView.columnCount;
             headView.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());
         }

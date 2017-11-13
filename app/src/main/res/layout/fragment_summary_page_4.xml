@@ -61,7 +61,7 @@
         android:textColor="@color/summary_white"
         android:textSize="18pt"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintLeft_toLeftOf="@+id/summary_fragment4_time_value"
         app:layout_constraintRight_toRightOf="@+id/summary_fragment4_time_value"
         app:layout_constraintTop_toTopOf="parent"

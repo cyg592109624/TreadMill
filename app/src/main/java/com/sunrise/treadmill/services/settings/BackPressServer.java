@@ -16,6 +16,7 @@ import android.widget.ImageView;
 
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
+import com.sunrise.treadmill.activity.settings.SettingsActivity;
 import com.sunrise.treadmill.utils.ImageUtils;
 
 /**
@@ -48,7 +49,6 @@ public class BackPressServer extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-
         return floatBinder;
     }
 
@@ -72,6 +72,7 @@ public class BackPressServer extends Service {
     }
 
     private void initImageView() {
+        System.out.println("initImageView");
         mWindowManager = (WindowManager) getApplication().getSystemService(Context.WINDOW_SERVICE);
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -102,9 +103,6 @@ public class BackPressServer extends Service {
         backImage = new ImageView(getApplicationContext());
         ImageUtils.changeImageView(backImage, R.drawable.btn_back_2);
 
-        backImage.setLayoutParams(floatParams);
-
-        mWindowManager.addView(backImage, floatParams);
         backImage.setOnTouchListener(new View.OnTouchListener() {
             int lastX, lastY;
             int paramX, paramY;
@@ -129,10 +127,12 @@ public class BackPressServer extends Service {
                         break;
                     case MotionEvent.ACTION_UP:
                         if (Math.abs(dx) < 10 && Math.abs(dy) < 10) {
-                            mWindowManager.removeView(backImage);
                             Intent intent = new Intent();
                             intent.setAction(Constant.BACK_PRESS_SERVER_ACTION);
                             sendBroadcast(intent);
+
+                            intent.setClass(getApplicationContext(), SettingsActivity.class);
+//                            startActivity(intent);
                         }
                         break;
                 }
@@ -140,7 +140,22 @@ public class BackPressServer extends Service {
             }
         });
 
+        backImage.setLayoutParams(floatParams);
     }
 
+    public void moveBackView() {
+        try {
+            mWindowManager.removeView(backImage);
+        } catch (Exception e) {
 
+        }
+    }
+
+    public void addBackView() {
+        try {
+            mWindowManager.addView(backImage, floatParams);
+        } catch (Exception e) {
+
+        }
+    }
 }

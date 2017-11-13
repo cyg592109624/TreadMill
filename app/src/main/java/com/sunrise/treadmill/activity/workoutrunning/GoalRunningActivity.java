@@ -39,7 +39,7 @@ public class GoalRunningActivity extends BaseRunningActivity {
                 isCountDownTime = true;
                 avgLevelTime = runningTimeTarget / LevelView.columnCount;
 
-                tgLevel = (int) runningTimeTotal / (int) avgLevelTime;
+                tgLevel = workOutInfo.getRunningLevelCount();
 
                 headView.setLevelValue(workOutInfo.getLevelList().get(tgLevel).getLevel());
                 headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeSurplus));
@@ -52,7 +52,7 @@ public class GoalRunningActivity extends BaseRunningActivity {
                 isCountDownTime = false;
                 avgLevelTime = 60;
 
-                timerMissionTimes = (int) runningTimeTotal / (int) avgLevelTime;
+                timerMissionTimes = workOutInfo.getRunningLevelCount();
                 tgLevel = timerMissionTimes % LevelView.columnCount;
 
                 headView.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());
@@ -67,7 +67,7 @@ public class GoalRunningActivity extends BaseRunningActivity {
                 isCountDownTime = false;
                 avgLevelTime = 60;
 
-                timerMissionTimes = (int) runningTimeTotal / (int) avgLevelTime;
+                timerMissionTimes = workOutInfo.getRunningLevelCount();
                 tgLevel = timerMissionTimes % LevelView.columnCount;
 
                 headView.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());

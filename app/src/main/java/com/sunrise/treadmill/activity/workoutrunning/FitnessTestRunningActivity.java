@@ -47,7 +47,7 @@ public class FitnessTestRunningActivity extends BaseRunningActivity implements D
         headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeSurplus));
 
         avgLevelTime = 60;
-        timerMissionTimes = (int) runningTimeTotal / (int) avgLevelTime;
+        timerMissionTimes = workOutInfo.getRunningLevelCount();
 
         tgLevel = timerMissionTimes % LevelView.columnCount;
 

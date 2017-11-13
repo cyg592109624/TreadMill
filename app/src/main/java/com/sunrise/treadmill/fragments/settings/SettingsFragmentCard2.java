@@ -29,8 +29,6 @@ public class SettingsFragmentCard2 extends BaseFragment {
 
     private void openBle() {
         try {
-            Intent serverIntent=new Intent(getContext(), BackPressServer.class);
-            getActivity().startService(serverIntent);
             Thread.sleep(200);
             Intent intent = new Intent();
             intent.setAction(Settings.ACTION_BLUETOOTH_SETTINGS);
