@@ -64,6 +64,9 @@ public class SummaryFragmentPage2 extends BaseFragment {
     @Override
     protected void init() {
         WorkOut workOutInfo = getActivity().getIntent().getParcelableExtra(Constant.WORK_OUT_INFO);
+        if (workOutInfo.getRunningLevelCount() <= 0) {
+            return;
+        }
         List<Level> levels = workOutInfo.getLevelList();
         List<Integer> list = new ArrayList<>();
         avgLevel = 0L;

@@ -33,6 +33,7 @@ import com.sunrise.treadmill.interfaces.home.HomeLanguageDialogReturn;
 import com.sunrise.treadmill.interfaces.home.OnInitialReturn;
 import com.sunrise.treadmill.interfaces.home.OnModeSelectReturn;
 import com.sunrise.treadmill.services.workoutrunning.BaseFloatWindowService;
+import com.sunrise.treadmill.services.workoutrunning.QuickStartServer;
 import com.sunrise.treadmill.utils.BitMapUtils;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.ThreadPoolUtils;
@@ -232,7 +233,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     @Override
     public void onMediaStart(int mediaType) {
-        serviceIntent = new Intent(HomeActivity.this, BaseFloatWindowService.class);
+        serviceIntent = new Intent(HomeActivity.this, QuickStartServer.class);
         workOutInfo.setWorkOutModeName(Constant.WORK_OUT_MODE_MEDIA);
         switch (mediaType) {
             default:

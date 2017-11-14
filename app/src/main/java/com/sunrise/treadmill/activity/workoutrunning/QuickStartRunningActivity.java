@@ -23,6 +23,8 @@ public class QuickStartRunningActivity extends BaseRunningActivity {
         //这里获取已经运行的时间 以秒为单位
         runningTimeTotal = Integer.valueOf(workOutInfo.getRunningTime());
 
+        timerMissionTimes = workOutInfo.getRunningLevelCount();
+
         if (runningTimeTarget > Constant.COUNTDOWN_FLAG) {
             //累减形式 计算时间
             isCountDownTime = true;
@@ -35,7 +37,8 @@ public class QuickStartRunningActivity extends BaseRunningActivity {
 
             avgLevelTime = runningTimeTarget / LevelView.columnCount;
 
-            tgLevel = workOutInfo.getRunningLevelCount();
+
+            tgLevel = timerMissionTimes;
 
             headView.setLevelValue(workOutInfo.getLevelList().get(tgLevel).getLevel());
 
@@ -43,9 +46,11 @@ public class QuickStartRunningActivity extends BaseRunningActivity {
             //累加形式 计算时间
             isCountDownTime = false;
             headView.setTimeValue(DateUtil.getFormatMMSS(runningTimeTotal));
+
             avgLevelTime = 2;
-            timerMissionTimes = workOutInfo.getRunningLevelCount();
+
             tgLevel = timerMissionTimes % LevelView.columnCount;
+
             headView.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());
         }
 

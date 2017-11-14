@@ -83,6 +83,9 @@ public class LineChat extends View {
     }
 
     private void drawData() {
+        if (data.size() <= 0) {
+            return;
+        }
         mX = 0;
 
         mY = viewHeight - data.get(0) * avgHeight;

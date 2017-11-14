@@ -177,8 +177,8 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
      */
     public int valueBMP = 0;
 
-    public int screenWidth=0;
-    public int screenHeight=0;
+    public int screenWidth = 0;
+    public int screenHeight = 0;
 
     @Override
     public void onCreate() {
@@ -188,7 +188,7 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
         mWindowManager.getDefaultDisplay().getMetrics(dm);
         screenWidth = dm.widthPixels;
         screenHeight = dm.heightPixels;
-        dm=null;
+        dm = null;
         stageService();
         initWindowParams();
         initFloatWindow();
@@ -322,19 +322,22 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
 
     @Override
     public void onHomeClick() {
+        stopForeground(true);
         runningTimer.cancel();
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         startActivity(intent);
-        Intent serverIntent = new Intent(getApplicationContext(), BaseFloatWindowService.class);
+        Intent serverIntent = new Intent(getApplicationContext(), getClass());
         toggleFloatWindow();
+
         stopService(serverIntent);
     }
 
     @Override
     public void onBackClick() {
+        stopForeground(true);
         runningTimer.cancel();
         saveWorkOutInfo();
         Intent intent = new Intent();
@@ -345,7 +348,7 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
 
         startActivity(intent);
 
-        Intent serverIntent = new Intent(getApplicationContext(), BaseFloatWindowService.class);
+        Intent serverIntent = new Intent(getApplicationContext(), getClass());
         toggleFloatWindow();
 
         stopService(serverIntent);
@@ -372,19 +375,26 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
             runningTimeTarget = runningTimeTarget * 60;
 
             runningTimeSurplus = runningTimeTarget - runningTimeTotal;
+
             floatWindowHead.setTimeValue(DateUtil.getFormatMMSS(runningTimeSurplus));
 
             avgLevelTime = runningTimeTarget / LevelView.columnCount;
 
-            tgLevel = (int) runningTimeTotal / (int) avgLevelTime;
+            timerMissionTimes = workOutInfo.getRunningLevelCount();
+
+            tgLevel = workOutInfo.getRunningLevelCount();
             floatWindowHead.setLevelValue(workOutInfo.getLevelList().get(tgLevel).getLevel());
 
         } else {
             //累加形式 计算时间
             isCountDownTime = false;
+
             floatWindowHead.setTimeValue(DateUtil.getFormatMMSS(runningTimeTotal));
-            avgLevelTime = 5;
-            timerMissionTimes = (int) runningTimeTotal / (int) avgLevelTime;
+
+            avgLevelTime = 60;
+
+            timerMissionTimes = workOutInfo.getRunningLevelCount();
+
             tgLevel = timerMissionTimes % LevelView.columnCount;
             floatWindowHead.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());
         }
@@ -676,6 +686,10 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
      */
     public void saveWorkOutInfo() {
         workOutInfo.setRunningTime(runningTimeTotal + "");
+        workOutInfo.setDistance(runningDistanceTotal + "");
+        workOutInfo.setCalories(runningCaloriesTotal + "");
+        workOutInfo.setRunningLevelCount(timerMissionTimes);
+
     }
 
     /**

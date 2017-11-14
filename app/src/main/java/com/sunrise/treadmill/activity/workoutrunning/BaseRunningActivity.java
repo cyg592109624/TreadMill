@@ -255,6 +255,7 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
         bottomView = null;
 
         packageManager = null;
+
         if (floatWindowConnection != null) {
             unbindService(floatWindowConnection);
         }
@@ -388,11 +389,9 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
 
     @Override
     public void onPauseTimeOut() {
-
         if (coolDownTimer != null) {
             coolDownTimer.cancel();
         }
-        saveWorkOutInfo();
         goToSummary();
     }
 
@@ -407,7 +406,6 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
             coolDownTimer.cancel();
             coolDownTimer = null;
         }
-        saveWorkOutInfo();
         goToSummary();
     }
 
@@ -660,14 +658,7 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
 
 
     public void bindServer() {
-        ThreadPoolUtils.runTaskOnThread(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(activityContext, BaseFloatWindowService.class);
-                intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
-                bindService(intent, floatWindowConnection, Context.BIND_AUTO_CREATE);
-            }
-        });
+
     }
 
     /**
@@ -758,10 +749,11 @@ public abstract class BaseRunningActivity extends BaseFragmentActivity implement
      * 必然带数据跳转
      */
     public void goToSummary() {
+        saveWorkOutInfo();
         ThreadPoolUtils.runTaskOnUIThread(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(BaseRunningActivity.this, SummaryActivity.class);
+                Intent intent = new Intent(activityContext, SummaryActivity.class);
                 intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
                 finishActivity();
                 startActivity(intent);

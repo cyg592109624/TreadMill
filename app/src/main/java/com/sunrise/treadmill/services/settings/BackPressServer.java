@@ -16,7 +16,6 @@ import android.widget.ImageView;
 
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.activity.settings.SettingsActivity;
 import com.sunrise.treadmill.utils.ImageUtils;
 
 /**
@@ -130,9 +129,6 @@ public class BackPressServer extends Service {
                             Intent intent = new Intent();
                             intent.setAction(Constant.BACK_PRESS_SERVER_ACTION);
                             sendBroadcast(intent);
-
-                            intent.setClass(getApplicationContext(), SettingsActivity.class);
-//                            startActivity(intent);
                         }
                         break;
                 }
