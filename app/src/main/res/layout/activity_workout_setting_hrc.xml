@@ -15,7 +15,7 @@
         android:gravity="center"
         android:text="@string/workout_mode_hrc"
         android:textColor="@color/workout_mode_white"
-        android:textSize="18pt"
+        android:textSize="16pt"
         app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -39,7 +39,7 @@
         android:gravity="center"
         android:text="@string/workout_mode_hint_f"
         android:textColor="@color/workout_mode_white"
-        android:textSize="14pt"
+        android:textSize="12pt"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workout_setting_head_name" />
@@ -101,11 +101,10 @@
         android:maxWidth="600dp"
         android:text="@string/workout_mode_hint_b"
         android:textColor="@color/workout_mode_white"
-        android:textSize="14pt"
+        android:textSize="10pt"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/include2"
+        app:layout_constraintRight_toRightOf="@+id/include2"
         app:layout_constraintTop_toBottomOf="@+id/workout_setting_head_hint"
         app:layout_constraintVertical_bias="0.64" />
 
@@ -116,11 +115,10 @@
         android:scaleType="fitXY"
         android:src="@drawable/btn_next"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_setting_head_hint"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/include2"
+        app:layout_constraintRight_toRightOf="@+id/include2"
+        app:layout_constraintTop_toBottomOf="@+id/include2" />
 
     <ImageView
         android:id="@+id/workout_setting_back"
@@ -144,11 +142,10 @@
         android:scaleType="fitXY"
         android:src="@drawable/btn_start"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.91"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_setting_head_hint"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@+id/include2"
+        app:layout_constraintRight_toRightOf="@+id/include2"
+        app:layout_constraintTop_toBottomOf="@+id/include2" />
 
 
     <include

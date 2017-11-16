@@ -15,7 +15,7 @@
         android:gravity="center"
         android:text="@string/workout_mode_hill"
         android:textColor="@color/workout_mode_white"
-        android:textSize="18pt"
+        android:textSize="16pt"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -39,7 +39,7 @@
         android:gravity="center"
         android:text="@string/workout_mode_hint_f"
         android:textColor="@color/workout_mode_white"
-        android:textSize="14pt"
+        android:textSize="12pt"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workout_setting_head_name" />
@@ -84,12 +84,12 @@
         android:layout_width="wrap_content"
         android:layout_height="58dp"
         android:layout_gravity="center"
-        android:layout_marginRight="20dp"
         android:gravity="center|left"
         android:text="@string/workout_mode_hint_a"
         android:textColor="@color/workout_mode_white"
-        android:textSize="14pt"
+        android:textSize="10pt"
         app:layout_constraintBottom_toTopOf="@+id/include_bottom"
+        app:layout_constraintLeft_toLeftOf="@+id/include2"
         app:layout_constraintRight_toLeftOf="@+id/workout_setting_start"
         app:layout_constraintTop_toBottomOf="@+id/include2" />
 

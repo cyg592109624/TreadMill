@@ -61,7 +61,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         WindowManager windowManager = getActivity().getWindowManager();
         DisplayMetrics dm = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(dm);
-        window.setLayout(dm.widthPixels, dm.heightPixels+50);
+        window.setLayout(dm.widthPixels, dm.heightPixels);
     }
 
     @Override

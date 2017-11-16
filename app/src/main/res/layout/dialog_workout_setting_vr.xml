@@ -56,7 +56,7 @@
         android:gravity="center|left"
         android:text="@string/workout_mode_hint_a"
         android:textColor="@color/workout_mode_white"
-        android:textSize="14pt"
+        android:textSize="12pt"
         app:layout_constraintBottom_toTopOf="@+id/workout_setting_back"
         app:layout_constraintLeft_toLeftOf="@+id/workout_setting_back"
         app:layout_constraintTop_toBottomOf="@+id/dialog_workout_vr_edit_time"

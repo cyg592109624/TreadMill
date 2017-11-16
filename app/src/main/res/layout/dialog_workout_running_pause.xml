@@ -33,7 +33,6 @@
         android:id="@+id/workout_running_pause_continue"
         android:layout_width="168dp"
         android:layout_height="104dp"
-        android:layout_marginTop="8dp"
         android:src="@drawable/btn_dialog_pause_continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
