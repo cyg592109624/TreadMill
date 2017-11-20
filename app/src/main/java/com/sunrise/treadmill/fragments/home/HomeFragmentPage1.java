@@ -1,8 +1,11 @@
 package com.sunrise.treadmill.fragments.home;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
@@ -26,6 +29,24 @@ public class HomeFragmentPage1 extends BaseFragment {
     @Override
     protected void init() {
         selectReturn = (OnModeSelectReturn) getActivity();
+        ImageView imageView1 = parentView.findViewById(R.id.workout_mode_hill);
+        ImageView imageView2 = parentView.findViewById(R.id.workout_mode_interval);
+        ImageView imageView3 = parentView.findViewById(R.id.workout_mode_goal);
+        ImageView imageView4 = parentView.findViewById(R.id.workout_mode_fitness_test);
+        ImageView imageView5 = parentView.findViewById(R.id.workout_mode_hrc);
+        ImageView imageView6 = parentView.findViewById(R.id.workout_mode_user_program);
+        ImageView imageView7 = parentView.findViewById(R.id.workout_mode_vr);
+        ImageView imageView8 = parentView.findViewById(R.id.workout_mode_quick_start);
+
+        Glide.with(this).load(R.drawable.btn_home_hill).into(imageView1);
+        Glide.with(this).load(R.drawable.btn_home_interval).into(imageView2);
+        Glide.with(this).load(R.drawable.btn_home_goal).into(imageView3);
+        Glide.with(this).load(R.drawable.btn_home_fitness).into(imageView4);
+        Glide.with(this).load(R.drawable.btn_home_hrc).into(imageView5);
+        Glide.with(this).load(R.drawable.btn_home_user_program).into(imageView6);
+        Glide.with(this).load(R.drawable.btn_home_virtual).into(imageView7);
+        Glide.with(this).load(R.drawable.btn_home_quick_start).into(imageView8);
+
     }
 
     @Override
@@ -36,7 +57,7 @@ public class HomeFragmentPage1 extends BaseFragment {
     @OnClick({R.id.workout_mode_hill, R.id.workout_mode_interval, R.id.workout_mode_goal,
             R.id.workout_mode_fitness_test, R.id.workout_mode_hrc, R.id.workout_mode_user_program,
             R.id.workout_mode_vr, R.id.workout_mode_quick_start})
-    public  void selectWorkOutMode(View view) {
+    public void selectWorkOutMode(View view) {
         switch (view.getId()) {
             default:
                 break;
@@ -67,7 +88,7 @@ public class HomeFragmentPage1 extends BaseFragment {
         }
     }
 
-    public void setSelectReturn(OnModeSelectReturn selectReturn){
-        this.selectReturn=selectReturn;
+    public void setSelectReturn(OnModeSelectReturn selectReturn) {
+        this.selectReturn = selectReturn;
     }
 }

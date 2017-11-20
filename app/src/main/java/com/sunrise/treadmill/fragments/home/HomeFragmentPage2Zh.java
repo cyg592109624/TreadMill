@@ -1,7 +1,9 @@
 package com.sunrise.treadmill.fragments.home;
 
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
@@ -25,6 +27,20 @@ public class HomeFragmentPage2Zh extends BaseFragment {
     @Override
     protected void init() {
         selectReturn = (OnModeSelectReturn) getActivity();
+
+        ImageView imageView1 = parentView.findViewById(R.id.home_app_mode_baidu);
+        ImageView imageView2 = parentView.findViewById(R.id.home_app_mode_weibo);
+        ImageView imageView3 = parentView.findViewById(R.id.home_app_mode_i71);
+        ImageView imageView4 = parentView.findViewById(R.id.home_app_mode_avin);
+        ImageView imageView5 = parentView.findViewById(R.id.home_app_mode_mp3);
+        ImageView imageView6 = parentView.findViewById(R.id.workout_mode_quick_start);
+
+        Glide.with(this).load(R.drawable.btn_home_bai).into(imageView1);
+        Glide.with(this).load(R.drawable.btn_home_weibo).into(imageView2);
+        Glide.with(this).load(R.drawable.btn_home_i71).into(imageView3);
+        Glide.with(this).load(R.drawable.btn_home_av_in).into(imageView4);
+        Glide.with(this).load(R.drawable.btn_home_mp3).into(imageView5);
+        Glide.with(this).load(R.drawable.btn_home_quick_start).into(imageView6);
     }
 
     @Override

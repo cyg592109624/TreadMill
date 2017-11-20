@@ -81,8 +81,8 @@
 
     <TextView
         android:id="@+id/workout_setting_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center|left"
         android:text="@string/workout_mode_hint_a"

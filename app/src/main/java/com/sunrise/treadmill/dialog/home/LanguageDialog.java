@@ -59,6 +59,7 @@ public class LanguageDialog extends BaseDialogFragment {
     @Override
     public void init() {
         dialogFragmentReturn = (HomeLanguageDialogReturn) getActivity();
+
     }
 
 
@@ -67,71 +68,66 @@ public class LanguageDialog extends BaseDialogFragment {
         boolean isChange = false;
         switch (btn.getId()) {
             default:
-                dismiss();
                 break;
             case R.id.home_dialog_language_img_us:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.en_US)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.en_US;
-                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_US, getResources());
+//                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_US, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_zh:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.zh_CN;
-                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_CN, getResources());
+//                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_CN, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_de:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.de_DE)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.de_DE;
-                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_DE, getResources());
+//                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_DE, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_tr:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.tr_TR)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.tr_TR;
-                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_TR, getResources());
+//                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_TR, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_ir:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.ir_IR)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.ir_IR;
-                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_IR, getResources());
+//                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_IR, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_es:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.es_ES)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.es_ES;
-                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_ESP, getResources());
+//                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_ESP, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_pt:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.pt_PT)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.pt_PT;
-                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_PT, getResources());
+//                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_PT, getResources());
                 }
                 break;
             case R.id.home_dialog_language_img_ru:
                 if (!GlobalSetting.AppLanguage.equals(LanguageUtils.ru_RU)) {
                     isChange = true;
                     GlobalSetting.AppLanguage = LanguageUtils.ru_RU;
-                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_RU, getResources());
+//                    LanguageUtils.updateLanguage(LanguageUtils.LOCALE_RU, getResources());
                 }
                 break;
         }
-        if (isChange) {
-            SharedPreferencesUtils.put(getContext(), Constant.APP_LANGUAGE, GlobalSetting.AppLanguage);
-            dialogFragmentReturn.onLanguageReturn(isChange);
-        } else {
-            dialogFragmentReturn.onLanguageReturn(isChange);
-        }
+        SharedPreferencesUtils.put(getContext(), Constant.APP_LANGUAGE, GlobalSetting.AppLanguage);
+        dialogFragmentReturn.onLanguageReturn(isChange);
         dismiss();
 
     }

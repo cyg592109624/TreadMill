@@ -150,8 +150,6 @@ public class Factory2FragmentCard3 extends BaseFragment {
                 break;
             case R.id.factory2_card3_1_btn:
                 if (apkFile != null) {
-                    Toast.makeText(getContext(), "开始复制APK文件", Toast.LENGTH_SHORT).show();
-                    upDataBtn.setEnabled(false);
 //                    PackageManager pm = getContext().getPackageManager();
 //                    String path = apkFile.getAbsolutePath();
 //                    PackageInfo packageInfo = pm.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
@@ -162,6 +160,8 @@ public class Factory2FragmentCard3 extends BaseFragment {
 //                    intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
 //                    startActivity(intent);
 
+                    Toast.makeText(getContext(), "开始复制APK文件", Toast.LENGTH_SHORT).show();
+                    upDataBtn.setEnabled(false);
                     copyApk();
                 }
                 break;
@@ -223,11 +223,7 @@ public class Factory2FragmentCard3 extends BaseFragment {
             @Override
             public void run() {
                 try {
-                    //在系统内部存贮 需要权限
-                    boolean sd = SDCardUtils.isSDCardEnable();
-                    System.out.println("SDCardUtils.isSDCardEnable() --->" + sd);
-
-                    File sdFile = new File(SDCardUtils.getRootDirectoryPath() + "running.apk");
+                    File sdFile = new File(SDCardUtils.getSDCardPath() + "running.apk");
                     BufferedOutputStream out = null;
                     BufferedInputStream in = null;
                     if (sdFile.exists()) {

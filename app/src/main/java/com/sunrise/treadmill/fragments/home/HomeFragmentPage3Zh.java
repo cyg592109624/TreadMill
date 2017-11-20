@@ -1,7 +1,9 @@
 package com.sunrise.treadmill.fragments.home;
 
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
@@ -24,6 +26,15 @@ public class HomeFragmentPage3Zh extends BaseFragment {
     @Override
     protected void init() {
         selectReturn = (OnModeSelectReturn) getActivity();
+
+        ImageView imageView1 = parentView.findViewById(R.id.home_app_mode_mp4);
+        ImageView imageView2 = parentView.findViewById(R.id.home_app_mode_screen_mirror);
+        ImageView imageView3 = parentView.findViewById(R.id.workout_mode_quick_start);
+
+        Glide.with(this).load(R.drawable.btn_home_mp4).into(imageView1);
+        Glide.with(this).load(R.drawable.btn_home_screen_mirroring).into(imageView2);
+        Glide.with(this).load(R.drawable.btn_home_quick_start).into(imageView3);
+
     }
 
     @Override
@@ -33,6 +44,7 @@ public class HomeFragmentPage3Zh extends BaseFragment {
     public void setSelectReturn(OnModeSelectReturn selectReturn) {
         this.selectReturn = selectReturn;
     }
+
     @OnClick({R.id.home_app_mode_mp4, R.id.home_app_mode_screen_mirror, R.id.workout_mode_quick_start})
     public void onMediaClick(View view) {
         switch (view.getId()) {

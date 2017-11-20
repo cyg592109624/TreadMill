@@ -109,21 +109,17 @@ public class LanguageUtils {
     public static void updateLanguage(@NonNull Locale locale) {
         try {
             Object objIActMag, objActMagNative;
-
             Class clzIActMag = Class.forName("android.app.IActivityManager");
 
-            Class clzActMagNative = Class
-                    .forName("android.app.ActivityManagerNative");
+            Class clzActMagNative = Class.forName("android.app.ActivityManagerNative");
 
             //amn = ActivityManagerNative.getDefault();
-            Method mtdActMagNative$getDefault = clzActMagNative
-                    .getDeclaredMethod("getDefault");
+            Method mtdActMagNative$getDefault = clzActMagNative.getDeclaredMethod("getDefault");
 
             objIActMag = mtdActMagNative$getDefault.invoke(clzActMagNative);
 
             // objIActMag = amn.getConfiguration();
-            Method mtdIActMag$getConfiguration = clzIActMag
-                    .getDeclaredMethod("getConfiguration");
+            Method mtdIActMag$getConfiguration = clzIActMag.getDeclaredMethod("getConfiguration");
 
             Configuration config = (Configuration) mtdIActMag$getConfiguration
                     .invoke(objIActMag);
@@ -132,10 +128,8 @@ public class LanguageUtils {
             config.locale = locale;
 
             //持久化  config.userSetLocale = true;
-            Class clzConfig = Class
-                    .forName("android.content.res.Configuration");
-            java.lang.reflect.Field userSetLocale = clzConfig
-                    .getField("userSetLocale");
+            Class clzConfig = Class.forName("android.content.res.Configuration");
+            java.lang.reflect.Field userSetLocale = clzConfig.getField("userSetLocale");
             userSetLocale.set(config, true);
 
             // 此处需要声明权限:android.permission.CHANGE_CONFIGURATION
@@ -143,8 +137,7 @@ public class LanguageUtils {
             Class[] clzParams = {Configuration.class};
 
             // objIActMag.updateConfiguration(config);
-            Method mtdIActMag$updateConfiguration = clzIActMag
-                    .getDeclaredMethod("updateConfiguration", clzParams);
+            Method mtdIActMag$updateConfiguration = clzIActMag.getDeclaredMethod("updateConfiguration", clzParams);
 
             mtdIActMag$updateConfiguration.invoke(objIActMag, config);
 

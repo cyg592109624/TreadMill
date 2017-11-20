@@ -91,7 +91,6 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
             String[] args = new String[perms.size()];
             for (int i = 0; i < perms.size(); i++) {
                 args[i] = perms.get(i);
-                System.out.println("允许的权限     -->" + perms.get(i));
             }
             mHandler.sendEmptyMessage(easyPermissionResult);
         }
@@ -160,21 +159,30 @@ public class LogoActivity extends BaseActivity implements EasyPermissions.Permis
      * 切换app语言
      */
     private void syncLanguage() {
-        //启动app时 获取语言设置
-        String appLanguage = (String) SharedPreferencesUtils.get(activityContext, Constant.APP_LANGUAGE, LanguageUtils.zh_CN);
-        //获取当前设置
-        String nowAppLanguage = LanguageUtils.getAppLanguage(activityContext.getResources());
-        Intent intent = new Intent();
         try {
+            //启动app时 获取语言设置
+            String appLanguage = (String) SharedPreferencesUtils.get(activityContext, Constant.APP_LANGUAGE, LanguageUtils.zh_CN);
+            //获取当前设置
+            String nowAppLanguage = LanguageUtils.getAppLanguage(activityContext.getResources());
+            Intent intent = new Intent();
+//            if (!appLanguage.equals(nowAppLanguage)) {
+//                GlobalSetting.AppLanguage = appLanguage;
+//                String[] he = appLanguage.split("_");
+//                LanguageUtils.updateLanguage(LanguageUtils.buildLocale(he[0], he[1]));
+//            }
+//            intent.setClass(activityContext, HomeActivity.class);
+
             if (appLanguage.equals(nowAppLanguage)) {
                 intent.setClass(activityContext, HomeActivity.class);
             } else {
                 GlobalSetting.AppLanguage = appLanguage;
                 String[] he = appLanguage.split("_");
                 LanguageUtils.updateLanguage(LanguageUtils.buildLocale(he[0], he[1]), activityContext.getResources());
+//                LanguageUtils.updateLanguage(LanguageUtils.buildLocale(he[0], he[1]));
                 intent.setClass(activityContext, LogoActivity.class);
                 Thread.sleep(300);
             }
+
             finishActivity();
             startActivity(intent);
         } catch (Exception e) {
