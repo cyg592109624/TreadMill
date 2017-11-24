@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseDialogFragment;
-import com.sunrise.treadmill.interfaces.factory.OnFactory2Fragment2Card2DialogReturn;
+import com.sunrise.treadmill.interfaces.factory.Card2DialogResult;
 
 import butterknife.OnClick;
 
@@ -13,7 +13,7 @@ import butterknife.OnClick;
  */
 
 public class Factory2FragmentCard2Dialog extends BaseDialogFragment {
-    private OnFactory2Fragment2Card2DialogReturn dialogReturn;
+    private Card2DialogResult dialogReturn;
 
     @Override
     public int getLayoutId() {
@@ -40,7 +40,7 @@ public class Factory2FragmentCard2Dialog extends BaseDialogFragment {
         }
     }
 
-    public void setDialogReturn(OnFactory2Fragment2Card2DialogReturn dialogReturn) {
+    public void setDialogReturn(Card2DialogResult dialogReturn) {
         this.dialogReturn = dialogReturn;
     }
 

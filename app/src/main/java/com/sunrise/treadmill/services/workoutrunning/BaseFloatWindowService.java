@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -21,16 +22,16 @@ import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.home.HomeActivity;
 import com.sunrise.treadmill.activity.summary.SummaryActivity;
-import com.sunrise.treadmill.activity.workoutrunning.BaseRunningActivity;
-import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity;
+import com.sunrise.treadmill.activity.workout.running.BaseRunningActivity;
+import com.sunrise.treadmill.activity.workout.running.QuickStartRunningActivity;
 import com.sunrise.treadmill.bean.Level;
 import com.sunrise.treadmill.bean.WorkOut;
 import com.sunrise.treadmill.interfaces.services.FloatWindowBottomCallBack;
 import com.sunrise.treadmill.utils.AnimationsContainer;
 import com.sunrise.treadmill.utils.DateUtil;
-import com.sunrise.treadmill.views.workout.LevelView;
-import com.sunrise.treadmill.views.workout.running.FloatWindowBottom;
-import com.sunrise.treadmill.views.workout.running.FloatWindowHead;
+import com.sunrise.treadmill.utils.ImageUtils;
+import com.sunrise.treadmill.views.FloatWindowBottom;
+import com.sunrise.treadmill.views.FloatWindowHead;
 
 import java.util.List;
 import java.util.Timer;
@@ -61,6 +62,7 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
     public WindowManager.LayoutParams paramsBottom;
 
     public WindowManager.LayoutParams dialogParams;
+    public WindowManager.LayoutParams toggleParams;
 
     public FloatWindowHead floatWindowHead;
     public FloatWindowBottom floatWindowBottom;
@@ -68,6 +70,9 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
     public ConstraintLayout dialogCountDown;
     public ConstraintLayout dialogPause;
     public ConstraintLayout dialogCoolDown;
+
+
+    public ImageView toggleImage;
 
     /**
      * 运行时间为一年
@@ -193,6 +198,7 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
         initWindowParams();
         initFloatWindow();
         initDialog();
+        initToggleBtn();
         initBottomView();
     }
 
@@ -234,6 +240,8 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
             floatWindowBottom.stopBtnVisibility(View.INVISIBLE);
 
             toggleFloatWindow();
+            //专门针对FloatWindow的显示和隐藏
+            mWindowManager.addView(toggleImage, toggleParams);
         }
         setUpInfo();
         initCountDownTimer();
@@ -245,7 +253,7 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
         super.onDestroy();
         stopForeground(true);
         activity = null;
-        View[] views = {floatWindowHead, floatWindowBottom, dialogPause, dialogCoolDown};
+        View[] views = {floatWindowHead, floatWindowBottom, dialogPause, dialogCoolDown,toggleImage};
         for (View v : views) {
             reMoveView(v);
         }
@@ -366,7 +374,6 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
         //这里获取已经运行的时间 以秒为单位
         runningTimeTotal = Integer.valueOf(workOutInfo.getRunningTime());
 
-
         if (runningTimeTarget > Constant.COUNTDOWN_FLAG) {
             //累减形式 计算时间
             isCountDownTime = true;
@@ -378,7 +385,7 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
 
             floatWindowHead.setTimeValue(DateUtil.getFormatMMSS(runningTimeSurplus));
 
-            avgLevelTime = runningTimeTarget / LevelView.columnCount;
+            avgLevelTime = runningTimeTarget / Constant.LEVEL_COLUMN;
 
             timerMissionTimes = workOutInfo.getRunningLevelCount();
 
@@ -395,7 +402,7 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
 
             timerMissionTimes = workOutInfo.getRunningLevelCount();
 
-            tgLevel = timerMissionTimes % LevelView.columnCount;
+            tgLevel = timerMissionTimes % Constant.LEVEL_COLUMN;
             floatWindowHead.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());
         }
     }
@@ -420,6 +427,25 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
         paramsHead = setUpParams(0, -800);
         paramsBottom = setUpParams(0, 800);
         dialogParams = setUpParams(0, 0);
+
+        toggleParams  = new WindowManager.LayoutParams();
+        // 设置window type
+        toggleParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        // 设置图片格式，效果为背景透明
+        toggleParams.format = PixelFormat.RGBA_8888;
+
+        // 设置Window flag
+        toggleParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | WindowManager.LayoutParams.FLAG_FULLSCREEN
+                | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
+
+        toggleParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        toggleParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        toggleParams.horizontalMargin = 0;
+        toggleParams.verticalMargin = 0;
+        toggleParams.x = screenWidth / 2;
+        toggleParams.y = 0;
     }
 
     private WindowManager.LayoutParams setUpParams(int x, int y) {
@@ -456,6 +482,45 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
 
         floatWindowBottom.setLayoutParams(paramsBottom);
         floatWindowBottom.setWindowBottomCallBack(BaseFloatWindowService.this);
+    }
+
+    private void initToggleBtn() {
+        toggleImage = new ImageView(getApplicationContext());
+        ImageUtils.changeImageView(toggleImage, R.drawable.btn_back_2);
+        toggleImage.setOnTouchListener(new View.OnTouchListener() {
+            int lastX, lastY;
+            int paramX, paramY;
+            int dx, dy;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                switch (event.getAction()) {
+                    default:
+                        break;
+                    case MotionEvent.ACTION_DOWN:
+                        lastX = (int) event.getRawX();
+                        lastY = (int) event.getRawY();
+                        paramX = toggleParams.x;
+                        paramY = toggleParams.y;
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        dx = (int) event.getRawX() - lastX;
+                        dy = (int) event.getRawY() - lastY;
+                        toggleParams.x = paramX + dx;
+                        toggleParams.y = paramY + dy;
+                        // 更新悬浮窗位置
+                        mWindowManager.updateViewLayout(toggleImage, toggleParams);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if (Math.abs(dx) < 10 && Math.abs(dy) < 10) {
+                            toggleFloatWindow();
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
+        toggleImage.setLayoutParams(toggleParams);
     }
 
     /**
@@ -635,10 +700,10 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
             tgLevel++;
             if (!isCountDownTime) {
                 //累加时间时才触发
-                if (timerMissionTimes % LevelView.columnCount == 0) {
+                if (timerMissionTimes % Constant.LEVEL_COLUMN == 0) {
                     tgLevel = 0;
                     List<Level> arr = workOutInfo.getLevelList();
-                    for (int i = 0; i < LevelView.columnCount; i++) {
+                    for (int i = 0; i < Constant.LEVEL_COLUMN; i++) {
                         Level level = new Level();
                         level.setLevel(floatWindowHead.getLevel());
                         arr.add(level);
@@ -707,5 +772,4 @@ public abstract class BaseFloatWindowService extends Service implements FloatWin
         toggleFloatWindow();
         stopService(serverIntent);
     }
-
 }

@@ -2,7 +2,7 @@ package com.sunrise.treadmill.services.workoutrunning;
 
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.utils.DateUtil;
-import com.sunrise.treadmill.views.workout.LevelView;
+import com.sunrise.treadmill.views.LevelView;
 
 /**
  * Created by ChuHui on 2017/11/10.
@@ -34,7 +34,7 @@ public class GoalServer extends BaseFloatWindowService {
                 break;
             case Constant.MODE_GOAL_TIME:
                 isCountDownTime = true;
-                avgLevelTime = runningTimeTarget / LevelView.columnCount;
+                avgLevelTime = runningTimeTarget / Constant.LEVEL_COLUMN;
 
                 tgLevel = (int) runningTimeTotal / (int) avgLevelTime;
 
@@ -50,7 +50,7 @@ public class GoalServer extends BaseFloatWindowService {
                 avgLevelTime = 60;
 
                 timerMissionTimes = (int) runningTimeTotal / (int) avgLevelTime;
-                tgLevel = timerMissionTimes % LevelView.columnCount;
+                tgLevel = timerMissionTimes % Constant.LEVEL_COLUMN;
 
                 floatWindowHead.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());
                 floatWindowHead.setTimeValue(DateUtil.getFormatMMSS(runningTimeTotal));
@@ -65,7 +65,7 @@ public class GoalServer extends BaseFloatWindowService {
                 avgLevelTime = 60;
 
                 timerMissionTimes = (int) runningTimeTotal / (int) avgLevelTime;
-                tgLevel = timerMissionTimes % LevelView.columnCount;
+                tgLevel = timerMissionTimes % Constant.LEVEL_COLUMN;
 
                 floatWindowHead.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());
                 floatWindowHead.setTimeValue(DateUtil.getFormatMMSS(runningTimeTotal));

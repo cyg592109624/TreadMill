@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.activity.workoutsetting.VirtualRealityActivity;
+import com.sunrise.treadmill.activity.workout.setting.VirtualRealityActivity;
 import com.sunrise.treadmill.base.BaseDialogFragment;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.interfaces.workout.setting.OnVrDialogClick;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView;
+import com.sunrise.treadmill.views.NumberKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,9 +96,9 @@ public class VirtualSetValueDialog extends BaseDialogFragment implements OnKeyBo
         txtList.add((TextView) parentView.findViewById(R.id.workout_setting_hint));
         txtList.add(editValue);
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft(getContext()));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Microsoft());
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.Arial(getContext()));
+            TextUtils.setTextTypeFace(txtList, TextUtils.Arial());
         }
         txtList.clear();
         txtList = null;

@@ -71,7 +71,6 @@ public class BackPressServer extends Service {
     }
 
     private void initImageView() {
-        System.out.println("initImageView");
         mWindowManager = (WindowManager) getApplication().getSystemService(Context.WINDOW_SERVICE);
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -110,6 +109,8 @@ public class BackPressServer extends Service {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 switch (event.getAction()) {
+                    default:
+                        break;
                     case MotionEvent.ACTION_DOWN:
                         lastX = (int) event.getRawX();
                         lastY = (int) event.getRawY();

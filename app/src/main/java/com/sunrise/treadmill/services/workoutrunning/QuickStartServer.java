@@ -2,7 +2,7 @@ package com.sunrise.treadmill.services.workoutrunning;
 
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.utils.DateUtil;
-import com.sunrise.treadmill.views.workout.LevelView;
+import com.sunrise.treadmill.views.LevelView;
 
 /**
  * Created by ChuHui on 2017/11/10.
@@ -35,7 +35,7 @@ public class QuickStartServer extends BaseFloatWindowService {
             runningTimeSurplus = runningTimeTarget - runningTimeTotal;
             floatWindowHead.setTimeValue(DateUtil.getFormatMMSS(runningTimeSurplus));
 
-            avgLevelTime = runningTimeTarget / LevelView.columnCount;
+            avgLevelTime = runningTimeTarget /  Constant.LEVEL_COLUMN;
 
             tgLevel = timerMissionTimes;
 
@@ -48,7 +48,7 @@ public class QuickStartServer extends BaseFloatWindowService {
             floatWindowHead.setTimeValue(DateUtil.getFormatMMSS(runningTimeTotal));
             avgLevelTime = 2;
 
-            tgLevel = timerMissionTimes % LevelView.columnCount;
+            tgLevel = timerMissionTimes % Constant.LEVEL_COLUMN;
 
             floatWindowHead.setLevelValue(workOutInfo.getLevelList().get(timerMissionTimes).getLevel());
         }

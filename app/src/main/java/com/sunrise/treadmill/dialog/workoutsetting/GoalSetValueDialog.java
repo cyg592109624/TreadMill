@@ -9,14 +9,14 @@ import android.widget.TextView;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.activity.workoutsetting.GoalActivity;
-import com.sunrise.treadmill.activity.workoutsetting.WorkOutSettingCommon;
+import com.sunrise.treadmill.activity.workout.setting.GoalActivity;
+import com.sunrise.treadmill.activity.workout.WorkOutSettingCommon;
 import com.sunrise.treadmill.base.BaseDialogFragment;
 import com.sunrise.treadmill.interfaces.workout.setting.OnGoalSetValueReturn;
 import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView;
+import com.sunrise.treadmill.views.NumberKeyBoardView;
 
 import butterknife.BindView;
 
@@ -90,9 +90,9 @@ public class GoalSetValueDialog extends BaseDialogFragment implements OnKeyBoard
     @Override
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(editValue, TextUtils.Microsoft(getContext()));
+            TextUtils.setTextTypeFace(editValue, TextUtils.Microsoft());
         } else {
-            TextUtils.setTextTypeFace(editValue, TextUtils.Arial(getContext()));
+            TextUtils.setTextTypeFace(editValue, TextUtils.Arial());
         }
     }
 

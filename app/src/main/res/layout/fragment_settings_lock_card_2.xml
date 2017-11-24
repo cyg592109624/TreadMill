@@ -15,7 +15,7 @@
         android:layout_marginRight="20dp"
         android:src="@mipmap/img_factory_line" />
 
-    <com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView
+    <com.sunrise.treadmill.views.NumberKeyBoardView
         android:id="@+id/settings_card4_2_right"
         android:layout_width="0dp"
         android:layout_height="match_parent"

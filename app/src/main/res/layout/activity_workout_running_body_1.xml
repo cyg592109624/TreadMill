@@ -56,7 +56,7 @@
         app:layout_constraintRight_toLeftOf="@+id/workout_running_level_view"
         app:layout_constraintTop_toTopOf="@+id/workout_running_level_view" />
 
-    <com.sunrise.treadmill.views.workout.LevelView
+    <com.sunrise.treadmill.views.LevelView
         android:id="@+id/workout_running_level_view"
         android:layout_width="300dp"
         android:layout_height="128dp"

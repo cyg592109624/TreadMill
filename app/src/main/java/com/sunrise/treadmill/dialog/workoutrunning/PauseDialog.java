@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
-import com.sunrise.treadmill.activity.workoutrunning.BaseRunningActivity;
+import com.sunrise.treadmill.activity.workout.running.BaseRunningActivity;
 import com.sunrise.treadmill.base.BaseDialogFragment;
 import com.sunrise.treadmill.interfaces.workout.running.DialogPauseClick;
 

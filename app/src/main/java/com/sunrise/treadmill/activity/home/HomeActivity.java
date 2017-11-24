@@ -1,5 +1,6 @@
 package com.sunrise.treadmill.activity.home;
 
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
@@ -11,15 +12,15 @@ import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.activity.LogoActivity;
 import com.sunrise.treadmill.activity.factory.FactoriesActivity;
-import com.sunrise.treadmill.activity.settings.SettingsActivity;
-import com.sunrise.treadmill.activity.workoutrunning.QuickStartRunningActivity;
-import com.sunrise.treadmill.activity.workoutsetting.FitnessTestActivity;
-import com.sunrise.treadmill.activity.workoutsetting.GoalActivity;
-import com.sunrise.treadmill.activity.workoutsetting.HRCActivity;
-import com.sunrise.treadmill.activity.workoutsetting.HillActivity;
-import com.sunrise.treadmill.activity.workoutsetting.IntervalActivity;
-import com.sunrise.treadmill.activity.workoutsetting.UserProgramActivity;
-import com.sunrise.treadmill.activity.workoutsetting.VirtualRealityActivity;
+import com.sunrise.treadmill.activity.setting.SettingActivity;
+import com.sunrise.treadmill.activity.workout.running.QuickStartRunningActivity;
+import com.sunrise.treadmill.activity.workout.setting.FitnessTestActivity;
+import com.sunrise.treadmill.activity.workout.setting.GoalActivity;
+import com.sunrise.treadmill.activity.workout.setting.HRCActivity;
+import com.sunrise.treadmill.activity.workout.setting.HillActivity;
+import com.sunrise.treadmill.activity.workout.setting.IntervalActivity;
+import com.sunrise.treadmill.activity.workout.setting.UserProgramActivity;
+import com.sunrise.treadmill.activity.workout.setting.VirtualRealityActivity;
 import com.sunrise.treadmill.adapter.home.HomeViewPageAdapter;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.bean.Level;
@@ -29,11 +30,10 @@ import com.sunrise.treadmill.dialog.home.LanguageDialog;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage1;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage2;
 import com.sunrise.treadmill.fragments.home.HomeFragmentPage3;
-import com.sunrise.treadmill.interfaces.home.HomeLanguageDialogReturn;
+import com.sunrise.treadmill.interfaces.home.OnLanguageSelectResult;
 import com.sunrise.treadmill.interfaces.home.OnInitialReturn;
 import com.sunrise.treadmill.interfaces.home.OnModeSelectReturn;
-import com.sunrise.treadmill.services.workoutrunning.BaseFloatWindowService;
-import com.sunrise.treadmill.services.workoutrunning.QuickStartServer;
+import com.sunrise.treadmill.services.workoutrunning.MediaQuickStartServer;
 import com.sunrise.treadmill.utils.BitMapUtils;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.ThreadPoolUtils;
@@ -49,7 +49,7 @@ import butterknife.OnClick;
 /**
  * Created by ChuHui on 2017/9/6.
  */
-public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDialogReturn, OnInitialReturn, ViewPager.OnPageChangeListener, OnModeSelectReturn {
+public class HomeActivity extends BaseFragmentActivity implements OnLanguageSelectResult, OnInitialReturn, ViewPager.OnPageChangeListener, OnModeSelectReturn {
     @BindView(R.id.home_img_vp)
     ImageView selectTg;
 
@@ -60,7 +60,8 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     private Bitmap selectTgBitmap;
 
-    private Intent serviceIntent;
+    private Intent mediaServerIntent;
+    private PackageManager packageManager;
 
     private final String mediaMode = "MEDIA_MODE";
 
@@ -76,7 +77,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
             selectTgBitmap.recycle();
             selectTgBitmap = null;
         }
-        serviceIntent = null;
+        mediaServerIntent = null;
         viewPager.removeAllViews();
         viewPager = null;
         fragmentAdapter.recycle();
@@ -87,22 +88,25 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (serviceIntent != null) {
-            stopService(serviceIntent);
+        if (mediaServerIntent != null) {
+            stopService(mediaServerIntent);
         }
     }
 
     @Override
     protected void init() {
         workOutInfo = new WorkOut();
+        packageManager = getApplicationContext().getPackageManager();
         List<Fragment> list = new ArrayList<Fragment>();
         HomeFragmentPage1 page1 = new HomeFragmentPage1();
-        page1.setSelectReturn(HomeActivity.this);
-        list.add(page1);
         HomeFragmentPage2 page2 = new HomeFragmentPage2();
         HomeFragmentPage3 page3 = new HomeFragmentPage3();
+
+        page1.setSelectReturn(HomeActivity.this);
         page2.setSelectReturn(HomeActivity.this);
         page3.setSelectReturn(HomeActivity.this);
+
+        list.add(page1);
         list.add(page2);
         list.add(page3);
         fragmentAdapter = new HomeViewPageAdapter(fragmentManager, list);
@@ -171,7 +175,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
     }
 
     @Override
-    public void onLanguageReturn(boolean isChange) {
+    public void onLanguageResult(boolean isChange) {
         if (isChange) {
             Intent intent = new Intent(activityContext, LogoActivity.class);
             finishActivity();
@@ -221,9 +225,9 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
                 break;
         }
-        if (serviceIntent != null) {
-            stopService(serviceIntent);
-            serviceIntent = null;
+        if (mediaServerIntent != null) {
+            stopService(mediaServerIntent);
+            mediaServerIntent = null;
         }
         if (intent != null) {
             intent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
@@ -233,65 +237,84 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     @Override
     public void onMediaStart(int mediaType) {
-        serviceIntent = new Intent(HomeActivity.this, QuickStartServer.class);
         workOutInfo.setWorkOutModeName(Constant.WORK_OUT_MODE_MEDIA);
+        Intent mediaIntent=null;
         switch (mediaType) {
             default:
                 break;
             case Constant.MODE_MEDIA_YOUTUBE:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_YOUTUBE);
+                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_YOUTUBE);
                 break;
             case Constant.MODE_MEDIA_CHROME:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_CHROME);
+                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_CHROME);
                 break;
             case Constant.MODE_MEDIA_FACEBOOK:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_FACEBOOK);
+                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_FACEBOOK);
                 break;
             case Constant.MODE_MEDIA_FLIKR:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_FLIKR);
+                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_FLIKR);
                 break;
             case Constant.MODE_MEDIA_INSTAGRAM:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_INSTAGRAM);
+                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_INSTAGRAM);
                 break;
             case Constant.MODE_MEDIA_MP3:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_MP3);
+                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_MP4);
                 break;
             case Constant.MODE_MEDIA_MP4:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_MP4);
+                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_MP4);
                 break;
             case Constant.MODE_MEDIA_AVIN:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_AVIN);
+//                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_AVIN);
                 break;
             case Constant.MODE_MEDIA_TWITTER:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_TWITTER);
+                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_TWITTER);
                 break;
             case Constant.MODE_MEDIA_SCREEN_MIRROR:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_SCREEN_MIRROR);
+                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_SCREEN_MIRROR);
                 break;
             case Constant.MODE_MEDIA_BAI_DU:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_BAI_DU);
+                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_BAI_DU);
                 break;
             case Constant.MODE_MEDIA_WEI_BO:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_WEI_BO);
+                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_WEI_BO);
                 break;
             case Constant.MODE_MEDIA_I71:
                 workOutInfo.setWorkOutMode(Constant.MODE_MEDIA_I71);
+                mediaIntent = packageManager.getLaunchIntentForPackage(Constant.MEDIA_I71);
                 break;
         }
-        Random random = new Random();
-        int max = 36;
-        int min = 1;
-        List<Level> array = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            Level level = new Level();
-            level.setLevel(random.nextInt(max) % (max - min + 1) + min);
-            array.add(level);
-        }
-        workOutInfo.setLevelList(array);
-        serviceIntent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
 
-        startService(serviceIntent);
-        moveTaskToBack(true);
+        if(mediaIntent!=null){
+            mediaServerIntent = new Intent(HomeActivity.this, MediaQuickStartServer.class);
+
+            Random random = new Random();
+            int max = 36;
+            int min = 1;
+            List<Level> array = new ArrayList<>();
+            for (int i = 0; i < 30; i++) {
+                Level level = new Level();
+                level.setLevel(random.nextInt(max) % (max - min + 1) + min);
+                array.add(level);
+            }
+            workOutInfo.setLevelList(array);
+            mediaServerIntent.putExtra(Constant.WORK_OUT_INFO, workOutInfo);
+
+            startService(mediaServerIntent);
+            startActivity(mediaIntent);
+        }
+
     }
 
     @OnClick(R.id.home_btn_language)
@@ -302,7 +325,7 @@ public class HomeActivity extends BaseFragmentActivity implements HomeLanguageDi
 
     @OnClick(R.id.home_btn_setting)
     public void toSettings() {
-        Intent intent = new Intent(activityContext, SettingsActivity.class);
+        Intent intent = new Intent(activityContext, SettingActivity.class);
         startActivity(intent);
     }
 

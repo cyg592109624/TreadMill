@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseDialogFragment;
-import com.sunrise.treadmill.interfaces.home.HomeLanguageDialogReturn;
+import com.sunrise.treadmill.interfaces.home.OnLanguageSelectResult;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.LanguageUtils;
@@ -26,7 +26,7 @@ import butterknife.OnClick;
  */
 
 public class LanguageDialog extends BaseDialogFragment {
-    private HomeLanguageDialogReturn dialogFragmentReturn;
+    private OnLanguageSelectResult dialogFragmentReturn;
     @BindViews({R.id.home_dialog_language_img_us, R.id.home_dialog_language_img_zh, R.id.home_dialog_language_img_de, R.id.home_dialog_language_img_tr, R.id.home_dialog_language_img_ir, R.id.home_dialog_language_img_es, R.id.home_dialog_language_img_pt, R.id.home_dialog_language_img_ru})
     List<ImageView> imageViews;
 
@@ -48,9 +48,9 @@ public class LanguageDialog extends BaseDialogFragment {
     @Override
     protected void setTextStyle() {
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(textViews, TextUtils.Microsoft(getContext()));
+            TextUtils.setTextTypeFace(textViews, TextUtils.Microsoft());
         } else {
-            TextUtils.setTextTypeFace(textViews, TextUtils.Arial(getContext()));
+            TextUtils.setTextTypeFace(textViews, TextUtils.Arial());
         }
         TextUtils.changeTextColor(textViews, ContextCompat.getColor(getContext(), R.color.language_btn_on));
         ImageUtils.changeImageView(imageViews);
@@ -58,7 +58,7 @@ public class LanguageDialog extends BaseDialogFragment {
 
     @Override
     public void init() {
-        dialogFragmentReturn = (HomeLanguageDialogReturn) getActivity();
+        dialogFragmentReturn = (OnLanguageSelectResult) getActivity();
 
     }
 
@@ -127,7 +127,7 @@ public class LanguageDialog extends BaseDialogFragment {
                 break;
         }
         SharedPreferencesUtils.put(getContext(), Constant.APP_LANGUAGE, GlobalSetting.AppLanguage);
-        dialogFragmentReturn.onLanguageReturn(isChange);
+        dialogFragmentReturn.onLanguageResult(isChange);
         dismiss();
 
     }

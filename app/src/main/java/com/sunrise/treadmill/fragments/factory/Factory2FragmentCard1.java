@@ -14,7 +14,7 @@ import com.sunrise.treadmill.interfaces.workout.setting.OnKeyBoardReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.SharedPreferencesUtils;
 import com.sunrise.treadmill.utils.TextUtils;
-import com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView;
+import com.sunrise.treadmill.views.NumberKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,9 +101,9 @@ public class Factory2FragmentCard1 extends BaseFragment implements OnKeyBoardRet
         txtList.add(pwmValue);
 
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(getContext()));
+            TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold());
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(getContext()));
+            TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold());
         }
         txtList.clear();
         txtList = null;

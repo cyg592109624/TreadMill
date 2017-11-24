@@ -16,7 +16,7 @@
         android:textColor="@color/workout_mode_white"
         android:textSize="30pt" />
 
-    <com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView
+    <com.sunrise.treadmill.views.NumberKeyBoardView
         android:id="@+id/dialog_workout_goal_keyboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

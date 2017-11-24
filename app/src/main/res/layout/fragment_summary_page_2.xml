@@ -68,7 +68,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.03" />
 
-    <com.sunrise.treadmill.views.summary.LineChat
+    <com.sunrise.treadmill.views.LineChat
         android:id="@+id/summary_fragment2_lineChat"
         android:layout_width="725dp"
         android:layout_height="450dp"

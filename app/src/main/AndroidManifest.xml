@@ -63,14 +63,14 @@
         </activity>
 
         <activity
-            android:name=".activity.workoutsetting.HillActivity"
+            android:name=".activity.workout.setting.HillActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:screenOrientation="sensorLandscape">
 
         </activity>
         <activity
-            android:name=".activity.workoutsetting.IntervalActivity"
+            android:name=".activity.workout.setting.IntervalActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:screenOrientation="sensorLandscape">
@@ -78,35 +78,35 @@
         </activity>
 
         <activity
-            android:name=".activity.workoutsetting.GoalActivity"
+            android:name=".activity.workout.setting.GoalActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:screenOrientation="sensorLandscape">
 
         </activity>
         <activity
-            android:name=".activity.workoutsetting.FitnessTestActivity"
+            android:name=".activity.workout.setting.FitnessTestActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:screenOrientation="sensorLandscape">
 
         </activity>
         <activity
-            android:name=".activity.workoutsetting.HRCActivity"
+            android:name=".activity.workout.setting.HRCActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:screenOrientation="sensorLandscape">
 
         </activity>
         <activity
-            android:name=".activity.workoutsetting.UserProgramActivity"
+            android:name=".activity.workout.setting.UserProgramActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:screenOrientation="sensorLandscape">
 
         </activity>
         <activity
-            android:name=".activity.workoutsetting.VirtualRealityActivity"
+            android:name=".activity.workout.setting.VirtualRealityActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:screenOrientation="sensorLandscape">
@@ -123,7 +123,7 @@
         </activity>
 
         <activity
-            android:name=".activity.settings.SettingsActivity"
+            android:name=".activity.setting.SettingActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:launchMode="singleTop"
@@ -132,7 +132,7 @@
         </activity>
 
         <activity
-            android:name=".activity.settings.SettingsLockActivity"
+            android:name=".activity.setting.SettingLockActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:launchMode="singleTop"
@@ -169,7 +169,7 @@
 
 
         <activity
-            android:name=".activity.workoutrunning.HillRunningActivity"
+            android:name=".activity.workout.running.HillRunningActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:launchMode="singleTop"
@@ -182,7 +182,7 @@
 
 
         <activity
-            android:name=".activity.workoutrunning.IntervalRunningActivity"
+            android:name=".activity.workout.running.IntervalRunningActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:launchMode="singleTop"
@@ -194,7 +194,7 @@
         </activity>
 
         <activity
-            android:name=".activity.workoutrunning.GoalRunningActivity"
+            android:name=".activity.workout.running.GoalRunningActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:launchMode="singleTop"
@@ -206,7 +206,7 @@
         </activity>
 
         <activity
-            android:name=".activity.workoutrunning.FitnessTestRunningActivity"
+            android:name=".activity.workout.running.FitnessTestRunningActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:launchMode="singleTop"
@@ -218,7 +218,7 @@
         </activity>
 
         <activity
-            android:name=".activity.workoutrunning.HRCRunningActivity"
+            android:name=".activity.workout.running.HRCRunningActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:launchMode="singleTop"
@@ -230,7 +230,7 @@
         </activity>
 
         <activity
-            android:name=".activity.workoutrunning.QuickStartRunningActivity"
+            android:name=".activity.workout.running.QuickStartRunningActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:exported="false"
             android:launchMode="singleTop"
@@ -243,10 +243,11 @@
 
         <service android:name=".services.settings.BackPressServer" />
 
+        <service android:name=".services.workoutrunning.MediaQuickStartServer" />
         <service android:name=".services.workoutrunning.HillServer" />
         <service android:name=".services.workoutrunning.IntervalServer" />
         <service android:name=".services.workoutrunning.QuickStartServer" />
-        <service android:name=".services.settings.BackPressServer" />
+        <service android:name=".services.workoutrunning.GoalServer" />
 
     </application>
 

@@ -44,7 +44,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workout_setting_head_name" />
 
-    <com.sunrise.treadmill.views.workout.setting.GenderView
+    <com.sunrise.treadmill.views.GenderView
         android:id="@+id/workout_mode_gender_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workout_setting_head_hint" />
 
-    <com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView
+    <com.sunrise.treadmill.views.NumberKeyBoardView
         android:id="@+id/workout_mode_keyboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

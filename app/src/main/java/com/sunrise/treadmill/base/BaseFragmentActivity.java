@@ -10,7 +10,6 @@ import android.view.WindowManager;
 
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.bean.WorkOut;
-import com.sunrise.treadmill.utils.ActivityManageUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

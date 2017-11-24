@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.SharedPreferencesUtils;
+import com.sunrise.treadmill.utils.TextUtils;
 import com.sunrise.treadmill.utils.ThreadPoolUtils;
 
 /**
@@ -21,6 +22,7 @@ public class TreadApplication extends Application {
             @Override
             public void run() {
 
+                TextUtils.getInstance(getApplicationContext());
                 //所以数据保存都是以公制保存的 使用时 按实际情况转换
                 GlobalSetting.CustomerPassWord = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.CUSTOMER_PASS_WORD, GlobalSetting.CustomerPassWord);
 

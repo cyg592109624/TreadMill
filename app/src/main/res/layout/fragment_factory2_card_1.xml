@@ -8,7 +8,7 @@
 
     <include layout="@layout/fragment_factory2_card_1_1" />
 
-    <com.sunrise.treadmill.views.workout.setting.NumberKeyBoardView
+    <com.sunrise.treadmill.views.NumberKeyBoardView
         android:id="@+id/factory2_card1_1_keyboard"
         android:layout_width="0dp"
         android:layout_height="match_parent"

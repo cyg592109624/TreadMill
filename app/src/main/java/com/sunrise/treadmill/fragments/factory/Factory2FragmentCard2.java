@@ -1,6 +1,5 @@
 package com.sunrise.treadmill.fragments.factory;
 
-import android.support.v4.app.FragmentManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,7 +8,7 @@ import com.sunrise.treadmill.GlobalSetting;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.base.BaseFragment;
 import com.sunrise.treadmill.dialog.factory.Factory2FragmentCard2Dialog;
-import com.sunrise.treadmill.interfaces.factory.OnFactory2Fragment2Card2DialogReturn;
+import com.sunrise.treadmill.interfaces.factory.Card2DialogResult;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.PackageUtils;
 import com.sunrise.treadmill.utils.SharedPreferencesUtils;
@@ -82,9 +81,9 @@ public class Factory2FragmentCard2 extends BaseFragment {
         txtList.add((TextView) parentView.findViewById(R.id.factory2_card2_2_ver_soft_value));
 
         if (GlobalSetting.AppLanguage.equals(LanguageUtils.zh_CN)) {
-            TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold(getContext()));
+            TextUtils.setTextTypeFace(txtList, TextUtils.MicrosoftBold());
         } else {
-            TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold(getContext()));
+            TextUtils.setTextTypeFace(txtList, TextUtils.ArialBold());
         }
         if (GlobalSetting.UnitType.equals(Constant.UNIT_TYPE_METRIC)) {
             txtList.get(6).setText(R.string.unit_km);
@@ -113,7 +112,7 @@ public class Factory2FragmentCard2 extends BaseFragment {
     @OnClick(R.id.factory2_card2_1_reset)
     public void reSetValue() {
         Factory2FragmentCard2Dialog dialog = new Factory2FragmentCard2Dialog();
-        dialog.setDialogReturn(new OnFactory2Fragment2Card2DialogReturn() {
+        dialog.setDialogReturn(new Card2DialogResult() {
             @Override
             public void onYes() {
                 GlobalSetting.Factory2_TotalTime = "0";

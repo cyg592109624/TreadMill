@@ -1,7 +1,5 @@
 package com.sunrise.treadmill;
 
-import java.util.Locale;
-
 /**
  * Created by ChuHui on 2017/9/4.
  */
