@@ -47,7 +47,7 @@ public class TreadApplication extends Application {
 
                 GlobalSetting.Factory2_TotalTime = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_TOTAL_TIME, GlobalSetting.Factory2_TotalTime);
                 GlobalSetting.Factory2_TotalDistant = (String) SharedPreferencesUtils.get(getApplicationContext(), Constant.FACTORY2_TOTAL_DISTANT, GlobalSetting.Factory2_TotalDistant);
-
+                //测试分支
             }
         });
     }
