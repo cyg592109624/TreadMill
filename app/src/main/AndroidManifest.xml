@@ -241,13 +241,13 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".services.settings.BackPressServer" />
+        <service android:name=".service.setting.BackPressServer" />
 
-        <service android:name=".services.workoutrunning.MediaQuickStartServer" />
-        <service android:name=".services.workoutrunning.HillServer" />
-        <service android:name=".services.workoutrunning.IntervalServer" />
-        <service android:name=".services.workoutrunning.QuickStartServer" />
-        <service android:name=".services.workoutrunning.GoalServer" />
+        <service android:name=".service.workoutrunning.MediaQuickStartServer" />
+        <service android:name=".service.workoutrunning.HillServer" />
+        <service android:name=".service.workoutrunning.IntervalServer" />
+        <service android:name=".service.workoutrunning.QuickStartServer" />
+        <service android:name=".service.workoutrunning.GoalServer" />
 
     </application>
 

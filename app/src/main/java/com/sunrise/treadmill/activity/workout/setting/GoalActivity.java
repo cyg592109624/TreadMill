@@ -16,7 +16,7 @@ import com.sunrise.treadmill.activity.workout.WorkOutSettingCommon;
 import com.sunrise.treadmill.activity.workout.running.GoalRunningActivity;
 import com.sunrise.treadmill.base.BaseFragmentActivity;
 import com.sunrise.treadmill.bean.Level;
-import com.sunrise.treadmill.dialog.workoutsetting.GoalSetValueDialog;
+import com.sunrise.treadmill.dialog.workout.setting.GoalSetValueDialog;
 import com.sunrise.treadmill.interfaces.workout.setting.OnGoalSetValueReturn;
 import com.sunrise.treadmill.utils.LanguageUtils;
 import com.sunrise.treadmill.utils.TextUtils;

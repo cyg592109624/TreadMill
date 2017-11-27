@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.sunrise.treadmill.Constant;
-import com.sunrise.treadmill.services.workoutrunning.IntervalServer;
+import com.sunrise.treadmill.service.workoutrunning.IntervalServer;
 import com.sunrise.treadmill.utils.ThreadPoolUtils;
 
 /**

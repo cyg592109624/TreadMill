@@ -5,12 +5,11 @@ import android.widget.ImageView;
 import com.sunrise.treadmill.Constant;
 import com.sunrise.treadmill.R;
 import com.sunrise.treadmill.bean.Level;
-import com.sunrise.treadmill.dialog.workoutrunning.WarmUpDialog;
+import com.sunrise.treadmill.dialog.workout.running.WarmUpDialog;
 import com.sunrise.treadmill.interfaces.workout.running.DialogWarmUpClick;
 import com.sunrise.treadmill.utils.DateUtil;
 import com.sunrise.treadmill.utils.ImageUtils;
 import com.sunrise.treadmill.utils.ThreadPoolUtils;
-import com.sunrise.treadmill.views.LevelView;
 
 import java.util.List;
 

@@ -4,10 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.sunrise.treadmill.Constant;
-import com.sunrise.treadmill.services.workoutrunning.QuickStartServer;
+import com.sunrise.treadmill.service.workoutrunning.QuickStartServer;
 import com.sunrise.treadmill.utils.DateUtil;
 import com.sunrise.treadmill.utils.ThreadPoolUtils;
-import com.sunrise.treadmill.views.LevelView;
 
 /**
  * Created by ChuHui on 2017/9/27.
